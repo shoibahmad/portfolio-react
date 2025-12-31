@@ -76,7 +76,7 @@ const Contact = () => {
             <div className="container">
                 <h2 className="section-title">Contact</h2>
                 <div className="contact-content">
-                    <div className="contact-info">
+                    <div className="contact-info animate-on-scroll">
                         <h3>Let's Connect</h3>
                         <p>I'm always open to discussing new opportunities, innovative projects, and collaborations.</p>
                         <div className="contact-details">
@@ -104,7 +104,7 @@ const Contact = () => {
                             </div>
                         </div>
                     </div>
-                    <form id="contact-form" className="contact-form" onSubmit={handleSubmit}>
+                    <form id="contact-form" className="contact-form animate-on-scroll" style={{ transitionDelay: '200ms' }} onSubmit={handleSubmit}>
                         <h3>Send a Message</h3>
                         <div className="form-group">
                             <label htmlFor="name">Name</label>

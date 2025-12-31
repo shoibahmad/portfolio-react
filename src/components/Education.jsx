@@ -25,7 +25,7 @@ const Education = () => {
                 <h2 className="section-title">Education</h2>
                 <div className="education-list">
                     {education.map((edu, index) => (
-                        <div key={index} className="education-item">
+                        <div key={index} className="education-item animate-on-scroll" style={{ transitionDelay: `${index * 150}ms` }}>
                             <div className="edu-header">
                                 <div>
                                     <h3>{edu.degree}</h3>

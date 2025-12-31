@@ -27,7 +27,7 @@ const Skills = () => {
                 <h2 className="section-title">Skills</h2>
                 <div className="skills-grid">
                     {skills.map((category, index) => (
-                        <div key={index} className="skill-category">
+                        <div key={index} className="skill-category animate-on-scroll" style={{ transitionDelay: `${index * 100}ms` }}>
                             <h3>{category.category}</h3>
                             <ul>
                                 {category.items.map((item, idx) => (

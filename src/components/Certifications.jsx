@@ -22,7 +22,7 @@ const Certifications = () => {
                 <h2 className="section-title">Trainings / Certifications</h2>
                 <div className="certifications-list">
                     {certifications.map((cert, index) => (
-                        <div key={index} className="certification-item">
+                        <div key={index} className="certification-item animate-on-scroll" style={{ transitionDelay: `${index * 150}ms` }}>
                             <div className="cert-header">
                                 <h3>{cert.title}</h3>
                                 <span className="cert-date">{cert.date}</span>

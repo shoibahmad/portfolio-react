@@ -31,7 +31,7 @@ const Experience = () => {
                 <h2 className="section-title">Work Experience</h2>
                 <div className="experience-list">
                     {experiences.map((exp, index) => (
-                        <div key={index} className="experience-item">
+                        <div key={index} className="experience-item animate-on-scroll" style={{ transitionDelay: `${index * 150}ms` }}>
                             <div className="exp-header">
                                 <div>
                                     <h3>{exp.title}, <span className="company">{exp.company}</span></h3>

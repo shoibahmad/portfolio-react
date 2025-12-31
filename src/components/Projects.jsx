@@ -59,7 +59,7 @@ const Projects = () => {
                 <h2 className="section-title">Featured Projects</h2>
                 <div className="projects-list">
                     {projects.map((project, index) => (
-                        <div key={index} className="project-item">
+                        <div key={index} className="project-item animate-on-scroll" style={{ transitionDelay: `${index * 100}ms` }}>
                             <div className="project-image">
                                 <img src={project.image} alt={project.title} loading="lazy" />
                             </div>

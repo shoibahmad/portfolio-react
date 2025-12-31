@@ -29,7 +29,7 @@ const Services = () => {
                 </div>
                 <div className="services-grid">
                     {services.map((service, index) => (
-                        <div key={index} className="service-card">
+                        <div key={index} className="service-card animate-on-scroll" style={{ transitionDelay: `${index * 150}ms` }}>
                             <div className="service-icon">
                                 <i className={`fas ${service.icon}`}></i>
                             </div>

@@ -6,6 +6,7 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Education from './components/Education';
+import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ResumeModal from './components/ResumeModal';
@@ -26,7 +27,7 @@ function App() {
       rootMargin: '0px 0px -50px 0px'
     });
 
-    const hiddenElements = document.querySelectorAll('section');
+    const hiddenElements = document.querySelectorAll('section, .animate-on-scroll');
     hiddenElements.forEach((el) => {
       el.classList.add('fade-in-section');
       observer.observe(el);
@@ -46,6 +47,7 @@ function App() {
         <Skills />
         <Experience />
         <Education />
+        <Certifications />
         <Contact />
       </main>
       <Footer />
