@@ -1,7 +1,7 @@
 import React from 'react';
 import './Footer.css';
 
-const Footer = () => {
+const Footer = ({ onOpenLegal }) => {
     const currentYear = new Date().getFullYear();
 
     return (
@@ -65,8 +65,22 @@ const Footer = () => {
                     </div>
                     <div className="footer-legal">
                         <p style={{ fontSize: '0.85rem', color: '#64748b', display: 'flex', gap: '1.5rem' }}>
-                            <a href="#" style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#94a3b8'} onMouseLeave={(e) => e.target.style.color = '#64748b'}>Privacy Policy</a>
-                            <a href="#" style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#94a3b8'} onMouseLeave={(e) => e.target.style.color = '#64748b'}>Terms of Service</a>
+                            <button
+                                onClick={() => onOpenLegal('privacy')}
+                                style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', padding: 0, color: '#64748b', transition: 'color 0.3s' }}
+                                onMouseEnter={(e) => e.target.style.color = '#94a3b8'}
+                                onMouseLeave={(e) => e.target.style.color = '#64748b'}
+                            >
+                                Privacy Policy
+                            </button>
+                            <button
+                                onClick={() => onOpenLegal('terms')}
+                                style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', padding: 0, color: '#64748b', transition: 'color 0.3s' }}
+                                onMouseEnter={(e) => e.target.style.color = '#94a3b8'}
+                                onMouseLeave={(e) => e.target.style.color = '#64748b'}
+                            >
+                                Terms of Service
+                            </button>
                         </p>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -10,11 +10,23 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ResumeModal from './components/ResumeModal';
+import LegalModal from './components/LegalModal';
 import ScrollToTop from './components/ScrollToTop';
 import Preloader from './components/Preloader';
 import TechMarquee from './components/TechMarquee';
 
 function App() {
+  const [legalModalOpen, setLegalModalOpen] = useState(false);
+  const [legalModalType, setLegalModalType] = useState('privacy');
+
+  const openLegalModal = (type) => {
+    setLegalModalType(type);
+    setLegalModalOpen(true);
+  };
+
+  const closeLegalModal = () => {
+    setLegalModalOpen(false);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -53,8 +65,9 @@ function App() {
         <Certifications />
         <Contact />
       </main>
-      <Footer />
+      <Footer onOpenLegal={openLegalModal} />
       <ResumeModal />
+      <LegalModal isOpen={legalModalOpen} type={legalModalType} onClose={closeLegalModal} />
       <ScrollToTop />
     </div>
   );
