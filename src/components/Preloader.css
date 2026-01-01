@@ -1,65 +1,91 @@
-/* Preloader Component Styles */
-.preloader {
+/* Preloader Overlay */
+.preloader-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    background-color: #0f172a;
+    /* Dark background for contrast */
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
+    z-index: 10000;
+    animation: fadeOut 0.5s ease-in-out 2.2s forwards;
+    pointer-events: all;
 }
 
-.preloader.fade-out {
-    opacity: 0;
-    visibility: hidden;
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
 }
 
-.preloader-logo {
-    font-family: var(--font-heading);
-    font-size: 5rem;
+.preloader-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loader-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3rem;
     font-weight: 800;
-    color: white;
-    animation: logoFade 2s ease-in-out infinite;
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    color: #f8fafc;
+    z-index: 10;
+    animation: pulseText 1.5s ease-in-out infinite;
 }
 
-@keyframes logoFade {
+/* Spinner Ring */
+.loader-ring {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 3px solid transparent;
+    border-top-color: #10b981;
+    /* Primary Green */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loader-ring::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #f97316;
+    /* Accent Orange */
+    animation: spin 2s linear infinite reverse;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulseText {
 
     0%,
     100% {
-        opacity: 0.6;
+        opacity: 0.8;
         transform: scale(1);
     }
 
     50% {
         opacity: 1;
         transform: scale(1.05);
-    }
-}
-
-/* Pulse animation */
-.preloader::after {
-    content: '';
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    animation: pulse 2s ease-out infinite;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(2);
-        opacity: 0;
     }
 }

@@ -29,16 +29,50 @@
 }
 
 .project-image {
-    height: 240px;
+    height: 260px;
+    /* Slight increase for header */
     overflow: hidden;
     position: relative;
     background: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+}
+
+.browser-mockup-header {
+    height: 28px;
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.sc-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dot-red {
+    background: #ef4444;
+}
+
+.dot-yellow {
+    background: #f59e0b;
+}
+
+.dot-green {
+    background: #10b981;
 }
 
 .project-image::after {
     content: '';
     position: absolute;
     inset: 0;
+    top: 28px;
+    /* Start after header */
     background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -52,11 +86,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top;
     transition: transform 0.5s ease;
 }
 
 .project-item:hover .project-image img {
-    transform: scale(1.08);
+    transform: scale(1.05);
+    /* Reduced scale to look cleaner inside frame */
 }
 
 .project-details {
@@ -133,4 +169,59 @@
     .projects-list {
         grid-template-columns: 1fr;
     }
+}
+
+/* Filter Styles */
+.projects-filter {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.6rem 1.5rem;
+    border: 2px solid var(--border);
+    background: transparent;
+    border-radius: 2rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: var(--font-body);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* Spotlight Effect */
+.spotlight-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.spotlight-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+            rgba(16, 185, 129, 0.06),
+            transparent 40%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.spotlight-card:hover::before {
+    opacity: 1;
 }

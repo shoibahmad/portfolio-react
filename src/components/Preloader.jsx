@@ -2,23 +2,22 @@ import React, { useEffect, useState } from 'react';
 import './Preloader.css';
 
 const Preloader = () => {
-    const [isLoading, setIsLoading] = useState(true);
+    const [visible, setVisible] = useState(true);
 
     useEffect(() => {
-        // Set a 3-second timer
         const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 3000);
-
+            setVisible(false);
+        }, 2800); // Wait slightly longer than CSS animation
         return () => clearTimeout(timer);
     }, []);
 
-    if (!isLoading) return null;
+    if (!visible) return null;
 
     return (
-        <div className={`preloader ${!isLoading ? 'fade-out' : ''}`}>
-            <div className="preloader-logo">
-                SA<span style={{ color: 'var(--accent)' }}>.</span>
+        <div className="preloader-overlay">
+            <div className="preloader-container">
+                <span className="loader-text">SA</span>
+                <div className="loader-ring"></div>
             </div>
         </div>
     );

@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import ResumeModal from './components/ResumeModal';
 import ScrollToTop from './components/ScrollToTop';
 import Preloader from './components/Preloader';
+import TechMarquee from './components/TechMarquee';
 
 function App() {
 
@@ -38,10 +39,12 @@ function App() {
 
   return (
     <div className="App">
-      <Preloader />
+      {/* <Preloader /> - Replaced by static index.html loader */}
+      {/* <ScrollProgress /> - Causing crash, kept disabled */}
       <Header />
       <main>
         <Hero />
+        <TechMarquee />
         <Services />
         <Projects />
         <Skills />
