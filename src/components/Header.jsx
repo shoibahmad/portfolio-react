@@ -67,10 +67,16 @@ const Header = () => {
                                 </a>
                             </li>
                         ))}
+                        <li>
+                            <a href="#contact" className="mobile-resume-btn" onClick={handleNavClick}>
+                                Let's Talk
+                            </a>
+                        </li>
                     </ul>
                 </nav>
 
                 <div className="header-actions">
+                    <a href="#contact" className="desktop-resume-btn">Let's Talk</a>
                     <div className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
                         <span></span>
                         <span></span>

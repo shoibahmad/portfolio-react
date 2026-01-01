@@ -49,6 +49,9 @@ const Footer = () => {
                             <a href="https://www.linkedin.com/in/shoib-ahmad-788096219/" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">
                                 <i className="fab fa-linkedin"></i>
                             </a>
+                            <a href="https://wa.me/918853741966" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
+                                <i className="fab fa-whatsapp"></i>
+                            </a>
                             <a href="mailto:shoibsahmad@gmail.com" aria-label="Email">
                                 <i className="fas fa-envelope"></i>
                             </a>
@@ -59,6 +62,12 @@ const Footer = () => {
                 <div className="footer-bottom animate-on-scroll" style={{ transitionDelay: '300ms' }}>
                     <div className="copyright">
                         <p>&copy; {currentYear} Shoib Ahmad. All rights reserved.</p>
+                    </div>
+                    <div className="footer-legal">
+                        <p style={{ fontSize: '0.85rem', color: '#64748b', display: 'flex', gap: '1.5rem' }}>
+                            <a href="#" style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#94a3b8'} onMouseLeave={(e) => e.target.style.color = '#64748b'}>Privacy Policy</a>
+                            <a href="#" style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#94a3b8'} onMouseLeave={(e) => e.target.style.color = '#64748b'}>Terms of Service</a>
+                        </p>
                     </div>
                 </div>
             </div>

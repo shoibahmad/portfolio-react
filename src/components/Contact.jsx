@@ -102,6 +102,13 @@ const Contact = () => {
                                     <p><a href="https://www.linkedin.com/in/shoib-ahmad-788096219/" target="_blank" rel="noopener noreferrer">linkedin.com/in/shoib-ahmad-788096219/</a></p>
                                 </div>
                             </div>
+                            <div className="contact-detail-item">
+                                <i className="fab fa-whatsapp"></i>
+                                <div>
+                                    <h4>WhatsApp</h4>
+                                    <p><a href="https://wa.me/918853741966" target="_blank" rel="noopener noreferrer">+91 8853741966</a></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <form id="contact-form" className="contact-form animate-on-scroll" style={{ transitionDelay: '200ms' }} onSubmit={handleSubmit}>
