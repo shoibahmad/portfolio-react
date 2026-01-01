@@ -257,8 +257,8 @@ For any inquiries or feedback, please use the contact form on the website or rea
 
 ## 🔗 Links
 
-- **Live Demo**: [https://YOUR_USERNAME.github.io/portfolio-react/](https://YOUR_USERNAME.github.io/portfolio-react/)
-- **Repository**: [https://github.com/YOUR_USERNAME/portfolio-react](https://github.com/YOUR_USERNAME/portfolio-react)
+- **Live Demo**: [https://shoibahmad.in](https://shoibahmad.in)
+- **Repository**: [https://github.com/shoibahmad/portfolio-react](https://github.com/shoibahmad/portfolio-react)
 
 ---
 
