@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const Footer = ({ onOpenLegal }) => {
@@ -21,11 +22,11 @@ const Footer = ({ onOpenLegal }) => {
                     <div className="footer-links animate-on-scroll" style={{ transitionDelay: '100ms' }}>
                         <h4>Quick Links</h4>
                         <ul>
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#projects">Projects</a></li>
-                            <li><a href="#skills">Skills</a></li>
-                            <li><a href="#services">Services</a></li>
-                            <li><a href="#contact">Contact</a></li>
+                            <li><Link to="/">Home</Link></li>
+                            <li><Link to="/projects">Projects</Link></li>
+                            <li><Link to="/skills">Skills</Link></li>
+                            <li><Link to="/services">Services</Link></li>
+                            <li><Link to="/contact">Contact</Link></li>
                         </ul>
                     </div>
 

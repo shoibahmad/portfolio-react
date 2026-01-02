@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -12,12 +13,28 @@ import Footer from './components/Footer';
 import ResumeModal from './components/ResumeModal';
 import LegalModal from './components/LegalModal';
 import ScrollToTop from './components/ScrollToTop';
-import Preloader from './components/Preloader';
 import TechMarquee from './components/TechMarquee';
+// import Preloader from './components/Preloader'; // Replaced by static index.html loader
+
+const HomePage = () => (
+  <>
+    <Hero />
+    <TechMarquee />
+  </>
+);
+
+const ExperiencePage = () => (
+  <>
+    <Experience />
+    <Education />
+    <Certifications />
+  </>
+);
 
 function App() {
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalModalType, setLegalModalType] = useState('privacy');
+  const location = useLocation();
 
   const openLegalModal = (type) => {
     setLegalModalType(type);
@@ -29,6 +46,9 @@ function App() {
   };
 
   useEffect(() => {
+    // Scroll to top on route change
+    window.scrollTo(0, 0);
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -40,30 +60,30 @@ function App() {
       rootMargin: '0px 0px -50px 0px'
     });
 
-    const hiddenElements = document.querySelectorAll('section, .animate-on-scroll');
-    hiddenElements.forEach((el) => {
-      el.classList.add('fade-in-section');
-      observer.observe(el);
-    });
+    // Small delay to ensure DOM is rendered
+    setTimeout(() => {
+      const hiddenElements = document.querySelectorAll('section, .animate-on-scroll');
+      hiddenElements.forEach((el) => {
+        el.classList.add('fade-in-section');
+        observer.observe(el);
+      });
+    }, 100);
 
     return () => observer.disconnect();
-  }, []);
+  }, [location.pathname]); // Re-run when path changes
 
   return (
     <div className="App">
-      {/* <Preloader /> - Replaced by static index.html loader */}
-      {/* <ScrollProgress /> - Causing crash, kept disabled */}
       <Header />
       <main>
-        <Hero />
-        <TechMarquee />
-        <Services />
-        <Projects />
-        <Skills />
-        <Experience />
-        <Education />
-        <Certifications />
-        <Contact />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </main>
       <Footer onOpenLegal={openLegalModal} />
       <ResumeModal />

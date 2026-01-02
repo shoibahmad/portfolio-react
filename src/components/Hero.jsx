@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Hero.css';
 
 const Hero = () => {
@@ -53,7 +54,7 @@ const Hero = () => {
                             </div>
                         </div>
                         <div className="hero-buttons">
-                            <a href="#contact" className="btn btn-primary">Get In Touch</a>
+                            <Link to="/contact" className="btn btn-primary">Get In Touch</Link>
                             <a href="https://github.com/shoibahmad" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                                 <i className="fab fa-github"></i> GitHub
                             </a>

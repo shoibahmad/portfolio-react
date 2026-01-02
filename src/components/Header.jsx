@@ -1,27 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState('home');
 
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
-
-            const sections = document.querySelectorAll('section[id]');
-            const scrollY = window.scrollY;
-
-            sections.forEach(section => {
-                const sectionHeight = section.offsetHeight;
-                const sectionTop = section.offsetTop - 100;
-                const sectionId = section.getAttribute('id');
-
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    setActiveSection(sectionId);
-                }
-            });
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -39,44 +26,46 @@ const Header = () => {
     };
 
     const navItems = [
-        { id: 'home', label: 'Home' },
-        { id: 'services', label: 'Services' },
-        { id: 'projects', label: 'Projects' },
-        { id: 'skills', label: 'Skills' },
-        { id: 'experience', label: 'Experience' },
-        { id: 'contact', label: 'Contact' }
+        { path: '/', label: 'Home' },
+        { path: '/services', label: 'Services' },
+        { path: '/projects', label: 'Projects' },
+        { path: '/skills', label: 'Skills' },
+        { path: '/experience', label: 'Experience' },
+        { path: '/contact', label: 'Contact' }
     ];
 
     return (
         <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
             <div className="container header-container">
-                <a href="#home" className="brand-logo">
-                    SA<span>.</span>
-                </a>
+                <Link to="/" className="brand-logo" onClick={handleNavClick}>
+                    <img src="/logo.svg" alt="Shoib Ahmad Logo" className="logo-img" />
+                </Link>
 
                 <nav className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
                     <ul>
                         {navItems.map((item) => (
-                            <li key={item.id}>
-                                <a
-                                    href={`#${item.id}`}
-                                    className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
+                            <li key={item.label}>
+                                <NavLink
+                                    to={item.path}
+                                    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
                                     onClick={handleNavClick}
                                 >
                                     {item.label}
-                                </a>
+                                </NavLink>
                             </li>
                         ))}
                         <li>
-                            <a href="#contact" className="mobile-resume-btn" onClick={handleNavClick}>
+                            {/* Mobile CTA */}
+                            <Link to="/contact" className="mobile-resume-btn" onClick={handleNavClick}>
                                 Let's Talk
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </nav>
 
                 <div className="header-actions">
-                    <a href="#contact" className="desktop-resume-btn">Let's Talk</a>
+                    {/* Desktop CTA */}
+                    <Link to="/contact" className="desktop-resume-btn">Let's Talk</Link>
                     <div className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
                         <span></span>
                         <span></span>
