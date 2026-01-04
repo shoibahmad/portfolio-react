@@ -16,58 +16,85 @@ const Projects = () => {
 
     const projects = [
         {
-            title: "ADR Risk Management",
+            title: "Code Scraper",
+            category: "Web Dev",
+            date: "Tool",
+            description: "A specialized tool for scraping code and resources from websites/repositories. Automates the extraction process for easier analysis.",
+            tech: ["React", "Node.js", "Puppeteer"],
+            image: "/images/scraper.png",
+            link: "https://github.com/shoibahmad/Code-Scraper"
+        },
+        {
+            title: "Truth Guard AI (Misinformation)",
             category: "AI/ML",
             date: "Project",
-            description: "A comprehensive healthcare solution for predicting and managing Adverse Drug Reactions (ADR). The system analyzes patient history and drug interactions to prevent potential risks, providing real-time alerts to healthcare providers.",
-            tech: ["HTML", "CSS", "JavaScript", "Flask", "Python"],
+            description: "A misinformation detector for news, photos, and videos. Built using a robust stack to verify authenticity and combat fake news.",
+            tech: ["HTML", "CSS", "JavaScript", "Python", "FastAPI"],
+            image: "/images/analyzer.png",
+            link: "https://github.com/shoibahmad/Misinformation"
+        },
+        {
+            title: "ADR Risk Predictor",
+            category: "AI/ML",
+            date: "Project",
+            description: "Machine learning model designed to predict Adverse Drug Reactions (ADR), helping healthcare professionals assess potential risks.",
+            tech: ["Python", "ML", "Flask"],
             image: "/images/adr.png",
             link: "https://github.com/shoibahmad/ADR-Risk-Predictor"
         },
         {
-            title: "Campus Grievance System",
+            title: "Food POS",
             category: "Mobile Apps",
-            date: "Project",
-            description: "A mobile-first application designed to streamline the grievance redressal process in educational institutions. Students can lodge complaints, track status, and communicate with administration transparently.",
-            tech: ["Flutter", "Dart", "Firebase", "Android"],
-            image: "/images/grievance.png",
-            link: "https://github.com/shoibahmad/Campus-Grievance"
+            date: "App",
+            description: "A Point of Sale system tailored for food businesses, managing orders, inventory, and sales efficienty.",
+            tech: ["Flutter", "Dart", "Firebase"],
+            image: "/images/Food.png",
+            link: "https://github.com/shoibahmad/Food-POS"
+        },
+        {
+            title: "IU CA (Cross Platform App)",
+            category: "Mobile Apps",
+            date: "App",
+            description: "A comprehensive academic management mobile application for the university department. Handles student data, notices, and resources.",
+            tech: ["Flutter", "Dart", "Firebase", "JSON"],
+            image: "/images/iu_ca_app.png",
+            link: "https://github.com/shoibahmad/IU-CA"
         },
         {
             title: "Code Analyzer Tool",
             category: "Web Dev",
             date: "Tool",
-            description: "A sophisticated static code analysis tool that helps developers identify code quality issues, security vulnerabilities, and performance bottlenecks. Features include syntax highlighting, detailed reports, and fix suggestions.",
+            description: "A sophisticated static code analysis tool that helps developers identify code quality issues, security vulnerabilities, and performance bottlenecks.",
             tech: ["React", "Vite", "Firebase", "Node.js"],
             image: "/images/analyzer.png",
             link: "https://github.com/shoibahmad/Code-Analyzer"
         },
         {
-            title: "Web Scraper Pro",
-            category: "Web Dev",
-            date: "Tool",
-            description: "An advanced web scraping dashboard that allows users to configure, schedule, and monitor data extraction jobs. Includes data visualization, export options (CSV/JSON), and proxy management.",
-            tech: ["React", "Vite", "Firebase", "Puppeteer"],
-            image: "/images/scraper.png",
-            link: "https://github.com/shoibahmad/Code-Scraper"
-        },
-        {
             title: "Employee Salary Predict",
             category: "AI/ML",
             date: "ML Project",
-            description: "An intelligent machine learning web application designed to predict employee salaries with high accuracy. The system utilizes advanced regression algorithms including Linear Regression and Random Forest.",
+            description: "An intelligent machine learning web application designed to predict employee salaries with high accuracy utilizing advanced regression algorithms.",
             tech: ["Python", "Flask", "Scikit-learn", "Pandas"],
             image: "/images/salary.png",
             link: "https://github.com/shoibahmad/employee-salary-predictor"
         },
         {
-            title: "Food POS Application",
+            title: "Campus Grievance System",
             category: "Mobile Apps",
-            date: "App",
-            description: "A comprehensive Point of Sale (POS) system specifically designed for restaurants. Streamlines order management, inventory tracking, and sales analytics in real-time.",
-            tech: ["Flutter", "Firebase", "Dart"],
-            image: "/images/Food.png",
-            link: "https://github.com/shoibahmad/Food-Runner"
+            date: "Project",
+            description: "A mobile-first application designed to streamline the grievance redressal process in educational institutions. Students can lodge complaints and track status.",
+            tech: ["Flutter", "Dart", "Firebase", "Android"],
+            image: "/images/grievance.png",
+            link: "https://github.com/shoibahmad/Campus-Grievance"
+        },
+        {
+            title: "Finance Management System",
+            category: "Web Dev",
+            date: "Project",
+            description: "A personal finance tracking application with expense categorization, budget planning, and financial analytics for better money management.",
+            tech: ["React", "Node.js", "MongoDB"],
+            image: "/images/Management.jpeg",
+            link: "#"
         }
     ];
 

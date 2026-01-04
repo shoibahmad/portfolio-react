@@ -123,10 +123,52 @@ const ResumeModal = () => {
                             <h2 className="resume-section-title">Projects</h2>
                             <div className="resume-item">
                                 <div className="resume-item-header">
-                                    <strong>ADR Risk Management</strong>
+                                    <strong>Code Scraper</strong>
+                                    <span>Tool</span>
+                                </div>
+                                <p>A specialized tool for scraping code and resources from websites. Automates extraction for analysis. Technologies: React, Node.js, Puppeteer.</p>
+                            </div>
+                            <div className="resume-item">
+                                <div className="resume-item-header">
+                                    <strong>Truth Guard AI (Misinformation)</strong>
                                     <span>Project</span>
                                 </div>
-                                <p>A comprehensive healthcare solution for predicting and managing Adverse Drug Reactions (ADR). Technologies: HTML, CSS, JavaScript, Flask, Python.</p>
+                                <p>A misinformation detector for news, photos, and videos to verify authenticity. Technologies: HTML, CSS, JavaScript, Python, FastAPI.</p>
+                            </div>
+                            <div className="resume-item">
+                                <div className="resume-item-header">
+                                    <strong>ADR Risk Predictor</strong>
+                                    <span>Project</span>
+                                </div>
+                                <p>Machine learning model designed to predict Adverse Drug Reactions (ADR) for healthcare risk assessment. Technologies: Python, ML, Flask.</p>
+                            </div>
+                            <div className="resume-item">
+                                <div className="resume-item-header">
+                                    <strong>Food POS</strong>
+                                    <span>App</span>
+                                </div>
+                                <p>A Point of Sale system for food businesses to manage orders and inventory efficiently. Technologies: Flutter, Dart, Firebase.</p>
+                            </div>
+                            <div className="resume-item">
+                                <div className="resume-item-header">
+                                    <strong>IU CA (Cross Platform App)</strong>
+                                    <span>App</span>
+                                </div>
+                                <p>Academic mobile application for university management and student resources. Technologies: Flutter, Dart, Firebase, JSON.</p>
+                            </div>
+                            <div className="resume-item">
+                                <div className="resume-item-header">
+                                    <strong>Code Analyzer Tool</strong>
+                                    <span>Tool</span>
+                                </div>
+                                <p>A sophisticated static code analysis tool for identifying quality issues and vulnerabilities. Technologies: React, Vite, Firebase.</p>
+                            </div>
+                            <div className="resume-item">
+                                <div className="resume-item-header">
+                                    <strong>Employee Salary Predict</strong>
+                                    <span>Project</span>
+                                </div>
+                                <p>Machine learning web application for salary prediction using regression algorithms. Technologies: Python, Flask, Scikit-learn.</p>
                             </div>
                             <div className="resume-item">
                                 <div className="resume-item-header">
@@ -137,45 +179,10 @@ const ResumeModal = () => {
                             </div>
                             <div className="resume-item">
                                 <div className="resume-item-header">
-                                    <strong>Code Analyzer Tool</strong>
-                                    <span>Tool</span>
-                                </div>
-                                <p>A sophisticated static code analysis tool that helps developers identify code quality issues and security vulnerabilities. Technologies: React, Vite, Firebase.</p>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Web Scraper Pro</strong>
-                                    <span>Tool</span>
-                                </div>
-                                <p>An advanced web scraping dashboard for data extraction with visualization and export capabilities. Technologies: React, Vite, Firebase, Puppeteer.</p>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Employee Salary Prediction</strong>
-                                    <span>Project</span>
-                                </div>
-                                <p>A machine learning web application that predicts employee salaries using advanced regression models and data analytics.</p>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Food POS Application</strong>
-                                    <span>Project</span>
-                                </div>
-                                <p>A comprehensive Point of Sale system for food businesses with inventory management and order tracking capabilities.</p>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>IU CA Department App</strong>
-                                    <span>Project</span>
-                                </div>
-                                <p>A comprehensive mobile application for the Computer Applications department, featuring student management and course tracking.</p>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
                                     <strong>Finance Management System</strong>
                                     <span>Project</span>
                                 </div>
-                                <p>A personal finance tracking application with expense categorization, budget planning, and financial analytics.</p>
+                                <p>Personal finance tracking application with expense categorization and analytics. Technologies: React, Node.js, MongoDB.</p>
                             </div>
                         </div>
 

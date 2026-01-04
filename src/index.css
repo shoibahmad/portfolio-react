@@ -1,44 +1,49 @@
 /* Global Styles & Variables */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 :root {
-  /* Modern Vibrant Color Palette */
-  --primary: #10b981;
-  /* Emerald Green */
-  --primary-dark: #059669;
-  --primary-light: #d1fae5;
+  /* Academic Premium Color Palette */
+  --primary: #27272a;
+  /* Dark Zinc/Charcoal - Premium Professional */
+  --primary-dark: #18181b;
+  /* Almost Black */
+  --primary-light: #f4f4f5;
+  /* Very light zinc */
 
-  --accent: #f97316;
-  /* Vibrant Orange */
-  --accent-dark: #ea580c;
-  --accent-light: #ffedd5;
+  --accent: #b45309;
+  /* Deep Amber/Gold */
+  --accent-dark: #78350f;
+  --accent-light: #fffbeb;
 
-  --secondary: #8b5cf6;
-  /* Purple accent */
-  --secondary-light: #ede9fe;
+  --secondary: #52525b;
+  /* Medium Zinc */
+  --secondary-light: #f4f4f5;
 
   --text-primary: #0f172a;
-  /* Dark Slate */
-  --text-secondary: #475569;
+  --text-secondary: #334155;
   --text-muted: #64748b;
 
   --bg-primary: #ffffff;
   --bg-secondary: #f8fafc;
-  --bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 50%, #fef3c7 100%);
+  /* Very light slate gray */
+  --bg-gradient: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  /* Subtle, professional gradient */
 
   --border: #e2e8f0;
 
   /* Typography */
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Merriweather', serif;
+  --font-body: 'Open Sans', sans-serif;
 
   /* Effects */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+  /* Softer shadows */
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
 
-  --radius: 0.75rem;
+  --radius: 0.5rem;
+  /* Slightly sharper corners for professional look */
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

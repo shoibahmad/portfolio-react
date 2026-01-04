@@ -34,14 +34,14 @@ const Services = () => {
         <section id="services" className="services">
             <div className="container">
                 <div className="section-header text-center">
-                    <h2 className="section-title">My Services</h2>
-                    <p className="section-subtitle">Specialized technical solutions for your digital needs</p>
+                    <h2 className="section-title">Research Interests</h2>
+                    <p className="section-subtitle">Areas of technical expertise and exploration</p>
                 </div>
                 <div className="services-grid">
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="service-card spotlight-card animate-on-scroll"
+                            className="service-card research-card animate-on-scroll"
                             style={{ transitionDelay: `${index * 150}ms` }}
                             onMouseMove={handleMouseMove}
                         >
@@ -50,6 +50,7 @@ const Services = () => {
                             </div>
                             <h3>{service.title}</h3>
                             <p>{service.description}</p>
+                            <div className="card-footer-line"></div>
                         </div>
                     ))}
                 </div>

@@ -1,108 +1,102 @@
 /* Services Section Styles */
 .services {
-    padding: 5rem 0;
+    padding: 6rem 0;
     background: var(--bg-primary);
 }
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
 }
 
-.service-card {
+.research-card {
     background: white;
-    padding: 3rem 2rem;
+    padding: 3rem 2.5rem;
     border-radius: var(--radius);
     text-align: center;
     transition: var(--transition);
     border: 1px solid var(--border);
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow);
 }
 
-.service-card::before {
+/* Elegant line at top instead of full gradient */
+.research-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.service-card:hover::before {
+    height: 6px;
+    background: var(--primary);
     transform: scaleX(1);
+    /* Always visible */
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--primary-light);
+.research-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.research-card:hover::before {
+    background: var(--accent);
 }
 
 .service-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+    width: 70px;
+    height: 70px;
+    background: var(--bg-secondary);
     color: var(--primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 1.75rem;
     margin: 0 auto 2rem;
     transition: var(--transition);
+    border: 1px solid var(--border);
 }
 
-.service-card:hover .service-icon {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+.research-card:hover .service-icon {
+    background: var(--primary);
     color: white;
-    transform: scale(1.1) rotate(5deg);
+    transform: none;
+    /* Removed rotation */
 }
 
-.service-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+.research-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    margin-bottom: 1.25rem;
     color: var(--text-primary);
 }
 
-.service-card p {
+.research-card p {
     color: var(--text-secondary);
-    line-height: 1.7;
+    line-height: 1.8;
     margin: 0;
+    font-size: 1rem;
+}
+
+.card-footer-line {
+    width: 40px;
+    height: 2px;
+    background: var(--border);
+    margin: 2rem auto 0;
+    transition: all 0.3s;
+}
+
+.research-card:hover .card-footer-line {
+    width: 80px;
+    background: var(--accent);
 }
 
 @media (max-width: 768px) {
     .services-grid {
         grid-template-columns: 1fr;
     }
-}
-
-/* Spotlight Effect reused */
-.spotlight-card {
-    position: relative;
-    overflow: hidden;
-}
-
-.spotlight-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-            rgba(16, 185, 129, 0.08),
-            transparent 40%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    z-index: 2;
-}
-
-.spotlight-card:hover::after {
-    opacity: 1;
 }

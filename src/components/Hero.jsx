@@ -4,7 +4,7 @@ import './Hero.css';
 
 const Hero = () => {
     const [typedText, setTypedText] = useState('');
-    const roles = "Software Engineer | Flutter Developer | AI & ML Enthusiast";
+    const roles = "Research Scholar | Full Stack Engineer | AI Specialist";
 
     useEffect(() => {
         let currentIndex = 0;
@@ -22,49 +22,45 @@ const Hero = () => {
 
     return (
         <section id="home" className="hero">
-            <div className="floating-icons">
-                <i className="fab fa-react icon-float delay-1"></i>
-                <i className="fab fa-python icon-float delay-2"></i>
-                <i className="fab fa-js icon-float delay-3"></i>
-                <i className="fab fa-node icon-float delay-4"></i>
-            </div>
-
             <div className="container">
                 <div className="hero-content">
                     <div className="hero-text">
+                        <div className="academic-badge">Open Source Contributor & Tech Innovator</div>
                         <h1 className="hero-title">Shoib Ahmad</h1>
                         <p className="hero-subtitle">
                             {typedText}
                             <span className="cursor">|</span>
                         </p>
-                        <div className="hero-contact">
-                            <div className="contact-item">
-                                <i className="fas fa-envelope"></i>
-                                <span>shoibsahmad@gmail.com</span>
-                            </div>
-                            <div className="contact-item">
-                                <i className="fas fa-map-marker-alt"></i>
-                                <span>Lucknow</span>
-                            </div>
-                            <div className="contact-item">
-                                <i className="fab fa-linkedin"></i>
-                                <a href="https://www.linkedin.com/in/shoib-ahmad-788096219/" target="_blank" rel="noopener noreferrer">
-                                    LinkedIn Profile
-                                </a>
-                            </div>
-                        </div>
+                        <p className="hero-description">
+                            Specializing in Artificial Intelligence and Full Stack Development.
+                            Dedicated to building scalable systems and advancing computational research.
+                        </p>
+
                         <div className="hero-buttons">
-                            <Link to="/contact" className="btn btn-primary">Get In Touch</Link>
+                            <Link to="/projects" className="btn btn-primary">View Research & Projects</Link>
                             <a href="https://github.com/shoibahmad" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                                 <i className="fab fa-github"></i> GitHub
                             </a>
                             <button id="resume-btn" className="btn btn-secondary" onClick={() => document.getElementById('resume-modal')?.classList.add('active')}>
-                                <i className="fas fa-file-alt"></i> Resume
+                                <i className="fas fa-file-alt"></i> CV / Resume
                             </button>
+                        </div>
+
+                        <div className="hero-contact">
+                            <div className="contact-item">
+                                <i className="fas fa-university"></i>
+                                <span>Jamia Hamdard University</span>
+                            </div>
+                            <div className="contact-item">
+                                <i className="fas fa-map-marker-alt"></i>
+                                <span>New Delhi, India</span>
+                            </div>
                         </div>
                     </div>
                     <div className="hero-image">
-                        <img src="/images/profile.jpg" alt="Shoib Ahmad" />
+                        <div className="image-frame-academic">
+                            <img src="/images/profile.jpg" alt="Shoib Ahmad" />
+                        </div>
                     </div>
                 </div>
             </div>

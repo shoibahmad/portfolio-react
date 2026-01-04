@@ -1,0 +1,121 @@
+.publications {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+}
+
+.publications-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.publication-card {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: var(--transition);
+    border-left: 4px solid var(--primary);
+}
+
+.publication-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.pub-year {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.pub-content {
+    flex: 1;
+}
+
+.pub-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.pub-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+}
+
+.pub-link i {
+    font-size: 0.8rem;
+    opacity: 0;
+    transform: translateY(2px);
+    transition: all 0.2s;
+}
+
+.pub-link:hover {
+    color: var(--primary);
+}
+
+.pub-link:hover i {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pub-authors {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.pub-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+}
+
+.pub-journal {
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pub-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.status-published {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+.status-under-review {
+    background: var(--accent-light);
+    color: var(--accent-dark);
+}
+
+@media (max-width: 768px) {
+    .publication-card {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .pub-year {
+        font-size: 1.2rem;
+    }
+}

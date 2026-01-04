@@ -13,12 +13,14 @@ import Footer from './components/Footer';
 import ResumeModal from './components/ResumeModal';
 import LegalModal from './components/LegalModal';
 import ScrollToTop from './components/ScrollToTop';
+import Publications from './components/Publications';
 import TechMarquee from './components/TechMarquee';
-// import Preloader from './components/Preloader'; // Replaced by static index.html loader
 
 const HomePage = () => (
   <>
     <Hero />
+    <Publications />
+    <Projects />
     <TechMarquee />
   </>
 );
@@ -26,6 +28,7 @@ const HomePage = () => (
 const ExperiencePage = () => (
   <>
     <Experience />
+    <Publications />
     <Education />
     <Certifications />
   </>

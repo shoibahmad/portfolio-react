@@ -14,33 +14,29 @@
 
 .education-item {
     background: white;
-    padding: 2.5rem;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
+    padding: 2.5rem 3rem;
+    border-radius: 2px;
+    /* Less rounded */
+    border-left: 4px solid var(--border);
+    /* Neutral default */
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .education-item::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(180deg, var(--secondary) 0%, var(--accent) 100%);
-    border-radius: var(--radius) 0 0 var(--radius);
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
-}
-
-.education-item:hover::before {
-    transform: scaleY(1);
+    display: none;
+    /* Remove the gradient strip */
 }
 
 .education-item:hover {
-    transform: translateX(8px);
+    border-left-color: var(--primary);
+    transform: translateX(5px);
     box-shadow: var(--shadow-lg);
 }
 
@@ -87,6 +83,14 @@
     padding: 0.35rem 1rem;
     border-radius: 20px;
     display: inline-block;
+}
+
+.pub-date {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 .edu-location {
