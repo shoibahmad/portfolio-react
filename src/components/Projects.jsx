@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Projects.css';
+import SkeletonProjectCard from './SkeletonProjectCard';
 
 const Projects = () => {
     const [activeFilter, setActiveFilter] = useState('All');
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 3000);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     const handleMouseMove = (e) => {
         const { currentTarget: target } = e;
@@ -131,38 +141,45 @@ const Projects = () => {
                 </div>
 
                 <div className="projects-list">
-                    {filteredProjects.map((project, index) => (
-                        <div
-                            key={index}
-                            className="project-item spotlight-card animate-on-scroll"
-                            style={{ transitionDelay: `${index * 100}ms` }}
-                            onMouseMove={handleMouseMove}
-                        >
-                            <div className="project-image">
-                                <div className="browser-mockup-header">
-                                    <span className="sc-dot dot-red"></span>
-                                    <span className="sc-dot dot-yellow"></span>
-                                    <span className="sc-dot dot-green"></span>
+                    {loading ? (
+                        // Show 6 skeleton cards while loading
+                        Array(6).fill(0).map((_, index) => (
+                            <SkeletonProjectCard key={`skeleton-${index}`} />
+                        ))
+                    ) : (
+                        filteredProjects.map((project, index) => (
+                            <div
+                                key={index}
+                                className="project-item spotlight-card animate-on-scroll"
+                                style={{ transitionDelay: `${index * 100}ms` }}
+                                onMouseMove={handleMouseMove}
+                            >
+                                <div className="project-image">
+                                    <div className="browser-mockup-header">
+                                        <span className="sc-dot dot-red"></span>
+                                        <span className="sc-dot dot-yellow"></span>
+                                        <span className="sc-dot dot-green"></span>
+                                    </div>
+                                    <img src={project.image} alt={project.title} loading="lazy" />
                                 </div>
-                                <img src={project.image} alt={project.title} loading="lazy" />
+                                <div className="project-details">
+                                    <div className="project-header">
+                                        <h3>{project.title}</h3>
+                                        <span className="project-date">{project.date}</span>
+                                    </div>
+                                    <p>{project.description}</p>
+                                    <div className="project-tech">
+                                        {project.tech.map((tech, idx) => (
+                                            <span key={idx}>{tech}</span>
+                                        ))}
+                                    </div>
+                                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
+                                        View Project <i className="fas fa-arrow-right" style={{ marginLeft: '8px', fontSize: '0.8em' }}></i>
+                                    </a>
+                                </div>
                             </div>
-                            <div className="project-details">
-                                <div className="project-header">
-                                    <h3>{project.title}</h3>
-                                    <span className="project-date">{project.date}</span>
-                                </div>
-                                <p>{project.description}</p>
-                                <div className="project-tech">
-                                    {project.tech.map((tech, idx) => (
-                                        <span key={idx}>{tech}</span>
-                                    ))}
-                                </div>
-                                <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
-                                    View Project <i className="fas fa-arrow-right" style={{ marginLeft: '8px', fontSize: '0.8em' }}></i>
-                                </a>
-                            </div>
-                        </div>
-                    ))}
+                        ))
+                    )}
                 </div>
             </div>
 
