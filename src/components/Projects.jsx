@@ -16,6 +16,15 @@ const Projects = () => {
 
     const projects = [
         {
+            title: "Lumina - Smart Inventory Management",
+            category: "Mobile Apps",
+            date: "Project",
+            description: "Lumina is a modern, premium inventory management and Point of Sale (POS) application built with Flutter. It streamlines product tracking, sales recording, and business analytics with a beautiful, user-centric interface.",
+            tech: ["Flutter", "Dart", "Firebase", "Cloudinary", "Provider"],
+            image: "/images/lumina_dashboard.png",
+            link: "#"
+        },
+        {
             title: "Code Scraper",
             category: "Web Dev",
             date: "Tool",
