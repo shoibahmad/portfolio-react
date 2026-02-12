@@ -21,6 +21,81 @@ const ResumeModal = () => {
         };
     }, []);
 
+    const projects = [
+        {
+            title: "Lumina - Smart Inventory Management",
+            type: "Mobile App",
+            description: "Offline-first Flutter inventory app with barcode scanning, dynamic sales charting, and real-time Firebase sync.",
+            tech: "Flutter, Firebase, Provider"
+        },
+        {
+            title: "RuralHealth AI",
+            type: "AI/ML Project",
+            description: "Digital health screening tool for rural areas using Gemini AI for analysis and OpenAI Whisper for voice vitals.",
+            tech: "React, Django, Gemini AI"
+        },
+        {
+            title: "Secure Eval",
+            type: "AI/ML Project",
+            description: "AI-powered proctoring platform with real-time cheating detection and automated behavioral analysis.",
+            tech: "React, FastAPI, Computer Vision"
+        },
+        {
+            title: "Code Scraper",
+            type: "Tool",
+            description: "Node.js automation tool using Puppeteer to scrape and structure code from documentation sites.",
+            tech: "Node.js, Puppeteer"
+        },
+        {
+            title: "Truth Guard AI",
+            type: "AI/ML Project",
+            description: "Multi-modal misinformation detector verifying news text and images using hybrid ML models.",
+            tech: "FastAPI, Python, NLP"
+        },
+        {
+            title: "ADR Risk Predictor",
+            type: "AI/ML Project",
+            description: "Machine learning model predicting adverse drug reactions based on patient history and vitals.",
+            tech: "Python, Scikit-learn, Flask"
+        },
+        {
+            title: "Food POS",
+            type: "Mobile App",
+            description: "High-contrast tablet POS system for food businesses with real-time kitchen syncing.",
+            tech: "Flutter, Firebase"
+        },
+        {
+            title: "IU CA (Cross Platform App)",
+            type: "Mobile App",
+            description: "Centralized university management app for notices, resources, and attendance tracking.",
+            tech: "Flutter, Firebase"
+        },
+        {
+            title: "Code Analyzer Tool",
+            type: "Web Tool",
+            description: "Client-side static analysis tool using AST parsing to detect code quality issues in real-time.",
+            tech: "React, Vite, AST"
+        },
+        {
+            title: "Employee Salary Predict",
+            type: "ML Project",
+            description: "Salary prediction web app using regression algorithms to estimate fair market value.",
+            tech: "Python, Flask, Pandas"
+        },
+        {
+            title: "Campus Grievance System",
+            type: "Mobile App",
+            description: "Ticket-based mobile app for streamlining student grievance redressal and tracking.",
+            tech: "Flutter, Firebase"
+        },
+        {
+            title: "Finance Management System",
+            type: "Web App",
+            description: "Personal finance dashboard for expense tracking, categorization, and visual analytics.",
+            tech: "React, Node.js, MongoDB"
+        }
+    ];
+
     return (
         <div id="resume-modal" className="resume-modal">
             <div className="resume-overlay"></div>
@@ -121,69 +196,19 @@ const ResumeModal = () => {
 
                         <div className="resume-section">
                             <h2 className="resume-section-title">Projects</h2>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Code Scraper</strong>
-                                    <span>Tool</span>
+                            {projects.map((project, index) => (
+                                <div className="resume-item" key={index}>
+                                    <div className="resume-item-header">
+                                        <strong>{project.title}</strong>
+                                        <span>{project.type}</span>
+                                    </div>
+                                    <p>{project.description}</p>
+                                    <p style={{ fontSize: '0.85rem', marginTop: '0.3rem', color: 'var(--text-muted)' }}>
+                                        <i className="fas fa-code" style={{ marginRight: '5px' }}></i>
+                                        {project.tech}
+                                    </p>
                                 </div>
-                                <p>A specialized tool for scraping code and resources from websites. Automates extraction for analysis. Technologies: React, Node.js, Puppeteer.</p>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Truth Guard AI (Misinformation)</strong>
-                                    <span>Project</span>
-                                </div>
-                                <p>A misinformation detector for news, photos, and videos to verify authenticity. Technologies: HTML, CSS, JavaScript, Python, FastAPI.</p>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>ADR Risk Predictor</strong>
-                                    <span>Project</span>
-                                </div>
-                                <p>Machine learning model designed to predict Adverse Drug Reactions (ADR) for healthcare risk assessment. Technologies: Python, ML, Flask.</p>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Food POS</strong>
-                                    <span>App</span>
-                                </div>
-                                <p>A Point of Sale system for food businesses to manage orders and inventory efficiently. Technologies: Flutter, Dart, Firebase.</p>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>IU CA (Cross Platform App)</strong>
-                                    <span>App</span>
-                                </div>
-                                <p>Academic mobile application for university management and student resources. Technologies: Flutter, Dart, Firebase, JSON.</p>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Code Analyzer Tool</strong>
-                                    <span>Tool</span>
-                                </div>
-                                <p>A sophisticated static code analysis tool for identifying quality issues and vulnerabilities. Technologies: React, Vite, Firebase.</p>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Employee Salary Predict</strong>
-                                    <span>Project</span>
-                                </div>
-                                <p>Machine learning web application for salary prediction using regression algorithms. Technologies: Python, Flask, Scikit-learn.</p>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Campus Grievance System</strong>
-                                    <span>Project</span>
-                                </div>
-                                <p>A mobile-first application for streamlining grievance redressal in educational institutions. Technologies: Flutter, Dart, Firebase.</p>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Finance Management System</strong>
-                                    <span>Project</span>
-                                </div>
-                                <p>Personal finance tracking application with expense categorization and analytics. Technologies: React, Node.js, MongoDB.</p>
-                            </div>
+                            ))}
                         </div>
 
                         <div className="resume-section">

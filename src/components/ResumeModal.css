@@ -28,16 +28,17 @@
 
 .resume-container {
     position: relative;
-    background: white;
+    background: var(--bg-primary);
     width: 100%;
     max-width: 900px;
     max-height: 90vh;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
     display: flex;
     flex-direction: column;
     z-index: 2;
     animation: slideUp 0.4s ease-out;
+    border: 1px solid var(--border);
 }
 
 @keyframes slideUp {
@@ -59,22 +60,20 @@
     justify-content: space-between;
     align-items: center;
     background: var(--bg-secondary);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .resume-header h2 {
     font-size: 2rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
 }
 
 .close-btn {
     width: 45px;
     height: 45px;
-    background: var(--primary);
-    color: white;
-    border: none;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
     border-radius: 50%;
     font-size: 1.5rem;
     cursor: pointer;
@@ -85,7 +84,8 @@
 }
 
 .close-btn:hover {
-    background: var(--accent);
+    background: var(--primary);
+    color: white;
     transform: rotate(90deg);
 }
 
@@ -93,21 +93,37 @@
     padding: 2.5rem;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    color: var(--text-secondary);
+}
+
+/* Scrollbar styles for the modal body */
+.resume-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.resume-content::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+.resume-content::-webkit-scrollbar-thumb {
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+}
+
+.resume-content::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
 }
 
 .resume-top {
     text-align: center;
     margin-bottom: 3rem;
     padding-bottom: 2rem;
-    border-bottom: 2px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
 .resume-name {
     font-size: 2.75rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
     margin-bottom: 1rem;
 }
 
@@ -117,7 +133,7 @@
     gap: 2rem;
     flex-wrap: wrap;
     font-size: 0.95rem;
-    color: var(--text-secondary);
+    color: var(--text-muted);
 }
 
 .resume-contact-info span {
@@ -137,9 +153,10 @@
 .resume-section-title {
     font-size: 1.75rem;
     color: var(--text-primary);
-    border-bottom: 3px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
     padding-bottom: 0.5rem;
     margin-bottom: 1.5rem;
+    display: inline-block;
 }
 
 .resume-item {
@@ -150,7 +167,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     gap: 1rem;
 }
 
@@ -160,45 +177,56 @@
 }
 
 .resume-item-header span {
-    color: var(--text-muted);
+    color: var(--accent);
     font-size: 0.9rem;
     white-space: nowrap;
+    background: rgba(251, 191, 36, 0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
 }
 
 .resume-item-details p {
-    margin: 0.5rem 0;
+    margin: 0.25rem 0;
     font-size: 1rem;
-    color: var(--text-secondary);
 }
 
 .resume-item p {
     color: var(--text-secondary);
     line-height: 1.7;
-    margin: 0.75rem 0 0 0;
+    margin: 0.5rem 0 0 0;
 }
 
 .resume-skills-grid {
     display: grid;
     gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .resume-skills-grid div {
-    padding: 1rem;
+    padding: 1.25rem;
     background: var(--bg-secondary);
-    border-radius: 0.5rem;
-    border-left: 3px solid var(--primary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.resume-skills-grid div:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
 }
 
 .resume-skills-grid strong {
-    color: var(--text-primary);
+    color: var(--primary);
     display: block;
     margin-bottom: 0.75rem;
+    font-size: 1.05rem;
 }
 
 .resume-skills-grid p {
     color: var(--text-secondary);
     margin: 0;
-    line-height: 1.7;
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
 
 .resume-footer-text {
@@ -221,6 +249,7 @@
     .resume-contact-info {
         flex-direction: column;
         gap: 0.75rem;
+        align-items: center;
     }
 
     .resume-item-header {
