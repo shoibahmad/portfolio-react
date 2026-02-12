@@ -1,6 +1,6 @@
 /* Education Section Styles */
 .education {
-    padding: 5rem 0;
+    padding: 6rem 0;
     background: var(--bg-primary);
 }
 
@@ -13,12 +13,10 @@
 }
 
 .education-item {
-    background: white;
+    background: var(--bg-secondary);
     padding: 2.5rem 3rem;
-    border-radius: 2px;
-    /* Less rounded */
+    border-radius: 4px;
     border-left: 4px solid var(--border);
-    /* Neutral default */
     border-top: 1px solid var(--border);
     border-right: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
@@ -29,15 +27,11 @@
     align-items: center;
 }
 
-.education-item::before {
-    display: none;
-    /* Remove the gradient strip */
-}
-
 .education-item:hover {
     border-left-color: var(--primary);
     transform: translateX(5px);
     box-shadow: var(--shadow-lg);
+    background: var(--bg-tertiary);
 }
 
 .edu-header {
@@ -55,7 +49,7 @@
 
 .institution {
     display: block;
-    color: var(--secondary);
+    color: var(--primary);
     font-weight: 600;
     margin-bottom: 0.25rem;
 }
@@ -77,20 +71,13 @@
 
 .edu-date {
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     font-weight: 600;
-    background: var(--secondary-light);
+    background: rgba(255, 255, 255, 0.05);
+    /* Subtle light bg */
     padding: 0.35rem 1rem;
     border-radius: 20px;
     display: inline-block;
-}
-
-.pub-date {
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
 }
 
 .edu-location {

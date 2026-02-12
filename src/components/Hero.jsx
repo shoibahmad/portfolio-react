@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import './Hero.css';
 
 const Hero = () => {
     const [typedText, setTypedText] = useState('');
-    const roles = "Research Scholar | Full Stack Engineer | AI Specialist";
+    const fullText = "Research Scholar | AI Specialist | Full Stack Engineer";
 
     useEffect(() => {
         let currentIndex = 0;
         const typingInterval = setInterval(() => {
-            if (currentIndex <= roles.length) {
-                setTypedText(roles.substring(0, currentIndex));
+            if (currentIndex <= fullText.length) {
+                setTypedText(fullText.substring(0, currentIndex));
                 currentIndex++;
             } else {
                 clearInterval(typingInterval);
@@ -20,55 +21,120 @@ const Hero = () => {
         return () => clearInterval(typingInterval);
     }, []);
 
+    // Animation Variants
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.3
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.8, ease: "easeOut" }
+        }
+    };
+
     return (
         <section id="home" className="hero">
+            {/* Background Elements */}
+            <div className="hero-background">
+                <div className="glow-orb orb-1"></div>
+                <div className="glow-orb orb-2"></div>
+                <div className="grid-overlay"></div>
+            </div>
+
             <div className="container">
                 <div className="hero-content">
-                    <div className="hero-text">
-                        <div className="academic-badge">Open Source Contributor & Tech Innovator</div>
-                        <h1 className="hero-title">Shoib Ahmad</h1>
-                        <p className="hero-subtitle">
-                            {typedText}
-                            <span className="cursor">|</span>
-                        </p>
-                        <p className="hero-description">
-                            Specializing in Artificial Intelligence and Full Stack Development.
-                            Dedicated to building scalable systems and advancing computational research.
-                        </p>
+                    <motion.div
+                        className="hero-text"
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                    >
+                        <motion.div variants={itemVariants} className="badge-wrapper">
+                            <span className="academic-badge">
+                                <i className="fas fa-rocket"></i> Innovating at the Edge of AI
+                            </span>
+                        </motion.div>
 
-                        <div className="hero-buttons">
-                            <Link to="/projects" className="btn btn-primary">View Research & Projects</Link>
+                        <motion.h1 variants={itemVariants} className="hero-title">
+                            Hello, I'm <br />
+                            <span className="text-gradient-gold">Shoib Ahmad</span>
+                        </motion.h1>
+
+                        <motion.div variants={itemVariants} className="hero-subtitle-wrapper">
+                            <p className="hero-subtitle">
+                                {typedText}
+                                <span className="cursor">|</span>
+                            </p>
+                        </motion.div>
+
+                        <motion.p variants={itemVariants} className="hero-description">
+                            Bridging the gap between <strong>advanced research</strong> and <strong>scalable software</strong>.
+                            Specializing in deep learning, distributed systems, and building intuitive digital experiences.
+                        </motion.p>
+
+                        <motion.div variants={itemVariants} className="hero-buttons">
+                            <Link to="/projects" className="btn btn-primary">
+                                <span>View My Work</span>
+                                <i className="fas fa-arrow-right"></i>
+                            </Link>
                             <a href="https://github.com/shoibahmad" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                                 <i className="fab fa-github"></i> GitHub
                             </a>
-                            <button id="resume-btn" className="btn btn-secondary" onClick={() => document.getElementById('resume-modal')?.classList.add('active')}>
-                                <i className="fas fa-file-alt"></i> CV / Resume
+                            <button className="btn btn-secondary" onClick={() => document.getElementById('resume-modal')?.classList.add('active')}>
+                                <i className="fas fa-file-alt"></i> Resume
                             </button>
-                        </div>
+                        </motion.div>
 
-                        <div className="hero-contact">
+                        <motion.div variants={itemVariants} className="hero-contact">
                             <div className="contact-item">
-                                <i className="fas fa-university"></i>
-                                <span>Jamia Hamdard University</span>
+                                <span className="icon-box"><i className="fas fa-university"></i></span>
+                                <div>
+                                    <span className="label">Research Scholar</span>
+                                    <span className="value">Jamia Hamdard University</span>
+                                </div>
                             </div>
+                            <div className="contact-divider"></div>
                             <div className="contact-item">
-                                <i className="fas fa-map-marker-alt"></i>
-                                <span>New Delhi, India</span>
+                                <span className="icon-box"><i className="fas fa-map-marker-alt"></i></span>
+                                <div>
+                                    <span className="label">Based in</span>
+                                    <span className="value">New Delhi, India</span>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+
+                    <motion.div
+                        className="hero-image-wrapper"
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+                    >
+                        <div className="image-container-premium">
+                            <div className="image-frame">
+                                <img src="/images/profile.jpg" alt="Shoib Ahmad" />
+                            </div>
+                            <div className="floating-card card-1">
+                                <i className="fas fa-code"></i>
+                                <span>Full Stack</span>
+                            </div>
+                            <div className="floating-card card-2">
+                                <i className="fas fa-brain"></i>
+                                <span>AI Research</span>
                             </div>
                         </div>
-                    </div>
-                    <div className="hero-image">
-                        <div className="image-frame-academic">
-                            <img src="/images/profile.jpg" alt="Shoib Ahmad" />
-                        </div>
-                    </div>
+                    </motion.div>
                 </div>
-            </div>
-
-            <div className="wave-divider">
-                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="shape-fill"></path>
-                </svg>
             </div>
         </section>
     );

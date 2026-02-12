@@ -11,15 +11,16 @@
 }
 
 .research-card {
-    background: white;
+    background: var(--bg-secondary);
+    /* Darker card */
     padding: 3rem 2.5rem;
-    border-radius: var(--radius);
+    border-radius: var(--radius-md);
     text-align: center;
     transition: var(--transition);
     border: 1px solid var(--border);
     position: relative;
     overflow: hidden;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-lg);
 }
 
 /* Elegant line at top instead of full gradient */
@@ -29,17 +30,17 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 6px;
+    height: 4px;
     background: var(--primary);
     transform: scaleX(1);
-    /* Always visible */
     transform-origin: left;
     transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .research-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.3);
+    border-color: var(--primary-dark);
 }
 
 .research-card:hover::before {
@@ -49,7 +50,7 @@
 .service-icon {
     width: 70px;
     height: 70px;
-    background: var(--bg-secondary);
+    background: rgba(59, 130, 246, 0.1);
     color: var(--primary);
     border-radius: 50%;
     display: flex;
@@ -58,14 +59,14 @@
     font-size: 1.75rem;
     margin: 0 auto 2rem;
     transition: var(--transition);
-    border: 1px solid var(--border);
+    border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 .research-card:hover .service-icon {
     background: var(--primary);
     color: white;
     transform: none;
-    /* Removed rotation */
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
 }
 
 .research-card h3 {

@@ -53,6 +53,44 @@ const Projects = () => {
             ]
         },
         {
+            title: "RuralHealth AI",
+            category: "AI/ML",
+            date: "Project",
+            description: "A production-ready Digital Health Survey & Risk Screening Tool designed for community health workers to screen rural populations for health risks using WHO algorithms, AI-powered voice vitals, and intelligent analysis.",
+            challenge: "Rural communities face severe healthcare gaps with limited access to trained professionals. Community health workers need a simple yet powerful digital tool to perform accurate screenings without deep medical expertise, while handling low-connectivity environments.",
+            solution: "Built a full-stack application with a React + TypeScript frontend and a Django REST backend. Integrated Google Gemini AI for intelligent health analysis, OpenAI Whisper for voice-based vitals input, and Tesseract OCR for document scanning. Firebase handles authentication and real-time data sync.",
+            learnings: ["Integrating multiple AI services (Gemini, Whisper, OCR) into a unified pipeline", "Designing offline-capable health screening workflows", "Building role-based access for health workers and administrators"],
+            tech: ["React", "TypeScript", "Django", "Firebase", "Gemini AI", "Tailwind CSS"],
+            image: "/images/ruralhealth.png",
+            link: "https://github.com/shoibahmad/RuralHealth",
+            architecture: [
+                { step: "Health Worker", icon: "fas fa-user-nurse" },
+                { step: "React UI", icon: "fab fa-react" },
+                { step: "Django API", icon: "fas fa-server" },
+                { step: "Gemini AI", icon: "fas fa-brain" },
+                { step: "Risk Report", icon: "fas fa-file-medical-alt" }
+            ]
+        },
+        {
+            title: "Secure Eval",
+            category: "AI/ML",
+            date: "Project",
+            description: "An AI-powered secure online examination platform with real-time cheating detection, automated proctoring, and comprehensive admin analytics to ensure academic integrity.",
+            challenge: "Online exams are vulnerable to cheating through tab-switching, screen sharing, and unauthorized tools. Traditional proctoring is expensive and unscalable. The goal was to build an automated, AI-driven proctoring system that is both effective and resource-efficient.",
+            solution: "Developed a full-stack platform with a React frontend and Python FastAPI backend. The system monitors student behavior in real-time — tracking tab switches, browser focus, and suspicious activity patterns. Admins get a comprehensive dashboard with session history, analytics, and AI-generated analysis of exam integrity.",
+            learnings: ["Real-time browser event monitoring and anomaly detection", "Building secure exam delivery with anti-cheat mechanisms", "Admin dashboard design with session analytics and AI insights"],
+            tech: ["React", "Python", "FastAPI", "Firebase", "Gemini AI", "JavaScript"],
+            image: "/images/secureeval.png",
+            link: "https://github.com/shoibahmad/Cheating-tracker",
+            architecture: [
+                { step: "Student", icon: "fas fa-user-graduate" },
+                { step: "Exam UI", icon: "fas fa-laptop" },
+                { step: "FastAPI", icon: "fas fa-server" },
+                { step: "AI Monitor", icon: "fas fa-eye" },
+                { step: "Admin Panel", icon: "fas fa-chart-pie" }
+            ]
+        },
+        {
             title: "Code Scraper",
             category: "Web Dev",
             date: "Tool",

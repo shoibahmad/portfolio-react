@@ -1,34 +1,35 @@
 /* Tech Marquee Styles */
 .tech-marquee {
-    padding: 3rem 0;
-    background: var(--bg-primary);
+    padding: 4rem 0;
+    background: var(--bg-secondary);
     overflow: hidden;
     position: relative;
+    border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
 }
 
 .marquee-content {
     display: flex;
-    gap: 4rem;
+    gap: 6rem;
     width: max-content;
-    animation: scroll 30s linear infinite;
+    animation: scroll 40s linear infinite;
 }
 
 .tech-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
     color: var(--text-muted);
     transition: var(--transition);
     cursor: default;
+    position: relative;
 }
 
 .tech-item i {
-    font-size: 3rem;
-    filter: grayscale(100%);
-    opacity: 0.7;
-    transition: var(--transition);
+    font-size: 3.5rem;
+    filter: grayscale(100%) opacity(0.5);
+    transition: all 0.4s ease;
 }
 
 .tech-item span {
@@ -36,7 +37,10 @@
     font-weight: 600;
     opacity: 0;
     transform: translateY(10px);
-    transition: var(--transition);
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
 }
 
 .tech-marquee:hover .marquee-content {
@@ -44,16 +48,69 @@
 }
 
 .tech-item:hover i {
-    filter: grayscale(0%);
-    opacity: 1;
-    transform: scale(1.1);
-    color: var(--primary);
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.2) translateY(-10px);
+    text-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    /* Fallback */
 }
+
+/* Specific colors for icons on hover */
+.tech-item:hover i.fa-react {
+    color: #61dafb;
+    box-shadow: 0 0 30px rgba(97, 218, 251, 0.4);
+    border-radius: 50%;
+}
+
+.tech-item:hover i.fa-python {
+    color: #ffe873;
+}
+
+.tech-item:hover i.fa-js {
+    color: #f7df1e;
+}
+
+.tech-item:hover i.fa-node-js {
+    color: #339933;
+}
+
+.tech-item:hover i.fa-html5 {
+    color: #e34f26;
+}
+
+.tech-item:hover i.fa-css3-alt {
+    color: #1572b6;
+}
+
+.tech-item:hover i.fa-java {
+    color: #007396;
+}
+
+.tech-item:hover i.fa-android {
+    color: #3ddc84;
+}
+
+.tech-item:hover i.fa-git-alt {
+    color: #f05032;
+}
+
+.tech-item:hover i.fa-docker {
+    color: #2496ed;
+}
+
+.tech-item:hover i.fa-aws {
+    color: #ff9900;
+}
+
+.tech-item:hover i.fa-linux {
+    color: #fcc624;
+}
+
 
 .tech-item:hover span {
     opacity: 1;
     transform: translateY(0);
-    color: var(--primary);
+    color: var(--text-primary);
 }
 
 @keyframes scroll {
@@ -62,18 +119,17 @@
     }
 
     100% {
-        transform: translateX(calc(-50% - 2rem));
-        /* Adjust based on duplication logic */
+        transform: translateX(calc(-50% - 3rem));
     }
 }
 
-/* Gradient Masks to fade edges */
+/* Gradient Masks */
 .tech-marquee::before,
 .tech-marquee::after {
     content: "";
     position: absolute;
     top: 0;
-    width: 150px;
+    width: 200px;
     height: 100%;
     z-index: 2;
     pointer-events: none;
@@ -81,10 +137,10 @@
 
 .tech-marquee::before {
     left: 0;
-    background: linear-gradient(to right, var(--bg-primary), transparent);
+    background: linear-gradient(to right, var(--bg-secondary), transparent);
 }
 
 .tech-marquee::after {
     right: 0;
-    background: linear-gradient(to left, var(--bg-primary), transparent);
+    background: linear-gradient(to left, var(--bg-secondary), transparent);
 }
