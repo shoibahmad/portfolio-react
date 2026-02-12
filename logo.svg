@@ -1,23 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#3B82F6" />
-      <stop offset="100%" style="stop-color:#06B6D4" />
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" /> <!-- Amber 400 -->
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" /> <!-- Amber 600 -->
     </linearGradient>
+     <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" /> <!-- Blue 400 -->
+      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" /> <!-- Blue 600 -->
+    </linearGradient>
+    <filter id="dropshadow" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/> <!-- stdDeviation is how much to blur -->
+      <feOffset dx="2" dy="2" result="offsetblur"/> <!-- how much to offset -->
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.5"/> <!-- opacity of the shadow -->
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode/> <!-- this contains the offset blurred image -->
+        <feMergeNode in="SourceGraphic"/> <!-- this contains the element that the filter is applied to -->
+      </feMerge>
+    </filter>
   </defs>
-  
-  <!-- Left Bracket -->
-  <path d="M40 20 L20 50 L40 80" stroke="url(#grad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <!-- Text S -->
-  <path d="M80 30 C70 30 65 35 65 42.5 C65 50 70 52.5 77.5 52.5 C85 52.5 90 55 90 62.5 C90 70 85 75 75 75" 
-        stroke="#1E293B" stroke-width="10" stroke-linecap="round" fill="none"/>
 
-  <!-- Text A -->
-  <path d="M110 75 L125 30 L140 75 M115 62 H135" 
-        stroke="#1E293B" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        
-  <!-- Right Bracket slash -->
-  <path d="M150 80 L180 20" stroke="url(#grad)" stroke-width="12" stroke-linecap="round" opacity="0.5"/>
-  <path d="M170 80 L190 50 L170 20" stroke="url(#grad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Background Shape (Optional, minimal hex) -->
+  <path d="M256 60 L440 150 L440 362 L256 452 L72 362 L72 150 Z" 
+        fill="none" 
+        stroke="url(#blueGrad)" 
+        stroke-width="12" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        opacity="0.8" />
+  
+  <!-- Text Monogram -->
+  <text x="50%" y="62%" 
+        font-family="'Playfair Display', serif" 
+        font-size="240" 
+        font-weight="bold" 
+        fill="url(#goldGrad)" 
+        text-anchor="middle" 
+        filter="url(#dropshadow)"
+        letter-spacing="-10">
+    SA
+  </text>
+  
+  <!-- Accent Dot -->
+  <circle cx="400" cy="110" r="15" fill="#10b981" filter="url(#dropshadow)" />
+
 </svg>
