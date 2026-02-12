@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import './Skills.css';
-import TechEcosystem from './TechEcosystem';
 
 const Skills = () => {
-    const [viewMode, setViewMode] = useState('graph');
     const skills = [
         {
             category: "Programming Languages",
@@ -38,72 +36,26 @@ const Skills = () => {
             <div className="container">
                 <div className="section-header text-center">
                     <h2 className="section-title">Technical Expertise</h2>
-                    <p className="section-subtitle">An interactive visualization of my technical skills and their relationships</p>
+                    <p className="section-subtitle">A comprehensive overview of my technical skills and tools</p>
                 </div>
 
-                <div className="skills-controls" style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
-                    <div className="toggle-container" style={{ background: 'var(--bg-secondary)', padding: '0.5rem', borderRadius: '2rem', border: '1px solid var(--border)' }}>
-                        <button
-                            className={`btn btn-toggle ${viewMode === 'graph' ? 'active' : ''}`}
-                            onClick={() => setViewMode('graph')}
-                            style={{
-                                background: viewMode === 'graph' ? 'var(--primary)' : 'transparent',
-                                color: viewMode === 'graph' ? 'white' : 'var(--text-secondary)',
-                                padding: '0.5rem 1.5rem',
-                                borderRadius: '1.5rem',
-                                border: 'none',
-                                cursor: 'pointer',
-                                transition: 'all 0.3s ease'
-                            }}
+                <div className="skills-grid">
+                    {skills.map((category, index) => (
+                        <div
+                            key={index}
+                            className="skill-category spotlight-card animate-on-scroll"
+                            style={{ transitionDelay: `${index * 100}ms` }}
+                            onMouseMove={handleMouseMove}
                         >
-                            <i className="fas fa-project-diagram" style={{ marginRight: '8px' }}></i>
-                            Graph View
-                        </button>
-                        <button
-                            className={`btn btn-toggle ${viewMode === 'list' ? 'active' : ''}`}
-                            onClick={() => setViewMode('list')}
-                            style={{
-                                background: viewMode === 'list' ? 'var(--primary)' : 'transparent',
-                                color: viewMode === 'list' ? 'white' : 'var(--text-secondary)',
-                                padding: '0.5rem 1.5rem',
-                                borderRadius: '1.5rem',
-                                border: 'none',
-                                cursor: 'pointer',
-                                transition: 'all 0.3s ease'
-                            }}
-                        >
-                            <i className="fas fa-list" style={{ marginRight: '8px' }}></i>
-                            List View
-                        </button>
-                    </div>
+                            <h3>{category.category}</h3>
+                            <ul>
+                                {category.items.map((item, idx) => (
+                                    <li key={idx}>{item}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
                 </div>
-
-                {viewMode === 'graph' ? (
-                    <div className="skills-graph-container animate-on-scroll" style={{ marginBottom: '3rem' }}>
-                        <TechEcosystem />
-                        <p className="text-center" style={{ marginTop: '1rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                            <i className="fas fa-info-circle"></i> Drag nodes to interact. Scroll to zoom.
-                        </p>
-                    </div>
-                ) : (
-                    <div className="skills-grid">
-                        {skills.map((category, index) => (
-                            <div
-                                key={index}
-                                className="skill-category spotlight-card animate-on-scroll"
-                                style={{ transitionDelay: `${index * 100}ms` }}
-                                onMouseMove={handleMouseMove}
-                            >
-                                <h3>{category.category}</h3>
-                                <ul>
-                                    {category.items.map((item, idx) => (
-                                        <li key={idx}>{item}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                    </div>
-                )}
             </div>
 
             <div className="wave-divider">
@@ -116,3 +68,4 @@ const Skills = () => {
 };
 
 export default Skills;
+

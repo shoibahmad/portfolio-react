@@ -16,7 +16,7 @@ const Preloader = () => {
     return (
         <div className="preloader-overlay">
             <div className="preloader-container">
-                <span className="loader-text">SA</span>
+                <img src="/logo.svg" alt="SA Logo" className="loader-logo-img" />
                 <div className="loader-ring"></div>
             </div>
         </div>

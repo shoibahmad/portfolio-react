@@ -20,12 +20,14 @@
 }
 
 .skill-category {
-    background: white;
+    background: var(--bg-secondary);
+    /* Changed from white to dark */
     padding: 2.5rem;
-    border-radius: var(--radius);
+    border-radius: var(--radius-md);
     border: 1px solid var(--border);
     transition: var(--transition);
     position: relative;
+    box-shadow: var(--shadow-sm);
 }
 
 .skill-category::before {
@@ -37,7 +39,7 @@
     height: 0;
     background: linear-gradient(180deg, var(--primary) 0%, var(--accent) 100%);
     transition: height 0.3s ease;
-    border-radius: var(--radius) 0 0 var(--radius);
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
 }
 
 .skill-category:hover::before {
@@ -47,29 +49,38 @@
 .skill-category:hover {
     box-shadow: var(--shadow-lg);
     transform: translateY(-5px);
+    border-color: var(--primary);
 }
 
 .skill-category h3 {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     margin-bottom: 1.5rem;
     color: var(--text-primary);
     padding-bottom: 1rem;
-    border-bottom: 2px solid var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-heading);
+    letter-spacing: 0.02em;
 }
 
 .skill-category ul {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.85rem;
     list-style: none;
+    padding: 0;
 }
 
 .skill-category li {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--text-secondary);
     padding-left: 1.5rem;
     position: relative;
-    font-weight: 500;
+    font-weight: 400;
+    transition: color 0.2s ease;
+}
+
+.skill-category li:hover {
+    color: var(--primary);
 }
 
 .skill-category li::before {
@@ -105,7 +116,7 @@
     right: 0;
     bottom: 0;
     background: radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-            rgba(16, 185, 129, 0.08),
+            rgba(59, 130, 246, 0.06),
             transparent 40%);
     opacity: 0;
     transition: opacity 0.3s;

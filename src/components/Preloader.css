@@ -31,20 +31,18 @@
     flex-direction: column;
 }
 
-.loader-text {
-    font-family: 'Outfit', sans-serif;
-    font-size: 3rem;
-    font-weight: 800;
-    color: #f8fafc;
+.loader-logo-img {
+    width: 100px;
+    height: 100px;
     z-index: 10;
-    animation: pulseText 1.5s ease-in-out infinite;
+    animation: pulseLogo 1.5s ease-in-out infinite;
 }
 
 /* Spinner Ring */
 .loader-ring {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 140px;
+    height: 140px;
     border: 3px solid transparent;
     border-top-color: #10b981;
     /* Primary Green */
@@ -76,7 +74,7 @@
     }
 }
 
-@keyframes pulseText {
+@keyframes pulseLogo {
 
     0%,
     100% {
