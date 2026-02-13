@@ -1,0 +1,22 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#f0fff4"/>
+  
+  <!-- Dashboard Layout -->
+  <rect x="100" y="100" width="600" height="400" rx="10" fill="white" stroke="#bbf7d0" stroke-width="2"/>
+  
+  <!-- Sidebar -->
+  <rect x="100" y="100" width="100" height="400" rx="10" fill="#dcfce7"/>
+  
+  <!-- Charts -->
+  <!-- Bar Chart -->
+  <rect x="250" y="300" width="30" height="100" fill="#4ade80"/>
+  <rect x="300" y="250" width="30" height="150" fill="#22c55e"/>
+  <rect x="350" y="320" width="30" height="80" fill="#86efac"/>
+  
+  <!-- Pie Chart -->
+  <circle cx="550" cy="200" r="60" fill="#16a34a"/>
+  <path d="M550 200 L550 140 A60 60 0 0 1 600 230 Z" fill="#bbf7d0"/>
+  
+  <!-- Text -->
+  <text x="400" y="550" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#14532d" text-anchor="middle">Finance Management</text>
+</svg>
