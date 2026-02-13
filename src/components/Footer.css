@@ -155,7 +155,7 @@
     font-size: 0.9rem;
 }
 
-.footer-legal p {
+.footer-legal {
     display: flex;
     gap: 1.5rem;
 }
