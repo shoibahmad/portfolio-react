@@ -1,6 +1,6 @@
 /* Projects Section Styles */
 .projects {
-    padding: 6rem 0;
+    padding: 8rem 0 5rem;
     background: var(--bg-secondary);
 }
 
@@ -222,6 +222,35 @@
     z-index: 2;
 }
 
-.spotlight-card:hover::before {
-    opacity: 1;
+opacity: 1;
+}
+
+/* Wave Divider Fix */
+.wave-divider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.wave-divider svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 60px;
+}
+
+.wave-divider .shape-fill {
+    fill: #f8fafc;
+    /* Match Footer Bg exactly */
+}
+
+/* Ensure Projects section has relative positioning for absolute child */
+.projects {
+    position: relative;
+    padding-bottom: 5rem;
+    /* Space for wave */
 }

@@ -1,0 +1,26 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#1e293b"/>
+  
+  <!-- Browser Window -->
+  <rect x="100" y="100" width="600" height="400" rx="10" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+  <rect x="100" y="100" width="600" height="40" rx="10" fill="#334155"/>
+  <circle cx="130" cy="120" r="6" fill="#ef4444"/>
+  <circle cx="150" cy="120" r="6" fill="#f59e0b"/>
+  <circle cx="170" cy="120" r="6" fill="#10b981"/>
+  
+  <!-- Code Lines -->
+  <rect x="150" y="180" width="300" height="10" rx="2" fill="#3b82f6"/>
+  <rect x="150" y="210" width="200" height="10" rx="2" fill="#64748b"/>
+  <rect x="150" y="240" width="350" height="10" rx="2" fill="#64748b"/>
+  <rect x="150" y="270" width="250" height="10" rx="2" fill="#64748b"/>
+  
+  <!-- Robot Arm / Scraper Icon -->
+  <path d="M550 250 L600 300 L550 400 L500 300 Z" fill="#fbbf24"/>
+  <circle cx="550" cy="250" r="30" fill="#d97706"/>
+  <rect x="540" y="300" width="20" height="100" fill="#b45309"/>
+  
+  <!-- Gear -->
+  <circle cx="550" cy="250" r="15" fill="#fef3c7"/>
+  
+  <text x="400" y="560" font-family="monospace" font-size="28" font-weight="bold" fill="#f8fafc" text-anchor="middle">&lt;CodeScraper /&gt;</text>
+</svg>

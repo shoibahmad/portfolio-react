@@ -62,7 +62,7 @@ const Projects = () => {
             solution: "Designed a robust Flutter architecture using Provider for efficient state management and Firebase for real-time cloud sync. The app features a custom-built barcode scanner, dynamic sales charting, and an intuitive POS interface that works flawlessly on tablet and mobile form factors.",
             learnings: ["Implementing offline-first data persistence with local caching", "Complex state management with Provider pattern", "Optimizing large list rendering for inventory items"],
             tech: ["Flutter", "Dart", "Firebase", "Cloudinary", "Provider"],
-            image: "/images/lumina_dashboard.png",
+            image: "/images/lumina.svg",
             link: "#",
             architecture: [
                 { step: "User", icon: "fas fa-user-circle" },
@@ -81,7 +81,7 @@ const Projects = () => {
             solution: "Built a full-stack application with a React + TypeScript frontend and a Django REST backend. Integrated Google Gemini AI for intelligent health analysis, OpenAI Whisper for voice-based vitals input, and Tesseract OCR for document scanning. Firebase handles authentication and real-time data sync.",
             learnings: ["Integrating multiple AI services (Gemini, Whisper, OCR) into a unified pipeline", "Designing offline-capable health screening workflows", "Building role-based access for health workers and administrators"],
             tech: ["React", "TypeScript", "Django", "Firebase", "Gemini AI", "Tailwind CSS"],
-            image: "/images/ruralhealth.png",
+            image: "/images/ruralhealth.svg",
             link: "https://github.com/shoibahmad/RuralHealth",
             architecture: [
                 { step: "Health Worker", icon: "fas fa-user-nurse" },
@@ -100,7 +100,7 @@ const Projects = () => {
             solution: "Developed a full-stack platform with a React frontend and Python FastAPI backend. The system monitors student behavior in real-time — tracking tab switches, browser focus, and suspicious activity patterns. Admins get a comprehensive dashboard with session history, analytics, and AI-generated analysis of exam integrity.",
             learnings: ["Real-time browser event monitoring and anomaly detection", "Building secure exam delivery with anti-cheat mechanisms", "Admin dashboard design with session analytics and AI insights"],
             tech: ["React", "Python", "FastAPI", "Firebase", "Gemini AI", "JavaScript"],
-            image: "/images/secureeval.png",
+            image: "/images/secureeval.svg",
             link: "https://github.com/shoibahmad/Cheating-tracker",
             architecture: [
                 { step: "Student", icon: "fas fa-user-graduate" },
@@ -119,7 +119,7 @@ const Projects = () => {
             solution: "Built a Node.js automation tool using Puppeteer to navigate pages headless-ly. It intelligently identifies code blocks, preserves syntax highlighting context, and packages extracted resources into structured files for immediate developer use.",
             learnings: ["Headless browser orchestration with Puppeteer", "DOM manipulation and traversal strategies", "Handling async/await flows for scraping pipelines"],
             tech: ["React", "Node.js", "Puppeteer"],
-            image: "/images/scraper.png",
+            image: "/images/scraper.svg",
             link: "https://github.com/shoibahmad/Code-Scraper",
             architecture: [
                 { step: "Dev User", icon: "fas fa-laptop-code" },
@@ -138,7 +138,7 @@ const Projects = () => {
             solution: "Developed a hybrid API using FastAPI that routes content to specialized models. Text is analyzed via NLP transformers for sentiment and fact-checking, while images undergo error level analysis. The React frontend presents a unified 'Truth Score'.",
             learnings: ["Integrating Python ML models with a modern Web Stack", "Handling multi-modal data inputs (Text + Image)", "API latency optimization for ML inference"],
             tech: ["HTML", "CSS", "JavaScript", "Python", "FastAPI"],
-            image: "/images/analyzer.png",
+            image: "/images/misinformation.svg",
             link: "https://github.com/shoibahmad/Misinformation",
             architecture: [
                 { step: "User Input", icon: "fas fa-keyboard" },
@@ -157,7 +157,7 @@ const Projects = () => {
             solution: "Trained a supervised learning model on anonymized medical datasets using Scikit-learn. The model helps clinicians by outputting risk probabilities based on drug combinations and patient vitals, served via a lightweight Flask API.",
             learnings: ["Data preprocessing for healthcare datasets", "Classification algorithms & model tuning", "Ethical considerations in AI healthcare"],
             tech: ["Python", "ML", "Flask"],
-            image: "/images/adr.png",
+            image: "/images/adr.svg",
             link: "https://github.com/shoibahmad/ADR-Risk-Predictor",
             architecture: [
                 { step: "Patient Data", icon: "fas fa-file-medical" },
@@ -176,7 +176,7 @@ const Projects = () => {
             solution: "Created a simplified, high-contrast Flutter interface optimized for tablets. It features 'Quick Add' grid layouts, instant order modification, and background syncing to ensuring the kitchen display is always up to date.",
             learnings: ["UX design for high-stress environments", "Optimizing touch targets and workflows", "Real-time database triggers"],
             tech: ["Flutter", "Dart", "Firebase"],
-            image: "/images/Food.png",
+            image: "/images/food_pos.svg",
             link: "https://github.com/shoibahmad/Food-POS",
             architecture: [
                 { step: "Staff", icon: "fas fa-user-tie" },
@@ -194,7 +194,7 @@ const Projects = () => {
             solution: "Launched a centralized mobile portal comprising Notice Boards, Attendance Tracking, and Resource Sharing. Implemented role-based access control (RBAC) so professors can push updates that students receive instantly via notifications.",
             learnings: ["Role-Based Access Control (RBAC)", "Push Notification Services integration", "Designing for large user bases (Students)"],
             tech: ["Flutter", "Dart", "Firebase", "JSON"],
-            image: "/images/iu_ca_app.png",
+            image: "/images/iu_ca.svg",
             link: "https://github.com/shoibahmad/IU-CA",
             architecture: [
                 { step: "Student", icon: "fas fa-user-graduate" },
@@ -212,7 +212,7 @@ const Projects = () => {
             solution: "Implemented an Abstract Syntax Tree (AST) parser in the browser. It tokenizes JavaScript code in real-time to detect anti-patterns and suggest ES6+ modernizations without sending code to a server.",
             learnings: ["Abstract Syntax Trees (AST) logic", "Compiler theory basics", "Client-side file processing performance"],
             tech: ["React", "Vite", "Firebase", "Node.js"],
-            image: "/images/analyzer.png",
+            image: "/images/code_analyzer.svg",
             link: "https://github.com/shoibahmad/Code-Analyzer",
             architecture: [
                 { step: "Source Code", icon: "fas fa-code" },
@@ -230,7 +230,7 @@ const Projects = () => {
             solution: "Built a regression pipeline using Pandas for data cleaning and Scikit-learn for modeling. The system analyzes years of experience, test scores, and interview performance to predict a precise salary figure.",
             learnings: ["Regression analysis techniques", "Feature Engineering and selection", "Deploying ML to a web interface"],
             tech: ["Python", "Flask", "Scikit-learn", "Pandas"],
-            image: "/images/salary.png",
+            image: "/images/salary.svg",
             link: "https://github.com/shoibahmad/employee-salary-predictor",
             architecture: [
                 { step: "Emp Data", icon: "fas fa-users" },
@@ -248,7 +248,7 @@ const Projects = () => {
             solution: "Developed a ticket-based mobile app where students lodge complaints that are auto-assigned to department heads. Features include status tracking, anonymous reporting, and admin escalation workflows.",
             learnings: ["Workflow automation logic", "Ticket status state machines", "Anonymous data handling"],
             tech: ["Flutter", "Dart", "Firebase", "Android"],
-            image: "/images/grievance.png",
+            image: "/images/grievance.svg",
             link: "https://github.com/shoibahmad/Campus-Grievance",
             architecture: [
                 { step: "Student", icon: "fas fa-user" },
@@ -266,7 +266,7 @@ const Projects = () => {
             solution: "Created a React-based dashboard that aggregates expense data into clean charts. Users can set monthly caps, view spending vs budget, and categorize transactions for better financial health insights.",
             learnings: ["Data Visualization with Chart.js", "CRUD operations with MongoDB", "Authentication and secure data storage"],
             tech: ["React", "Node.js", "MongoDB"],
-            image: "/images/Management.jpeg",
+            image: "/images/finance.svg",
             link: "#",
             architecture: [
                 { step: "User", icon: "fas fa-user" },
@@ -355,7 +355,7 @@ const Projects = () => {
 
             <div className="wave-divider">
                 <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="shape-fill"></path>
+                    <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="shape-fill" fill="#f8fafc"></path>
                 </svg>
             </div>
         </section>

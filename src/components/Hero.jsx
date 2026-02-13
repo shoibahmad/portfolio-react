@@ -99,7 +99,7 @@ const Hero = () => {
                             <div className="contact-item">
                                 <span className="icon-box"><i className="fas fa-university"></i></span>
                                 <div>
-                                    <span className="label">Research Scholar</span>
+                                    <span className="label">MCA Scholar</span>
                                     <span className="value">Jamia Hamdard University</span>
                                 </div>
                             </div>

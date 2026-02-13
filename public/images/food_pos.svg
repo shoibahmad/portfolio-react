@@ -1,0 +1,24 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#fff1f2"/>
+  
+  <!-- Tablet POS -->
+  <rect x="150" y="100" width="500" height="350" rx="15" fill="white" stroke="#fda4af" stroke-width="4"/>
+  
+  <!-- Menu Grid -->
+  <rect x="180" y="140" width="100" height="80" rx="5" fill="#fecdd3"/>
+  <rect x="300" y="140" width="100" height="80" rx="5" fill="#fecdd3"/>
+  <rect x="420" y="140" width="100" height="80" rx="5" fill="#fecdd3"/>
+  
+  <rect x="180" y="240" width="100" height="80" rx="5" fill="#fecdd3"/>
+  <rect x="300" y="240" width="100" height="80" rx="5" fill="#fecdd3"/>
+  <rect x="420" y="240" width="100" height="80" rx="5" fill="#fecdd3"/>
+  
+  <!-- Order Sidebar -->
+  <rect x="540" y="120" width="90" height="310" rx="5" fill="#fffbeab"/>
+  
+  <!-- Food Icons (Simplified) -->
+  <circle cx="230" cy="180" r="15" fill="#fb7185"/> 
+  <rect x="340" y="170" width="20" height="20" fill="#fb7185"/>
+  
+  <text x="400" y="530" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#be123c" text-anchor="middle">Food POS System</text>
+</svg>
