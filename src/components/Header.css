@@ -6,23 +6,24 @@
     transform: translateX(-50%);
     width: calc(100% - 3rem);
     max-width: 1200px;
-    background: rgba(15, 23, 42, 0.7);
-    /* Dark Navy transparent */
-    backdrop-filter: blur(12px) saturate(180%);
-    -webkit-backdrop-filter: blur(12px) saturate(180%);
-    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.6);
+    /* Crystal clear transparency */
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 100px;
     z-index: 1000;
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+    /* Premium double layer shadow */
 }
 
 .header.scrolled {
     top: 1rem;
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(255, 255, 255, 0.85);
     width: calc(100% - 2rem);
-    border-color: var(--primary-glow);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
 }
 
 .header-container {
@@ -55,8 +56,26 @@
     transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.brand-logo:hover .logo-img {
-    transform: rotate(5deg) scale(1.1);
+.brand-logo:hover .logo-text {
+    transform: scale(1.05);
+}
+
+.logo-text {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.75rem;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: baseline;
+}
+
+.logo-dot {
+    color: var(--primary);
+    font-size: 2rem;
+    line-height: 0;
+    margin: 0 1px;
 }
 
 /* Navigation */
@@ -74,47 +93,44 @@
     font-weight: 500;
     font-size: 0.95rem;
     color: var(--text-secondary);
-    /* Light grey text */
     position: relative;
-    padding: 0.6rem 1.2rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0.5rem 0;
+    margin: 0 1rem;
+    transition: color 0.3s ease;
     letter-spacing: 0.01em;
-    border-radius: 100px;
-    overflow: hidden;
 }
 
-/* New Hover Effect: Pill Background */
+/* Elegant Underline Effect */
 .nav-link::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    background: var(--primary);
-    opacity: 0;
-    transform: scale(0.95);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: -1;
-    border-radius: 100px;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
 }
 
 .nav-link:hover {
-    color: white;
-    background: rgba(59, 130, 246, 0.1);
+    color: var(--primary);
+    background: transparent;
 }
 
 .nav-link.active {
-    color: white;
+    color: var(--primary);
     font-weight: 600;
-    background: rgba(59, 130, 246, 0.2);
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: transparent;
+    border: none;
 }
 
 .nav-link:hover::before,
 .nav-link.active::before {
-    opacity: 0;
-    transform: scale(1);
+    transform: scaleX(1);
+    transform-origin: bottom left;
+    opacity: 1;
 }
 
 /* Header Actions */
@@ -212,8 +228,8 @@
         right: -100%;
         width: 100%;
         height: 100vh;
-        background: rgba(15, 23, 42, 0.98);
-        /* Dark background */
+        background: rgba(255, 255, 255, 0.98);
+        /* Light background */
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         display: flex;

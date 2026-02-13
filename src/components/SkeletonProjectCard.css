@@ -1,5 +1,5 @@
 .skeleton-card {
-    background: white;
+    background: var(--bg-secondary);
     border-radius: var(--radius);
     border: 1px solid var(--border);
     overflow: hidden;
@@ -11,9 +11,9 @@
 
 .skeleton-pulse {
     background: linear-gradient(90deg,
-            var(--secondary-light) 0%,
+            var(--bg-tertiary) 0%,
             var(--border) 50%,
-            var(--secondary-light) 100%);
+            var(--bg-tertiary) 100%);
     background-size: 200% 100%;
     animation: pulse 1.5s infinite linear;
 }

@@ -17,6 +17,26 @@ const Projects = () => {
         return () => clearTimeout(timer);
     }, []);
 
+    useEffect(() => {
+        if (!loading) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            const hiddenElements = document.querySelectorAll('.project-item.animate-on-scroll');
+            hiddenElements.forEach((el) => observer.observe(el));
+
+            return () => observer.disconnect();
+        }
+    }, [loading, activeFilter]);
+
     const openModal = (project) => {
         setSelectedProject(project);
         setIsModalOpen(true);

@@ -18,7 +18,7 @@ const Footer = ({ onOpenLegal }) => {
                         </p>
                     </div>
 
-                    {/* Quick Links */}
+                    {/* Spacer Column (Optional, or just Quick Links) */}
                     <div className="footer-links animate-on-scroll" style={{ transitionDelay: '100ms' }}>
                         <h4>Quick Links</h4>
                         <ul>
@@ -43,6 +43,11 @@ const Footer = ({ onOpenLegal }) => {
                                 <span>Lucknow, India</span>
                             </li>
                         </ul>
+                    </div>
+
+                    {/* Socials Column (New separate column for balance) */}
+                    <div className="footer-social animate-on-scroll" style={{ transitionDelay: '250ms' }}>
+                        <h4>Connect</h4>
                         <div className="social-links">
                             <a href="https://github.com/shoibahmad" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
                                 <i className="fab fa-github"></i>
@@ -65,24 +70,8 @@ const Footer = ({ onOpenLegal }) => {
                         <p>&copy; {currentYear} Shoib Ahmad. All rights reserved.</p>
                     </div>
                     <div className="footer-legal">
-                        <p style={{ fontSize: '0.85rem', color: '#64748b', display: 'flex', gap: '1.5rem' }}>
-                            <button
-                                onClick={() => onOpenLegal('privacy')}
-                                style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', padding: 0, color: '#64748b', transition: 'color 0.3s' }}
-                                onMouseEnter={(e) => e.target.style.color = '#94a3b8'}
-                                onMouseLeave={(e) => e.target.style.color = '#64748b'}
-                            >
-                                Privacy Policy
-                            </button>
-                            <button
-                                onClick={() => onOpenLegal('terms')}
-                                style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', padding: 0, color: '#64748b', transition: 'color 0.3s' }}
-                                onMouseEnter={(e) => e.target.style.color = '#94a3b8'}
-                                onMouseLeave={(e) => e.target.style.color = '#64748b'}
-                            >
-                                Terms of Service
-                            </button>
-                        </p>
+                        <button onClick={() => onOpenLegal('privacy')}>Privacy Policy</button>
+                        <button onClick={() => onOpenLegal('terms')}>Terms of Service</button>
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@
 
 .skill-category {
     background: var(--bg-secondary);
-    /* Changed from white to dark */
+    /* Card background */
     padding: 2.5rem;
     border-radius: var(--radius-md);
     border: 1px solid var(--border);

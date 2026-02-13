@@ -73,7 +73,7 @@
     font-size: 0.85rem;
     color: var(--text-secondary);
     font-weight: 600;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-tertiary);
     /* Subtle light bg */
     padding: 0.35rem 1rem;
     border-radius: 20px;

@@ -11,8 +11,7 @@
 }
 
 .project-item {
-    background: var(--bg-primary);
-    /* Dark background */
+    background: var(--bg-secondary);
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
@@ -215,7 +214,7 @@
     right: 0;
     bottom: 0;
     background: radial-gradient(600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-            rgba(255, 255, 255, 0.06),
+            rgba(0, 0, 0, 0.03),
             transparent 40%);
     opacity: 0;
     transition: opacity 0.3s;

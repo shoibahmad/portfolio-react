@@ -38,7 +38,7 @@ const Header = () => {
         <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
             <div className="container header-container">
                 <Link to="/" className="brand-logo" onClick={handleNavClick}>
-                    <img src="/logo.svg" alt="Shoib Ahmad Logo" className="logo-img" />
+                    <span className="logo-text">shoib<span className="logo-dot">.</span>dev</span>
                 </Link>
 
                 <nav className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>

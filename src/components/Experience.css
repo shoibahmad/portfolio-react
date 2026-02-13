@@ -79,7 +79,7 @@
 
 /* Card Content inside Item */
 .exp-card {
-    background: var(--bg-primary);
+    background: var(--bg-secondary);
     padding: 2rem;
     border-radius: var(--radius);
     border: 1px solid var(--border);
