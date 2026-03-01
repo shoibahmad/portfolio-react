@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Shoib Ahmad",
+    "label": "Research Scholar | AI Specialist | Full Stack Engineer",
+    "image": "https://shoibahmad.in/images/profile.jpg",
+    "email": "contact@shoibahmad.in",
+    "url": "https://shoibahmad.in",
+    "summary": "Research Scholar specializing in AI, Machine Learning, and Full Stack Development. Bridging the gap between advanced research and scalable software.",
+    "location": {
+      "city": "New Delhi",
+      "countryCode": "IN",
+      "region": "Delhi"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "shoibahmad",
+        "url": "https://github.com/shoibahmad"
+      }
+    ]
+  },
+  "education": [
+    {
+      "institution": "Jamia Hamdard University",
+      "area": "Computer Applications",
+      "studyType": "MCA",
+      "startDate": "2023",
+      "endDate": "Present"
+    }
+  ]
+}
