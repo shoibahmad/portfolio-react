@@ -14,18 +14,36 @@
     background: var(--bg-secondary);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    transition: var(--transition);
+    box-shadow: var(--shadow);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     height: 100%;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
+    position: relative;
+}
+
+.project-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform: scaleX(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-item:hover::before {
+    transform: scaleX(1);
 }
 
 .project-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.4);
-    border-color: var(--primary);
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 
+                0 0 0 1px rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.2);
 }
 
 .project-image {
@@ -140,10 +158,17 @@
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--primary);
-    background: rgba(59, 130, 246, 0.1);
-    padding: 0.35rem 0.75rem;
-    border-radius: 4px;
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    background: rgba(99, 102, 241, 0.08);
+    padding: 0.4rem 0.85rem;
+    border-radius: 6px;
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    transition: all 0.3s ease;
+}
+
+.project-tech span:hover {
+    background: rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.3);
+    transform: translateY(-2px);
 }
 
 .project-link {
@@ -151,18 +176,37 @@
     background: transparent;
     color: var(--text-primary);
     text-align: center;
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
     font-weight: 600;
     margin-top: auto;
-    transition: var(--transition);
-    border: 1px solid var(--border);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.project-link:hover::before {
+    transform: translateY(0);
 }
 
 .project-link:hover {
-    background: var(--primary);
+    color: white;
     border-color: var(--primary);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
 }
 
 @media (max-width: 768px) {
@@ -253,4 +297,163 @@ opacity: 1;
     position: relative;
     padding-bottom: 5rem;
     /* Space for wave */
+}
+
+/* Search Bar Styles */
+.projects-search {
+    margin-bottom: 2rem;
+}
+
+.search-wrapper {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+.search-input {
+    width: 100%;
+    padding: 1rem 3rem 1rem 3.5rem;
+    border: 2px solid var(--border);
+    border-radius: 50px;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-clear {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-tertiary);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+}
+
+.search-clear:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* Tags Cloud Styles */
+.tags-cloud {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+}
+
+.tags-title {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.tag-item {
+    padding: 0.5rem 1rem;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    border-radius: 50px;
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+}
+
+.tag-item:hover {
+    background: rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+.tag-item.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.tag-count {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.tag-item.active .tag-count {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Results Count */
+.projects-results {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .search-input {
+        padding: 0.875rem 3rem 0.875rem 3rem;
+        font-size: 0.95rem;
+    }
+
+    .tags-cloud {
+        padding: 1.5rem;
+    }
+
+    .tags-wrapper {
+        gap: 0.5rem;
+    }
+
+    .tag-item {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
 }

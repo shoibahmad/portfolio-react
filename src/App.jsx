@@ -15,6 +15,10 @@ import LegalModal from './components/LegalModal';
 import ScrollToTop from './components/ScrollToTop';
 import Publications from './components/Publications';
 import TechMarquee from './components/TechMarquee';
+import Breadcrumb from './components/Breadcrumb';
+import ScrollProgress from './components/ScrollProgress';
+import ResumeDownload from './components/ResumeDownload';
+import InteractiveResume from './components/InteractiveResume';
 
 const HomePage = () => (
   <>
@@ -76,7 +80,9 @@ function App() {
 
   return (
     <div className="App">
+      <ScrollProgress />
       <Header />
+      <Breadcrumb />
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -84,6 +90,7 @@ function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/resume" element={<InteractiveResume />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
@@ -91,6 +98,7 @@ function App() {
       <ResumeModal />
       <LegalModal isOpen={legalModalOpen} type={legalModalType} onClose={closeLegalModal} />
       <ScrollToTop />
+      <ResumeDownload />
     </div>
   );
 }

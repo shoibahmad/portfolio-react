@@ -8,6 +8,7 @@ const Projects = () => {
     const [loading, setLoading] = useState(true);
     const [selectedProject, setSelectedProject] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -277,16 +278,74 @@ const Projects = () => {
         }
     ];
 
-    const filteredProjects = activeFilter === 'All'
-        ? projects
-        : projects.filter(project => project.category === activeFilter);
+    const filteredProjects = projects.filter(project => {
+        const matchesCategory = activeFilter === 'All' || project.category === activeFilter;
+        const matchesSearch = searchQuery === '' || 
+            project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            project.tech.some(tech => tech.toLowerCase().includes(searchQuery.toLowerCase()));
+        return matchesCategory && matchesSearch;
+    });
 
     const categories = ['All', 'Web Dev', 'Mobile Apps', 'AI/ML'];
+
+    // Extract all unique technologies for tag cloud
+    const allTechnologies = [...new Set(projects.flatMap(p => p.tech))];
+    const techCount = {};
+    projects.forEach(project => {
+        project.tech.forEach(tech => {
+            techCount[tech] = (techCount[tech] || 0) + 1;
+        });
+    });
 
     return (
         <section id="projects" className="projects">
             <div className="container">
                 <h2 className="section-title">Featured Projects</h2>
+
+                {/* Search Bar */}
+                <div className="projects-search">
+                    <div className="search-wrapper">
+                        <i className="fas fa-search search-icon"></i>
+                        <input
+                            type="text"
+                            placeholder="Search projects by name, description, or technology..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="search-input"
+                        />
+                        {searchQuery && (
+                            <button 
+                                className="search-clear"
+                                onClick={() => setSearchQuery('')}
+                                aria-label="Clear search"
+                            >
+                                <i className="fas fa-times"></i>
+                            </button>
+                        )}
+                    </div>
+                </div>
+
+                {/* Tags Cloud */}
+                <div className="tags-cloud">
+                    <h3 className="tags-title">Popular Technologies</h3>
+                    <div className="tags-wrapper">
+                        {allTechnologies.sort((a, b) => techCount[b] - techCount[a]).map((tech, idx) => (
+                            <button
+                                key={idx}
+                                className={`tag-item ${searchQuery.toLowerCase() === tech.toLowerCase() ? 'active' : ''}`}
+                                style={{ 
+                                    fontSize: `${0.85 + (techCount[tech] * 0.1)}rem`,
+                                    opacity: 0.6 + (techCount[tech] * 0.1)
+                                }}
+                                onClick={() => setSearchQuery(tech)}
+                            >
+                                {tech}
+                                <span className="tag-count">{techCount[tech]}</span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
 
                 <div className="projects-filter">
                     {categories.map((category) => (
@@ -298,6 +357,11 @@ const Projects = () => {
                             {category}
                         </button>
                     ))}
+                </div>
+
+                {/* Results count */}
+                <div className="projects-results">
+                    <p>Showing {filteredProjects.length} of {projects.length} projects</p>
                 </div>
 
                 <div className="projects-list">

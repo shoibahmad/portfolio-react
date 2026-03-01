@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './ScrollProgress.css';
 
 const ScrollProgress = () => {
     const [scrollWidth, setScrollWidth] = useState(0);
