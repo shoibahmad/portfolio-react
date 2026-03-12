@@ -3,16 +3,8 @@ import './Experience.css';
 
 const Experience = () => {
     const experiences = [
-        {
-            title: "Internship",
-            company: "Deloitte Virtual Experience Program",
-            date: "05/2025 – 07/2025"
-        },
-        {
-            title: "Internship",
-            company: "Deolang",
-            date: "01/2025 – 06/2025"
-        },
+
+
         {
             title: "IBM",
             company: "Edunet Foundation",

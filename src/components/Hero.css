@@ -10,7 +10,7 @@
     overflow: hidden;
 }
 
-/* Background Effects */
+/* Background Effects removed for mobile optimization
 .hero-background {
     position: absolute;
     top: 0;
@@ -68,6 +68,7 @@
         transform: translate(30px, 50px);
     }
 }
+*/
 
 /* Content Layout */
 .hero-content {
@@ -241,7 +242,7 @@
     overflow: hidden;
     border: 1px solid var(--border);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25),
-                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
     background: var(--bg-secondary);
     position: relative;
     z-index: 1;
@@ -268,7 +269,7 @@
 .image-container-premium:hover .image-frame {
     transform: rotateY(0) rotateX(0) scale(1.03);
     box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(99, 102, 241, 0.2) inset;
+        0 0 0 1px rgba(99, 102, 241, 0.2) inset;
 }
 
 .image-container-premium:hover .image-frame::after {

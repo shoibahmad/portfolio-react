@@ -17,7 +17,7 @@ import Publications from './components/Publications';
 import TechMarquee from './components/TechMarquee';
 import Breadcrumb from './components/Breadcrumb';
 import ScrollProgress from './components/ScrollProgress';
-import ResumeDownload from './components/ResumeDownload';
+
 import InteractiveResume from './components/InteractiveResume';
 
 const HomePage = () => (
@@ -98,7 +98,7 @@ function App() {
       <ResumeModal />
       <LegalModal isOpen={legalModalOpen} type={legalModalType} onClose={closeLegalModal} />
       <ScrollToTop />
-      <ResumeDownload />
+
     </div>
   );
 }

@@ -7,14 +7,7 @@ const InteractiveResume = () => {
 
     const resumeData = {
         experience: [
-            {
-                title: "Research Scholar",
-                company: "Jamia Hamdard University",
-                period: "2023 - Present",
-                location: "New Delhi, India",
-                description: "Conducting research in AI/ML, Deep Learning, and Software Engineering",
-                skills: ["Python", "Machine Learning", "Research", "AI"]
-            }
+
         ],
         education: [
             {

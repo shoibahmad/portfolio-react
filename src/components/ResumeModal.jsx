@@ -122,18 +122,8 @@ const ResumeModal = () => {
 
                         <div className="resume-section">
                             <h2 className="resume-section-title">Work Experience</h2>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Internship, Deloitte Virtual Experience Program</strong>
-                                    <span>05/2025 – 07/2025</span>
-                                </div>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Internship, Deolang</strong>
-                                    <span>01/2025 – 06/2025</span>
-                                </div>
-                            </div>
+
+
                             <div className="resume-item">
                                 <div className="resume-item-header">
                                     <strong>IBM, Edunet Foundation</strong>

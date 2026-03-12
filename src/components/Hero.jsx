@@ -5,7 +5,8 @@ import './Hero.css';
 
 const Hero = () => {
     const [typedText, setTypedText] = useState('');
-    const fullText = "Research Scholar | AI Specialist | Full Stack Engineer";
+    const fullText = "AI Specialist | Full Stack Engineer";
+
 
     useEffect(() => {
         let currentIndex = 0;
@@ -44,12 +45,8 @@ const Hero = () => {
 
     return (
         <section id="home" className="hero">
-            {/* Background Elements */}
-            <div className="hero-background">
-                <div className="glow-orb orb-1"></div>
-                <div className="glow-orb orb-2"></div>
-                <div className="grid-overlay"></div>
-            </div>
+            {/* Background elements removed for better mobile experience */}
+
 
             <div className="container">
                 <div className="hero-content">
@@ -90,9 +87,7 @@ const Hero = () => {
                             <a href="https://github.com/shoibahmad" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                                 <i className="fab fa-github"></i> GitHub
                             </a>
-                            <button className="btn btn-secondary" onClick={() => document.getElementById('resume-modal')?.classList.add('active')}>
-                                <i className="fas fa-file-alt"></i> Resume
-                            </button>
+
                         </motion.div>
 
                         <motion.div variants={itemVariants} className="hero-contact">
