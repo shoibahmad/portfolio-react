@@ -23,7 +23,7 @@ const ResumeDownload = () => {
             format: 'Markdown',
             icon: 'fas fa-file-alt',
             description: 'Plain text format for easy editing',
-            color: '#6366f1',
+            color: '#c15f3c',
             downloadUrl: '/resume/resume.md'
         }
     ];

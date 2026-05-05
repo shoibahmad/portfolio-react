@@ -19,6 +19,7 @@ import Breadcrumb from './components/Breadcrumb';
 import ScrollProgress from './components/ScrollProgress';
 
 import InteractiveResume from './components/InteractiveResume';
+import TerminalModal from './components/TerminalModal';
 
 const HomePage = () => (
   <>
@@ -40,6 +41,7 @@ const ExperiencePage = () => (
 function App() {
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalModalType, setLegalModalType] = useState('privacy');
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const location = useLocation();
 
   const openLegalModal = (type) => {
@@ -81,7 +83,7 @@ function App() {
   return (
     <div className="App">
       <ScrollProgress />
-      <Header />
+      <Header onToggleTerminal={() => setIsTerminalOpen(!isTerminalOpen)} />
       <Breadcrumb />
       <main>
         <Routes>
@@ -97,6 +99,7 @@ function App() {
       <Footer onOpenLegal={openLegalModal} />
       <ResumeModal />
       <LegalModal isOpen={legalModalOpen} type={legalModalType} onClose={closeLegalModal} />
+      <TerminalModal isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
       <ScrollToTop />
 
     </div>

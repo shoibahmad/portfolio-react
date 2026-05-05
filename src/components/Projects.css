@@ -244,27 +244,6 @@
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
-/* Spotlight Effect */
-.spotlight-card {
-    position: relative;
-    overflow: hidden;
-}
-
-.spotlight-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-            rgba(0, 0, 0, 0.03),
-            transparent 40%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    z-index: 2;
-}
 
 
 
@@ -287,7 +266,7 @@
 }
 
 .wave-divider .shape-fill {
-    fill: #f8fafc;
+    fill: #faf9f5;
     /* Match Footer Bg exactly */
 }
 

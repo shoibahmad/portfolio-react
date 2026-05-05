@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ onToggleTerminal }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -66,6 +66,9 @@ const Header = () => {
 
                 <div className="header-actions">
                     {/* Desktop CTA */}
+                    <button onClick={onToggleTerminal} className="terminal-toggle-btn" aria-label="Open Terminal" style={{ background: 'transparent', border: '1px solid var(--border)', color: 'var(--text-primary)', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', marginRight: '1rem' }}>
+                        <i className="fas fa-terminal"></i>
+                    </button>
                     <Link to="/contact" className="desktop-resume-btn">Let's Talk</Link>
                     <div className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
                         <span></span>

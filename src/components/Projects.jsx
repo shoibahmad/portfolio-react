@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Projects.css';
 import SkeletonProjectCard from './SkeletonProjectCard';
 import ProjectModal from './ProjectModal';
+import Spotlight from './ui/Spotlight';
 
 const Projects = () => {
     const [activeFilter, setActiveFilter] = useState('All');
@@ -364,7 +365,7 @@ const Projects = () => {
                     <p>Showing {filteredProjects.length} of {projects.length} projects</p>
                 </div>
 
-                <div className="projects-list">
+                <Spotlight className="projects-list">
                     {loading ? (
                         // Show 6 skeleton cards while loading
                         Array(6).fill(0).map((_, index) => (
@@ -376,7 +377,6 @@ const Projects = () => {
                                 key={index}
                                 className="project-item spotlight-card animate-on-scroll"
                                 style={{ transitionDelay: `${index * 100}ms` }}
-                                onMouseMove={handleMouseMove}
                             >
                                 <div className="project-image">
                                     <div className="browser-mockup-header">
@@ -408,7 +408,7 @@ const Projects = () => {
                             </div>
                         ))
                     )}
-                </div>
+                </Spotlight>
             </div>
 
             <ProjectModal
@@ -417,11 +417,6 @@ const Projects = () => {
                 onClose={() => setIsModalOpen(false)}
             />
 
-            <div className="wave-divider">
-                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="shape-fill" fill="#f8fafc"></path>
-                </svg>
-            </div>
         </section>
     );
 };

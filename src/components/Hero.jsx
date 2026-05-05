@@ -1,53 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './Hero.css';
 
 const Hero = () => {
-    const [typedText, setTypedText] = useState('');
-    const fullText = "AI Specialist | Full Stack Engineer";
-
+    const [time, setTime] = useState('');
 
     useEffect(() => {
-        let currentIndex = 0;
-        const typingInterval = setInterval(() => {
-            if (currentIndex <= fullText.length) {
-                setTypedText(fullText.substring(0, currentIndex));
-                currentIndex++;
-            } else {
-                clearInterval(typingInterval);
-            }
-        }, 50);
-
-        return () => clearInterval(typingInterval);
+        const updateTime = () => {
+            const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: true };
+            setTime(new Intl.DateTimeFormat('en-US', options).format(new Date()));
+        };
+        updateTime();
+        const interval = setInterval(updateTime, 60000);
+        return () => clearInterval(interval);
     }, []);
-
     // Animation Variants
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.3
+                staggerChildren: 0.1,
+                delayChildren: 0.2
             }
         }
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 30 },
+        hidden: { opacity: 0, y: 20 },
         visible: {
             opacity: 1,
             y: 0,
-            transition: { duration: 0.8, ease: "easeOut" }
+            transition: { duration: 0.6, ease: "easeOut" }
         }
     };
 
     return (
         <section id="home" className="hero">
-            {/* Background elements removed for better mobile experience */}
-
-
             <div className="container">
                 <div className="hero-content">
                     <motion.div
@@ -56,77 +46,83 @@ const Hero = () => {
                         initial="hidden"
                         animate="visible"
                     >
-                        <motion.div variants={itemVariants} className="badge-wrapper">
-                            <span className="academic-badge">
-                                <i className="fas fa-rocket"></i> Innovating at the Edge of AI
-                            </span>
+                        <motion.div variants={itemVariants} className="hero-breadcrumbs">
+                            <Link to="/">Home</Link> <i className="fas fa-chevron-right"></i>
+                            <Link to="/portfolio">Portfolio</Link> <i className="fas fa-chevron-right"></i>
+                            <span className="current">Shoib Ahmad</span>
+                        </motion.div>
+
+                        <motion.div variants={itemVariants} className="status-badge-container">
+                            <div className="availability-pulse">
+                                <span className="pulse-dot"></span>
+                                <span className="pulse-text">Available for work</span>
+                            </div>
+                            <div className="local-time">
+                                <i className="far fa-clock"></i> Lucknow, India — {time}
+                            </div>
                         </motion.div>
 
                         <motion.h1 variants={itemVariants} className="hero-title">
-                            Hello, I'm <br />
-                            <span className="text-gradient-gold">Shoib Ahmad</span>
+                            Shoib Ahmad: The Complete<br />
+                            Guide to Scalable Software
                         </motion.h1>
 
-                        <motion.div variants={itemVariants} className="hero-subtitle-wrapper">
-                            <p className="hero-subtitle">
-                                {typedText}
-                                <span className="cursor">|</span>
-                            </p>
-                        </motion.div>
-
                         <motion.p variants={itemVariants} className="hero-description">
-                            Bridging the gap between <strong>advanced research</strong> and <strong>scalable software</strong>.
-                            Specializing in deep learning, distributed systems, and building intuitive digital experiences.
+                            Shoib is a dedicated Full Stack Developer and AI Researcher. You will start with the fundamentals — building responsive interfaces, designing robust APIs, and integrating intelligent AI models. Then you will explore complex cloud architectures, automate workflows, and connect systems through advanced protocols. Whether you are an employer, collaborator, or curious visitor, this portfolio gives you everything you need to collaborate effectively with Shoib.
                         </motion.p>
+
+                        <motion.div variants={itemVariants} className="hero-stats">
+                            <span className="stat-item"><i className="fas fa-book-open"></i> 12+ Projects</span>
+                            <span className="stat-item"><i className="far fa-clock"></i> ~3 years exp.</span>
+                            <span className="stat-item"><i className="fas fa-layer-group"></i> Full Stack</span>
+                            <span className="stat-item"><i className="fas fa-graduation-cap"></i> MCA Scholar</span>
+                        </motion.div>
 
                         <motion.div variants={itemVariants} className="hero-buttons">
                             <Link to="/projects" className="btn btn-primary">
+                                <i className="fas fa-play"></i>
                                 <span>View My Work</span>
-                                <i className="fas fa-arrow-right"></i>
                             </Link>
-                            <a href="https://github.com/shoibahmad" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                                <i className="fab fa-github"></i> GitHub
-                            </a>
-
-                        </motion.div>
-
-                        <motion.div variants={itemVariants} className="hero-contact">
-                            <div className="contact-item">
-                                <span className="icon-box"><i className="fas fa-university"></i></span>
-                                <div>
-                                    <span className="label">MCA Scholar</span>
-                                    <span className="value">Jamia Hamdard University</span>
-                                </div>
-                            </div>
-                            <div className="contact-divider"></div>
-                            <div className="contact-item">
-                                <span className="icon-box"><i className="fas fa-map-marker-alt"></i></span>
-                                <div>
-                                    <span className="label">Based in</span>
-                                    <span className="value">New Delhi, India</span>
-                                </div>
-                            </div>
                         </motion.div>
                     </motion.div>
 
                     <motion.div
-                        className="hero-image-wrapper"
-                        initial={{ opacity: 0, x: 50 }}
+                        className="hero-visuals-wrapper"
+                        initial={{ opacity: 0, x: 30 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+                        transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
                     >
-                        <div className="image-container-premium">
-                            <div className="image-frame">
-                                <img src="/images/profile.jpg" alt="Shoib Ahmad" />
-                            </div>
-                            <div className="floating-card card-1">
-                                <i className="fas fa-code"></i>
-                                <span>Full Stack</span>
-                            </div>
-                            <div className="floating-card card-2">
-                                <i className="fas fa-brain"></i>
-                                <span>AI Research</span>
-                            </div>
+                        <div className="hero-portrait">
+                            <img src="/images/profile.jpg" alt="Shoib Ahmad" />
+                        </div>
+                        <div className="details-card">
+                            <h3>Developer Details</h3>
+                            <ul className="details-list">
+                                <li>
+                                    <div className="detail-label"><i className="fas fa-layer-group"></i> Level</div>
+                                    <div className="detail-value">Intermediate / Advanced</div>
+                                </li>
+                                <li>
+                                    <div className="detail-label"><i className="fas fa-book-open"></i> Projects</div>
+                                    <div className="detail-value">12+ Completed</div>
+                                </li>
+                                <li>
+                                    <div className="detail-label"><i className="far fa-clock"></i> Experience</div>
+                                    <div className="detail-value">~3 Years</div>
+                                </li>
+                                <li>
+                                    <div className="detail-label"><i className="fas fa-bolt"></i> Focus</div>
+                                    <div className="detail-value">AI + Full Stack</div>
+                                </li>
+                                <li>
+                                    <div className="detail-label"><i className="fas fa-play"></i> Stack</div>
+                                    <div className="detail-value">React, Python, Flutter</div>
+                                </li>
+                                <li>
+                                    <div className="detail-label"><i className="far fa-check-circle"></i> Availability</div>
+                                    <div className="detail-value">Open to Work</div>
+                                </li>
+                            </ul>
                         </div>
                     </motion.div>
                 </div>

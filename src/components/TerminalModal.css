@@ -1,0 +1,129 @@
+.terminal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(15, 14, 18, 0.85); /* Darker backdrop for premium feel */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 1rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.terminal-window {
+    width: 100%;
+    max-width: 800px;
+    height: 500px;
+    background: #1A191E; /* matches bg-primary */
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.terminal-header {
+    height: 40px;
+    background: #242229; /* matches bg-secondary */
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    position: relative;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.terminal-buttons span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.close-btn { background: #FF5F56; cursor: pointer; }
+.min-btn { background: #FFBD2E; }
+.max-btn { background: #27C93F; }
+
+.terminal-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.terminal-body {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    line-height: 1.6;
+    cursor: text;
+}
+
+/* Custom Scrollbar for Terminal */
+.terminal-body::-webkit-scrollbar {
+    width: 8px;
+}
+.terminal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.terminal-body::-webkit-scrollbar-thumb {
+    background: rgba(216, 180, 139, 0.2); /* Theme accent */
+    border-radius: 4px;
+}
+
+.terminal-log {
+    margin-bottom: 0.5rem;
+    white-space: pre-wrap;
+}
+
+.terminal-log.input {
+    color: var(--text-primary);
+}
+
+.terminal-log.output {
+    color: var(--primary); /* Gold/Tan color */
+}
+
+.terminal-log.error {
+    color: #FF5F56;
+}
+
+.prompt {
+    color: #27C93F; /* Classic green for the prompt */
+    margin-right: 0.5rem;
+}
+
+.terminal-input-line {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.terminal-input-line input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.95rem;
+    caret-color: var(--primary); /* Caret color matches theme */
+}
+
+@keyframes slideUpFade {
+    0% { transform: translateY(30px) scale(0.98); opacity: 0; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+}

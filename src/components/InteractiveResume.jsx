@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './InteractiveResume.css';
+import Spotlight from './ui/Spotlight';
 
 const InteractiveResume = () => {
     const [activeSection, setActiveSection] = useState('all');
@@ -7,15 +8,61 @@ const InteractiveResume = () => {
 
     const resumeData = {
         experience: [
-
+            {
+                title: "Lead Full Stack Developer",
+                company: "RuralHealth AI",
+                period: "Jan 2026 – Present",
+                location: "Remote",
+                description: "Digital health screening tool for rural areas using Gemini AI for analysis and OpenAI Whisper for voice vitals.",
+                skills: ["React", "Django", "Gemini AI"]
+            },
+            {
+                title: "Frontend Developer",
+                company: "Price Radar",
+                period: "Aug 2025 – Dec 2025",
+                location: "Remote",
+                description: "Built the high-fidelity UI/UX platform incorporating dark mode glassmorphism and real-time state synchronization.",
+                skills: ["React", "CSS", "Frontend"]
+            },
+            {
+                title: "Security & AI Engineer",
+                company: "Secure Eval",
+                period: "Mar 2025 – Jul 2025",
+                location: "Remote",
+                description: "AI-powered proctoring platform with real-time cheating detection and automated behavioral analysis.",
+                skills: ["React", "FastAPI", "Computer Vision"]
+            },
+            {
+                title: "Machine Learning Engineer",
+                company: "ADR Risk Predictor",
+                period: "Sep 2024 – Feb 2025",
+                location: "Remote",
+                description: "Machine learning model predicting adverse drug reactions based on patient history and vitals.",
+                skills: ["Python", "Scikit-learn", "Flask"]
+            },
+            {
+                title: "Software Engineer",
+                company: "Resume Analyzer",
+                period: "Apr 2024 – Aug 2024",
+                location: "Remote",
+                description: "Developed automated resume parsing and matching system using NLP.",
+                skills: ["Python", "NLP", "React"]
+            }
         ],
         education: [
             {
-                degree: "Master of Computer Applications (MCA)",
+                degree: "Master's of Computer Application (MCA)",
                 institution: "Jamia Hamdard University",
-                period: "2023 - Present",
+                period: "08/2024 - Present",
                 location: "New Delhi, India",
                 skills: ["Computer Science", "Algorithms", "Data Structures"]
+            },
+            {
+                degree: "Bachelor of Computer Applications (BCA)",
+                institution: "Integral University Lucknow",
+                period: "2021 - 2024",
+                location: "Lucknow, India",
+                skills: ["Programming", "DBMS", "Software Engineering"]
             }
         ],
         skills: {
@@ -80,7 +127,7 @@ const InteractiveResume = () => {
                     </div>
                 )}
 
-                <div className="resume-content">
+                <Spotlight className="resume-content">
                     {/* Experience Section */}
                     {(activeSection === 'all' || activeSection === 'experience') && (
                         <div className="resume-section">
@@ -89,7 +136,7 @@ const InteractiveResume = () => {
                                 Experience
                             </h3>
                             {resumeData.experience.map((exp, idx) => (
-                                <div key={idx} className="resume-card">
+                                <div key={idx} className="resume-card spotlight-card">
                                     <div className="resume-card-header">
                                         <div>
                                             <h4>{exp.title}</h4>
@@ -126,7 +173,7 @@ const InteractiveResume = () => {
                                 Education
                             </h3>
                             {resumeData.education.map((edu, idx) => (
-                                <div key={idx} className="resume-card">
+                                <div key={idx} className="resume-card spotlight-card">
                                     <div className="resume-card-header">
                                         <div>
                                             <h4>{edu.degree}</h4>
@@ -151,7 +198,7 @@ const InteractiveResume = () => {
                                 Technical Skills
                             </h3>
                             {Object.entries(resumeData.skills).map(([category, skills]) => (
-                                <div key={category} className="skills-category">
+                                <div key={category} className="skills-category spotlight-card">
                                     <h4 className="skills-category-title">{category}</h4>
                                     <div className="resume-skills">
                                         {skills.map((skill, i) => (
@@ -168,7 +215,7 @@ const InteractiveResume = () => {
                             ))}
                         </div>
                     )}
-                </div>
+                </Spotlight>
             </div>
         </section>
     );

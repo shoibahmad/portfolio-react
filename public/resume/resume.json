@@ -28,5 +28,37 @@
       "startDate": "2023",
       "endDate": "Present"
     }
+  ],
+  "work": [
+    {
+      "company": "RuralHealth AI",
+      "position": "Lead Full Stack Developer",
+      "startDate": "2026-01-01",
+      "endDate": "Present"
+    },
+    {
+      "company": "Price Radar",
+      "position": "Frontend Developer",
+      "startDate": "2025-08-01",
+      "endDate": "2025-12-01"
+    },
+    {
+      "company": "Secure Eval",
+      "position": "Security & AI Engineer",
+      "startDate": "2025-03-01",
+      "endDate": "2025-07-01"
+    },
+    {
+      "company": "ADR Risk Predictor",
+      "position": "Machine Learning Engineer",
+      "startDate": "2024-09-01",
+      "endDate": "2025-02-01"
+    },
+    {
+      "company": "Resume Analyzer",
+      "position": "Software Engineer",
+      "startDate": "2024-04-01",
+      "endDate": "2024-08-01"
+    }
   ]
 }

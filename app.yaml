@@ -1,0 +1,13 @@
+runtime: nodejs20
+env: standard
+
+handlers:
+  # Serve static files from the build directory
+  - url: /(.*\..+)$
+    static_files: dist/\1
+    upload: dist/(.*\..+)$
+
+  # Serve index.html for all other routes (for React Router support)
+  - url: /.*
+    static_files: dist/index.html
+    upload: dist/index.html

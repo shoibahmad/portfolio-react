@@ -101,29 +101,4 @@
         grid-column: auto;
     }
 }
-
-/* Spotlight Effect reused */
-.spotlight-card {
-    position: relative;
-    overflow: hidden;
-}
-
-.spotlight-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-            rgba(59, 130, 246, 0.06),
-            transparent 40%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    z-index: 2;
-}
-
-.spotlight-card:hover::after {
-    opacity: 1;
-}
+

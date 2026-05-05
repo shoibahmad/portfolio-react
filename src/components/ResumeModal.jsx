@@ -123,17 +123,34 @@ const ResumeModal = () => {
                         <div className="resume-section">
                             <h2 className="resume-section-title">Work Experience</h2>
 
-
                             <div className="resume-item">
                                 <div className="resume-item-header">
-                                    <strong>IBM, Edunet Foundation</strong>
-                                    <span>06/2025 – 07/2025</span>
+                                    <strong>Lead Full Stack Developer, RuralHealth AI</strong>
+                                    <span>Jan 2026 – Present</span>
                                 </div>
                             </div>
                             <div className="resume-item">
                                 <div className="resume-item-header">
-                                    <strong>Content Writing Internship, Marpu Foundation</strong>
-                                    <span>06/2023 – 07/2023</span>
+                                    <strong>Frontend Developer, Price Radar</strong>
+                                    <span>Aug 2025 – Dec 2025</span>
+                                </div>
+                            </div>
+                            <div className="resume-item">
+                                <div className="resume-item-header">
+                                    <strong>Security & AI Engineer, Secure Eval</strong>
+                                    <span>Mar 2025 – Jul 2025</span>
+                                </div>
+                            </div>
+                            <div className="resume-item">
+                                <div className="resume-item-header">
+                                    <strong>Machine Learning Engineer, ADR Risk Predictor</strong>
+                                    <span>Sep 2024 – Feb 2025</span>
+                                </div>
+                            </div>
+                            <div className="resume-item">
+                                <div className="resume-item-header">
+                                    <strong>Software Engineer, Resume Analyzer</strong>
+                                    <span>Apr 2024 – Aug 2024</span>
                                 </div>
                             </div>
                         </div>

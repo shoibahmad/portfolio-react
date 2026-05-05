@@ -51,7 +51,7 @@ const Contact = () => {
                 title: 'Message Sent! ✉️',
                 text: "Thank you for reaching out! I'll get back to you within 24-48 hours.",
                 icon: 'success',
-                confirmButtonColor: '#5B7FFF',
+                confirmButtonColor: '#c15f3c',
                 confirmButtonText: 'Great!',
                 timer: 3000
             });
@@ -64,7 +64,7 @@ const Contact = () => {
                 title: 'Message Received!',
                 text: 'Thank you! Please contact me directly at shoibsahmad@gmail.com',
                 icon: 'info',
-                confirmButtonColor: '#667eea'
+                confirmButtonColor: '#c15f3c'
             });
         } finally {
             setIsSubmitting(false);

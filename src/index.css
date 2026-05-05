@@ -2,42 +2,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 :root {
-  /* Premium Light Academic Palette */
-  --bg-primary: #fafbfc;
-  /* Slightly warmer off-white */
-  --bg-secondary: #ffffff;
-  /* Pure White - Cards/Sections */
-  --bg-tertiary: #f1f5f9;
-  /* Slate 100 - Hover states */
-  --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* Claude AI Aesthetic Palette */
+  --bg-primary: #1A191E;
+  /* Dark purple/black background */
+  --bg-secondary: #242229;
+  /* Lighter surface */
+  --bg-tertiary: #2A2830;
+  /* Hover surface */
+  --bg-gradient: linear-gradient(135deg, #1A191E 0%, #242229 100%);
 
-  --text-primary: #0f172a;
-  /* Slate 900 - Deep Navy for Headings */
-  --text-secondary: #475569;
-  /* Slate 600 - Readable Body text */
-  --text-muted: #64748b;
-  /* Slate 500 - Meta info */
+  --text-primary: #FFFFFF;
+  /* White */
+  --text-secondary: #A3A0AA;
+  /* Muted Gray/Purple */
+  --text-muted: #7D7A84;
+  /* Deep Muted */
 
-  --primary: #6366f1;
-  /* Indigo 500 - More vibrant */
-  --primary-dark: #4f46e5;
-  /* Indigo 600 */
-  --primary-light: #818cf8;
-  /* Indigo 400 */
-  --primary-glow: rgba(99, 102, 241, 0.25);
+  --primary: #D8B48B;
+  /* Tan / Beige */
+  --primary-dark: #C19F77;
+  /* Darker Tan */
+  --primary-light: #E8C396;
+  /* Lighter Beige */
+  --primary-glow: rgba(216, 180, 139, 0.15);
 
-  --accent: #f59e0b;
-  /* Amber 500 - Warmer gold */
-  --accent-dark: #d97706;
-  /* Amber 600 */
-  --accent-glow: rgba(245, 158, 11, 0.2);
+  --accent: #E2B887;
+  /* Accent Beige */
+  --accent-dark: #C19F77;
+  /* Accent Dark */
+  --accent-glow: rgba(226, 184, 135, 0.1);
 
-  --border: #e2e8f0;
-  /* Slate 200 - Subtle Gray Border */
-  --border-light: #f1f5f9;
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  --border: #35323B;
+  /* Dark Border */
+  --border-light: #45424D;
+  --glass-bg: rgba(26, 25, 30, 0.8);
+  --glass-border: rgba(53, 50, 59, 0.6);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
 
   /* Typography */
   --font-heading: 'Playfair Display', serif;
@@ -47,11 +47,11 @@
   --section-spacing: 6rem;
 
   /* Effects */
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
-  --shadow-xl: 0 20px 40px -10px rgba(0, 0, 0, 0.15), 0 10px 20px -8px rgba(0, 0, 0, 0.1);
-  --shadow-colored: 0 10px 40px -10px rgba(99, 102, 241, 0.3);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.2);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 10px 20px -8px rgba(0, 0, 0, 0.5);
+  --shadow-colored: 0 10px 40px -10px rgba(216, 180, 139, 0.15);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
@@ -68,7 +68,7 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 body {
@@ -80,9 +80,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   background-image:
-    radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 30%),
-    radial-gradient(circle at 85% 30%, rgba(245, 158, 11, 0.04) 0%, transparent 30%),
-    radial-gradient(circle at 50% 100%, rgba(99, 102, 241, 0.03) 0%, transparent 40%);
+    radial-gradient(circle at 15% 50%, rgba(216, 180, 139, 0.03) 0%, transparent 30%),
+    radial-gradient(circle at 85% 30%, rgba(226, 184, 135, 0.02) 0%, transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(216, 180, 139, 0.02) 0%, transparent 40%);
   background-attachment: fixed;
 }
 
@@ -157,12 +157,12 @@ img {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #35323B;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #45424D;
 }
 
 /* Utility Classes */
@@ -184,10 +184,10 @@ img {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  color: white;
+  background: var(--primary);
+  color: var(--bg-primary);
   border: none;
-  box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.35);
+  box-shadow: none;
   position: relative;
   overflow: hidden;
 }
@@ -208,8 +208,9 @@ img {
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+  background: var(--primary-light);
+  box-shadow: 0 4px 15px rgba(216, 180, 139, 0.2);
 }
 
 .btn-outline {

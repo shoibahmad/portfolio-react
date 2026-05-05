@@ -1,0 +1,41 @@
+.spotlight-container {
+    width: 100%;
+}
+
+.spotlight-card {
+    position: relative;
+    overflow: hidden;
+    /* Optional: Ensure card looks clickable if it is */
+}
+
+.spotlight-card::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+        rgba(216, 180, 139, 0.06),
+        transparent 40%
+    );
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    opacity: 0;
+}
+
+.spotlight-container:hover .spotlight-card::before {
+    opacity: 0.8; /* Subtle background glow for all cards in container */
+}
+
+.spotlight-card:hover::before {
+    opacity: 1; /* Stronger glow for the hovered card */
+}
+
+/* Ensure inner content is above the glow */
+.spotlight-card > * {
+    position: relative;
+    z-index: 1;
+}
