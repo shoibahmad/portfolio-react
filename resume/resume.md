@@ -25,11 +25,20 @@ Research Scholar specializing in AI, Machine Learning, and Full Stack Developmen
 
 ## Experience
 
-### Research Scholar
-**Jamia Hamdard University** | 2023 - Present  
-📍 New Delhi, India
+### Lead Full Stack Developer
+**RuralHealth AI** | Jan 2026 - Present
 
-Conducting research in AI/ML, Deep Learning, and Software Engineering. Building innovative solutions with modern technologies.
+### Frontend Developer
+**Price Radar** | Aug 2025 - Dec 2025
+
+### Security & AI Engineer
+**Secure Eval** | Mar 2025 - Jul 2025
+
+### Machine Learning Engineer
+**ADR Risk Predictor** | Sep 2024 - Feb 2025
+
+### Software Engineer
+**Resume Analyzer** | Apr 2024 - Aug 2024
 
 ---
 
