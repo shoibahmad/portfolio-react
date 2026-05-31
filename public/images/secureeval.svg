@@ -1,8 +1,59 @@
 <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="#faf5ff"/>
-  <path d="M400 180 L520 230 V350 C520 440 400 500 400 500 C400 500 280 440 280 350 V230 Z" fill="#9333ea" opacity="0.9"/>
-  <path d="M370 300 L430 360 L400 390 L370 360 Z" fill="none" stroke="white" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/> 
-  <path d="M360 320 L400 360 L440 280" fill="none" stroke="white" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="400" y="560" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#581c87" text-anchor="middle">Secure Eval</text>
-  <text x="400" y="600" font-family="Arial, sans-serif" font-size="20" fill="#6b7280" text-anchor="middle">AI-Powered Proctoring</text>
+  <rect width="100%" height="100%" fill="#040c16"/>
+
+  <!-- Scanning lines grid -->
+  <path d="M 0,90 L 800,90 M 0,180 L 800,180 M 0,270 L 800,270 M 0,360 L 800,360 M 0,450 L 800,450" stroke="#0ea5e9" stroke-opacity="0.03" stroke-width="1"/>
+  <path d="M 100,0 L 100,600 M 200,0 L 200,600 M 300,0 L 300,600 M 400,0 L 400,600 M 500,0 L 500,600 M 600,0 L 600,600 M 700,0 L 700,600" stroke="#0ea5e9" stroke-opacity="0.03" stroke-width="1"/>
+
+  <circle cx="400" cy="250" r="160" fill="#0ea5e9" fill-opacity="0.1" filter="blur(25px)"/>
+
+  <!-- Proctor Camera / AI Eye (Center) -->
+  <g transform="translate(400, 220)">
+    <circle cx="0" cy="0" r="60" fill="#08101a" stroke="#0ea5e9" stroke-width="3" filter="drop-shadow(0 0 10px rgba(14, 165, 233, 0.4))"/>
+    <circle cx="0" cy="0" r="45" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="6,4"/>
+    
+    <!-- Camera Lens iris -->
+    <circle cx="0" cy="0" r="25" fill="#0f172a" stroke="#0ea5e9" stroke-width="2"/>
+    <circle cx="5" cy="-5" r="8" fill="#38bdf8"/>
+    <circle cx="8" cy="-8" r="3" fill="#ffffff"/>
+    
+    <!-- Red recording dot -->
+    <circle cx="-35" cy="-35" r="5" fill="#ef4444"/>
+  </g>
+
+  <!-- Browser Anti-Cheat Panel (Left side) -->
+  <g transform="translate(130, 160)">
+    <rect x="0" y="0" width="180" height="150" rx="8" fill="#0b1727" stroke="#1e293b" stroke-width="1.5"/>
+    <rect x="0" y="0" width="180" height="25" rx="8" fill="#1e293b"/>
+    <circle cx="15" cy="12" r="4" fill="#ef4444"/>
+    <circle cx="27" cy="12" r="4" fill="#f59e0b"/>
+    <circle cx="39" cy="12" r="4" fill="#10b981"/>
+    
+    <text x="15" y="55" font-family="sans-serif" font-size="11" fill="#94a3b8">Active Browser Focus</text>
+    <rect x="15" y="65" width="150" height="25" rx="4" fill="#061220" stroke="#10b981" stroke-width="1.5"/>
+    <text x="25" y="81" font-family="sans-serif" font-size="10" fill="#34d399">✓ Locked (No Tab Switched)</text>
+
+    <!-- Tab switch warning indicator -->
+    <text x="15" y="112" font-family="sans-serif" font-size="11" fill="#94a3b8">Suspicious Activity</text>
+    <rect x="15" y="120" width="150" height="20" rx="4" fill="#7f1d1d" opacity="0.3"/>
+    <text x="25" y="133" font-family="sans-serif" font-size="9" fill="#fca5a5">0 tab switches detected</text>
+  </g>
+
+  <!-- AI Proctor Analysis Dashboard (Right side) -->
+  <g transform="translate(490, 160)">
+    <rect x="0" y="0" width="180" height="150" rx="8" fill="#0b1727" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="15" y="25" font-family="sans-serif" font-weight="bold" font-size="12" fill="#0ea5e9">Exam Session Stats</text>
+    
+    <!-- Integrity Score Meter -->
+    <rect x="15" y="45" width="150" height="45" rx="6" fill="#0f172a"/>
+    <text x="25" y="63" font-family="sans-serif" font-size="10" fill="#94a3b8">Integrity Index</text>
+    <text x="25" y="82" font-family="monospace" font-weight="bold" font-size="15" fill="#38bdf8">99.8% Trust</text>
+    
+    <rect x="15" y="105" width="150" height="30" rx="4" fill="#061220"/>
+    <text x="25" y="123" font-family="sans-serif" font-size="9" fill="#34d399">Status: Secure session</text>
+  </g>
+
+  <!-- Title Text -->
+  <text x="400" y="520" font-family="sans-serif" font-size="32" font-weight="bold" fill="#f8fafc" text-anchor="middle">Secure Eval</text>
+  <text x="400" y="555" font-family="monospace" font-size="16" fill="#38bdf8" text-anchor="middle">&lt; Automated Online Proctoring /&gt;</text>
 </svg>

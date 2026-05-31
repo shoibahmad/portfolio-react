@@ -56,6 +56,139 @@ const Projects = () => {
 
     const projects = [
         {
+            title: "AgentForge — gitagent Studio",
+            category: "Web Dev",
+            date: "Project",
+            description: "A polished, 100% client-side studio for building, validating, and packaging AI agents in the gitagent format. A 5-step guided builder generates agent.yaml, SOUL.md, RULES.md, and skill definitions with a live VS Code-style editor, in-browser spec validation, one-click ZIP download, and shareable URL state — no backend, no sign-up.",
+            challenge: "Defining AI agents in the gitagent spec requires hand-writing YAML and Markdown files with strict schema rules. Developers had no visual tooling to build, validate, and package agents without deep knowledge of the spec format or risk of producing invalid repositories.",
+            solution: "Built a Next.js 16 App Router SPA with TypeScript and a custom AgentContext using useReducer for typed state management. The 5-step builder maps directly to each output file. Step 5 renders a VS Code-style editor with highlight.js syntax highlighting, a full spec compliance validator with jump-to-step navigation, JSZip for client-side ZIP bundling, and Base64 URL encoding for shareable agent configs. Zero data leaves the browser.",
+            learnings: ["Client-side ZIP generation with JSZip — no server upload required", "Base64 URL state encoding for shareable, server-free configuration links", "Building a spec compliance validator with scored pass/warn/fail reporting", "useReducer + createContext for complex multi-step form state management", "VS Code-style file tree editor with highlight.js YAML and Markdown rendering"],
+            tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "JSZip", "highlight.js"],
+            image: "/images/agentforge.svg",
+            link: "https://github.com/shoibahmad/agentforge",
+            architecture: [
+                { step: "5-Step Builder", icon: "fas fa-list-ol" },
+                { step: "AgentContext", icon: "fas fa-cogs" },
+                { step: "Validator", icon: "fas fa-check-double" },
+                { step: "JSZip", icon: "fas fa-file-archive" },
+                { step: "gitagent Repo", icon: "fas fa-robot" }
+            ]
+        },
+        {
+            title: "Mike AI — Smart Recruitment Platform",
+            category: "AI/ML",
+            date: "Project",
+            description: "A premium AI-driven recruitment intelligence platform that uses Gemini embeddings and pgvector semantic search to rank candidates by true experience-role fit — not keywords. Features a drag-and-drop Kanban pipeline, live talent pool analytics with draggable widgets, and an enterprise-grade glassmorphism dark UI.",
+            challenge: "Traditional recruitment tools rely on keyword filters that miss qualified candidates whose experience doesn't match exact phrasing. Recruiters also lack a unified view combining AI match scoring, pipeline management, and talent analytics in one cohesive interface.",
+            solution: "Built a React 19 + Vite frontend with pure CSS glassmorphism and canvas-confetti for pipeline celebrations. The FastAPI backend uses LangChain with Gemini 2.5 Flash for semantic matching and Gemini Text Embedding (gemini-embedding-004) stored in Supabase pgvector for high-dimensional similarity search. Match results include AI-generated Pros & Cons with visual skill, experience, and role-fit breakdowns.",
+            learnings: ["Vector-based semantic search with pgvector and Gemini embeddings for candidate ranking", "LangChain + Gemini 2.5 Flash for structured AI match insight generation", "Drag-and-drop Kanban with real-time Supabase persistence and stage-specific themes", "Draggable analytics widgets with live CRUD re-calculation of talent pool stats"],
+            tech: ["React", "FastAPI", "Gemini AI", "Supabase", "LangChain", "pgvector", "Python", "Vite"],
+            image: "/images/mike_ai.svg",
+            link: "https://github.com/shoibahmad/mike-ai",
+            architecture: [
+                { step: "Job Description", icon: "fas fa-file-alt" },
+                { step: "Embeddings", icon: "fas fa-vector-square" },
+                { step: "pgvector", icon: "fas fa-database" },
+                { step: "Gemini Match", icon: "fas fa-brain" },
+                { step: "Kanban Board", icon: "fas fa-columns" }
+            ]
+        },
+        {
+            title: "PriceRadar — Market Triangulation Engine",
+            category: "AI/ML",
+            date: "Project",
+            description: "A high-fidelity market intelligence platform that scrapes real-time pricing data across Amazon, Flipkart, Meesho, and Snapdeal. Features multimodal image recon via Gemini Vision for OCR-driven product identification, AI merchant trust validation, market volatility analytics, and a brutalist design aesthetic built for operational speed.",
+            challenge: "Consumers and operators lack a unified tool to compare prices across major Indian e-commerce platforms in real-time. Existing tools are slow, single-platform, and offer no AI-driven deal intelligence or vendor reliability scoring.",
+            solution: "Built a Next.js 16 + React 19 frontend with TanStack Query for real-time data streaming and Framer Motion for premium micro-animations. The FastAPI backend runs multi-threaded Playwright scrapers across 4 retail nodes with async SQLAlchemy for persistence. Gemini 2.5 Flash handles image-based product identification via drag-and-drop recon, query optimization, and merchant trust analysis. Docker Compose containerizes the full stack.",
+            learnings: ["Multi-threaded Playwright scraping across fortified retail nodes with header rotation", "Gemini 2.5 multimodal pipeline for OCR-driven product identification from images", "TanStack Query v5 for real-time price stream caching and synchronization", "Async SQLAlchemy 2.0 + Aiosqlite for non-blocking database operations", "Brutalist design system with Tailwind CSS 4.0 and high-contrast aesthetics"],
+            tech: ["Next.js", "React", "FastAPI", "Gemini AI", "Playwright", "Firebase", "Tailwind CSS", "Docker"],
+            image: "/images/priceradar.svg",
+            link: "https://github.com/shoibahmad/priceradar",
+            architecture: [
+                { step: "Image/Query", icon: "fas fa-search" },
+                { step: "Playwright", icon: "fas fa-robot" },
+                { step: "4 Retailers", icon: "fas fa-store" },
+                { step: "Gemini 2.5", icon: "fas fa-brain" },
+                { step: "Price Intel", icon: "fas fa-chart-line" }
+            ]
+        },
+        {
+            title: "ResuMind AI — Resume Intelligence Engine",
+            category: "AI/ML",
+            date: "Project",
+            description: "A premium AI-powered career trajectory engine that audits resumes like a top-tier technical recruiter. Features ATS readability scoring, job description match analysis, a 'Shadow Recruiter' visual audit powered by Gemini Vision, predictive 10-year career roadmaps, salary coaching, and dynamic interview prep.",
+            challenge: "Most resume tools do shallow keyword matching and return generic feedback. Candidates have no visibility into how ATS systems parse their profile, how a recruiter visually scans their layout in 6 seconds, or what strategic gaps are blocking their next role.",
+            solution: "Built a FastAPI backend serving Gemini 2.5 Flash for both vision and text analysis. The vision pipeline audits typography, whitespace, and visual hierarchy. The text pipeline runs ATS parsing, JD match scoring, missing skills detection, salary range estimation, and generates personalized interview questions. Firebase handles auth and Firestore stores analysis history. Deployed on Render via render.yaml.",
+            learnings: ["Using Gemini Vision for document layout and visual hierarchy analysis", "ATS parsing logic and keyword gap detection against job descriptions", "Predictive career roadmap generation with salary milestones using LLMs", "Unified FastAPI + static frontend served from a single Render web service"],
+            tech: ["Python", "FastAPI", "Gemini AI", "Firebase", "JavaScript", "Lottie"],
+            image: "/images/resumind.svg",
+            link: "https://github.com/shoibahmad/Resume-Analyzer",
+            architecture: [
+                { step: "Resume PDF", icon: "fas fa-file-pdf" },
+                { step: "FastAPI", icon: "fas fa-server" },
+                { step: "Gemini Vision", icon: "fas fa-eye" },
+                { step: "NLP Analysis", icon: "fas fa-brain" },
+                { step: "Career Report", icon: "fas fa-road" }
+            ]
+        },
+        {
+            title: "Aura — Advanced Sentiment Intelligence Platform",
+            category: "AI/ML",
+            date: "Project",
+            description: "A full-stack NLP-powered web application for real-time sentiment analysis, emotion detection, sarcasm scoring, toxicity filtering, and AI-driven text insights. Supports individual text analysis, bulk CSV/TXT uploads, interactive dashboards, and Gemini AI-powered personality profiling.",
+            challenge: "Sentiment analysis tools are often shallow — returning just positive/negative labels with no deeper context. The challenge was to build a multi-dimensional NLP pipeline that goes beyond polarity to detect emotions, sarcasm, toxicity, named entities, and aspect-level sentiment, all while making results human-readable through generative AI.",
+            solution: "Built a FastAPI backend orchestrating TextBlob, NRCLex, SpaCy, and LangDetect in a unified analysis pipeline. Integrated Gemini 2.5 Flash for conversational explanations and multi-tone text rewrites. The Vanilla JS + Tailwind frontend features three portals — User, Dashboard, and Admin — with Chart.js visualizations, word clouds, and Firebase Auth for session management.",
+            learnings: ["Building a multi-library NLP pipeline (TextBlob + NRCLex + SpaCy) in a single API call", "Heuristic sarcasm detection using tone-emoji contradictions and polarity-emotion mismatch", "Gemini AI for psychological personality profiling from analysis history", "Bulk file analysis with CSV/TXT parsing and aggregate summaries", "Admin panel with platform-wide analytics, user management, and CSV export"],
+            tech: ["Python", "FastAPI", "Gemini AI", "Firebase", "SpaCy", "TextBlob", "Tailwind CSS", "Chart.js"],
+            image: "/images/aura.svg",
+            link: "https://github.com/shoibahmad/aura",
+            architecture: [
+                { step: "Text Input", icon: "fas fa-keyboard" },
+                { step: "NLP Pipeline", icon: "fas fa-brain" },
+                { step: "FastAPI", icon: "fas fa-server" },
+                { step: "Gemini 2.5", icon: "fas fa-magic" },
+                { step: "Dashboard", icon: "fas fa-chart-pie" }
+            ]
+        },
+        {
+            title: "Web Sonar — Advanced Web Intelligence Platform",
+            category: "AI/ML",
+            date: "MCA Final Year Project",
+            description: "A cutting-edge web analysis platform that fuses headless browser automation with Google Gemini 2.5 AI. Delivers deep X-ray insights into any website — from visual regression time-travel to dark pattern detection, privacy compliance, and full AI-powered strategic reports across 30 analysis modules.",
+            challenge: "Modern websites are complex ecosystems of tech stacks, security postures, accessibility gaps, and dark patterns. No single tool could provide a holistic, AI-augmented view. The challenge was to build a unified platform that runs 24+ backend analyzers in parallel, integrates multiple AI services, and presents results in a clean, real-time dashboard.",
+            solution: "Built a React 18 + Vite SPA with Firebase Auth and Firestore for user management. The FastAPI backend orchestrates 24 analyzer modules using Selenium and Playwright for headless scraping, Gemini 2.5 Flash for AI insights, Wayback Machine API for time-travel regression, APScheduler for cron monitoring, and ReportLab for PDF exports. Also ships a Chrome Extension (MV3) for one-click scanning.",
+            learnings: ["Orchestrating 24 parallel async analyzers with FastAPI", "Integrating Gemini 2.5 for RAG-style site chat and AI critique", "Building a Chrome Extension (Manifest V3) with popup UI", "Wayback Machine API for visual regression time-travel", "APScheduler cron jobs with Slack/Discord/Email alert webhooks"],
+            tech: ["React", "FastAPI", "Python", "Gemini AI", "Firebase", "Selenium", "Playwright", "Tailwind CSS"],
+            image: "/images/web_sonar.svg",
+            link: "https://github.com/shoibahmad/web-sonar",
+            architecture: [
+                { step: "URL Input", icon: "fas fa-globe" },
+                { step: "Selenium/PW", icon: "fas fa-robot" },
+                { step: "24 Analyzers", icon: "fas fa-microscope" },
+                { step: "Gemini 2.5", icon: "fas fa-brain" },
+                { step: "Dashboard", icon: "fas fa-chart-bar" }
+            ]
+        },
+        {
+            title: "Smart Health Appointment System",
+            category: "AI/ML",
+            date: "Academic Project",
+            description: "A full-stack appointment scheduling system with AI-powered symptom analysis. Uses a Naive Bayes classifier to analyze natural language symptoms and recommend the appropriate medical department, followed by smart slot booking.",
+            challenge: "Patients often don't know which medical department to visit for their symptoms, leading to wrong bookings and wasted time. The challenge was to build an intelligent triage system that understands natural language and maps symptoms to the right specialist.",
+            solution: "Built a React + Vite frontend with client-side routing and premium animations on the landing page. The FastAPI backend runs a Naive Bayes ML pipeline that processes symptom text, predicts the relevant department, and returns available appointment slots for booking.",
+            learnings: ["Naive Bayes text classification for medical NLP", "Integrating a Python ML pipeline with a FastAPI REST backend", "Building multi-step UX flows with React Router"],
+            tech: ["React", "Vite", "FastAPI", "Python", "Naive Bayes", "React Router"],
+            image: "/images/smart_health.svg",
+            link: "#",
+            architecture: [
+                { step: "Patient", icon: "fas fa-user-injured" },
+                { step: "React UI", icon: "fab fa-react" },
+                { step: "FastAPI", icon: "fas fa-server" },
+                { step: "Naive Bayes", icon: "fas fa-brain" },
+                { step: "Slot Booking", icon: "fas fa-calendar-check" }
+            ]
+        },
+        {
             title: "Lumina - Smart Inventory Management",
             category: "Mobile Apps",
             date: "Project",

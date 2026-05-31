@@ -1,33 +1,54 @@
 <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f0f9ff;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#e0f2fe;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  <rect width="100%" height="100%" fill="url(#grad1)"/>
+  <rect width="100%" height="100%" fill="#0c0714"/>
   
-  <!-- Tablet Frame -->
-  <rect x="150" y="100" width="500" height="400" rx="20" fill="white" stroke="#cbd5e1" stroke-width="4"/>
-  
-  <!-- Header -->
-  <rect x="170" y="120" width="460" height="50" rx="8" fill="#0f172a"/>
-  <circle cx="200" cy="145" r="8" fill="#fbbf24"/>
-  <rect x="230" y="135" width="100" height="20" rx="4" fill="#334155"/>
-  
-  <!-- Sidebar -->
-  <rect x="170" y="180" width="100" height="300" rx="8" fill="#f1f5f9"/>
-  <rect x="180" y="200" width="80" height="15" rx="4" fill="#cbd5e1"/>
-  <rect x="180" y="230" width="80" height="15" rx="4" fill="#cbd5e1"/>
-  <rect x="180" y="260" width="80" height="15" rx="4" fill="#cbd5e1"/>
-  
-  <!-- Main Content Grid -->
-  <rect x="280" y="180" width="110" height="90" rx="8" fill="#3b82f6" opacity="0.1"/>
-  <rect x="400" y="180" width="110" height="90" rx="8" fill="#3b82f6" opacity="0.1"/>
-  <rect x="520" y="180" width="110" height="90" rx="8" fill="#3b82f6" opacity="0.1"/>
-  
-  <rect x="280" y="280" width="350" height="150" rx="8" fill="white" stroke="#e2e8f0" stroke-width="2"/>
-  <path d="M300 380 L350 350 L400 390 L450 320 L500 360 L550 300" fill="none" stroke="#2563eb" stroke-width="3"/>
-  
-  <text x="400" y="550" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#0f172a" text-anchor="middle">Lumina Inventory</text>
+  <!-- Backdrop grid -->
+  <path d="M 0,80 L 800,80 M 0,160 L 800,160 M 0,240 L 800,240 M 0,320 L 800,320 M 0,400 L 800,400 M 0,480 L 800,480" stroke="#f43f5e" stroke-opacity="0.03" stroke-width="1"/>
+  <path d="M 100,0 L 100,600 M 200,0 L 200,600 M 300,0 L 300,600 M 400,0 L 400,600 M 500,0 L 500,600 M 600,0 L 600,600 M 700,0 L 700,600" stroke="#f43f5e" stroke-opacity="0.03" stroke-width="1"/>
+
+  <circle cx="400" cy="250" r="160" fill="#d946ef" fill-opacity="0.1" filter="blur(25px)"/>
+
+  <!-- Barcode Scanner beam visual -->
+  <g transform="translate(180, 150)">
+    <!-- Scanner frame / laser gun mockup -->
+    <path d="M 10,80 L 40,30 L 120,30 L 140,80 L 90,130 L 70,130 Z" fill="#1e1b4b" stroke="#d946ef" stroke-width="2"/>
+    <circle cx="80" cy="80" r="25" fill="#d946ef" fill-opacity="0.2"/>
+    
+    <!-- Laser line -->
+    <line x1="100" y1="80" x2="350" y2="80" stroke="#f43f5e" stroke-width="4" filter="drop-shadow(0 0 5px #f43f5e)"/>
+  </g>
+
+  <!-- Product Box with Barcode -->
+  <g transform="translate(480, 170)">
+    <rect x="0" y="0" width="160" height="120" rx="8" fill="#1e1b4b" stroke="#a21caf" stroke-width="2"/>
+    
+    <!-- Barcode lines -->
+    <rect x="25" y="30" width="5" height="40" fill="#c084fc"/>
+    <rect x="35" y="30" width="10" height="40" fill="#c084fc"/>
+    <rect x="50" y="30" width="3" height="40" fill="#c084fc"/>
+    <rect x="58" y="30" width="8" height="40" fill="#c084fc"/>
+    <rect x="72" y="30" width="12" height="40" fill="#c084fc"/>
+    <rect x="90" y="30" width="4" height="40" fill="#c084fc"/>
+    <rect x="98" y="30" width="10" height="40" fill="#c084fc"/>
+    <rect x="114" y="30" width="6" height="40" fill="#c084fc"/>
+    <rect x="125" y="30" width="10" height="40" fill="#c084fc"/>
+    
+    <text x="80" y="95" font-family="monospace" font-size="12" fill="#c084fc" text-anchor="middle">5 901234 123457</text>
+  </g>
+
+  <!-- Sync Cloud and stats (Center Bottom) -->
+  <g transform="translate(310, 320)">
+    <rect x="0" y="0" width="180" height="90" rx="10" fill="#1e1b4b" stroke="#6b21a8" stroke-width="1.5"/>
+    <text x="90" y="25" font-family="sans-serif" font-weight="bold" font-size="11" fill="#f472b6" text-anchor="middle">Firebase Cloud Sync</text>
+    
+    <!-- Cloud shape -->
+    <path d="M 50,60 A 15,15 0 0,1 60,35 A 22,22 0 0,1 100,30 A 20,20 0 0,1 125,42 A 15,15 0 0,1 130,60 Z" fill="#6b21a8" opacity="0.6"/>
+    
+    <!-- Sync Arrow -->
+    <path d="M 85,50 L 95,40 L 105,50 M 95,40 L 95,62" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"/>
+    <text x="90" y="78" font-family="sans-serif" font-size="10" fill="#2dd4bf" text-anchor="middle">Synced: Offline-First</text>
+  </g>
+
+  <!-- Title Text -->
+  <text x="400" y="520" font-family="sans-serif" font-size="32" font-weight="bold" fill="#f8fafc" text-anchor="middle">Lumina POS</text>
+  <text x="400" y="555" font-family="monospace" font-size="16" fill="#d946ef" text-anchor="middle">&lt; Smart Inventory Management /&gt;</text>
 </svg>

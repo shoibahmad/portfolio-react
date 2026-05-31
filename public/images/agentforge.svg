@@ -1,0 +1,79 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#0f172a"/>
+  
+  <!-- Grid Background Effect -->
+  <path d="M 0,50 L 800,50 M 0,100 L 800,100 M 0,150 L 800,150 M 0,200 L 800,200 M 0,250 L 800,250 M 0,300 L 800,300 M 0,350 L 800,350 M 0,400 L 800,400 M 0,450 L 800,450 M 0,500 L 800,500" stroke="#1e293b" stroke-width="1"/>
+  <path d="M 50,0 L 50,600 M 100,0 L 100,600 M 150,0 L 150,600 M 200,0 L 200,600 M 250,0 L 250,600 M 300,0 L 300,600 M 350,0 L 350,600 M 400,0 L 400,600 M 450,0 L 450,600 M 500,0 L 500,600 M 550,0 L 550,600 M 600,0 L 600,600 M 650,0 L 650,600 M 700,0 L 700,600 M 750,0 L 750,600" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Glowing background behind robot -->
+  <circle cx="400" cy="260" r="160" fill="#6366f1" fill-opacity="0.15" filter="blur(20px)"/>
+
+  <!-- VS Code Editor Window Mockup -->
+  <rect x="120" y="100" width="560" height="340" rx="12" fill="#1e1e2e" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.6"/>
+  <rect x="120" y="100" width="560" height="40" rx="12" fill="#181825"/>
+  <circle cx="150" cy="120" r="6" fill="#f38ba8"/>
+  <circle cx="170" cy="120" r="6" fill="#f9e2af"/>
+  <circle cx="190" cy="120" r="6" fill="#a6e3a1"/>
+  
+  <text x="400" y="125" font-family="monospace" font-size="14" fill="#cdd6f4" text-anchor="middle">agent.yaml — AgentForge Studio</text>
+  
+  <!-- File Tree Sidebar -->
+  <rect x="120" y="140" width="120" height="300" fill="#11111b" rx="2"/>
+  <text x="135" y="170" font-family="monospace" font-size="12" fill="#89b4fa">📄 agent.yaml</text>
+  <text x="135" y="195" font-family="monospace" font-size="12" fill="#a6adc8">📄 SOUL.md</text>
+  <text x="135" y="220" font-family="monospace" font-size="12" fill="#a6adc8">📄 RULES.md</text>
+  <text x="135" y="245" font-family="monospace" font-size="12" fill="#a6adc8">📁 skills/</text>
+  <text x="150" y="270" font-family="monospace" font-size="12" fill="#a6adc8">📄 search.py</text>
+  
+  <!-- Code Lines -->
+  <rect x="260" y="165" width="120" height="10" rx="2" fill="#cba6f7"/>
+  <rect x="390" y="165" width="180" height="10" rx="2" fill="#89b4fa"/>
+  <rect x="280" y="195" width="220" height="10" rx="2" fill="#a6e3a1"/>
+  <rect x="280" y="225" width="140" height="10" rx="2" fill="#f9e2af"/>
+  <rect x="300" y="255" width="280" height="10" rx="2" fill="#94e2d5"/>
+  <rect x="300" y="285" width="190" height="10" rx="2" fill="#f2cdcd"/>
+  
+  <!-- Agent Forge Core: Robot Head / Assembly -->
+  <g transform="translate(480, 240)">
+    <!-- Base / Stand -->
+    <rect x="-40" y="60" width="80" height="30" rx="5" fill="#45475a"/>
+    <rect x="-10" y="30" width="20" height="40" fill="#313244"/>
+    
+    <!-- Outer brain outline -->
+    <circle cx="0" cy="-10" r="50" fill="#1e1e2e" stroke="#89b4fa" stroke-width="4"/>
+    
+    <!-- Circuits -->
+    <path d="M-30 -20 Q -10 -40 20 -30 Q 35 -10 15 20" fill="none" stroke="#6366f1" stroke-width="3"/>
+    <circle cx="-30" cy="-20" r="5" fill="#f38ba8"/>
+    <circle cx="20" cy="-30" r="5" fill="#a6e3a1"/>
+    <circle cx="15" cy="20" r="5" fill="#f9e2af"/>
+    
+    <!-- Gear icon representing Forge -->
+    <path d="M-10 -10 L -5 -15 L 0 -10 L 5 -15 L 10 -10 L 15 -5 L 10 0 L 15 5 L 10 10 L 5 15 L 0 10 L -5 15 L -10 10 L -15 5 L -10 0 L -15 -5 Z" fill="#fab387" transform="scale(1.5)"/>
+    <circle cx="0" cy="0" r="8" fill="#1e1e2e"/>
+  </g>
+  
+  <!-- Guided Steps visual -->
+  <g transform="translate(140, 390)">
+    <circle cx="20" cy="20" r="16" fill="#89b4fa"/>
+    <text x="20" y="25" font-family="sans-serif" font-weight="bold" font-size="14" fill="#11111b" text-anchor="middle">1</text>
+    <line x1="36" y1="20" x2="84" y2="20" stroke="#45475a" stroke-width="3"/>
+    
+    <circle cx="100" cy="20" r="16" fill="#89b4fa"/>
+    <text x="100" y="25" font-family="sans-serif" font-weight="bold" font-size="14" fill="#11111b" text-anchor="middle">2</text>
+    <line x1="116" y1="20" x2="164" y2="20" stroke="#45475a" stroke-width="3"/>
+    
+    <circle cx="180" cy="20" r="16" fill="#89b4fa"/>
+    <text x="180" y="25" font-family="sans-serif" font-weight="bold" font-size="14" fill="#11111b" text-anchor="middle">3</text>
+    <line x1="196" y1="20" x2="244" y2="20" stroke="#45475a" stroke-width="3"/>
+
+    <circle cx="260" cy="20" r="16" fill="#fab387"/>
+    <text x="260" y="25" font-family="sans-serif" font-weight="bold" font-size="14" fill="#11111b" text-anchor="middle">4</text>
+    
+    <text x="320" y="25" font-family="sans-serif" font-size="14" fill="#a6adc8">Build &amp; Package</text>
+  </g>
+
+  <!-- Title Text -->
+  <text x="400" y="520" font-family="sans-serif" font-size="32" font-weight="bold" fill="#f8fafc" text-anchor="middle">AgentForge Studio</text>
+  <text x="400" y="555" font-family="monospace" font-size="16" fill="#38bdf8" text-anchor="middle">&lt; Client-Side Agent Builder /&gt;</text>
+</svg>
