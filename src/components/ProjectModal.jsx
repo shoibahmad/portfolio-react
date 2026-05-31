@@ -37,6 +37,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                 <div className="project-modal-content">
                     <div className="modal-hero">
                         <img src={project.image} alt={project.title} />
+                        <div className="modal-hero-scanline"></div>
                         <div className="modal-hero-overlay">
                             <div className="modal-badges">
                                 <span className="modal-badge">{project.category}</span>

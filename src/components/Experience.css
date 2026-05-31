@@ -15,7 +15,6 @@
     padding: 2rem 0;
 }
 
-/* Central Line */
 .experience-list::before {
     content: '';
     position: absolute;
@@ -23,7 +22,7 @@
     bottom: 0;
     left: 50%;
     width: 2px;
-    background: var(--border);
+    background: linear-gradient(to bottom, transparent 0%, var(--primary) 15%, var(--accent) 85%, transparent 100%);
     transform: translateX(-50%);
 }
 
