@@ -1,9 +1,56 @@
 <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="#eff6ff"/>
-  <circle cx="400" cy="250" r="60" fill="#3b82f6" opacity="0.2"/>
-  <circle cx="400" cy="250" r="45" fill="#3b82f6"/>
-  <rect x="385" y="220" width="30" height="60" fill="white"/>
-  <rect x="370" y="235" width="60" height="30" fill="white"/>
-  <text x="400" y="380" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#1e3a8a" text-anchor="middle">RuralHealth AI</text>
-  <text x="400" y="420" font-family="Arial, sans-serif" font-size="20" fill="#64748b" text-anchor="middle">Smart Health Screening</text>
+  <rect width="100%" height="100%" fill="#021c15"/>
+
+  <!-- Map grid grid -->
+  <path d="M 0,90 L 800,90 M 0,180 L 800,180 M 0,270 L 800,270 M 0,360 L 800,360 M 0,450 L 800,450" stroke="#10b981" stroke-opacity="0.03" stroke-width="1"/>
+  <path d="M 100,0 L 100,600 M 200,0 L 200,600 M 300,0 L 300,600 M 400,0 L 400,600 M 500,0 L 500,600 M 600,0 L 600,600 M 700,0 L 700,600" stroke="#10b981" stroke-opacity="0.03" stroke-width="1"/>
+
+  <circle cx="400" cy="250" r="160" fill="#10b981" fill-opacity="0.1" filter="blur(25px)"/>
+
+  <!-- Healthcare Cross with Map pin -->
+  <g transform="translate(400, 220)">
+    <!-- Glowing Cross -->
+    <rect x="-20" y="-60" width="40" height="120" rx="8" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="2.5" filter="drop-shadow(0 0 8px rgba(16, 185, 129, 0.4))"/>
+    <rect x="-60" y="-20" width="120" height="40" rx="8" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="2.5" filter="drop-shadow(0 0 8px rgba(16, 185, 129, 0.4))"/>
+    
+    <!-- Map pins (Community health spots) -->
+    <circle cx="-100" cy="-60" r="8" fill="#f59e0b"/>
+    <path d="M -100,-60 L -100,-45" stroke="#f59e0b" stroke-width="1.5"/>
+
+    <circle cx="100" cy="40" r="8" fill="#f59e0b"/>
+    <path d="M 100,40 L 100,55" stroke="#f59e0b" stroke-width="1.5"/>
+  </g>
+
+  <!-- Voice Vitals check (Left side) -->
+  <g transform="translate(130, 160)">
+    <rect x="0" y="0" width="180" height="140" rx="8" fill="#032b20" stroke="#047857" stroke-width="1.5"/>
+    <text x="15" y="25" font-family="sans-serif" font-weight="bold" font-size="12" fill="#34d399">Whisper Voice Vitals</text>
+    
+    <!-- Voice waveform visual -->
+    <line x1="30" y1="75" x2="30" y2="85" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <line x1="45" y1="65" x2="45" y2="95" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <line x1="60" y1="55" x2="60" y2="105" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <line x1="75" y1="45" x2="75" y2="115" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <line x1="90" y1="60" x2="90" y2="100" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <line x1="105" y1="50" x2="105" y2="110" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <line x1="120" y1="68" x2="120" y2="92" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <line x1="135" y1="75" x2="135" y2="85" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Screening Risk report (Right side) -->
+  <g transform="translate(490, 160)">
+    <rect x="0" y="0" width="180" height="140" rx="8" fill="#032b20" stroke="#047857" stroke-width="1.5"/>
+    <text x="15" y="25" font-family="sans-serif" font-weight="bold" font-size="12" fill="#34d399">WHO Risk Screener</text>
+    
+    <!-- Findings -->
+    <rect x="15" y="45" width="150" height="25" rx="4" fill="#021c15"/>
+    <text x="25" y="61" font-family="sans-serif" font-size="10" fill="#a7f3d0">Cardio Risk: Low (2%)</text>
+
+    <rect x="15" y="80" width="150" height="25" rx="4" fill="#021c15"/>
+    <text x="25" y="96" font-family="sans-serif" font-size="10" fill="#a7f3d0">Anemia Check: Clear</text>
+  </g>
+
+  <!-- Title Text -->
+  <text x="400" y="520" font-family="sans-serif" font-size="32" font-weight="bold" fill="#f8fafc" text-anchor="middle">RuralHealth AI</text>
+  <text x="400" y="555" font-family="monospace" font-size="16" fill="#10b981" text-anchor="middle">&lt; Mobile Health Survey &amp; Triage /&gt;</text>
 </svg>

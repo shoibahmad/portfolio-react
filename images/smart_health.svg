@@ -1,0 +1,72 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#04151b"/>
+
+  <!-- Grid backdrop -->
+  <path d="M 0,90 L 800,90 M 0,180 L 800,180 M 0,270 L 800,270 M 0,360 L 800,360 M 0,450 L 800,450" stroke="#0ea5e9" stroke-opacity="0.03" stroke-width="1"/>
+  <path d="M 100,0 L 100,600 M 200,0 L 200,600 M 300,0 L 300,600 M 400,0 L 400,600 M 500,0 L 500,600 M 600,0 L 600,600 M 700,0 L 700,600" stroke="#0ea5e9" stroke-opacity="0.03" stroke-width="1"/>
+
+  <!-- Glowing background -->
+  <circle cx="400" cy="250" r="160" fill="#0d9488" fill-opacity="0.1" filter="blur(25px)"/>
+
+  <!-- Glowing Medical Cross (Teal) -->
+  <g transform="translate(400, 240)">
+    <!-- Vertical Bar -->
+    <rect x="-24" y="-70" width="48" height="140" rx="10" fill="#0ea5e9" fill-opacity="0.2" stroke="#0ea5e9" stroke-width="3" filter="drop-shadow(0 0 10px rgba(14, 165, 233, 0.4))"/>
+    <!-- Horizontal Bar -->
+    <rect x="-70" y="-24" width="140" height="48" rx="10" fill="#0ea5e9" fill-opacity="0.2" stroke="#0ea5e9" stroke-width="3" filter="drop-shadow(0 0 10px rgba(14, 165, 233, 0.4))"/>
+    
+    <!-- Central AI Brain/Triage Icon -->
+    <circle cx="0" cy="0" r="20" fill="#04151b" stroke="#2dd4bf" stroke-width="2"/>
+    <path d="M-10,-5 C-5,-12 5,-12 10,-5 C12,0 8,10 0,14 C-8,10 -12,0 -10,-5 Z" fill="none" stroke="#2dd4bf" stroke-width="2"/>
+    <circle cx="0" cy="0" r="3" fill="#2dd4bf"/>
+  </g>
+
+  <!-- Symptom Analysis Triage Flow (Left side) -->
+  <g transform="translate(120, 150)">
+    <rect x="0" y="0" width="180" height="180" rx="8" fill="#09222a" stroke="#115e59" stroke-width="1.5"/>
+    <text x="15" y="28" font-family="sans-serif" font-weight="bold" font-size="12" fill="#2dd4bf">AI Symptom Triage</text>
+    
+    <!-- Text Input bubble mockup -->
+    <rect x="15" y="45" width="150" height="40" rx="4" fill="#05151b" stroke="#0d9488" stroke-width="1"/>
+    <text x="25" y="60" font-family="sans-serif" font-size="10" fill="#99f6e4">"I have a severe headache</text>
+    <text x="25" y="74" font-family="sans-serif" font-size="10" fill="#99f6e4">and visual aura..."</text>
+    
+    <!-- Department recommendation -->
+    <path d="M 90,95 L 90,115" stroke="#2dd4bf" stroke-width="2" stroke-dasharray="3,3"/>
+    
+    <rect x="15" y="125" width="150" height="40" rx="4" fill="#115e59"/>
+    <text x="90" y="140" font-family="sans-serif" font-weight="bold" font-size="11" fill="#ffffff" text-anchor="middle">Neurology Dept</text>
+    <text x="90" y="154" font-family="sans-serif" font-size="9" fill="#99f6e4" text-anchor="middle">Matched via Naive Bayes</text>
+  </g>
+
+  <!-- Booking Grid slots (Right side) -->
+  <g transform="translate(500, 150)">
+    <rect x="0" y="0" width="180" height="180" rx="8" fill="#09222a" stroke="#115e59" stroke-width="1.5"/>
+    <text x="15" y="28" font-family="sans-serif" font-weight="bold" font-size="12" fill="#0ea5e9">Available Slots</text>
+    
+    <!-- Slots list -->
+    <!-- Slot 1: Booked -->
+    <rect x="15" y="45" width="70" height="35" rx="4" fill="#04151b" opacity="0.5" stroke="#1e293b"/>
+    <text x="50" y="66" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">09:00 AM</text>
+    
+    <!-- Slot 2: Available -->
+    <rect x="95" y="45" width="70" height="35" rx="4" fill="#0ea5e9" fill-opacity="0.1" stroke="#0ea5e9" stroke-width="1.5"/>
+    <text x="130" y="66" font-family="sans-serif" font-size="10" fill="#0ea5e9" font-weight="bold" text-anchor="middle">10:30 AM</text>
+    
+    <!-- Slot 3: Available -->
+    <rect x="15" y="90" width="70" height="35" rx="4" fill="#0ea5e9" fill-opacity="0.1" stroke="#0ea5e9" stroke-width="1.5"/>
+    <text x="50" y="111" font-family="sans-serif" font-size="10" fill="#0ea5e9" font-weight="bold" text-anchor="middle">01:00 PM</text>
+    
+    <!-- Slot 4: Available -->
+    <rect x="95" y="90" width="70" height="35" rx="4" fill="#0ea5e9" fill-opacity="0.1" stroke="#0ea5e9" stroke-width="1.5"/>
+    <text x="130" y="111" font-family="sans-serif" font-size="10" fill="#0ea5e9" font-weight="bold" text-anchor="middle">02:30 PM</text>
+
+    <!-- Slot 5: Selected -->
+    <rect x="15" y="135" width="150" height="30" rx="4" fill="#2dd4bf" stroke="#2dd4bf"/>
+    <text x="90" y="154" font-family="sans-serif" font-weight="bold" font-size="11" fill="#04151b" text-anchor="middle">Confirm Booking</text>
+  </g>
+
+  <!-- Title Text -->
+  <text x="400" y="520" font-family="sans-serif" font-size="32" font-weight="bold" fill="#f8fafc" text-anchor="middle">Smart Health</text>
+  <text x="400" y="555" font-family="monospace" font-size="16" fill="#2dd4bf" text-anchor="middle">&lt; Symptom Analysis &amp; Triage /&gt;</text>
+</svg>

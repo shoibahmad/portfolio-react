@@ -1,22 +1,62 @@
 <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="#ecfdf5"/>
-  
-  <!-- Graph Axes -->
-  <line x1="150" y1="450" x2="650" y2="450" stroke="#059669" stroke-width="4"/>
-  <line x1="150" y1="450" x2="150" y2="100" stroke="#059669" stroke-width="4"/>
-  
-  <!-- Regression Line -->
-  <line x1="150" y1="400" x2="600" y2="150" stroke="#10b981" stroke-width="6"/>
-  
-  <!-- Data Points -->
-  <circle cx="200" cy="380" r="8" fill="#047857"/>
-  <circle cx="300" cy="320" r="8" fill="#047857"/>
-  <circle cx="400" cy="260" r="8" fill="#047857"/>
-  <circle cx="500" cy="200" r="8" fill="#047857"/>
-  
-  <!-- Dollar Sign -->
-  <circle cx="650" cy="150" r="50" fill="#d1fae5" stroke="#10b981" stroke-width="4"/>
-  <text x="650" y="170" font-family="Arial" font-size="60" font-weight="bold" fill="#059669" text-anchor="middle">$</text>
-  
-  <text x="400" y="550" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#065f46" text-anchor="middle">Salary Prediction ML</text>
+  <rect width="100%" height="100%" fill="#051021"/>
+
+  <!-- Backdrop grid -->
+  <path d="M 0,90 L 800,90 M 0,180 L 800,180 M 0,270 L 800,270 M 0,360 L 800,360 M 0,450 L 800,450" stroke="#0284c7" stroke-opacity="0.03" stroke-width="1"/>
+  <path d="M 100,0 L 100,600 M 200,0 L 200,600 M 300,0 L 300,600 M 400,0 L 400,600 M 500,0 L 500,600 M 600,0 L 600,600 M 700,0 L 700,600" stroke="#0284c7" stroke-opacity="0.03" stroke-width="1"/>
+
+  <circle cx="400" cy="250" r="160" fill="#0284c7" fill-opacity="0.08" filter="blur(25px)"/>
+
+  <!-- Regression Graph (Center) -->
+  <g transform="translate(260, 120)">
+    <rect x="0" y="0" width="280" height="220" rx="8" fill="#0c192e" stroke="#0284c7" stroke-width="2"/>
+    
+    <!-- Y-axis (Salary) -->
+    <line x1="40" y1="20" x2="40" y2="180" stroke="#475569" stroke-width="2"/>
+    <!-- X-axis (Experience) -->
+    <line x1="40" y1="180" x2="260" y2="180" stroke="#475569" stroke-width="2"/>
+    
+    <!-- Data points -->
+    <circle cx="70" cy="150" r="4" fill="#38bdf8"/>
+    <circle cx="110" cy="130" r="4" fill="#38bdf8"/>
+    <circle cx="150" cy="90" r="4" fill="#38bdf8"/>
+    <circle cx="190" cy="80" r="4" fill="#38bdf8"/>
+    <circle cx="230" cy="50" r="4" fill="#38bdf8"/>
+    
+    <!-- Regression Trend Line -->
+    <line x1="40" y1="170" x2="250" y2="40" stroke="#0ea5e9" stroke-width="3" filter="drop-shadow(0 0 4px #0ea5e9)"/>
+    
+    <!-- Labels -->
+    <text x="15" y="100" font-family="sans-serif" font-size="9" fill="#64748b" transform="rotate(-90 15 100)" text-anchor="middle">Salary (₹)</text>
+    <text x="150" y="202" font-family="sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Experience (Years)</text>
+  </g>
+
+  <!-- Left: Employee Attributes inputs -->
+  <g transform="translate(70, 160)">
+    <rect x="0" y="0" width="160" height="130" rx="8" fill="#0b1e36" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="15" y="25" font-family="sans-serif" font-weight="bold" font-size="11" fill="#38bdf8">Input Attributes</text>
+    
+    <rect x="15" y="40" width="130" height="20" rx="4" fill="#051021"/>
+    <text x="25" y="53" font-family="sans-serif" font-size="9" fill="#93c5fd">Exp: 8 Years</text>
+    
+    <rect x="15" y="68" width="130" height="20" rx="4" fill="#051021"/>
+    <text x="25" y="81" font-family="sans-serif" font-size="9" fill="#93c5fd">Test: 92/100</text>
+    
+    <rect x="15" y="96" width="130" height="20" rx="4" fill="#051021"/>
+    <text x="25" y="109" font-family="sans-serif" font-size="9" fill="#93c5fd">Rating: 9.5/10</text>
+  </g>
+
+  <!-- Right: Prediction readout -->
+  <g transform="translate(570, 160)">
+    <rect x="0" y="0" width="160" height="130" rx="8" fill="#0b1e36" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="15" y="25" font-family="sans-serif" font-weight="bold" font-size="11" fill="#38bdf8">ML Prediction</text>
+    
+    <rect x="15" y="45" width="130" height="65" rx="6" fill="#051021"/>
+    <text x="65" y="65" font-family="sans-serif" font-size="9" fill="#93c5fd" text-anchor="middle">Estimated Salary</text>
+    <text x="65" y="92" font-family="monospace" font-weight="bold" font-size="16" fill="#10b981" text-anchor="middle">₹1,24,000</text>
+  </g>
+
+  <!-- Title Text -->
+  <text x="400" y="520" font-family="sans-serif" font-size="32" font-weight="bold" fill="#f8fafc" text-anchor="middle">Salary Predictor</text>
+  <text x="400" y="555" font-family="monospace" font-size="16" fill="#0284c7" text-anchor="middle">&lt; ML Regression Predictive Engine /&gt;</text>
 </svg>

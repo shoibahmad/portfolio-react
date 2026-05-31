@@ -1,21 +1,50 @@
 <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="#fff7ed"/>
+  <rect width="100%" height="100%" fill="#120c08"/>
+
+  <!-- Backdrop grid -->
+  <path d="M 0,90 L 800,90 M 0,180 L 800,180 M 0,270 L 800,270 M 0,360 L 800,360 M 0,450 L 800,450" stroke="#f97316" stroke-opacity="0.03" stroke-width="1"/>
+  <path d="M 100,0 L 100,600 M 200,0 L 200,600 M 300,0 L 300,600 M 400,0 L 400,600 M 500,0 L 500,600 M 600,0 L 600,600 M 700,0 L 700,600" stroke="#f97316" stroke-opacity="0.03" stroke-width="1"/>
+
+  <circle cx="400" cy="250" r="160" fill="#ea580c" fill-opacity="0.08" filter="blur(25px)"/>
+
+  <!-- Ticket Redressal Flow (Center) -->
+  <g transform="translate(120, 140)">
+    <!-- Column 1: Lodged -->
+    <rect x="0" y="0" width="160" height="200" rx="8" fill="#1c120c" stroke="#432210" stroke-width="1.5"/>
+    <text x="15" y="25" font-family="sans-serif" font-weight="bold" font-size="11" fill="#ea580c">Ticket Lodged</text>
+    
+    <rect x="10" y="45" width="140" height="50" rx="4" fill="#0f0905" stroke="#7c2d12" stroke-width="1"/>
+    <text x="18" y="62" font-family="sans-serif" font-size="9" fill="#fdbaf8" font-weight="bold">#1024 Water Leak</text>
+    <rect x="18" y="72" width="40" height="10" rx="2" fill="#ef4444"/>
+    <text x="38" y="80" font-family="sans-serif" font-size="8" fill="#ffffff" text-anchor="middle">High</text>
+
+    <!-- Column 2: Assigned -->
+    <rect x="200" y="0" width="160" height="200" rx="8" fill="#1c120c" stroke="#432210" stroke-width="1.5"/>
+    <text x="215" y="25" font-family="sans-serif" font-weight="bold" font-size="11" fill="#ea580c">Assigned Dept</text>
+    
+    <rect x="210" y="45" width="140" height="50" rx="4" fill="#0f0905" stroke="#7c2d12" stroke-width="1"/>
+    <text x="218" y="62" font-family="sans-serif" font-size="9" fill="#fdbaf8" font-weight="bold">#1023 Wi-Fi Down</text>
+    <rect x="218" y="72" width="45" height="10" rx="2" fill="#3b82f6"/>
+    <text x="240" y="80" font-family="sans-serif" font-size="8" fill="#ffffff" text-anchor="middle">IT Dept</text>
+
+    <!-- Column 3: Resolved -->
+    <rect x="400" y="0" width="160" height="200" rx="8" fill="#1c120c" stroke="#432210" stroke-width="1.5"/>
+    <text x="415" y="25" font-family="sans-serif" font-weight="bold" font-size="11" fill="#ea580c">Redressed</text>
+    
+    <rect x="410" y="45" width="140" height="50" rx="4" fill="#0f0905" stroke="#14532d" stroke-width="1"/>
+    <text x="418" y="62" font-family="sans-serif" font-size="9" fill="#a7f3d0" font-weight="bold">#1022 Library Card</text>
+    <rect x="418" y="72" width="50" height="10" rx="2" fill="#10b981"/>
+    <text x="443" y="80" font-family="sans-serif" font-size="8" fill="#ffffff" text-anchor="middle">Resolved</text>
+  </g>
+
+  <!-- Flow connecting arrows -->
+  <path d="M 290,240 L 310,240" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="310,240 304,235 304,245" fill="#ea580c"/>
   
-  <!-- Mobile App Frame -->
-  <rect x="300" y="100" width="200" height="350" rx="15" fill="white" stroke="#f97316" stroke-width="4"/>
-  
-  <!-- Ticket List -->
-  <rect x="320" y="140" width="160" height="40" rx="4" fill="#ffedd5"/>
-  <rect x="320" y="200" width="160" height="40" rx="4" fill="#ffedd5"/>
-  <rect x="320" y="260" width="160" height="40" rx="4" fill="#ffedd5"/>
-  
-  <!-- Status Icons -->
-  <circle cx="450" cy="160" r="10" fill="#f97316"/> <!-- Pending -->
-  <circle cx="450" cy="220" r="10" fill="#fbbf24"/> <!-- In Progress -->
-  <circle cx="450" cy="280" r="10" fill="#22c55e"/> <!-- Resolved -->
-  
-  <!-- Admin Shield -->
-  <path d="M600 300 C600 300 550 450 500 500 C450 450 400 300 400 300" fill="none" stroke="#ea580c" stroke-width="2" opacity="0.3"/>
-  
-  <text x="400" y="530" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#9a3412" text-anchor="middle">Campus Grievance</text>
+  <path d="M 490,240 L 510,240" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="510,240 504,235 504,245" fill="#ea580c"/>
+
+  <!-- Title Text -->
+  <text x="400" y="520" font-family="sans-serif" font-size="32" font-weight="bold" fill="#f8fafc" text-anchor="middle">Campus Grievance</text>
+  <text x="400" y="555" font-family="monospace" font-size="16" fill="#ea580c" text-anchor="middle">&lt; Redressal &amp; Ticket Tracking System /&gt;</text>
 </svg>

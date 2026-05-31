@@ -1,21 +1,63 @@
 <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="#f0fdf4"/>
-  
-  <!-- Mobile Phones -->
-  <rect x="250" y="150" width="120" height="240" rx="12" fill="white" stroke="#16a34a" stroke-width="3"/>
-  <rect x="400" y="150" width="120" height="240" rx="12" fill="white" stroke="#16a34a" stroke-width="3"/>
-  
-  <!-- Screen Content -->
-  <rect x="260" y="170" width="100" height="20" rx="2" fill="#dcfce7"/>
-  <rect x="260" y="200" width="100" height="60" rx="2" fill="#f0fdf4"/>
-  <rect x="260" y="270" width="100" height="60" rx="2" fill="#f0fdf4"/>
-  
-  <rect x="410" y="170" width="100" height="40" rx="2" fill="#16a34a"/>
-  <circle cx="460" cy="250" r="20" fill="#bef264"/>
-  
-  <!-- Graduation Cap Icon -->
-  <path d="M460 250 L480 240 L460 230 L440 240 Z" fill="#15803d"/>
-  
-  <text x="400" y="500" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#15803d" text-anchor="middle">IU CA App</text>
-  <text x="400" y="540" font-family="Arial, sans-serif" font-size="20" fill="#166534" text-anchor="middle">Academic Management</text>
+  <rect width="100%" height="100%" fill="#1a0408"/>
+
+  <!-- Backdrop grid -->
+  <path d="M 0,90 L 800,90 M 0,180 L 800,180 M 0,270 L 800,270 M 0,360 L 800,360 M 0,450 L 800,450" stroke="#f43f5e" stroke-opacity="0.03" stroke-width="1"/>
+  <path d="M 100,0 L 100,600 M 200,0 L 200,600 M 300,0 L 300,600 M 400,0 L 400,600 M 500,0 L 500,600 M 600,0 L 600,600 M 700,0 L 700,600" stroke="#f43f5e" stroke-opacity="0.03" stroke-width="1"/>
+
+  <circle cx="400" cy="250" r="160" fill="#f43f5e" fill-opacity="0.08" filter="blur(25px)"/>
+
+  <!-- Phone Device Frame Outline (Center) -->
+  <g transform="translate(310, 80)">
+    <rect x="0" y="0" width="180" height="340" rx="24" fill="#0c0204" stroke="#f43f5e" stroke-width="3" filter="drop-shadow(0 0 10px rgba(244, 63, 94, 0.3))"/>
+    
+    <!-- Phone Ear speaker/camera notch -->
+    <rect x="55" y="10" width="70" height="12" rx="6" fill="#1f0409"/>
+    
+    <!-- Screen contents -->
+    <!-- App Bar -->
+    <rect x="10" y="32" width="160" height="35" rx="6" fill="#1f0409"/>
+    <text x="90" y="53" font-family="sans-serif" font-weight="bold" font-size="11" fill="#ffffff" text-anchor="middle">IU Portal</text>
+    
+    <!-- Attendance Circle Progress -->
+    <circle cx="90" cy="120" r="35" fill="none" stroke="#251216" stroke-width="6"/>
+    <path d="M 90,85 A 35,35 0 1,1 65,145" fill="none" stroke="#f43f5e" stroke-width="6" stroke-linecap="round"/>
+    <text x="90" y="124" font-family="monospace" font-weight="bold" font-size="14" fill="#ffffff" text-anchor="middle">82%</text>
+    <text x="90" y="170" font-family="sans-serif" font-size="9" fill="#9fb3c8" text-anchor="middle">Attendance OK</text>
+    
+    <!-- Notices Cards feed -->
+    <rect x="15" y="190" width="150" height="50" rx="6" fill="#1f0409" stroke="#3d0812" stroke-width="1"/>
+    <text x="25" y="208" font-family="sans-serif" font-weight="bold" font-size="9" fill="#fca5a5">Mid-term Exam Notice</text>
+    <text x="25" y="222" font-family="sans-serif" font-size="8" fill="#9fb3c8">Exam starts next Monday...</text>
+    
+    <rect x="15" y="250" width="150" height="50" rx="6" fill="#1f0409" stroke="#3d0812" stroke-width="1"/>
+    <text x="25" y="268" font-family="sans-serif" font-weight="bold" font-size="9" fill="#fca5a5">Notice: Labs schedule</text>
+  </g>
+
+  <!-- Left: Professor updates (Admin push) -->
+  <g transform="translate(90, 160)">
+    <rect x="0" y="0" width="180" height="120" rx="8" fill="#2d0a11" stroke="#5c1121" stroke-width="1.5"/>
+    <text x="15" y="25" font-family="sans-serif" font-weight="bold" font-size="12" fill="#fca5a5">Faculty Portal</text>
+    
+    <rect x="15" y="45" width="150" height="25" rx="4" fill="#1a0408"/>
+    <text x="25" y="61" font-family="sans-serif" font-size="9" fill="#a7f3d0">Professor Badge: Admin</text>
+    
+    <!-- Push Notice Trigger Button -->
+    <rect x="15" y="80" width="150" height="25" rx="4" fill="#f43f5e"/>
+    <text x="90" y="96" font-family="sans-serif" font-weight="bold" font-size="10" fill="#ffffff" text-anchor="middle">Push Notice Alert</text>
+  </g>
+
+  <!-- Right: Role Badges info -->
+  <g transform="translate(530, 160)">
+    <rect x="0" y="0" width="180" height="120" rx="8" fill="#2d0a11" stroke="#5c1121" stroke-width="1.5"/>
+    <text x="15" y="25" font-family="sans-serif" font-weight="bold" font-size="12" fill="#fca5a5">Notifications Hub</text>
+    
+    <rect x="15" y="45" width="150" height="55" rx="6" fill="#1a0408"/>
+    <text x="25" y="65" font-family="sans-serif" font-size="9" fill="#9fb3c8">Student Alert status</text>
+    <text x="25" y="85" font-family="sans-serif" font-weight="bold" font-size="11" fill="#10b981">● Firebase Push Active</text>
+  </g>
+
+  <!-- Title Text -->
+  <text x="400" y="520" font-family="sans-serif" font-size="32" font-weight="bold" fill="#f8fafc" text-anchor="middle">IU CA Portal</text>
+  <text x="400" y="555" font-family="monospace" font-size="16" fill="#f43f5e" text-anchor="middle">&lt; Academic Management App /&gt;</text>
 </svg>

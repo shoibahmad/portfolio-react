@@ -1,0 +1,81 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#0a1128"/>
+
+  <!-- Scanning grid background -->
+  <path d="M 0,80 L 800,80 M 0,160 L 800,160 M 0,240 L 800,240 M 0,320 L 800,320 M 0,400 L 800,400 M 0,480 L 800,480" stroke="#00f2fe" stroke-opacity="0.05" stroke-width="1.5"/>
+  <path d="M 100,0 L 100,600 M 200,0 L 200,600 M 300,0 L 300,600 M 400,0 L 400,600 M 500,0 L 500,600 M 600,0 L 600,600 M 700,0 L 700,600" stroke="#00f2fe" stroke-opacity="0.05" stroke-width="1.5"/>
+
+  <!-- Radial Glow behind layout -->
+  <circle cx="280" cy="270" r="160" fill="#00f2fe" fill-opacity="0.1" filter="blur(25px)"/>
+  <circle cx="550" cy="270" r="160" fill="#4facfe" fill-opacity="0.1" filter="blur(25px)"/>
+
+  <!-- Resume Sheet (Left side) -->
+  <g transform="translate(140, 100)">
+    <!-- Document background -->
+    <rect x="0" y="0" width="220" height="310" rx="6" fill="#1b2a4a" stroke="#00f2fe" stroke-width="2.5" filter="drop-shadow(0 4px 12px rgba(0, 242, 254, 0.2))"/>
+    
+    <!-- Profile Mockup -->
+    <circle cx="40" cy="40" r="18" fill="#4facfe"/>
+    <rect x="70" y="28" width="110" height="10" rx="3" fill="#ffffff"/>
+    <rect x="70" y="44" width="70" height="6" rx="2" fill="#9fb3c8"/>
+    
+    <!-- Content Divider -->
+    <line x1="20" y1="75" x2="200" y2="75" stroke="#334e68" stroke-width="2"/>
+    
+    <!-- Experience sections -->
+    <rect x="20" y="95" width="80" height="8" rx="2" fill="#00f2fe"/>
+    <rect x="20" y="112" width="180" height="6" rx="2" fill="#9fb3c8"/>
+    <rect x="20" y="125" width="160" height="6" rx="2" fill="#9fb3c8"/>
+    <rect x="20" y="138" width="120" height="6" rx="2" fill="#9fb3c8"/>
+    
+    <!-- Projects sections -->
+    <rect x="20" y="165" width="60" height="8" rx="2" fill="#00f2fe"/>
+    <rect x="20" y="182" width="180" height="6" rx="2" fill="#9fb3c8"/>
+    <rect x="20" y="195" width="150" height="6" rx="2" fill="#9fb3c8"/>
+
+    <!-- Skills tags -->
+    <rect x="20" y="230" width="40" height="12" rx="3" fill="#334e68"/>
+    <rect x="68" y="230" width="45" height="12" rx="3" fill="#334e68"/>
+    <rect x="121" y="230" width="35" height="12" rx="3" fill="#334e68"/>
+    <rect x="20" y="250" width="50" height="12" rx="3" fill="#334e68"/>
+    <rect x="78" y="250" width="40" height="12" rx="3" fill="#334e68"/>
+  </g>
+
+  <!-- Laser Scanner Line -->
+  <g transform="translate(130, 240)">
+    <line x1="0" y1="0" x2="240" y2="0" stroke="#00f2fe" stroke-width="4" filter="drop-shadow(0 0 8px #00f2fe)"/>
+    <polygon points="0,0 -10,-8 -10,8" fill="#00f2fe"/>
+    <polygon points="240,0 250,-8 250,8" fill="#00f2fe"/>
+  </g>
+
+  <!-- AI Critique / Analysis Panel (Right side) -->
+  <g transform="translate(440, 110)">
+    <!-- Dashboard box -->
+    <rect x="0" y="0" width="220" height="290" rx="8" fill="#0d1f3d" stroke="#334e68" stroke-width="2"/>
+    
+    <text x="20" y="32" font-family="sans-serif" font-weight="bold" font-size="14" fill="#ffffff">ATS Score Analysis</text>
+    
+    <!-- Score Dial -->
+    <circle cx="110" cy="100" r="45" fill="none" stroke="#1f2d3d" stroke-width="8"/>
+    <path d="M 110,55 A 45,45 0 1,1 78,131" fill="none" stroke="#00f2fe" stroke-width="8" stroke-linecap="round" filter="drop-shadow(0 0 5px #00f2fe)"/>
+    <text x="110" y="106" font-family="monospace" font-weight="bold" font-size="20" fill="#ffffff" text-anchor="middle">85%</text>
+    
+    <!-- Audit Findings -->
+    <rect x="20" y="170" width="180" height="28" rx="4" fill="#1b2a4a"/>
+    <circle cx="35" cy="184" r="6" fill="#10b981"/>
+    <text x="50" y="188" font-family="sans-serif" font-size="11" fill="#cdd6f4">Strong Verb Usage</text>
+    
+    <rect x="20" y="208" width="180" height="28" rx="4" fill="#1b2a4a"/>
+    <circle cx="35" cy="222" r="6" fill="#f59e0b"/>
+    <text x="50" y="226" font-family="sans-serif" font-size="11" fill="#cdd6f4">Missing Skills: React 19</text>
+
+    <!-- Career path roadmap nodes -->
+    <rect x="20" y="246" width="180" height="28" rx="4" fill="#1b2a4a"/>
+    <circle cx="35" cy="260" r="6" fill="#38bdf8"/>
+    <text x="50" y="264" font-family="sans-serif" font-size="11" fill="#cdd6f4">Career Roadmap Ready</text>
+  </g>
+
+  <!-- Title Text -->
+  <text x="400" y="520" font-family="sans-serif" font-size="32" font-weight="bold" fill="#f8fafc" text-anchor="middle">ResuMind AI</text>
+  <text x="400" y="555" font-family="monospace" font-size="16" fill="#00f2fe" text-anchor="middle">&lt; Recruiter Layout &amp; ATS Audit /&gt;</text>
+</svg>
