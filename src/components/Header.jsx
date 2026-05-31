@@ -66,7 +66,7 @@ const Header = ({ onToggleTerminal }) => {
 
                 <div className="header-actions">
                     {/* Desktop CTA */}
-                    <button onClick={onToggleTerminal} className="terminal-toggle-btn" aria-label="Open Terminal" style={{ background: 'transparent', border: '1px solid var(--border)', color: 'var(--text-primary)', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', marginRight: '1rem' }}>
+                    <button onClick={onToggleTerminal} className="terminal-toggle-btn" aria-label="Open Terminal">
                         <i className="fas fa-terminal"></i>
                     </button>
                     <Link to="/contact" className="desktop-resume-btn">Let's Talk</Link>

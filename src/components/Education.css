@@ -45,7 +45,7 @@
     transform: translateX(5px);
     box-shadow: var(--shadow-lg);
     background: var(--bg-tertiary);
-    border-color: rgba(216, 180, 139, 0.3);
+    border-color: rgba(16, 185, 129, 0.3);
 }
 
 .edu-header {
