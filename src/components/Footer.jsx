@@ -27,6 +27,10 @@ const Footer = ({ onOpenLegal }) => {
                         <Link to="/" className="footer-logo">
                             <span className="logo-text">shoib<span className="logo-dot">.</span>dev</span>
                         </Link>
+                        <div className="footer-availability">
+                            <span className="avail-dot"></span>
+                            Open to opportunities
+                        </div>
                         <p className="tagline">Building digital experiences that matter.</p>
                         <p className="description">
                             A passionate Full Stack Developer & AI Enthusiast focused on creating interactive, clean, and high-performance web applications.
@@ -90,6 +94,8 @@ const Footer = ({ onOpenLegal }) => {
                     </div>
                 </div>
             </div>
+            {/* Background watermark */}
+            <div className="footer-watermark" aria-hidden="true">shoib.dev</div>
         </footer>
     );
 };

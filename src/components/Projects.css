@@ -11,7 +11,9 @@
 }
 
 .project-item {
-    background: var(--bg-secondary);
+    background: rgba(18, 31, 42, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow);
@@ -21,6 +23,42 @@
     flex-direction: column;
     border: 1px solid var(--border);
     position: relative;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+/* Category color-coded left border */
+.project-item[data-category="AI/ML"]::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.project-item[data-category="Web Dev"]::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #6366f1, #8b5cf6);
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.project-item[data-category="Mobile Apps"]::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #f59e0b, #ef4444);
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
 }
 
 .project-item::before {
@@ -40,10 +78,11 @@
 }
 
 .project-item:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 
-                0 0 25px var(--primary-glow);
+    transform: translateY(-12px) rotateX(2deg);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 
+                0 0 30px var(--primary-glow);
     border-color: var(--primary);
+    background: rgba(18, 31, 42, 0.85);
 }
 
 .project-image {
@@ -122,9 +161,32 @@
 }
 
 .project-header h3 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-bottom: 0.5rem;
     color: var(--text-primary);
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.project-header h3::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 2px;
+}
+
+.project-item:hover .project-header h3 {
+    color: var(--primary-light);
+}
+
+.project-item:hover .project-header h3::after {
+    width: 100%;
 }
 
 .project-date {

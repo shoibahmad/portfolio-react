@@ -77,7 +77,8 @@
     color: var(--text-secondary);
     text-decoration: none;
     position: relative;
-    padding: 0.5rem 0.2rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 6px;
     transition: var(--transition-smooth);
 }
 
@@ -85,7 +86,8 @@
     content: '';
     position: absolute;
     bottom: -2px;
-    left: 0;
+    left: 0.85rem;
+    right: 0.85rem;
     width: 0;
     height: 2px;
     background: linear-gradient(90deg, var(--primary), var(--accent));
@@ -95,16 +97,19 @@
 
 .nav-link:hover {
     color: var(--text-primary);
+    background: rgba(16, 185, 129, 0.06);
 }
 
 .nav-link:hover::after,
 .nav-link.active::after {
-    width: 100%;
+    width: calc(100% - 1.7rem);
 }
 
 .nav-link.active {
     color: var(--primary-light);
     font-weight: 600;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.15);
 }
 
 /* Header Actions */

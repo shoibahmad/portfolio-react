@@ -509,6 +509,7 @@ const Projects = () => {
                             <div
                                 key={index}
                                 className="project-item spotlight-card animate-on-scroll"
+                                data-category={project.category}
                                 style={{ transitionDelay: `${index * 100}ms` }}
                             >
                                 <div className="project-image">

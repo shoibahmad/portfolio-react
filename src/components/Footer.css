@@ -8,6 +8,48 @@
     overflow: hidden;
 }
 
+/* Footer watermark */
+.footer-watermark {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-heading);
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.02);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.04em;
+    z-index: 0;
+}
+
+/* Open to opportunities badge */
+.footer-availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.45rem 1rem;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-light);
+    margin-top: 1.25rem;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+}
+
+.footer-availability .avail-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--primary);
+    border-radius: 50%;
+    animation: pulse-animation 2s infinite;
+}
+
 /* Elegant Top Divider Gradient Glow */
 .footer::before {
     content: '';

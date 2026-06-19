@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -17,25 +18,47 @@ import Publications from './components/Publications';
 import TechMarquee from './components/TechMarquee';
 import Breadcrumb from './components/Breadcrumb';
 import ScrollProgress from './components/ScrollProgress';
-
 import InteractiveResume from './components/InteractiveResume';
 import TerminalModal from './components/TerminalModal';
 
+const pageVariants = {
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] } },
+  exit:    { opacity: 0, y: -8, transition: { duration: 0.25, ease: [0.4, 0, 0.2, 1] } }
+};
+
+const PageWrapper = ({ children }) => (
+  <motion.div
+    variants={pageVariants}
+    initial="initial"
+    animate="animate"
+    exit="exit"
+    style={{ width: '100%' }}
+    onAnimationComplete={() => {
+      // Re-trigger intersection observer after page transition
+      const hiddenElements = document.querySelectorAll('section, .animate-on-scroll');
+      hiddenElements.forEach((el) => el.classList.add('is-visible'));
+    }}
+  >
+    {children}
+  </motion.div>
+);
+
 const HomePage = () => (
-  <>
+  <PageWrapper>
     <Hero />
     <Publications />
     <TechMarquee />
-  </>
+  </PageWrapper>
 );
 
 const ExperiencePage = () => (
-  <>
+  <PageWrapper>
     <Experience />
     <Publications />
     <Education />
     <Certifications />
-  </>
+  </PageWrapper>
 );
 
 function App() {
@@ -64,21 +87,23 @@ function App() {
         }
       });
     }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: 0.05,
+      rootMargin: '0px 0px -30px 0px'
     });
 
-    // Small delay to ensure DOM is rendered
-    setTimeout(() => {
+    // Delay to let Framer Motion page animation complete first
+    const timeout = setTimeout(() => {
       const hiddenElements = document.querySelectorAll('section, .animate-on-scroll');
       hiddenElements.forEach((el) => {
-        el.classList.add('fade-in-section');
         observer.observe(el);
       });
-    }, 100);
+    }, 500);
 
-    return () => observer.disconnect();
-  }, [location.pathname]); // Re-run when path changes
+    return () => {
+      clearTimeout(timeout);
+      observer.disconnect();
+    };
+  }, [location.pathname]);
 
   return (
     <div className="App">
@@ -86,15 +111,17 @@ function App() {
       <Header onToggleTerminal={() => setIsTerminalOpen(!isTerminalOpen)} />
       <Breadcrumb />
       <main>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/experience" element={<ExperiencePage />} />
-          <Route path="/resume" element={<InteractiveResume />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/services" element={<PageWrapper><Services /></PageWrapper>} />
+            <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
+            <Route path="/skills" element={<PageWrapper><Skills /></PageWrapper>} />
+            <Route path="/experience" element={<ExperiencePage />} />
+            <Route path="/resume" element={<PageWrapper><InteractiveResume /></PageWrapper>} />
+            <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+          </Routes>
+        </AnimatePresence>
       </main>
       <Footer onOpenLegal={openLegalModal} />
       <ResumeModal />

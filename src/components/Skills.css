@@ -20,8 +20,9 @@
 }
 
 .skill-category {
-    background: var(--bg-secondary);
-    /* Card background */
+    background: rgba(18, 31, 42, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 2.5rem;
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
@@ -101,4 +102,4 @@
         grid-column: auto;
     }
 }
-
+

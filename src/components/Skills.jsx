@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Skills.css';
 import Spotlight from './ui/Spotlight';
+import GitHubStats from './GitHubStats';
 
 const Skills = () => {
     const skills = [
@@ -56,8 +57,10 @@ const Skills = () => {
                         </div>
                     ))}
                 </Spotlight>
-            </div>
 
+                {/* GitHub Live Stats */}
+                <GitHubStats />
+            </div>
         </section>
     );
 };
