@@ -85,15 +85,22 @@ const Header = ({ onToggleTerminal }) => {
                             </li>
                         ))}
                     </ul>
+
+                    {/* Prominent CTA in Mobile Menu */}
+                    <Link to="/contact" className="mobile-drawer-cta" onClick={handleNavClick}>
+                        <span>Let's Talk & Collaborate</span>
+                        <i className="fas fa-arrow-right"></i>
+                    </Link>
                 </nav>
 
-                {/* Right: CTA link + User Pill */}
+                {/* Right: Actions */}
                 <div className="header-right">
-                    <Link to="/contact" className="cta-link-orange" onClick={handleNavClick}>
-                        GET IN TOUCH <span className="cta-arrow">↗</span>
+                    <Link to="/contact" className="header-contact-btn" onClick={handleNavClick} title="Contact Shoib" aria-label="Contact">
+                        <i className="fas fa-paper-plane"></i>
+                        <span>Contact</span>
                     </Link>
 
-                    <Link to="/contact" className="user-profile-pill" onClick={handleNavClick}>
+                    <Link to="/contact" className="user-profile-pill" onClick={handleNavClick} title="Shoib Profile">
                         <span className="avatar-circle">S</span>
                         <span className="avatar-username">SHOIB SA..</span>
                     </Link>

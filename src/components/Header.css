@@ -142,38 +142,61 @@
     border-radius: 2px;
 }
 
-/* ---------------- Right: CTA, Avatar & Terminal ---------------- */
+/* ---------------- Right: Contact Button, Avatar & Terminal ---------------- */
 .header-right {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1rem;
 }
 
-.cta-link-orange {
-    font-family: 'Courier New', 'Fira Code', monospace;
+.header-contact-btn {
+    font-family: var(--font-body);
     font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #FF6B00;
+    font-weight: 800;
+    color: #FFFFFF !important;
+    background: #FF6B00;
+    border-radius: 8px;
+    padding: 0.42rem 0.95rem;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.45rem;
+    box-shadow: 0 2px 12px rgba(255, 107, 0, 0.35);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+}
+
+.header-contact-btn i {
+    font-size: 0.75rem;
+}
+
+.header-contact-btn:hover {
+    background: #E05E00;
+    box-shadow: 0 4px 18px rgba(255, 107, 0, 0.5);
+    transform: translateY(-1px);
+}
+
+/* Mobile Drawer CTA */
+.mobile-drawer-cta {
+    display: none;
+    margin-top: 2rem;
+    padding: 0.9rem 2.2rem;
+    background: #FF6B00;
+    color: #FFFFFF;
+    border-radius: 9999px;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 0.95rem;
+    text-decoration: none;
+    align-items: center;
+    gap: 0.6rem;
+    box-shadow: 0 6px 20px rgba(255, 107, 0, 0.35);
     transition: all 0.2s ease;
 }
 
-.cta-link-orange .cta-arrow {
-    font-size: 0.95rem;
-    transition: transform 0.2s ease;
-}
-
-.cta-link-orange:hover {
-    color: #FF8833;
-    text-shadow: 0 0 10px rgba(255, 107, 0, 0.4);
-}
-
-.cta-link-orange:hover .cta-arrow {
-    transform: translate(2px, -2px);
+.mobile-drawer-cta:hover {
+    background: #E05E00;
+    transform: translateY(-2px);
 }
 
 /* User Profile Pill */
@@ -272,8 +295,22 @@
     }
 
     .header-pill {
-        height: 52px;
-        padding: 0 0.85rem;
+        height: 50px;
+        padding: 0 0.75rem;
+    }
+
+    .header-right {
+        gap: 0.65rem;
+    }
+
+    .header-contact-btn {
+        padding: 0.32rem 0.7rem;
+        font-size: 0.72rem;
+        border-radius: 6px;
+    }
+
+    .mobile-drawer-cta {
+        display: inline-flex;
     }
 
     .user-profile-pill .avatar-username {
@@ -282,6 +319,12 @@
 
     .user-profile-pill {
         padding: 0.2rem;
+    }
+
+    .terminal-pill-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.7rem;
     }
 
     .hamburger {
