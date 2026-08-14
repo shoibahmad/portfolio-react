@@ -10,6 +10,8 @@ const Projects = () => {
     const [selectedProject, setSelectedProject] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+    const [dossierTab, setDossierTab] = useState('architecture'); // 'architecture' | 'breakdown' | 'learnings'
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -432,10 +434,25 @@ const Projects = () => {
         });
     });
 
+    // Safety check for active project in studio
+    const activeProject = filteredProjects[activeProjectIndex] || filteredProjects[0] || projects[0];
+
     return (
-        <section id="projects" className="projects">
+        <section id="projects" className="projects-studio-section">
             <div className="container">
-                <h2 className="section-title">Featured Projects</h2>
+                {/* Header with PRDUCK styling */}
+                <div className="projects-header text-center">
+                    <div className="projects-badge">
+                        <span className="badge-dot"></span>
+                        INTERACTIVE WORKBENCH & DOSSIER
+                    </div>
+                    <h2 className="section-title">
+                        Engineered for <span className="hero-title-accent">Impact & Innovation.</span>
+                    </h2>
+                    <p className="section-subtitle">
+                        Select any project from the directory to inspect its live system architecture, problem breakdown, and production metrics.
+                    </p>
+                </div>
 
                 {/* Search Bar */}
                 <div className="projects-search">
@@ -443,9 +460,12 @@ const Projects = () => {
                         <i className="fas fa-search search-icon"></i>
                         <input
                             type="text"
-                            placeholder="Search projects by name, description, or technology..."
+                            placeholder="Search projects by name, description, or technology (e.g. Next.js, Gemini, FastAPI)..."
                             value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onChange={(e) => {
+                                setSearchQuery(e.target.value);
+                                setActiveProjectIndex(0);
+                            }}
                             className="search-input"
                         />
                         {searchQuery && (
@@ -460,89 +480,226 @@ const Projects = () => {
                     </div>
                 </div>
 
-                {/* Tags Cloud */}
-                <div className="tags-cloud">
-                    <h3 className="tags-title">Popular Technologies</h3>
-                    <div className="tags-wrapper">
-                        {allTechnologies.sort((a, b) => techCount[b] - techCount[a]).map((tech, idx) => (
-                            <button
-                                key={idx}
-                                className={`tag-item ${searchQuery.toLowerCase() === tech.toLowerCase() ? 'active' : ''}`}
-                                style={{ 
-                                    fontSize: `${0.85 + (techCount[tech] * 0.1)}rem`,
-                                    opacity: 0.6 + (techCount[tech] * 0.1)
-                                }}
-                                onClick={() => setSearchQuery(tech)}
-                            >
-                                {tech}
-                                <span className="tag-count">{techCount[tech]}</span>
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
+                {/* Category Filter Pills */}
                 <div className="projects-filter">
-                    {categories.map((category) => (
-                        <button
-                            key={category}
-                            className={`filter-btn ${activeFilter === category ? 'active' : ''}`}
-                            onClick={() => setActiveFilter(category)}
-                        >
-                            {category}
-                        </button>
-                    ))}
-                </div>
-
-                {/* Results count */}
-                <div className="projects-results">
-                    <p>Showing {filteredProjects.length} of {projects.length} projects</p>
-                </div>
-
-                <Spotlight className="projects-list">
-                    {loading ? (
-                        // Show 6 skeleton cards while loading
-                        Array(6).fill(0).map((_, index) => (
-                            <SkeletonProjectCard key={`skeleton-${index}`} />
-                        ))
-                    ) : (
-                        filteredProjects.map((project, index) => (
-                            <div
-                                key={index}
-                                className="project-item spotlight-card animate-on-scroll"
-                                data-category={project.category}
-                                style={{ transitionDelay: `${index * 100}ms` }}
+                    {categories.map((category) => {
+                        const count = category === 'All' 
+                            ? projects.length 
+                            : projects.filter(p => p.category === category).length;
+                        return (
+                            <button
+                                key={category}
+                                className={`filter-btn ${activeFilter === category ? 'active' : ''}`}
+                                onClick={() => {
+                                    setActiveFilter(category);
+                                    setActiveProjectIndex(0);
+                                }}
                             >
-                                <div className="project-image">
-                                    <div className="browser-mockup-header">
-                                        <span className="sc-dot dot-red"></span>
-                                        <span className="sc-dot dot-yellow"></span>
-                                        <span className="sc-dot dot-green"></span>
-                                    </div>
-                                    <img src={project.image} alt={project.title} loading="lazy" />
-                                </div>
-                                <div className="project-details">
-                                    <div className="project-header">
-                                        <h3>{project.title}</h3>
-                                        <span className="project-date">{project.date}</span>
-                                    </div>
-                                    <p>{project.description}</p>
-                                    <div className="project-tech">
-                                        {project.tech.map((tech, idx) => (
-                                            <span key={idx}>{tech}</span>
-                                        ))}
-                                    </div>
-                                    <button
-                                        onClick={() => openModal(project)}
-                                        className="project-link"
-                                        style={{ width: '100%', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                                {category.toUpperCase()} <span className="filter-count">({count})</span>
+                            </button>
+                        );
+                    })}
+                </div>
+
+                {/* Split-Screen Studio Layout */}
+                <div className="studio-workspace">
+                    {/* Left Pane: Project Index Directory */}
+                    <div className="studio-directory-pane">
+                        <div className="directory-header">
+                            <div className="directory-title">
+                                <i className="fas fa-folder-open"></i>
+                                <span>PROJECT DIRECTORY</span>
+                            </div>
+                            <span className="directory-count">{filteredProjects.length} MODULES</span>
+                        </div>
+
+                        <div className="directory-list">
+                            {filteredProjects.map((project, index) => {
+                                const isActive = index === activeProjectIndex;
+                                const projectNum = String(index + 1).padStart(2, '0');
+
+                                return (
+                                    <div
+                                        key={index}
+                                        className={`directory-item ${isActive ? 'active' : ''}`}
+                                        onClick={() => setActiveProjectIndex(index)}
+                                        onMouseEnter={() => setActiveProjectIndex(index)}
                                     >
-                                        View Case Study <i className="fas fa-arrow-right" style={{ marginLeft: '8px', fontSize: '0.8em' }}></i>
-                                    </button>
+                                        <div className="dir-item-left">
+                                            <span className="dir-num">{projectNum}</span>
+                                            <div className="dir-info">
+                                                <h4 className="dir-title">{project.title}</h4>
+                                                <div className="dir-meta-row">
+                                                    <span className="dir-cat">{project.category}</span>
+                                                    <span className="dir-date">{project.date}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="dir-item-right">
+                                            <i className="fas fa-chevron-right dir-arrow"></i>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                            {filteredProjects.length === 0 && (
+                                <div className="directory-empty">
+                                    <i className="fas fa-search"></i>
+                                    <p>No projects match your search query.</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Right Pane: Live Mission Control / Dossier Inspector */}
+                    {activeProject && (
+                        <div className="studio-inspector-pane">
+                            {/* Browser Mockup Top Bar */}
+                            <div className="inspector-topbar">
+                                <div className="mac-dots">
+                                    <span className="sc-dot dot-red"></span>
+                                    <span className="sc-dot dot-yellow"></span>
+                                    <span className="sc-dot dot-green"></span>
+                                </div>
+                                <div className="inspector-url-bar">
+                                    <i className="fas fa-lock"></i>
+                                    <span>shoib.dev/{activeProject.title.toLowerCase().replace(/[^a-z0-9]/g, '-').slice(0, 22)}</span>
+                                </div>
+                                <div className="inspector-badges">
+                                    <span className="badge-cat">{activeProject.category}</span>
+                                    <span className="badge-live">
+                                        <span className="beacon-dot"></span> LIVE
+                                    </span>
                                 </div>
                             </div>
-                        ))
+
+                            {/* Visual Canvas */}
+                            <div className="inspector-visual-canvas">
+                                <img src={activeProject.image} alt={activeProject.title} />
+                                <div className="canvas-laser-scan"></div>
+                                <div className="canvas-badge-overlay">
+                                    <span>{activeProject.date}</span>
+                                </div>
+                            </div>
+
+                            {/* Dossier Body */}
+                            <div className="inspector-body">
+                                <div className="inspector-title-row">
+                                    <h3>{activeProject.title}</h3>
+                                </div>
+
+                                <p className="inspector-desc">{activeProject.description}</p>
+
+                                {/* Dossier Interactive Tabs */}
+                                <div className="dossier-tabs-nav">
+                                    <button
+                                        className={`dossier-tab-btn ${dossierTab === 'architecture' ? 'active' : ''}`}
+                                        onClick={() => setDossierTab('architecture')}
+                                    >
+                                        <i className="fas fa-sitemap"></i> Architecture Flow
+                                    </button>
+                                    <button
+                                        className={`dossier-tab-btn ${dossierTab === 'breakdown' ? 'active' : ''}`}
+                                        onClick={() => setDossierTab('breakdown')}
+                                    >
+                                        <i className="fas fa-shield-alt"></i> Challenge & Solution
+                                    </button>
+                                    <button
+                                        className={`dossier-tab-btn ${dossierTab === 'learnings' ? 'active' : ''}`}
+                                        onClick={() => setDossierTab('learnings')}
+                                    >
+                                        <i className="fas fa-lightbulb"></i> Key Takeaways
+                                    </button>
+                                </div>
+
+                                {/* Dossier Tab Content */}
+                                <div className="dossier-tab-content">
+                                    {dossierTab === 'architecture' && (
+                                        <div className="dossier-panel architecture-panel">
+                                            <div className="architecture-pipeline">
+                                                {activeProject.architecture && activeProject.architecture.map((node, nIdx) => (
+                                                    <React.Fragment key={nIdx}>
+                                                        <div className="pipeline-node">
+                                                            <div className="node-icon">
+                                                                <i className={node.icon}></i>
+                                                            </div>
+                                                            <span className="node-label">{node.step}</span>
+                                                        </div>
+                                                        {nIdx < activeProject.architecture.length - 1 && (
+                                                            <i className="fas fa-arrow-right pipeline-separator"></i>
+                                                        )}
+                                                    </React.Fragment>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {dossierTab === 'breakdown' && (
+                                        <div className="dossier-panel breakdown-panel">
+                                            <div className="breakdown-card challenge-card">
+                                                <h5><i className="fas fa-exclamation-triangle"></i> The Challenge</h5>
+                                                <p>{activeProject.challenge || "Building high-performance scalable software with seamless UX."}</p>
+                                            </div>
+                                            <div className="breakdown-card solution-card">
+                                                <h5><i className="fas fa-check-circle"></i> Engineering Solution</h5>
+                                                <p>{activeProject.solution || activeProject.description}</p>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {dossierTab === 'learnings' && (
+                                        <div className="dossier-panel learnings-panel">
+                                            <ul className="learnings-list">
+                                                {activeProject.learnings ? activeProject.learnings.map((item, lIdx) => (
+                                                    <li key={lIdx}>
+                                                        <i className="fas fa-check"></i>
+                                                        <span>{item}</span>
+                                                    </li>
+                                                )) : (
+                                                    <li>
+                                                        <i className="fas fa-check"></i>
+                                                        <span>Production-grade full stack deployment with modern APIs.</span>
+                                                    </li>
+                                                )}
+                                            </ul>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Tech Stack Badges */}
+                                <div className="inspector-tech-section">
+                                    <span className="tech-heading">TECHNOLOGIES DEPLOYED:</span>
+                                    <div className="inspector-tech-tags">
+                                        {activeProject.tech.map((tech, idx) => (
+                                            <span key={idx} className="inspector-tech-pill">{tech}</span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Action Buttons */}
+                                <div className="inspector-actions">
+                                    <button
+                                        onClick={() => openModal(activeProject)}
+                                        className="btn-inspect-modal"
+                                    >
+                                        <span>Explore Full Case Study</span>
+                                        <i className="fas fa-external-link-alt"></i>
+                                    </button>
+                                    {activeProject.link && activeProject.link !== '#' && (
+                                        <a
+                                            href={activeProject.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="btn-github-link"
+                                        >
+                                            <i className="fab fa-github"></i>
+                                            <span>Repository</span>
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                     )}
-                </Spotlight>
+                </div>
             </div>
 
             <ProjectModal
@@ -550,7 +707,6 @@ const Projects = () => {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
             />
-
         </section>
     );
 };

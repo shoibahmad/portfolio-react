@@ -1,4 +1,4 @@
-/* Tech Marquee Styles */
+/* Tech Marquee Styles — PRDUCK Warm Theme */
 .tech-marquee {
     padding: 4rem 0;
     background: var(--bg-secondary);
@@ -28,7 +28,7 @@
 
 .tech-item i {
     font-size: 3.5rem;
-    filter: grayscale(100%) opacity(0.5);
+    filter: grayscale(100%) opacity(0.4);
     transition: all 0.4s ease;
 }
 

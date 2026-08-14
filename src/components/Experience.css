@@ -1,4 +1,4 @@
-/* Experience Section Styles */
+/* Experience Section Styles — PRDUCK Warm Theme */
 .experience {
     padding: 8rem 0 5rem;
     background: var(--bg-secondary);
@@ -22,7 +22,7 @@
     bottom: 0;
     left: 50%;
     width: 2px;
-    background: linear-gradient(to bottom, transparent 0%, var(--primary) 15%, var(--accent) 85%, transparent 100%);
+    background: linear-gradient(to bottom, transparent 0%, var(--primary) 15%, var(--primary-dark) 85%, transparent 100%);
     transform: translateX(-50%);
 }
 
@@ -73,14 +73,14 @@
 
 .experience-item:hover::after {
     background: var(--primary);
-    box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 0 0 5px rgba(255, 107, 0, 0.15);
 }
 
 /* Card Content inside Item */
 .exp-card {
-    background: var(--bg-secondary);
+    background: rgba(255, 255, 255, 0.85);
     padding: 2rem;
-    border-radius: var(--radius);
+    border-radius: var(--radius-md);
     border: 1px solid var(--border);
     box-shadow: var(--shadow);
     transition: var(--transition);
@@ -115,7 +115,7 @@
     font-size: 0.85rem;
     color: var(--text-muted);
     font-weight: 600;
-    background: var(--bg-secondary);
+    background: var(--bg-tertiary);
     padding: 0.35rem 1rem;
     border-radius: 20px;
     margin-top: 1rem;

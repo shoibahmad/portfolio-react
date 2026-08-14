@@ -1,4 +1,4 @@
-/* Hero Section Styles - Claude Theme */
+/* Hero Section Styles — PRDUCK Warm Theme */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -6,15 +6,15 @@
     padding-top: 100px;
     padding-bottom: 4rem;
     position: relative;
-    background: var(--bg-primary);
+    background: linear-gradient(180deg, #F5C6A0 0%, #E89B70 35%, #F0B088 70%, var(--bg-primary) 100%);
 }
 
-/* Animated dot-grid hero background */
+/* Subtle noise texture for hero */
 .hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
     mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 40%, transparent 100%);
     pointer-events: none;
@@ -82,7 +82,7 @@
     padding: 0.4rem 1rem;
     border: 1px solid rgba(39, 201, 63, 0.3);
     border-radius: 50px;
-    background: rgba(39, 201, 63, 0.05);
+    background: rgba(39, 201, 63, 0.08);
 }
 
 .pulse-dot {
@@ -123,9 +123,17 @@
     font-size: 3.5rem;
     line-height: 1.2;
     margin-bottom: 1.5rem;
-    font-weight: 800;
+    font-weight: 900;
     color: var(--text-primary);
     letter-spacing: -0.02em;
+}
+
+.hero-title-accent {
+    font-family: var(--font-accent);
+    color: #FF6B00;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: -0.01em;
 }
 
 .hero-description {
@@ -197,10 +205,10 @@
     overflow: hidden;
     position: relative;
     padding: 3px;
-    background: linear-gradient(135deg, var(--primary), var(--accent), var(--primary));
+    background: linear-gradient(135deg, var(--primary), #FFB366, var(--primary));
     background-size: 300% 300%;
     animation: gradientBorder 5s ease infinite;
-    box-shadow: 0 0 50px rgba(16, 185, 129, 0.12);
+    box-shadow: 0 0 50px rgba(255, 107, 0, 0.15);
 }
 
 @keyframes gradientBorder {
@@ -214,7 +222,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center 20%;
-    filter: brightness(0.9) contrast(1.1);
+    filter: brightness(0.95) contrast(1.05);
     border-radius: 18px;
     transition: transform 0.5s ease;
 }
@@ -225,7 +233,7 @@
 
 .details-card {
     width: 340px;
-    background: rgba(36, 34, 41, 0.4); /* subtle translucent background */
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);

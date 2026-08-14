@@ -1,4 +1,4 @@
-/* Education Section Styles */
+/* Education Section Styles — PRDUCK Warm Theme */
 .education {
     padding: 6rem 0;
     background: var(--bg-primary);
@@ -13,7 +13,7 @@
 }
 
 .education-item {
-    background: var(--bg-secondary);
+    background: rgba(255, 255, 255, 0.85);
     padding: 2.5rem 3rem;
     border-radius: 4px;
     border: 1px solid var(--border);
@@ -37,15 +37,15 @@
 }
 
 .education-item:hover::before {
-    background: linear-gradient(to bottom, var(--primary), var(--accent));
+    background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
     box-shadow: 0 0 8px var(--primary);
 }
 
 .education-item:hover {
     transform: translateX(5px);
     box-shadow: var(--shadow-lg);
-    background: var(--bg-tertiary);
-    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 107, 0, 0.3);
 }
 
 .edu-header {
@@ -70,7 +70,7 @@
 
 .cgpa {
     display: block;
-    color: var(--accent);
+    color: var(--primary-dark);
     font-weight: 700;
     margin-top: 0.5rem;
     font-size: 1rem;
@@ -88,7 +88,6 @@
     color: var(--text-secondary);
     font-weight: 600;
     background: var(--bg-tertiary);
-    /* Subtle light bg */
     padding: 0.35rem 1rem;
     border-radius: 20px;
     display: inline-block;

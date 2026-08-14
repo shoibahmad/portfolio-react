@@ -35,7 +35,7 @@
 
 .breadcrumb-item a:hover {
     color: var(--primary);
-    background: rgba(99, 102, 241, 0.08);
+    background: rgba(255, 107, 0, 0.06);
 }
 
 .breadcrumb-item.active span {

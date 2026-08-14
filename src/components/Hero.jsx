@@ -63,8 +63,7 @@ const Hero = () => {
                         </motion.div>
 
                         <motion.h1 variants={itemVariants} className="hero-title">
-                            Shoib Ahmad: The Complete<br />
-                            Guide to Scalable Software
+                            Understand what your software <span className="hero-title-accent">can become.</span>
                         </motion.h1>
 
                         <motion.p variants={itemVariants} className="hero-description">

@@ -1,217 +1,291 @@
-/* Redesigned Header Component Styles - Option 1: Full-Width Glass Navbar */
-.header {
+/* =========================================================
+   PRDUCK-Exact Header Styling
+   ========================================================= */
+
+.header-wrapper {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(11, 19, 26, 0.75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(45, 212, 191, 0.08);
     z-index: 1000;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+    padding: 0.85rem 1.5rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none; /* allows clicking through wrapper outside pill */
 }
 
-.header.scrolled {
-    background: rgba(11, 19, 26, 0.88);
-    border-bottom-color: rgba(45, 212, 191, 0.18);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), 
-                0 0 20px rgba(16, 185, 129, 0.04);
+.header-wrapper.scrolled {
+    padding: 0.5rem 1.5rem;
 }
 
-.header-container {
-    height: 80px;
+.header-pill {
+    max-width: 1320px;
+    margin: 0 auto;
+    background: #111111;
+    border: 1px solid #282828;
+    border-radius: 16px;
+    height: 58px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2rem;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0 1.25rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.4);
+    pointer-events: auto;
+    transition: all 0.3s ease;
 }
 
-.header.scrolled .header-container {
-    height: 65px;
+.header-wrapper.scrolled .header-pill {
+    background: #0A0A0A;
+    border-color: #333333;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
 }
 
-/* Brand Logo */
+/* ---------------- Left: Logo & Toggle ---------------- */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .brand-logo {
     display: flex;
     align-items: center;
+    gap: 0.6rem;
     text-decoration: none;
-    position: relative;
-    z-index: 10;
 }
 
-.logo-text {
+.duck-logo-icon {
+    width: 22px;
+    height: 22px;
+}
+
+.brand-logo .logo-text {
     font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: #FFFFFF;
+    letter-spacing: 0.04em;
+}
+
+/* Pill Toggle [ HUMAN | MACHINE ] */
+.mode-toggle-pill {
+    display: inline-flex;
+    align-items: center;
+    background: #181818;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 2.5px;
+    gap: 2px;
+}
+
+.toggle-option {
+    border: none;
+    background: transparent;
+    font-family: 'Courier New', 'Fira Code', monospace;
+    font-size: 0.68rem;
     font-weight: 700;
-    font-size: 1.55rem;
-    color: var(--text-primary);
-    transition: var(--transition);
-    letter-spacing: -0.01em;
+    letter-spacing: 0.08em;
+    color: #777777;
+    padding: 0.3rem 0.65rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.brand-logo:hover .logo-text {
-    opacity: 0.95;
-    text-shadow: 0 0 10px rgba(45, 212, 191, 0.3);
+.toggle-option:hover {
+    color: #CCCCCC;
 }
 
-.logo-dot {
-    color: var(--primary);
+.toggle-option.active {
+    background: #FF6B00;
+    color: #111111;
+    font-weight: 800;
 }
 
-/* Navigation Menu */
+/* ---------------- Center: Navigation ---------------- */
 .nav-menu ul {
     display: flex;
-    gap: 2rem;
-    list-style: none;
     align-items: center;
+    gap: 1.75rem;
+    list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .nav-link {
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 0.95rem;
-    color: var(--text-secondary);
+    font-family: 'Courier New', 'Fira Code', monospace;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: #8E8E8E;
     text-decoration: none;
+    transition: color 0.2s ease;
+    padding: 0.25rem 0;
     position: relative;
-    padding: 0.4rem 0.85rem;
-    border-radius: 6px;
-    transition: var(--transition-smooth);
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0.85rem;
-    right: 0.85rem;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    transition: width 0.3s ease;
-    border-radius: 2px;
 }
 
 .nav-link:hover {
-    color: var(--text-primary);
-    background: rgba(16, 185, 129, 0.06);
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-    width: calc(100% - 1.7rem);
+    color: #FFFFFF;
 }
 
 .nav-link.active {
-    color: var(--primary-light);
-    font-weight: 600;
-    background: rgba(16, 185, 129, 0.08);
-    border: 1px solid rgba(16, 185, 129, 0.15);
+    color: #FFFFFF;
 }
 
-/* Header Actions */
-.header-actions {
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #FF6B00;
+    border-radius: 2px;
+}
+
+/* ---------------- Right: CTA, Avatar & Terminal ---------------- */
+.header-right {
     display: flex;
     align-items: center;
     gap: 1.25rem;
 }
 
-/* Terminal button */
-.terminal-toggle-btn {
-    background: rgba(25, 43, 58, 0.3);
-    border: 1px solid var(--border);
-    color: var(--text-secondary);
-    padding: 0.55rem 0.85rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: var(--transition);
+.cta-link-orange {
+    font-family: 'Courier New', 'Fira Code', monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #FF6B00;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.2s ease;
+}
+
+.cta-link-orange .cta-arrow {
+    font-size: 0.95rem;
+    transition: transform 0.2s ease;
+}
+
+.cta-link-orange:hover {
+    color: #FF8833;
+    text-shadow: 0 0 10px rgba(255, 107, 0, 0.4);
+}
+
+.cta-link-orange:hover .cta-arrow {
+    transform: translate(2px, -2px);
+}
+
+/* User Profile Pill */
+.user-profile-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #181818;
+    border: 1px solid #333333;
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem 0.25rem 0.3rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.user-profile-pill:hover {
+    border-color: #FF6B00;
+    background: #202020;
+}
+
+.avatar-circle {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #FF6B00;
+    color: #111111;
+    font-weight: 900;
+    font-size: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: var(--font-heading);
 }
 
-.terminal-toggle-btn:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-    background: var(--accent-glow);
-    transform: translateY(-1px);
-    box-shadow: 0 0 12px var(--accent-glow);
+.avatar-username {
+    font-family: 'Courier New', 'Fira Code', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #E0E0E0;
 }
 
-/* Desktop CTA */
-.desktop-resume-btn {
-    padding: 0.55rem 1.3rem;
-    border: 1px solid var(--primary);
-    color: var(--primary-light);
-    background: transparent;
+/* Terminal Pill Button */
+.terminal-pill-btn {
+    background: #181818;
+    border: 1px solid #333333;
+    color: #888888;
+    width: 32px;
+    height: 32px;
     border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: var(--transition-smooth);
-    text-decoration: none;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.75rem;
 }
 
-.desktop-resume-btn:hover {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-    color: var(--bg-primary);
-    border-color: transparent;
-    box-shadow: 0 4px 15px rgba(45, 212, 191, 0.3);
-    transform: translateY(-1px);
+.terminal-pill-btn:hover {
+    color: #FF6B00;
+    border-color: #FF6B00;
+    background: rgba(255, 107, 0, 0.08);
 }
 
-/* Hamburger mobile button */
+/* Mobile Hamburger */
 .hamburger {
     display: none;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
     cursor: pointer;
-    padding: 0.5rem;
-    z-index: 1002;
+    padding: 0.4rem;
     border: none;
     background: transparent;
 }
 
 .hamburger span {
-    width: 22px;
+    width: 20px;
     height: 2px;
-    background: var(--text-primary);
+    background: #FFFFFF;
     transition: var(--transition-smooth);
 }
 
-.mobile-resume-btn {
-    display: none;
-}
-
-/* Responsive & Mobile overlay styles */
-@media (max-width: 991px) {
+/* ---------------- Responsive ---------------- */
+@media (max-width: 1080px) {
+    .mode-toggle-pill {
+        display: none;
+    }
     .nav-menu ul {
-        gap: 1.25rem;
-    }
-    .nav-link {
-        font-size: 0.9rem;
+        gap: 1.15rem;
     }
 }
 
-@media (max-width: 768px) {
-    .header-container {
-        height: 70px;
-        padding: 0 1.5rem;
+@media (max-width: 860px) {
+    .header-wrapper {
+        padding: 0.5rem 0.75rem;
     }
-    .header.scrolled .header-container {
-        height: 60px;
-        padding: 0 1.25rem;
+
+    .header-pill {
+        height: 52px;
+        padding: 0 0.85rem;
+    }
+
+    .user-profile-pill .avatar-username {
+        display: none;
+    }
+
+    .user-profile-pill {
+        padding: 0.2rem;
     }
 
     .hamburger {
         display: flex;
-    }
-
-    .desktop-resume-btn {
-        display: none;
     }
 
     .nav-menu {
@@ -220,14 +294,14 @@
         left: 0;
         width: 100%;
         height: 100vh;
-        background: rgba(11, 19, 26, 0.97);
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
+        background: rgba(17, 17, 17, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         z-index: 1001;
         opacity: 0;
         pointer-events: none;
@@ -242,46 +316,21 @@
     .nav-menu ul {
         flex-direction: column;
         gap: 2rem;
-        width: 100%;
         text-align: center;
     }
 
     .nav-link {
-        font-size: 1.3rem;
-        display: inline-block;
-        padding: 0.6rem 2rem;
-    }
-
-    .nav-link::after {
-        display: none;
+        font-size: 1.1rem;
+        color: #CCCCCC;
     }
 
     .nav-link.active {
-        color: var(--primary-light);
+        color: #FF6B00;
     }
 
-    .mobile-resume-btn {
-        display: inline-block;
-        margin-top: 1rem;
-        padding: 0.8rem 2.5rem;
-        background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-        color: var(--bg-primary);
-        border-radius: 30px;
-        font-weight: 600;
-        text-decoration: none;
-        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);
-        transition: var(--transition);
-    }
-
-    .mobile-resume-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
-    }
-
-    /* Animated close symbol */
     .hamburger.active span:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
-        background: var(--primary);
+        transform: translateY(6px) rotate(45deg);
+        background: #FF6B00;
     }
 
     .hamburger.active span:nth-child(2) {
@@ -289,7 +338,7 @@
     }
 
     .hamburger.active span:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
-        background: var(--primary);
+        transform: translateY(-6px) rotate(-45deg);
+        background: #FF6B00;
     }
 }

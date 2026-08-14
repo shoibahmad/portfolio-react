@@ -1,7 +1,7 @@
-/* Redesigned Footer Styles - Premium Glassmorphic Aesthetic */
+/* Redesigned Footer Styles — PRDUCK Dark Footer */
 .footer {
-    background: var(--bg-primary);
-    color: var(--text-secondary);
+    background: #1A1A1A;
+    color: #AAAAAA;
     padding: 6rem 0 3rem;
     position: relative;
     font-family: var(--font-body);
@@ -31,12 +31,12 @@
     align-items: center;
     gap: 0.6rem;
     padding: 0.45rem 1rem;
-    background: rgba(16, 185, 129, 0.08);
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    background: rgba(255, 107, 0, 0.08);
+    border: 1px solid rgba(255, 107, 0, 0.2);
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--primary-light);
+    color: var(--primary);
     margin-top: 1.25rem;
     margin-bottom: 1.5rem;
     width: fit-content;
@@ -62,16 +62,16 @@
     height: 1px;
     background: linear-gradient(90deg, 
         transparent 0%, 
-        rgba(16, 185, 129, 0.4) 30%, 
-        rgba(45, 212, 191, 0.4) 70%, 
+        rgba(255, 107, 0, 0.4) 30%, 
+        rgba(255, 140, 51, 0.4) 70%, 
         transparent 100%
     );
 }
 
 /* Call To Action Banner styling */
 .footer-cta {
-    background: linear-gradient(135deg, rgba(18, 31, 42, 0.4) 0%, rgba(25, 43, 58, 0.25) 100%);
-    border: 1px solid rgba(45, 212, 191, 0.1);
+    background: linear-gradient(135deg, rgba(255, 107, 0, 0.08) 0%, rgba(255, 140, 51, 0.05) 100%);
+    border: 1px solid rgba(255, 107, 0, 0.15);
     border-radius: 24px;
     padding: 3.5rem;
     display: flex;
@@ -79,8 +79,8 @@
     align-items: center;
     margin-bottom: 5rem;
     gap: 2rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35),
-                inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2),
+                inset 0 1px 1px rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     position: relative;
@@ -95,7 +95,7 @@
     right: -20px;
     width: 150px;
     height: 150px;
-    background: radial-gradient(circle, rgba(45, 212, 191, 0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 107, 0, 0.06) 0%, transparent 70%);
     pointer-events: none;
     z-index: -1;
 }
@@ -103,7 +103,7 @@
 .footer-cta-content h2 {
     font-family: var(--font-heading);
     font-size: 2.3rem;
-    color: var(--text-primary);
+    color: #FFFFFF;
     margin-bottom: 0.75rem;
     letter-spacing: -0.02em;
     font-weight: 700;
@@ -111,7 +111,7 @@
 }
 
 .footer-cta-content p {
-    color: var(--text-secondary);
+    color: #AAAAAA;
     font-size: 1.05rem;
     max-width: 600px;
     line-height: 1.6;
@@ -122,14 +122,14 @@
     align-items: center;
     gap: 0.75rem;
     padding: 1.05rem 2.2rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-    color: var(--bg-primary) !important;
+    background: var(--primary);
+    color: #FFFFFF !important;
     border-radius: 50px;
     font-weight: 600;
     font-size: 1.05rem;
     transition: var(--transition-smooth);
     text-decoration: none;
-    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.25);
+    box-shadow: 0 5px 15px rgba(255, 107, 0, 0.25);
     white-space: nowrap;
 }
 
@@ -140,7 +140,7 @@
 
 .btn-cta-footer:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(45, 212, 191, 0.45);
+    box-shadow: 0 10px 25px rgba(255, 107, 0, 0.4);
 }
 
 .btn-cta-footer:hover i {
@@ -172,7 +172,7 @@
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 1.6rem;
-    color: var(--text-primary);
+    color: #FFFFFF;
 }
 
 .footer-brand .logo-dot {
@@ -180,15 +180,15 @@
 }
 
 .tagline {
-    color: var(--primary-light);
+    color: var(--primary);
     font-weight: 500;
     font-size: 0.95rem;
     margin-bottom: 1rem;
     display: block;
 }
 
-.description {
-    color: var(--text-muted);
+.footer .description {
+    color: #888888;
     line-height: 1.7;
     font-size: 0.95rem;
     max-width: 360px;
@@ -200,7 +200,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--text-primary);
+    color: #FFFFFF;
     position: relative;
 }
 
@@ -216,7 +216,7 @@
 }
 
 .footer-links a {
-    color: var(--text-secondary);
+    color: #AAAAAA;
     transition: var(--transition);
     text-decoration: none;
     font-size: 0.95rem;
@@ -231,7 +231,7 @@
     left: 0;
     width: 0;
     height: 1.5px;
-    background: var(--primary-light);
+    background: var(--primary);
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -240,33 +240,33 @@
 }
 
 .footer-links a:hover {
-    color: var(--text-primary);
+    color: #FFFFFF;
 }
 
 .footer-contact li {
     display: flex;
     align-items: center;
     gap: 0.85rem;
-    color: var(--text-secondary);
+    color: #AAAAAA;
     font-size: 0.95rem;
 }
 
 .footer-contact li i {
-    color: var(--primary-light);
+    color: var(--primary);
     font-size: 0.95rem;
     width: 16px;
     text-align: center;
 }
 
 .footer-contact a {
-    color: var(--text-secondary);
+    color: #AAAAAA;
     transition: var(--transition);
     text-decoration: none;
 }
 
 .footer-contact a:hover {
-    color: var(--text-primary);
-    text-shadow: 0 0 10px rgba(45, 212, 191, 0.2);
+    color: #FFFFFF;
+    text-shadow: 0 0 10px rgba(255, 107, 0, 0.2);
 }
 
 /* Premium Social Buttons */
@@ -279,9 +279,9 @@
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: rgba(25, 43, 58, 0.4);
-    border: 1px solid var(--border);
-    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #AAAAAA;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -291,17 +291,17 @@
 }
 
 .social-links a:hover {
-    color: var(--bg-primary) !important;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: #FFFFFF !important;
+    background: var(--primary);
     border-color: transparent;
     transform: translateY(-4px) rotate(8deg);
-    box-shadow: 0 5px 15px rgba(45, 212, 191, 0.35);
+    box-shadow: 0 5px 15px rgba(255, 107, 0, 0.35);
 }
 
 /* Footer bottom bar */
 .footer-bottom {
     padding-top: 2rem;
-    border-top: 1px solid var(--border-light);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -312,7 +312,7 @@
 }
 
 .copyright p {
-    color: var(--text-muted);
+    color: #666666;
     font-size: 0.85rem;
     margin: 0;
 }
@@ -329,12 +329,12 @@
     font-family: inherit;
     font-size: 0.85rem;
     padding: 0;
-    color: var(--text-muted);
+    color: #666666;
     transition: var(--transition);
 }
 
 .footer-legal button:hover {
-    color: var(--primary-light);
+    color: var(--primary);
 }
 
 /* Responsive queries */

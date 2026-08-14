@@ -1,4 +1,4 @@
-/* Resume Modal Styles */
+/* Resume Modal Styles — PRDUCK Warm Theme */
 .resume-modal {
     position: fixed;
     top: 0;
@@ -22,7 +22,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(8px);
 }
 
@@ -68,7 +68,7 @@
     color: var(--text-primary);
 }
 
-.close-btn {
+.resume-modal .close-btn {
     width: 45px;
     height: 45px;
     background: var(--bg-tertiary);
@@ -83,7 +83,7 @@
     justify-content: center;
 }
 
-.close-btn:hover {
+.resume-modal .close-btn:hover {
     background: var(--primary);
     color: white;
     transform: rotate(90deg);
@@ -150,7 +150,7 @@
     margin-bottom: 2.5rem;
 }
 
-.resume-section-title {
+.resume-modal .resume-section-title {
     font-size: 1.75rem;
     color: var(--text-primary);
     border-bottom: 2px solid var(--primary);
@@ -177,10 +177,10 @@
 }
 
 .resume-item-header span {
-    color: var(--accent);
+    color: var(--primary);
     font-size: 0.9rem;
     white-space: nowrap;
-    background: rgba(251, 191, 36, 0.1);
+    background: rgba(255, 107, 0, 0.08);
     padding: 0.2rem 0.6rem;
     border-radius: 4px;
 }
