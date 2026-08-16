@@ -1,60 +1,82 @@
-/* Services Section Styles — PRDUCK Warm Theme */
+/* Services Section Styles — Highly Animated */
 .services {
-    padding: 8rem 0 5rem;
+    padding: 8rem 0 6rem;
     background: var(--bg-primary);
     position: relative;
     overflow: hidden;
 }
 
-/* Background Decoration */
-.services::before {
-    content: '';
-    position: absolute;
-    top: 20%;
-    right: -10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(255, 107, 0, 0.05) 0%, transparent 70%);
-    z-index: 0;
-    pointer-events: none;
+.services-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Courier New', 'Fira Code', monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #FF6B00;
+    background: rgba(255, 107, 0, 0.08);
+    border: 1px solid rgba(255, 107, 0, 0.2);
+    padding: 0.35rem 0.9rem;
+    border-radius: 9999px;
+    margin-bottom: 1.25rem;
+}
+
+.services-badge .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #FF6B00;
+    box-shadow: 0 0 8px #FF6B00;
+    animation: badgePing 2s infinite ease-in-out;
 }
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
     position: relative;
     z-index: 1;
-    padding: 1rem;
+    padding: 1rem 0;
 }
 
 .research-card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 3.5rem 2.5rem;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 3rem 2.25rem;
     border-radius: 24px;
     text-align: center;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid var(--border);
     position: relative;
-    box-shadow: var(--shadow);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover State */
 .research-card:hover {
-    transform: translateY(-10px);
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--primary);
+    border-color: rgba(255, 107, 0, 0.5);
+    box-shadow: 0 20px 40px rgba(255, 107, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.service-tag {
+    font-family: 'Courier New', 'Fira Code', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #FF6B00;
+    background: rgba(255, 107, 0, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
 }
 
 .service-icon {
-    width: 80px;
-    height: 80px;
+    width: 76px;
+    height: 76px;
     background: rgba(255, 107, 0, 0.08);
     color: var(--primary);
     border-radius: 20px;
@@ -62,60 +84,54 @@
     align-items: center;
     justify-content: center;
     font-size: 2rem;
-    margin-bottom: 2rem;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 107, 0, 0.15);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04), 0 8px 16px -4px rgba(0, 0, 0, 0.06);
+    margin-bottom: 1.75rem;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    border: 1px solid rgba(255, 107, 0, 0.2);
 }
 
 .research-card:hover .service-icon {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white;
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 10px 20px -5px rgba(255, 107, 0, 0.3);
+    background: linear-gradient(135deg, #FF6B00 0%, #E05E00 100%);
+    color: #FFFFFF;
+    transform: scale(1.12) rotate(6deg);
+    box-shadow: 0 10px 24px rgba(255, 107, 0, 0.35);
     border-color: transparent;
 }
 
 .research-card h3 {
     font-family: var(--font-heading);
-    font-size: 1.75rem;
-    font-weight: 700;
+    font-size: 1.5rem;
+    font-weight: 800;
     margin-bottom: 1rem;
     color: var(--text-primary);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
 }
 
 .research-card p {
     color: var(--text-secondary);
     line-height: 1.7;
-    font-size: 1.05rem;
+    font-size: 0.96rem;
     margin-bottom: 2rem;
     flex-grow: 1;
 }
 
-/* Decorative Footer Line */
 .card-footer-line {
-    width: 40px;
+    width: 44px;
     height: 4px;
     background: var(--border);
     border-radius: 2px;
-    transition: all 0.3s ease;
+    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s ease;
 }
 
 .research-card:hover .card-footer-line {
     width: 100%;
-    background: var(--primary);
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
 }
-
 
 @media (max-width: 768px) {
     .services-grid {
         grid-template-columns: 1fr;
-        padding: 0;
     }
-
     .research-card {
-        padding: 2.5rem 2rem;
+        padding: 2.25rem 1.75rem;
     }
 }
-

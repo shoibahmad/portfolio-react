@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 import './Contact.css';
@@ -51,9 +52,9 @@ const Contact = () => {
                 title: 'Message Sent! ✉️',
                 text: "Thank you for reaching out! I'll get back to you within 24-48 hours.",
                 icon: 'success',
-                confirmButtonColor: '#c15f3c',
+                confirmButtonColor: '#FF6B00',
                 confirmButtonText: 'Great!',
-                timer: 3000
+                timer: 3500
             });
 
             setFormData({ name: '', email: '', message: '' });
@@ -64,7 +65,7 @@ const Contact = () => {
                 title: 'Message Received!',
                 text: 'Thank you! Please contact me directly at shoibsahmad@gmail.com',
                 icon: 'info',
-                confirmButtonColor: '#c15f3c'
+                confirmButtonColor: '#FF6B00'
             });
         } finally {
             setIsSubmitting(false);
@@ -74,62 +75,125 @@ const Contact = () => {
     return (
         <section id="contact" className="contact">
             <div className="container">
-                <h2 className="section-title">Contact</h2>
+                <div className="contact-header text-center">
+                    <div className="contact-badge">
+                        <span className="badge-dot"></span>
+                        GET IN TOUCH
+                    </div>
+                    <h2 className="section-title">
+                        Let's Build Something <span className="hero-title-accent">Exceptional.</span>
+                    </h2>
+                    <p className="section-subtitle">
+                        I'm always open to discussing new opportunities, high-impact projects, or AI engineering collaborations.
+                    </p>
+                </div>
+
                 <div className="contact-content">
-                    <div className="contact-info animate-on-scroll">
-                        <h3>Let's Connect</h3>
-                        <p>I'm always open to discussing new opportunities, innovative projects, and collaborations.</p>
+                    <motion.div
+                        className="contact-info spotlight-card"
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <h3>Connect Directly</h3>
+                        <p>Have an ambitious project in mind, an open role, or need architectural consultation? Reach out across any channel.</p>
+                        
                         <div className="contact-details">
-                            <div className="contact-detail-item">
-                                <i className="fas fa-envelope"></i>
+                            <motion.a
+                                href="mailto:shoibsahmad@gmail.com"
+                                className="contact-detail-item"
+                                whileHover={{ x: 6 }}
+                                transition={{ type: "spring", stiffness: 350 }}
+                            >
+                                <div className="contact-icon-box">
+                                    <i className="fas fa-envelope"></i>
+                                </div>
                                 <div>
                                     <h4>Email</h4>
                                     <p>shoibsahmad@gmail.com</p>
                                 </div>
-                            </div>
+                            </motion.a>
 
-                            <div className="contact-detail-item">
-                                <i className="fas fa-map-marker-alt"></i>
+                            <motion.div
+                                className="contact-detail-item"
+                                whileHover={{ x: 6 }}
+                                transition={{ type: "spring", stiffness: 350 }}
+                            >
+                                <div className="contact-icon-box">
+                                    <i className="fas fa-map-marker-alt"></i>
+                                </div>
                                 <div>
                                     <h4>Location</h4>
-                                    <p>Lucknow, India</p>
+                                    <p>Lucknow, India (Open to Remote / Relocation)</p>
                                 </div>
-                            </div>
-                            <div className="contact-detail-item">
-                                <i className="fab fa-linkedin"></i>
+                            </motion.div>
+
+                            <motion.a
+                                href="https://www.linkedin.com/in/shoib-ahmad-788096219/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="contact-detail-item"
+                                whileHover={{ x: 6 }}
+                                transition={{ type: "spring", stiffness: 350 }}
+                            >
+                                <div className="contact-icon-box">
+                                    <i className="fab fa-linkedin"></i>
+                                </div>
                                 <div>
                                     <h4>LinkedIn</h4>
-                                    <p><a href="https://www.linkedin.com/in/shoib-ahmad-788096219/" target="_blank" rel="noopener noreferrer">linkedin.com/in/shoib-ahmad-788096219/</a></p>
+                                    <p>linkedin.com/in/shoib-ahmad</p>
                                 </div>
-                            </div>
-                            <div className="contact-detail-item">
-                                <i className="fab fa-whatsapp"></i>
+                            </motion.a>
+
+                            <motion.a
+                                href="https://wa.me/918853741966"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="contact-detail-item"
+                                whileHover={{ x: 6 }}
+                                transition={{ type: "spring", stiffness: 350 }}
+                            >
+                                <div className="contact-icon-box">
+                                    <i className="fab fa-whatsapp"></i>
+                                </div>
                                 <div>
                                     <h4>WhatsApp</h4>
-                                    <p><a href="https://wa.me/918853741966" target="_blank" rel="noopener noreferrer">+91 8853741966</a></p>
+                                    <p>+91 8853741966</p>
                                 </div>
-                            </div>
+                            </motion.a>
                         </div>
-                    </div>
-                    <form id="contact-form" className="contact-form animate-on-scroll" style={{ transitionDelay: '200ms' }} onSubmit={handleSubmit}>
-                        <h3>Send a Message</h3>
+                    </motion.div>
+
+                    <motion.form
+                        id="contact-form"
+                        className="contact-form spotlight-card"
+                        onSubmit={handleSubmit}
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.15 }}
+                    >
+                        <h3>Send a Direct Message</h3>
                         <div className="form-group">
-                            <label htmlFor="name">Name</label>
+                            <label htmlFor="name">Your Name</label>
                             <input
                                 type="text"
                                 id="name"
                                 name="name"
+                                placeholder="e.g. Alex Morgan"
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="email">Email Address</label>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
+                                placeholder="alex@company.com"
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
@@ -141,27 +205,26 @@ const Contact = () => {
                                 id="message"
                                 name="message"
                                 rows="5"
+                                placeholder="Tell me about your project, timeline, or idea..."
                                 value={formData.message}
                                 onChange={handleChange}
                                 required
                             ></textarea>
                         </div>
-                        <button
+                        <motion.button
                             type="submit"
-                            className="btn btn-primary"
+                            className="btn btn-primary contact-submit-btn"
                             disabled={isSubmitting}
-                            style={{
-                                transform: isSubmitting ? 'scale(0.95)' : 'scale(1)',
-                                transition: 'all 0.3s'
-                            }}
+                            whileHover={{ scale: 1.02, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
                         >
                             {isSubmitting ? (
-                                <><i className="fas fa-spinner fa-spin"></i> Sending...</>
+                                <><i className="fas fa-spinner fa-spin"></i> Sending Message...</>
                             ) : (
-                                'Send Message'
+                                <><i className="fas fa-paper-plane"></i> Send Message</>
                             )}
-                        </button>
-                    </form>
+                        </motion.button>
+                    </motion.form>
                 </div>
             </div>
         </section>

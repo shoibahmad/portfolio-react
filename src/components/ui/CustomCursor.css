@@ -1,0 +1,76 @@
+/* Custom Magnetic Cursor Styles */
+.custom-cursor-container {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.custom-cursor-container.visible {
+    opacity: 1;
+}
+
+.cursor-dot {
+    position: fixed;
+    top: -4px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary, #FF6B00);
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform;
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 0 10px rgba(255, 107, 0, 0.6);
+}
+
+.cursor-ring {
+    position: fixed;
+    top: -20px;
+    left: -20px;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid rgba(255, 107, 0, 0.5);
+    background: rgba(255, 107, 0, 0.04);
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform;
+    transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                height 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                border-color 0.3s ease, 
+                background 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 107, 0, 0.15);
+}
+
+/* Hover State */
+.custom-cursor-container.hovered .cursor-ring {
+    top: -28px;
+    left: -28px;
+    width: 56px;
+    height: 56px;
+    border-color: rgba(255, 107, 0, 0.85);
+    background: rgba(255, 107, 0, 0.12);
+    backdrop-filter: blur(2px);
+    box-shadow: 0 0 25px rgba(255, 107, 0, 0.35);
+}
+
+.custom-cursor-container.hovered .cursor-dot {
+    opacity: 0.6;
+    transform: scale(0.6);
+}
+
+/* Clicking State */
+.custom-cursor-container.clicking .cursor-ring {
+    transform: scale(0.85);
+    border-color: #E05E00;
+    background: rgba(255, 107, 0, 0.25);
+}
+
+@media (pointer: coarse), (max-width: 768px) {
+    .custom-cursor-container {
+        display: none !important;
+    }
+}

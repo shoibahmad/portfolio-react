@@ -1,0 +1,34 @@
+/* 3D Hero Floating Canvas Container */
+.hero-3d-canvas-container {
+    position: absolute;
+    top: 50%;
+    right: -5%;
+    transform: translateY(-50%);
+    width: 650px;
+    height: 650px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.65;
+}
+
+.hero-3d-canvas-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+@media (max-width: 1024px) {
+    .hero-3d-canvas-container {
+        width: 450px;
+        height: 450px;
+        right: 50%;
+        transform: translate(50%, -50%);
+        opacity: 0.35;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero-3d-canvas-container {
+        width: 320px;
+        height: 320px;
+    }
+}

@@ -1,28 +1,12 @@
 /* =========================================================
-   3D Exploded-Layer Architecture Stack (PRDUCK Aesthetic)
+   3D Exploded-Layer Architecture Stack (Fluid & Non-Sticky)
    ========================================================= */
 
 .exploded-3d-stack-section {
-    min-height: 240vh;
+    padding: 7rem 0 5rem;
     background: var(--bg-primary);
     position: relative;
-}
-
-.sticky-3d-viewport {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
     overflow: hidden;
-    padding: 2rem 0;
-}
-
-.stack-viewport-inner {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
 }
 
 /* Header */

@@ -1,6 +1,62 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import './InteractiveResume.css';
 import Spotlight from './ui/Spotlight';
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.12,
+            delayChildren: 0.1
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 24, scale: 0.98 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: { duration: 0.55, ease: [0.25, 1, 0.5, 1] }
+    }
+};
+
+// 3D Tilt Card Component
+const TiltCard = ({ children, className = "" }) => {
+    const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
+
+    const handleMouseMove = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        setTilt({
+            rotateX: -(y / rect.height) * 8,
+            rotateY: (x / rect.width) * 8
+        });
+    };
+
+    const handleMouseLeave = () => {
+        setTilt({ rotateX: 0, rotateY: 0 });
+    };
+
+    return (
+        <motion.div
+            className={`resume-card spotlight-card ${className}`}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            animate={{ rotateX: tilt.rotateX, rotateY: tilt.rotateY }}
+            transition={{ type: "spring", stiffness: 350, damping: 25 }}
+            style={{ transformStyle: 'preserve-3d' }}
+            variants={itemVariants}
+            whileHover={{ y: -4, scale: 1.01 }}
+        >
+            {children}
+        </motion.div>
+    );
+};
 
 const InteractiveResume = () => {
     const [activeSection, setActiveSection] = useState('all');
@@ -88,55 +144,96 @@ const InteractiveResume = () => {
         );
     };
 
-    const allSkills = Object.values(resumeData.skills).flat();
-
     return (
         <section className="interactive-resume">
             <div className="container">
-                <h2 className="section-title">Interactive Resume</h2>
-                <p className="section-subtitle">
-                    Click to filter and explore my professional journey
-                </p>
+                {/* Section Header with floating badges */}
+                <motion.div
+                    className="resume-header text-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <div className="resume-badge">
+                        <span className="badge-dot"></span>
+                        CURRICULUM VITAE & CAREER
+                    </div>
+                    <h2 className="section-title">
+                        Interactive <span className="hero-title-accent">Career Timeline.</span>
+                    </h2>
+                    <p className="section-subtitle">
+                        Filter, explore, and inspect each milestone, university degree, and technical capability.
+                    </p>
+                </motion.div>
 
-                {/* Filter Buttons */}
-                <div className="resume-filters">
+                {/* Filter Buttons with Spring Animations */}
+                <motion.div
+                    className="resume-filters"
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                >
                     {filterOptions.map(option => (
-                        <button
+                        <motion.button
                             key={option.id}
                             className={`resume-filter-btn ${activeSection === option.id ? 'active' : ''}`}
                             onClick={() => setActiveSection(option.id)}
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            whileTap={{ scale: 0.95 }}
                         >
                             <i className={option.icon}></i>
                             <span>{option.label}</span>
-                        </button>
+                        </motion.button>
                     ))}
-                </div>
+                </motion.div>
 
-                {/* Skill Tags Filter */}
-                {selectedSkills.length > 0 && (
-                    <div className="active-filters">
-                        <span className="filter-label">Filtering by:</span>
-                        {selectedSkills.map(skill => (
-                            <span key={skill} className="active-filter-tag">
-                                {skill}
-                                <button onClick={() => toggleSkillFilter(skill)}>
-                                    <i className="fas fa-times"></i>
-                                </button>
-                            </span>
-                        ))}
-                    </div>
-                )}
+                {/* Active Skill Filters Pill */}
+                <AnimatePresence>
+                    {selectedSkills.length > 0 && (
+                        <motion.div
+                            className="active-filters"
+                            initial={{ opacity: 0, height: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, height: 'auto', scale: 1 }}
+                            exit={{ opacity: 0, height: 0, scale: 0.95 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <span className="filter-label">Filtering by:</span>
+                            {selectedSkills.map(skill => (
+                                <motion.span
+                                    key={skill}
+                                    className="active-filter-tag"
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.8 }}
+                                >
+                                    {skill}
+                                    <button onClick={() => toggleSkillFilter(skill)}>
+                                        <i className="fas fa-times"></i>
+                                    </button>
+                                </motion.span>
+                            ))}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 <Spotlight className="resume-content">
                     {/* Experience Section */}
                     {(activeSection === 'all' || activeSection === 'experience') && (
-                        <div className="resume-section">
-                            <h3 className="resume-section-title">
+                        <motion.div
+                            className="resume-section"
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: "-50px" }}
+                        >
+                            <motion.h3 className="resume-section-title" variants={itemVariants}>
                                 <i className="fas fa-briefcase"></i>
-                                Experience
-                            </h3>
+                                Professional Experience
+                            </motion.h3>
                             {resumeData.experience.map((exp, idx) => (
-                                <div key={idx} className="resume-card spotlight-card">
+                                <TiltCard key={idx}>
                                     <div className="resume-card-header">
                                         <div>
                                             <h4>{exp.title}</h4>
@@ -151,29 +248,37 @@ const InteractiveResume = () => {
                                     <p className="description">{exp.description}</p>
                                     <div className="resume-skills">
                                         {exp.skills.map((skill, i) => (
-                                            <span
+                                            <motion.span
                                                 key={i}
                                                 className={`skill-tag ${selectedSkills.includes(skill) ? 'highlighted' : ''}`}
                                                 onClick={() => toggleSkillFilter(skill)}
+                                                whileHover={{ scale: 1.08, y: -2 }}
+                                                whileTap={{ scale: 0.95 }}
                                             >
                                                 {skill}
-                                            </span>
+                                            </motion.span>
                                         ))}
                                     </div>
-                                </div>
+                                </TiltCard>
                             ))}
-                        </div>
+                        </motion.div>
                     )}
 
                     {/* Education Section */}
                     {(activeSection === 'all' || activeSection === 'education') && (
-                        <div className="resume-section">
-                            <h3 className="resume-section-title">
+                        <motion.div
+                            className="resume-section"
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: "-50px" }}
+                        >
+                            <motion.h3 className="resume-section-title" variants={itemVariants}>
                                 <i className="fas fa-graduation-cap"></i>
-                                Education
-                            </h3>
+                                Academic Education
+                            </motion.h3>
                             {resumeData.education.map((edu, idx) => (
-                                <div key={idx} className="resume-card spotlight-card">
+                                <TiltCard key={idx}>
                                     <div className="resume-card-header">
                                         <div>
                                             <h4>{edu.degree}</h4>
@@ -185,35 +290,61 @@ const InteractiveResume = () => {
                                         <i className="fas fa-map-marker-alt"></i>
                                         {edu.location}
                                     </p>
-                                </div>
+                                    <div className="resume-skills">
+                                        {edu.skills && edu.skills.map((skill, i) => (
+                                            <motion.span
+                                                key={i}
+                                                className="skill-tag"
+                                                whileHover={{ scale: 1.08, y: -2 }}
+                                            >
+                                                {skill}
+                                            </motion.span>
+                                        ))}
+                                    </div>
+                                </TiltCard>
                             ))}
-                        </div>
+                        </motion.div>
                     )}
 
                     {/* Skills Section */}
                     {(activeSection === 'all' || activeSection === 'skills') && (
-                        <div className="resume-section">
-                            <h3 className="resume-section-title">
+                        <motion.div
+                            className="resume-section"
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: "-50px" }}
+                        >
+                            <motion.h3 className="resume-section-title" variants={itemVariants}>
                                 <i className="fas fa-code"></i>
-                                Technical Skills
-                            </h3>
-                            {Object.entries(resumeData.skills).map(([category, skills]) => (
-                                <div key={category} className="skills-category spotlight-card">
-                                    <h4 className="skills-category-title">{category}</h4>
-                                    <div className="resume-skills">
-                                        {skills.map((skill, i) => (
-                                            <span
-                                                key={i}
-                                                className={`skill-tag ${selectedSkills.includes(skill) ? 'highlighted' : ''}`}
-                                                onClick={() => toggleSkillFilter(skill)}
-                                            >
-                                                {skill}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                                Technical Skills Matrix
+                            </motion.h3>
+                            <div className="skills-category-grid">
+                                {Object.entries(resumeData.skills).map(([category, skills]) => (
+                                    <motion.div
+                                        key={category}
+                                        className="skills-category spotlight-card"
+                                        variants={itemVariants}
+                                        whileHover={{ y: -4 }}
+                                    >
+                                        <h4 className="skills-category-title">{category}</h4>
+                                        <div className="resume-skills">
+                                            {skills.map((skill, i) => (
+                                                <motion.span
+                                                    key={i}
+                                                    className={`skill-tag ${selectedSkills.includes(skill) ? 'highlighted' : ''}`}
+                                                    onClick={() => toggleSkillFilter(skill)}
+                                                    whileHover={{ scale: 1.08, y: -2 }}
+                                                    whileTap={{ scale: 0.95 }}
+                                                >
+                                                    {skill}
+                                                </motion.span>
+                                            ))}
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </motion.div>
                     )}
                 </Spotlight>
             </div>

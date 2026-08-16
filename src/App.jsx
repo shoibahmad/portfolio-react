@@ -20,11 +20,15 @@ import Breadcrumb from './components/Breadcrumb';
 import ScrollProgress from './components/ScrollProgress';
 import InteractiveResume from './components/InteractiveResume';
 import TerminalModal from './components/TerminalModal';
+import Scroll3DShowcase from './components/Scroll3DShowcase';
+import AnimatedBackground from './components/ui/AnimatedBackground';
+import CustomCursor from './components/ui/CustomCursor';
+import ThreeDAnimalFollower from './components/ui/ThreeDAnimalFollower';
 
 const pageVariants = {
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] } },
-  exit: { opacity: 0, y: -8, transition: { duration: 0.25, ease: [0.4, 0, 0.2, 1] } }
+  initial: { opacity: 0, y: 16, filter: 'blur(3px)' },
+  animate: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.45, ease: [0.25, 1, 0.5, 1] } },
+  exit: { opacity: 0, y: -12, filter: 'blur(3px)', transition: { duration: 0.25, ease: [0.25, 1, 0.5, 1] } }
 };
 
 const PageWrapper = ({ children }) => (
@@ -33,7 +37,7 @@ const PageWrapper = ({ children }) => (
     initial="initial"
     animate="animate"
     exit="exit"
-    style={{ width: '100%' }}
+    style={{ width: '100%', position: 'relative', zIndex: 1 }}
     onAnimationComplete={() => {
       // Re-trigger intersection observer after page transition
       const hiddenElements = document.querySelectorAll('section, .animate-on-scroll');
@@ -47,6 +51,7 @@ const PageWrapper = ({ children }) => (
 const HomePage = () => (
   <PageWrapper>
     <Hero />
+    <Scroll3DShowcase />
     <Publications />
     <TechMarquee />
   </PageWrapper>
@@ -97,7 +102,7 @@ function App() {
       hiddenElements.forEach((el) => {
         observer.observe(el);
       });
-    }, 500);
+    }, 400);
 
     return () => {
       clearTimeout(timeout);
@@ -107,6 +112,9 @@ function App() {
 
   return (
     <div className="App">
+      <CustomCursor />
+      <ThreeDAnimalFollower />
+      <AnimatedBackground />
       <ScrollProgress />
       <Header onToggleTerminal={() => setIsTerminalOpen(!isTerminalOpen)} />
       <Breadcrumb />
@@ -128,7 +136,6 @@ function App() {
       <LegalModal isOpen={legalModalOpen} type={legalModalType} onClose={closeLegalModal} />
       <TerminalModal isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
       <ScrollToTop />
-
     </div>
   );
 }

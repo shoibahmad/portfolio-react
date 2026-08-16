@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import './Scroll3DShowcase.css';
 
@@ -19,7 +19,7 @@ const stackLayers = [
             { label: "UX Flow", value: "60 FPS" },
             { label: "Responsiveness", value: "Mobile First" }
         ],
-        zOffset: 160
+        zOffset: 140
     },
     {
         id: "layer-3",
@@ -36,7 +36,7 @@ const stackLayers = [
             { label: "Embeddings", value: "768-dim" },
             { label: "AI Models", value: "Gemini / NLP" }
         ],
-        zOffset: 50
+        zOffset: 45
     },
     {
         id: "layer-2",
@@ -53,7 +53,7 @@ const stackLayers = [
             { label: "Concurrency", value: "Async AsyncIO" },
             { label: "Vector Store", value: "PostgreSQL" }
         ],
-        zOffset: -50
+        zOffset: -45
     },
     {
         id: "layer-1",
@@ -70,7 +70,7 @@ const stackLayers = [
             { label: "Uptime", value: "99.9%" },
             { label: "Environment", value: "Linux-First" }
         ],
-        zOffset: -160
+        zOffset: -140
     }
 ];
 
@@ -80,114 +80,115 @@ const Scroll3DShowcase = () => {
 
     const { scrollYProgress } = useScroll({
         target: sectionRef,
-        offset: ["start start", "end end"]
+        offset: ["start end", "end start"]
     });
 
-    // Transforms for 3D stack explosion
-    const explosionFactor = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.15, 1, 1, 0.15]);
-    const stackRotateX = useTransform(scrollYProgress, [0, 0.5, 1], [58, 52, 45]);
-    const stackRotateZ = useTransform(scrollYProgress, [0, 0.5, 1], [-32, -28, -22]);
+    // Smooth transforms without viewport locking
+    const explosionFactor = useTransform(scrollYProgress, [0.15, 0.5, 0.85], [0.2, 1, 0.4]);
+    const stackRotateX = useTransform(scrollYProgress, [0.15, 0.5, 0.85], [56, 50, 44]);
+    const stackRotateZ = useTransform(scrollYProgress, [0.15, 0.5, 0.85], [-30, -25, -20]);
 
     return (
         <section ref={sectionRef} className="exploded-3d-stack-section">
-            <div className="sticky-3d-viewport">
-                <div className="container stack-viewport-inner">
-                    {/* Header */}
-                    <div className="stack-header text-center">
-                        <div className="stack-badge">
-                            <span className="badge-dot"></span>
-                            3D ARCHITECTURAL DECONSTRUCTION
-                        </div>
-                        <h2 className="section-title">
-                            The Full-Stack <span className="hero-title-accent">System Prism.</span>
-                        </h2>
-                        <p className="section-subtitle">
-                            Scroll down to explode the 3D software architecture and explore how each layer is engineered.
-                        </p>
+            <div className="container">
+                {/* Header */}
+                <div className="stack-header text-center">
+                    <div className="stack-badge">
+                        <span className="badge-dot"></span>
+                        3D ARCHITECTURAL DECONSTRUCTION
+                    </div>
+                    <h2 className="section-title">
+                        The Full-Stack <span className="hero-title-accent">System Prism.</span>
+                    </h2>
+                    <p className="section-subtitle">
+                        Scroll down to explode the 3D software architecture and inspect how each layer is engineered.
+                    </p>
+                </div>
+
+                {/* Interactive 3D Arena */}
+                <div className="stack-arena-grid">
+                    {/* 3D Exploded Canvas Arena */}
+                    <div className="stack-3d-canvas-container">
+                        <motion.div
+                            className="stack-isometric-prism"
+                            style={{
+                                rotateX: stackRotateX,
+                                rotateZ: stackRotateZ,
+                                transformStyle: "preserve-3d"
+                            }}
+                        >
+                            {stackLayers.map((layer, index) => {
+                                const isSelected = index === selectedLayerIndex;
+
+                                return (
+                                    <motion.div
+                                        key={layer.id}
+                                        className={`isometric-layer-plate ${isSelected ? 'selected' : ''}`}
+                                        onClick={() => setSelectedLayerIndex(index)}
+                                        style={{
+                                            translateZ: useTransform(
+                                                explosionFactor,
+                                                v => `${layer.zOffset * v * 1.35}px`
+                                            ),
+                                            borderColor: isSelected ? layer.color : '#E5DCD3',
+                                            transformStyle: "preserve-3d"
+                                        }}
+                                        whileHover={{ scale: 1.05 }}
+                                    >
+                                        {/* Plate Surface content */}
+                                        <div className="plate-surface">
+                                            <div className="plate-header">
+                                                <span className="plate-num" style={{ color: layer.color }}>{layer.number}</span>
+                                                <span className="plate-title">{layer.name}</span>
+                                                <i className={`${layer.icon} plate-icon`} style={{ color: layer.color }}></i>
+                                            </div>
+                                            <div className="plate-chips">
+                                                {layer.tech.slice(0, 3).map((t, idx) => (
+                                                    <span key={idx} className="plate-chip">{t}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        {/* Plate 3D Extrusion Sides */}
+                                        <div className="plate-edge edge-front"></div>
+                                        <div className="plate-edge edge-side"></div>
+                                    </motion.div>
+                                );
+                            })}
+
+                            {/* Central 3D Energy Core Laser */}
+                            <div className="prism-core-laser"></div>
+                        </motion.div>
+
+                        {/* 3D Perspective Footprint Shadow */}
+                        <div className="stack-shadow-base"></div>
                     </div>
 
-                    {/* Interactive 3D Arena */}
-                    <div className="stack-arena-grid">
-                        {/* 3D Exploded Canvas Arena */}
-                        <div className="stack-3d-canvas-container">
-                            <motion.div
-                                className="stack-isometric-prism"
-                                style={{
-                                    rotateX: stackRotateX,
-                                    rotateZ: stackRotateZ,
-                                    transformStyle: "preserve-3d"
-                                }}
-                            >
-                                {stackLayers.map((layer, index) => {
-                                    const isSelected = index === selectedLayerIndex;
-
-                                    return (
-                                        <motion.div
-                                            key={layer.id}
-                                            className={`isometric-layer-plate ${isSelected ? 'selected' : ''}`}
-                                            onClick={() => setSelectedLayerIndex(index)}
-                                            style={{
-                                                translateZ: useTransform(
-                                                    explosionFactor,
-                                                    v => `${layer.zOffset * v * 1.5}px`
-                                                ),
-                                                borderColor: isSelected ? layer.color : '#E5DCD3',
-                                                transformStyle: "preserve-3d"
-                                            }}
-                                            whileHover={{ scale: 1.05 }}
-                                        >
-                                            {/* Plate Surface content */}
-                                            <div className="plate-surface">
-                                                <div className="plate-header">
-                                                    <span className="plate-num" style={{ color: layer.color }}>{layer.number}</span>
-                                                    <span className="plate-title">{layer.name}</span>
-                                                    <i className={`${layer.icon} plate-icon`} style={{ color: layer.color }}></i>
-                                                </div>
-                                                <div className="plate-chips">
-                                                    {layer.tech.slice(0, 3).map((t, idx) => (
-                                                        <span key={idx} className="plate-chip">{t}</span>
-                                                    ))}
-                                                </div>
-                                            </div>
-
-                                            {/* Plate 3D Extrusion Sides */}
-                                            <div className="plate-edge edge-front"></div>
-                                            <div className="plate-edge edge-side"></div>
-                                        </motion.div>
-                                    );
-                                })}
-
-                                {/* Central 3D Energy Core Laser */}
-                                <div className="prism-core-laser"></div>
-                            </motion.div>
-
-                            {/* 3D Perspective Footprint Shadow */}
-                            <div className="stack-shadow-base"></div>
+                    {/* Right: Layer Inspector HUD */}
+                    <div className="stack-hud-inspector">
+                        <div className="hud-layer-selector">
+                            {stackLayers.map((layer, index) => (
+                                <button
+                                    key={layer.id}
+                                    className={`hud-selector-btn ${index === selectedLayerIndex ? 'active' : ''}`}
+                                    onClick={() => setSelectedLayerIndex(index)}
+                                >
+                                    <span className="hud-num">{layer.number}</span>
+                                    <span className="hud-name">{layer.name.split(' ')[0]}</span>
+                                </button>
+                            ))}
                         </div>
 
-                        {/* Right: Layer Inspector HUD */}
-                        <div className="stack-hud-inspector">
-                            <div className="hud-layer-selector">
-                                {stackLayers.map((layer, index) => (
-                                    <button
-                                        key={layer.id}
-                                        className={`hud-selector-btn ${index === selectedLayerIndex ? 'active' : ''}`}
-                                        onClick={() => setSelectedLayerIndex(index)}
-                                    >
-                                        <span className="hud-num">{layer.number}</span>
-                                        <span className="hud-name">{layer.name.split(' ')[0]}</span>
-                                    </button>
-                                ))}
-                            </div>
-
-                            {/* Active Layer Details Card */}
+                        {/* Active Layer Details Card */}
+                        <AnimatePresence mode="wait">
                             {stackLayers[selectedLayerIndex] && (
                                 <motion.div
                                     key={stackLayers[selectedLayerIndex].id}
                                     className="hud-details-card"
                                     initial={{ opacity: 0, y: 15 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.3 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    transition={{ duration: 0.25 }}
                                 >
                                     <div className="hud-card-top">
                                         <span className="hud-tag" style={{ color: stackLayers[selectedLayerIndex].color }}>
@@ -229,7 +230,7 @@ const Scroll3DShowcase = () => {
                                     </div>
                                 </motion.div>
                             )}
-                        </div>
+                        </AnimatePresence>
                     </div>
                 </div>
             </div>

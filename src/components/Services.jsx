@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import './Services.css';
 import Spotlight from './ui/Spotlight';
 
@@ -6,56 +7,60 @@ const Services = () => {
     const services = [
         {
             icon: "fa-mobile-screen-button",
-            title: "Flutter Development",
-            description: "Building high-performance, cross-platform mobile applications for iOS and Android using Flutter. specialized in beautiful UIs and smooth animations."
+            title: "Flutter & Mobile Apps",
+            tag: "CROSS-PLATFORM",
+            description: "Building high-performance, cross-platform mobile applications for iOS and Android using Flutter. Specialized in beautiful glassmorphism UIs and 60fps smooth animations."
         },
         {
             icon: "fa-react",
-            title: "React Development",
-            description: "Developing dynamic, responsive, and fast-loading single-page web applications (SPAs) with modern React.js ecosystems, hooks, and state management."
+            title: "React & Next.js Architecture",
+            tag: "FULL STACK WEB",
+            description: "Developing dynamic, responsive, and fast-loading single-page web applications (SPAs) with modern React 19 / Next.js ecosystems, custom hooks, and scalable state management."
         },
         {
-            icon: "fa-code",
-            title: "Web Development",
-            description: "Full-stack web solutions utilizing modern technologies. From responsive landing pages to complex backend integrations and API development."
+            icon: "fa-robot",
+            title: "GenAI & Agentic Systems",
+            tag: "INTELLIGENT AI",
+            description: "End-to-end AI orchestration: LangChain RAG pipelines, pgvector high-dimensional similarity search, multi-agent workflows, and custom Gemini / LLM integrations."
         }
     ];
-
-    const handleMouseMove = (e) => {
-        const { currentTarget: target } = e;
-        const rect = target.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        target.style.setProperty('--mouse-x', `${x}px`);
-        target.style.setProperty('--mouse-y', `${y}px`);
-    };
 
     return (
         <section id="services" className="services">
             <div className="container">
                 <div className="section-header text-center">
-                    <h2 className="section-title">Research Interests</h2>
-                    <p className="section-subtitle">Areas of technical expertise and exploration</p>
+                    <div className="services-badge">
+                        <span className="badge-dot"></span>
+                        EXPERTISE & SERVICES
+                    </div>
+                    <h2 className="section-title">
+                        Solutions Engineered with <span className="hero-title-accent">Precision.</span>
+                    </h2>
+                    <p className="section-subtitle">Areas of technical mastery, architecture, and production delivery</p>
                 </div>
                 <Spotlight className="services-grid">
                     {services.map((service, index) => (
-                        <div
+                        <motion.div
                             key={index}
-                            className="service-card research-card spotlight-card animate-on-scroll"
-                            style={{ transitionDelay: `${index * 150}ms` }}
+                            className="service-card research-card spotlight-card"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.15 }}
+                            whileHover={{ y: -8, scale: 1.02 }}
                         >
+                            <div className="card-border-glow"></div>
+                            <div className="service-tag">{service.tag}</div>
                             <div className="service-icon">
                                 <i className={`fas ${service.icon}`}></i>
                             </div>
                             <h3>{service.title}</h3>
                             <p>{service.description}</p>
                             <div className="card-footer-line"></div>
-                        </div>
+                        </motion.div>
                     ))}
                 </Spotlight>
             </div>
-
         </section>
     );
 };

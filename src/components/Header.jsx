@@ -5,7 +5,6 @@ import './Header.css';
 const Header = ({ onToggleTerminal }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [mode, setMode] = useState('human'); // 'human' | 'machine'
 
     useEffect(() => {
         const handleScroll = () => {
@@ -37,37 +36,49 @@ const Header = ({ onToggleTerminal }) => {
     return (
         <header className={`header-wrapper ${isScrolled ? 'scrolled' : ''}`}>
             <div className="header-pill">
-                {/* Left: Brand + Toggle Pill */}
+                {/* Left: Brand */}
                 <div className="header-left">
-                    <Link to="/" className="brand-logo" onClick={handleNavClick}>
-                        <svg className="duck-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M12 3a6 6 0 0 0-6 6v1a5 5 0 0 0 5 5h1a4 4 0 0 0 4-4v-1a5 5 0 0 0-5-5z" fill="#FFFFFF"/>
-                            <circle cx="9" cy="8" r="1" fill="#111111"/>
-                            <path d="M4 14c1 2 4 4 8 4s7-2 8-4" />
-                            <path d="M7 11h-3a1 1 0 0 0-1 1c0 1 1 2 3 2" fill="#FF6B00"/>
+                    <Link to="/" className="brand-logo" onClick={handleNavClick} aria-label="Shoib Ahmad - Home">
+                        <svg className="brand-logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="logo-bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stopColor="#242428" />
+                                    <stop offset="100%" stopColor="#121214" />
+                                </linearGradient>
+                                <linearGradient id="logo-border-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stopColor="rgba(255, 107, 0, 0.7)" />
+                                    <stop offset="50%" stopColor="rgba(255, 255, 255, 0.15)" />
+                                    <stop offset="100%" stopColor="rgba(255, 107, 0, 0.3)" />
+                                </linearGradient>
+                                <linearGradient id="logo-s-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stopColor="#FFA14A" />
+                                    <stop offset="100%" stopColor="#FF5E00" />
+                                </linearGradient>
+                                <linearGradient id="logo-accent-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stopColor="#FFFFFF" />
+                                    <stop offset="100%" stopColor="#FFB070" />
+                                </linearGradient>
+                            </defs>
+                            {/* Background Squircle */}
+                            <rect x="1.5" y="1.5" width="33" height="33" rx="9.5" fill="url(#logo-bg-grad)" stroke="url(#logo-border-grad)" strokeWidth="1.2" className="logo-base-rect" />
+                            {/* Stylized S Monogram */}
+                            <path
+                                d="M24 10.5C24 9.12 22.88 8 21.5 8H15C12.24 8 10 10.24 10 13C10 15.76 12.24 18 15 18H21C23.76 18 26 20.24 26 23C26 25.76 23.76 28 21 28H14.5C13.12 28 12 26.88 12 25.5"
+                                stroke="url(#logo-s-grad-1)"
+                                strokeWidth="3"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                            {/* Modern Glowing Nodes */}
+                            <circle cx="21.5" cy="8" r="1.5" fill="url(#logo-accent-grad)" />
+                            <circle cx="14.5" cy="28" r="1.5" fill="url(#logo-accent-grad)" />
+                            <circle cx="18" cy="18" r="1.2" fill="#FFFFFF" opacity="0.9" />
+                            {/* Terminal Angle Accents */}
+                            <path d="M6.5 16.5L8 18L6.5 19.5" stroke="rgba(255, 107, 0, 0.45)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M29.5 16.5L28 18L29.5 19.5" stroke="rgba(255, 107, 0, 0.45)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                        <span className="logo-text">SHOIB</span>
+                        <span className="logo-text">SHOIB<span className="logo-accent-dot">.</span></span>
                     </Link>
-
-                    <div className="mode-toggle-pill">
-                        <button
-                            type="button"
-                            className={`toggle-option ${mode === 'human' ? 'active' : ''}`}
-                            onClick={() => setMode('human')}
-                        >
-                            HUMAN
-                        </button>
-                        <button
-                            type="button"
-                            className={`toggle-option ${mode === 'machine' ? 'active' : ''}`}
-                            onClick={() => {
-                                setMode('machine');
-                                if (onToggleTerminal) onToggleTerminal();
-                            }}
-                        >
-                            MACHINE
-                        </button>
-                    </div>
                 </div>
 
                 {/* Center: Nav Menu */}
