@@ -21,14 +21,20 @@ import ScrollProgress from './components/ScrollProgress';
 import InteractiveResume from './components/InteractiveResume';
 import TerminalModal from './components/TerminalModal';
 import Scroll3DShowcase from './components/Scroll3DShowcase';
+import AboutWalkthrough from './components/AboutWalkthrough';
 import AnimatedBackground from './components/ui/AnimatedBackground';
 import CustomCursor from './components/ui/CustomCursor';
-import ThreeDAnimalFollower from './components/ui/ThreeDAnimalFollower';
+import Reveal3D from './components/ui/Reveal3D';
+import ImmersiveBackground from './components/three/ImmersiveBackground';
 
+// No `filter` here on purpose. Framer leaves the settled value as
+// `filter: blur(0px)`, and any non-`none` filter makes the element a containing
+// block — which breaks `position: sticky` in the scroll-pinned walkthrough below.
+// Dropping it also removes a full-page filter pass on every route change.
 const pageVariants = {
-  initial: { opacity: 0, y: 16, filter: 'blur(3px)' },
-  animate: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.45, ease: [0.25, 1, 0.5, 1] } },
-  exit: { opacity: 0, y: -12, filter: 'blur(3px)', transition: { duration: 0.25, ease: [0.25, 1, 0.5, 1] } }
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.25, 1, 0.5, 1] } },
+  exit: { opacity: 0, y: -12, transition: { duration: 0.25, ease: [0.25, 1, 0.5, 1] } }
 };
 
 const PageWrapper = ({ children }) => (
@@ -50,19 +56,38 @@ const PageWrapper = ({ children }) => (
 
 const HomePage = () => (
   <PageWrapper>
+    {/* Hero drives its own scroll-linked parallax, so it is not wrapped */}
     <Hero />
-    <Scroll3DShowcase />
-    <Publications />
-    <TechMarquee />
+    {/* Deliberately NOT inside Reveal3D: that wrapper sets `perspective` and
+        animates a transform, and either one turns into a containing block that
+        breaks the sticky pinning this section depends on. */}
+    <AboutWalkthrough />
+    <Reveal3D preset="depth" amount={0.08}>
+      <Scroll3DShowcase />
+    </Reveal3D>
+    <Reveal3D preset="tilt">
+      <Publications />
+    </Reveal3D>
+    <Reveal3D preset="rise">
+      <TechMarquee />
+    </Reveal3D>
   </PageWrapper>
 );
 
 const ExperiencePage = () => (
   <PageWrapper>
-    <Experience />
-    <Publications />
-    <Education />
-    <Certifications />
+    <Reveal3D preset="tilt">
+      <Experience />
+    </Reveal3D>
+    <Reveal3D preset="flipL">
+      <Publications />
+    </Reveal3D>
+    <Reveal3D preset="flipR">
+      <Education />
+    </Reveal3D>
+    <Reveal3D preset="rise">
+      <Certifications />
+    </Reveal3D>
   </PageWrapper>
 );
 
@@ -113,8 +138,8 @@ function App() {
   return (
     <div className="App">
       <CustomCursor />
-      <ThreeDAnimalFollower />
       <AnimatedBackground />
+      <ImmersiveBackground />
       <ScrollProgress />
       <Header onToggleTerminal={() => setIsTerminalOpen(!isTerminalOpen)} />
       <Breadcrumb />
@@ -122,12 +147,14 @@ function App() {
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<PageWrapper><Services /></PageWrapper>} />
+            <Route path="/services" element={<PageWrapper><Reveal3D preset="tilt"><Services /></Reveal3D></PageWrapper>} />
+            {/* Projects is not 3D-wrapped: its directory pane is position:sticky, and an
+                animated-transform ancestor shifts the coordinate space sticky resolves against. */}
             <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
-            <Route path="/skills" element={<PageWrapper><Skills /></PageWrapper>} />
+            <Route path="/skills" element={<PageWrapper><Reveal3D preset="tilt"><Skills /></Reveal3D></PageWrapper>} />
             <Route path="/experience" element={<ExperiencePage />} />
-            <Route path="/resume" element={<PageWrapper><InteractiveResume /></PageWrapper>} />
-            <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+            <Route path="/resume" element={<PageWrapper><Reveal3D preset="rise"><InteractiveResume /></Reveal3D></PageWrapper>} />
+            <Route path="/contact" element={<PageWrapper><Reveal3D preset="rise"><Contact /></Reveal3D></PageWrapper>} />
           </Routes>
         </AnimatePresence>
       </main>

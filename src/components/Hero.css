@@ -6,8 +6,21 @@
     padding-top: 110px;
     padding-bottom: 4.5rem;
     position: relative;
-    background: linear-gradient(180deg, #F5C6A0 0%, #E89B70 35%, #F0B088 70%, var(--bg-primary) 100%);
+    background: var(--bg-gradient);
     overflow: hidden;
+}
+
+/* Soft horizon glow that hands the hero off to the next section */
+.hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 220px;
+    background: linear-gradient(180deg, transparent, var(--bg-primary) 88%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .hero::before {
@@ -31,6 +44,28 @@
     grid-template-columns: 1.45fr 1fr;
     gap: 3.5rem;
     align-items: center;
+}
+
+/* ---------------------------------------------------------------------------
+   No backdrop-filter inside .hero-content.
+
+   The container animates its opacity on scroll. Any opacity below 1 turns the
+   subtree into a single composited group, and a descendant's backdrop-filter
+   then samples that already-faded group rather than the page behind it — which
+   renders as a milky, washed-out panel instead of frosted glass.
+
+   These surfaces sit at 0.9+ alpha anyway, so an opaque background is visually
+   equivalent, immune to the grouping problem, and materially cheaper to paint.
+   --------------------------------------------------------------------------- */
+.hero-content .floating-badge,
+.hero-content .details-card,
+.hero-content .hero-role-carousel,
+.hero-content .local-time,
+.hero-content .availability-pulse,
+.hero-content .hero-cta-btn-alt,
+.hero-content .stat-item {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 /* Text Area */
@@ -121,7 +156,7 @@
     font-size: 0.85rem;
     color: var(--text-secondary);
     font-family: var(--font-mono, monospace);
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.9);
     padding: 0.3rem 0.8rem;
     border-radius: 20px;
     border: 1px solid rgba(224, 208, 192, 0.5);
@@ -136,7 +171,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    background: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.94);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 107, 0, 0.25);
     padding: 0.4rem 1.1rem;
@@ -228,7 +263,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.9);
     padding: 0.4rem 0.85rem;
     border-radius: 30px;
     border: 1px solid rgba(224, 208, 192, 0.6);
@@ -279,7 +314,7 @@
     font-size: 1rem;
     font-weight: 600;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(224, 208, 192, 0.8);
     transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
@@ -318,7 +353,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.55rem 1.1rem;
-    background: rgba(255, 255, 255, 0.92);
+    background: #FFFFFF;
     backdrop-filter: blur(14px);
     border: 1px solid rgba(255, 107, 0, 0.35);
     border-radius: 50px;
@@ -377,7 +412,7 @@
 /* 3D Details Card */
 .details-card {
     width: 340px;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.97);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--border);

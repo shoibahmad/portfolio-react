@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './ProjectModal.css';
 
 const ProjectModal = ({ project, isOpen, onClose }) => {
-    const [active, setActive] = useState(false);
+    // `active` was previously mirrored into state via an effect, which meant every
+    // open/close cost an extra render pass. It is pure derivation from a prop.
+    const active = isOpen;
 
+    // The effect now only does what effects are for: syncing an external system
+    // (document.body) with React state.
     useEffect(() => {
-        if (isOpen) {
-            setActive(true);
-            document.body.style.overflow = 'hidden';
-        } else {
-            setActive(false);
+        if (!isOpen) return;
+        document.body.style.overflow = 'hidden';
+        return () => {
             document.body.style.overflow = '';
-        }
+        };
     }, [isOpen]);
 
     if (!project) return null;

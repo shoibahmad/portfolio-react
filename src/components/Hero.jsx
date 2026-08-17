@@ -19,8 +19,16 @@ const Hero = () => {
     const { scrollY } = useScroll();
     const textY = useTransform(scrollY, [0, 500], [0, 45]);
     const visualY = useTransform(scrollY, [0, 500], [0, 75]);
-    const heroOpacity = useTransform(scrollY, [0, 500], [1, 0.2]);
+    // Fades out, but not so far that it reads as broken mid-scroll
+    const heroOpacity = useTransform(scrollY, [0, 620], [1, 0.45]);
     const indicatorOpacity = useTransform(scrollY, [0, 150], [1, 0]);
+
+    // NOTE: the hero deliberately has no scroll-linked rotateX / translateZ / scale.
+    // Applying a 3D transform to this container makes the browser rasterise the
+    // whole subtree once and then resample it through the transform, which visibly
+    // softens the headline text and the portrait while scrolling. Depth here is
+    // carried by the parallax offsets below and by the WebGL layer behind the page,
+    // both of which are free of that cost.
 
     useEffect(() => {
         const updateTime = () => {

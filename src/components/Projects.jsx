@@ -46,16 +46,6 @@ const Projects = () => {
         setIsModalOpen(true);
     };
 
-    const handleMouseMove = (e) => {
-        const { currentTarget: target } = e;
-        const rect = target.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        target.style.setProperty('--mouse-x', `${x}px`);
-        target.style.setProperty('--mouse-y', `${y}px`);
-    };
-
     const projects = [
         {
             title: "AgentForge — gitagent Studio",
@@ -425,8 +415,6 @@ const Projects = () => {
 
     const categories = ['All', 'Web Dev', 'Mobile Apps', 'AI/ML'];
 
-    // Extract all unique technologies for tag cloud
-    const allTechnologies = [...new Set(projects.flatMap(p => p.tech))];
     const techCount = {};
     projects.forEach(project => {
         project.tech.forEach(tech => {

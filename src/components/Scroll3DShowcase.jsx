@@ -74,6 +74,50 @@ const stackLayers = [
     }
 ];
 
+/**
+ * One extruded plate in the exploded stack.
+ *
+ * Split into its own component so the translateZ `useTransform` runs at the top
+ * level of a component rather than inside the parent's `.map()` callback.
+ */
+const IsometricLayerPlate = ({ layer, isSelected, explosionFactor, onSelect }) => {
+    const translateZ = useTransform(
+        explosionFactor,
+        (v) => `${layer.zOffset * v * 1.35}px`
+    );
+
+    return (
+        <motion.div
+            className={`isometric-layer-plate ${isSelected ? 'selected' : ''}`}
+            onClick={onSelect}
+            style={{
+                translateZ,
+                borderColor: isSelected ? layer.color : '#E5DCD3',
+                transformStyle: 'preserve-3d'
+            }}
+            whileHover={{ scale: 1.05 }}
+        >
+            {/* Plate Surface content */}
+            <div className="plate-surface">
+                <div className="plate-header">
+                    <span className="plate-num" style={{ color: layer.color }}>{layer.number}</span>
+                    <span className="plate-title">{layer.name}</span>
+                    <i className={`${layer.icon} plate-icon`} style={{ color: layer.color }}></i>
+                </div>
+                <div className="plate-chips">
+                    {layer.tech.slice(0, 3).map((t, idx) => (
+                        <span key={idx} className="plate-chip">{t}</span>
+                    ))}
+                </div>
+            </div>
+
+            {/* Plate 3D Extrusion Sides */}
+            <div className="plate-edge edge-front"></div>
+            <div className="plate-edge edge-side"></div>
+        </motion.div>
+    );
+};
+
 const Scroll3DShowcase = () => {
     const sectionRef = useRef(null);
     const [selectedLayerIndex, setSelectedLayerIndex] = useState(0);
@@ -117,44 +161,15 @@ const Scroll3DShowcase = () => {
                                 transformStyle: "preserve-3d"
                             }}
                         >
-                            {stackLayers.map((layer, index) => {
-                                const isSelected = index === selectedLayerIndex;
-
-                                return (
-                                    <motion.div
-                                        key={layer.id}
-                                        className={`isometric-layer-plate ${isSelected ? 'selected' : ''}`}
-                                        onClick={() => setSelectedLayerIndex(index)}
-                                        style={{
-                                            translateZ: useTransform(
-                                                explosionFactor,
-                                                v => `${layer.zOffset * v * 1.35}px`
-                                            ),
-                                            borderColor: isSelected ? layer.color : '#E5DCD3',
-                                            transformStyle: "preserve-3d"
-                                        }}
-                                        whileHover={{ scale: 1.05 }}
-                                    >
-                                        {/* Plate Surface content */}
-                                        <div className="plate-surface">
-                                            <div className="plate-header">
-                                                <span className="plate-num" style={{ color: layer.color }}>{layer.number}</span>
-                                                <span className="plate-title">{layer.name}</span>
-                                                <i className={`${layer.icon} plate-icon`} style={{ color: layer.color }}></i>
-                                            </div>
-                                            <div className="plate-chips">
-                                                {layer.tech.slice(0, 3).map((t, idx) => (
-                                                    <span key={idx} className="plate-chip">{t}</span>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        {/* Plate 3D Extrusion Sides */}
-                                        <div className="plate-edge edge-front"></div>
-                                        <div className="plate-edge edge-side"></div>
-                                    </motion.div>
-                                );
-                            })}
+                            {stackLayers.map((layer, index) => (
+                                <IsometricLayerPlate
+                                    key={layer.id}
+                                    layer={layer}
+                                    isSelected={index === selectedLayerIndex}
+                                    explosionFactor={explosionFactor}
+                                    onSelect={() => setSelectedLayerIndex(index)}
+                                />
+                            ))}
 
                             {/* Central 3D Energy Core Laser */}
                             <div className="prism-core-laser"></div>

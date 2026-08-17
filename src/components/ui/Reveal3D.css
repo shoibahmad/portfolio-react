@@ -1,0 +1,30 @@
+/* 3D scroll-reveal primitives */
+
+.reveal3d-stage {
+    perspective-origin: 50% 60%;
+    /* Stage must not clip the z-translated child or introduce layout of its own */
+    display: block;
+    width: 100%;
+}
+
+.reveal3d-item {
+    transform-style: preserve-3d;
+    /* backface-visibility keeps sub-pixel text crisp mid-rotation in WebKit */
+    backface-visibility: hidden;
+    /* No `will-change` here on purpose: Framer Motion applies it for the duration
+       of the animation and clears it afterwards. Declaring it in CSS would pin
+       every revealed section to its own GPU layer for the life of the page. */
+}
+
+.reveal3d-parallax {
+    transform-style: preserve-3d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal3d-item,
+    .reveal3d-parallax {
+        transform: none !important;
+        opacity: 1 !important;
+        will-change: auto;
+    }
+}

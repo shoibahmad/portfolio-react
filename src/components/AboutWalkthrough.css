@@ -1,0 +1,295 @@
+/* ===== Scroll-pinned 3D walkthrough =====
+   The wrapper is tall; the stage inside it is sticky. You scroll the wrapper
+   past the viewport while the stage stays fixed in place — that is what makes
+   the page advance while you appear to stand still. */
+
+.wt-wrapper {
+    position: relative;
+    /* One viewport of scroll per chapter, plus a little run-off at the end.
+       Keep this in sync with CHAPTERS.length in AboutWalkthrough.jsx. */
+    height: 520vh;
+    /* No `overflow` here — any value other than visible on an ancestor of a
+       sticky element turns it into a scroll container and kills the pinning. */
+}
+
+.wt-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    /* Safe on the sticky element itself; only ancestors must stay `visible`. */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    isolation: isolate;
+}
+
+/* --- 3D layer --- */
+.wt-canvas-slot {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.wt-canvas-slot canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Readability veil between the 3D and the copy. Radial so the scene stays
+   visible at the edges while text sits on a calm ground. */
+.wt-veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        radial-gradient(80% 70% at 32% 50%, rgba(255, 247, 240, 0.94) 0%, rgba(255, 247, 240, 0.72) 42%, transparent 78%),
+        linear-gradient(180deg, var(--bg-primary) 0%, transparent 18%, transparent 82%, var(--bg-primary) 100%);
+}
+
+/* --- Content --- */
+.wt-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.wt-chapter-deck {
+    position: relative;
+    min-height: 460px;
+    max-width: 620px;
+}
+
+/* Chapters stack in the same place and crossfade between each other */
+.wt-chapter {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.85rem;
+    will-change: opacity, transform;
+}
+
+.wt-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.wt-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.wt-headline {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.wt-body {
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    max-width: 52ch;
+    margin: 0;
+}
+
+.wt-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.wt-fact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+}
+
+.wt-fact-label {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.wt-fact-value {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.wt-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 1rem;
+}
+
+.wt-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.7rem;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+}
+
+.wt-btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #fff;
+    box-shadow: var(--shadow-colored);
+}
+
+.wt-btn-ghost {
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid var(--border-strong);
+    color: var(--text-primary);
+}
+
+.wt-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-float);
+}
+
+/* --- Progress rail --- */
+.wt-rail {
+    position: relative;
+    width: 3px;
+    height: 300px;
+    border-radius: 3px;
+    background: var(--border);
+    justify-self: center;
+}
+
+.wt-rail-fill {
+    position: absolute;
+    inset: 0;
+    border-radius: 3px;
+    background: linear-gradient(180deg, var(--primary), var(--primary-light));
+    transform-origin: top center;
+}
+
+.wt-rail-node {
+    position: absolute;
+    left: 50%;
+    width: 9px;
+    height: 9px;
+    margin-left: -4.5px;
+    margin-top: -4.5px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 2px solid var(--border-strong);
+}
+
+/* --- Scroll hint --- */
+.wt-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    pointer-events: none;
+    animation: wtHintBob 2.2s ease-in-out infinite;
+}
+
+.wt-hint i {
+    color: var(--primary);
+}
+
+@keyframes wtHintBob {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.65; }
+    50%      { transform: translateX(-50%) translateY(4px); opacity: 1; }
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .wt-content {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .wt-rail {
+        display: none;
+    }
+
+    .wt-chapter-deck {
+        min-height: 420px;
+    }
+
+    .wt-veil {
+        background:
+            radial-gradient(100% 60% at 50% 50%, rgba(255, 247, 240, 0.95) 0%, rgba(255, 247, 240, 0.8) 55%, transparent 90%),
+            linear-gradient(180deg, var(--bg-primary) 0%, transparent 15%, transparent 85%, var(--bg-primary) 100%);
+    }
+}
+
+/* --- Reduced motion: unpin entirely and read as a normal stacked article --- */
+@media (prefers-reduced-motion: reduce) {
+    .wt-wrapper {
+        height: auto;
+    }
+
+    .wt-stage {
+        position: static;
+        height: auto;
+        padding: 4rem 0;
+    }
+
+    .wt-chapter-deck {
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+    }
+
+    .wt-chapter {
+        position: static;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .wt-hint,
+    .wt-rail,
+    .wt-canvas-slot {
+        display: none;
+    }
+}

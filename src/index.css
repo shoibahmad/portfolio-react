@@ -2,42 +2,69 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@1,500;1,600;1,700;1,800&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&family=Inter:wght@400;600;700;800;900&display=swap');
 
 :root {
-  /* Warm Peach / PRDUCK Palette */
-  --bg-primary: #FFF5EE;
-  /* Warm seashell base */
-  --bg-secondary: #FFF0E6;
-  /* Slightly deeper warm cream */
-  --bg-tertiary: #FFE8D6;
-  /* Warm peach card surface */
-  --bg-gradient: linear-gradient(180deg, #F5C6A0 0%, #E89B70 40%, #F0B088 100%);
+  /* ===== Warm Amber Palette =====
+     Hues stay on a single warm axis (~28deg) and vary by lightness/chroma, so
+     surfaces stack without the muddy mid-tones a multi-hue peach ramp produces. */
+  --bg-primary: #FFF7F0;
+  /* Warm paper base */
+  --bg-secondary: #FFF1E4;
+  /* Recessed warm cream */
+  --bg-tertiary: #FFE7D3;
+  /* Raised peach card surface */
+  --bg-elevated: #FFFCF9;
+  /* Cards that float above the page */
 
-  --text-primary: #1A1A1A;
-  /* Near-black */
-  --text-secondary: #4A4A4A;
-  /* Dark grey */
-  --text-muted: #7A7A7A;
-  /* Mid grey */
+  /* Luminous mesh — replaces the flat muddy peach ramp.
+     Every stop carries alpha so the WebGL corridor behind the page shows
+     through. An opaque gradient here would hide the 3D layer completely. */
+  --bg-gradient:
+    radial-gradient(1200px 620px at 12% 6%, rgba(255, 138, 61, 0.26), transparent 62%),
+    radial-gradient(940px 540px at 88% 16%, rgba(255, 181, 115, 0.30), transparent 60%),
+    radial-gradient(1000px 720px at 50% 104%, rgba(255, 107, 0, 0.10), transparent 62%),
+    linear-gradient(180deg,
+      rgba(255, 235, 217, 0.86) 0%,
+      rgba(255, 221, 196, 0.78) 32%,
+      rgba(255, 234, 218, 0.72) 64%,
+      rgba(255, 247, 240, 0.80) 100%);
+
+  /* Frosted veil for sections that sit over the 3D layer and still need
+     body-copy contrast. Pair with backdrop-filter, never with full opacity. */
+  --bg-veil: rgba(255, 247, 240, 0.72);
+  --bg-veil-strong: rgba(255, 247, 240, 0.88);
+
+  --text-primary: #1A1310;
+  /* Warm near-black — reads as ink, not soot */
+  --text-secondary: #574B44;
+  /* Warm dark grey */
+  --text-muted: #8A7A70;
+  /* Warm mid grey */
 
   --primary: #FF6B00;
   /* Bold Orange */
-  --primary-dark: #E05E00;
-  /* Darker Orange */
+  --primary-dark: #D95400;
+  /* Deepened for AA contrast on light surfaces */
   --primary-light: #FF8C33;
   /* Lighter Orange */
+  --primary-soft: #FFE2CC;
+  /* Tinted fill for chips/badges */
   --primary-glow: rgba(255, 107, 0, 0.12);
 
-  --accent: #1A1A1A;
-  /* Dark Accent (Black) */
-  --accent-dark: #000000;
-  /* Pure Black */
-  --accent-glow: rgba(26, 26, 26, 0.08);
+  --accent: #1A1310;
+  /* Dark Accent */
+  --accent-dark: #0B0705;
+  --accent-glow: rgba(26, 19, 16, 0.08);
 
-  --border: #E0D0C0;
-  /* Warm border */
-  --border-light: #D4C0AE;
-  --glass-bg: rgba(255, 245, 238, 0.85);
-  --glass-border: rgba(224, 208, 192, 0.6);
-  --glass-shadow: 0 8px 32px 0 rgba(180, 140, 100, 0.12);
+  /* Depth cue for 3D sections */
+  --depth-near: rgba(255, 107, 0, 0.16);
+  --depth-far: rgba(140, 92, 58, 0.10);
+
+  --border: #EFDCCA;
+  /* Warm border, lifted so it stops reading as a hard line */
+  --border-light: #F6E9DC;
+  --border-strong: #DCC3AC;
+  --glass-bg: rgba(255, 247, 240, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.65);
+  --glass-shadow: 0 8px 32px 0 rgba(150, 105, 70, 0.12);
 
   /* Typography matching PRDUCK */
   --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -49,12 +76,14 @@
   /* Spacing */
   --section-spacing: 8rem;
 
-  /* Effects */
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
-  --shadow-xl: 0 20px 40px -10px rgba(0, 0, 0, 0.12), 0 10px 20px -8px rgba(0, 0, 0, 0.08);
-  --shadow-colored: 0 10px 40px -10px rgba(255, 107, 0, 0.15);
+  /* Effects — shadows carry the warm hue so depth reads as light, not dirt */
+  --shadow-sm: 0 1px 3px 0 rgba(122, 78, 45, 0.07), 0 1px 2px -1px rgba(122, 78, 45, 0.05);
+  --shadow: 0 4px 6px -1px rgba(122, 78, 45, 0.09), 0 2px 4px -2px rgba(122, 78, 45, 0.06);
+  --shadow-lg: 0 10px 25px -5px rgba(122, 78, 45, 0.12), 0 8px 10px -6px rgba(122, 78, 45, 0.07);
+  --shadow-xl: 0 20px 40px -10px rgba(122, 78, 45, 0.15), 0 10px 20px -8px rgba(122, 78, 45, 0.09);
+  --shadow-colored: 0 10px 40px -10px rgba(255, 107, 0, 0.28);
+  /* Long, soft cast used by elements lifted on the z-axis during scroll */
+  --shadow-float: 0 32px 64px -24px rgba(122, 78, 45, 0.28), 0 12px 24px -12px rgba(255, 107, 0, 0.14);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
@@ -81,11 +110,17 @@ body {
   line-height: 1.85;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  /* `clip`, not `hidden`. Per spec, `overflow-x: hidden` forces overflow-y to
+     compute to `auto`, which turns <body> into a scroll container — and every
+     `position: sticky` descendant then sticks to that container instead of the
+     viewport, which silently breaks scroll-pinned sections. `clip` prevents the
+     same horizontal overflow without creating a scroll container. */
+  overflow-x: clip;
   background-image:
-    radial-gradient(circle at 15% 50%, rgba(255, 107, 0, 0.06) 0%, transparent 30%),
-    radial-gradient(circle at 85% 30%, rgba(245, 198, 160, 0.08) 0%, transparent 30%),
-    radial-gradient(circle at 50% 100%, rgba(232, 155, 112, 0.05) 0%, transparent 40%);
+    radial-gradient(circle at 15% 50%, rgba(255, 107, 0, 0.07) 0%, transparent 32%),
+    radial-gradient(circle at 85% 30%, rgba(255, 181, 115, 0.09) 0%, transparent 32%),
+    radial-gradient(circle at 50% 100%, rgba(255, 138, 61, 0.06) 0%, transparent 42%);
+  background-attachment: fixed;
 }
 
 /* Clean warm background — no dot-grid overlay */
@@ -328,7 +363,10 @@ section {
 /* ===== Stats Counter Section ===== */
 .stats-section {
   padding: 4rem 0;
-  background: var(--bg-secondary);
+  /* Frosted rather than opaque, so the 3D corridor stays visible behind it */
+  background: var(--bg-veil);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   position: relative;
@@ -592,12 +630,76 @@ main {
               0 6px 12px -4px rgba(0, 0, 0, 0.04);
 }
 
+/* ===== 3D Scroll Depth Utilities ===== */
+
+/* Establishes a shared perspective so children share one vanishing point.
+   Apply to a section, then use .depth-layer on the children. */
+.depth-scene {
+  perspective: 1400px;
+  perspective-origin: 50% 45%;
+  transform-style: preserve-3d;
+}
+
+.depth-layer {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Card that physically lifts toward the viewer on hover */
+.lift-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.lift-3d:hover {
+  transform: translateZ(40px) translateY(-6px) rotateX(3deg);
+  box-shadow: var(--shadow-float);
+}
+
+/* Section seam: fades one band into the next so stacked sections read as
+   continuous depth instead of abutting rectangles. */
+.section-seam {
+  position: relative;
+}
+
+.section-seam::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(180deg, var(--bg-primary), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes depthDriftIn {
+  from {
+    opacity: 0;
+    transform: perspective(1300px) translate3d(0, 60px, -180px) rotateX(22deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1300px) translate3d(0, 0, 0) rotateX(0deg);
+  }
+}
+
+.depth-drift-in {
+  animation: depthDriftIn 0.9s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .lift-3d:hover {
+    transform: none;
   }
 }
 
