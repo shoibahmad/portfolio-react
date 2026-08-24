@@ -1,68 +1,75 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import TiltCard from './ui/TiltCard';
+import { RevealGroup } from './ui/Reveal';
 import './Services.css';
-import Spotlight from './ui/Spotlight';
 
-const Services = () => {
-    const services = [
-        {
-            icon: "fa-mobile-screen-button",
-            title: "Flutter & Mobile Apps",
-            tag: "CROSS-PLATFORM",
-            description: "Building high-performance, cross-platform mobile applications for iOS and Android using Flutter. Specialized in beautiful glassmorphism UIs and 60fps smooth animations."
-        },
-        {
-            icon: "fa-react",
-            title: "React & Next.js Architecture",
-            tag: "FULL STACK WEB",
-            description: "Developing dynamic, responsive, and fast-loading single-page web applications (SPAs) with modern React 19 / Next.js ecosystems, custom hooks, and scalable state management."
-        },
-        {
-            icon: "fa-robot",
-            title: "GenAI & Agentic Systems",
-            tag: "INTELLIGENT AI",
-            description: "End-to-end AI orchestration: LangChain RAG pipelines, pgvector high-dimensional similarity search, multi-agent workflows, and custom Gemini / LLM integrations."
-        }
-    ];
+const SERVICES = [
+    {
+        icon: 'fab fa-react',
+        title: 'React & Next.js interfaces',
+        tag: 'Frontend',
+        description:
+            'Production front ends on React.js, Next.js, Vite and Tailwind CSS — component architecture and state management that still holds up once the prototype becomes the product.'
+    },
+    {
+        icon: 'fas fa-server',
+        title: 'REST API backends',
+        tag: 'Backend & APIs',
+        description:
+            'FastAPI and Django REST Framework services with asynchronous endpoints, explicit service contracts and auth flows — built to stay reliable under concurrent load.'
+    },
+    {
+        icon: 'fas fa-brain',
+        title: 'LLM integration',
+        tag: 'Applied AI',
+        description:
+            'Gemini and Claude wired into real product workflows: prompt design, model evaluation against task-level criteria, and pipeline integration — not a chatbot bolted onto the side.'
+    }
+];
 
-    return (
-        <section id="services" className="services">
-            <div className="container">
-                <div className="section-header text-center">
-                    <div className="services-badge">
-                        <span className="badge-dot"></span>
-                        EXPERTISE & SERVICES
-                    </div>
-                    <h2 className="section-title">
-                        Solutions Engineered with <span className="hero-title-accent">Precision.</span>
-                    </h2>
-                    <p className="section-subtitle">Areas of technical mastery, architecture, and production delivery</p>
-                </div>
-                <Spotlight className="services-grid">
-                    {services.map((service, index) => (
-                        <motion.div
-                            key={index}
-                            className="service-card research-card spotlight-card"
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.15 }}
-                            whileHover={{ y: -8, scale: 1.02 }}
-                        >
-                            <div className="card-border-glow"></div>
-                            <div className="service-tag">{service.tag}</div>
-                            <div className="service-icon">
-                                <i className={`fas ${service.icon}`}></i>
-                            </div>
-                            <h3>{service.title}</h3>
-                            <p>{service.description}</p>
-                            <div className="card-footer-line"></div>
-                        </motion.div>
-                    ))}
-                </Spotlight>
+const Services = () => (
+    <section className="services section" id="services" aria-labelledby="services-title">
+        <div className="shell">
+            <div className="section-head">
+                <span className="section-kicker">Services</span>
+                <h2 className="section-title" id="services-title">
+                    Solutions engineered with precision.
+                </h2>
+                <p className="section-lede">
+                    Three areas where the work is deep rather than broad — and where each
+                    has already shipped into something people use daily.
+                </p>
             </div>
-        </section>
-    );
-};
+
+            <RevealGroup className="services__grid stage" stagger={0.08}>
+                {SERVICES.map((service, index) => (
+                    <TiltCard className="services__card card" key={service.title} max={4}>
+                        <span className="services__num" aria-hidden="true">
+                            {String(index + 1).padStart(2, '0')}
+                        </span>
+
+                        <span className="services__icon pop-1" aria-hidden="true">
+                            <i className={service.icon} />
+                        </span>
+
+                        <span className="label services__tag">{service.tag}</span>
+                        <h3 className="services__title">{service.title}</h3>
+                        <p className="services__desc">{service.description}</p>
+                    </TiltCard>
+                ))}
+            </RevealGroup>
+
+            <div className="services__footer">
+                <p className="services__footer-text">
+                    Have something that fits none of these boxes? Those are usually the
+                    interesting ones.
+                </p>
+                <Link to="/contact" className="btn btn-primary">
+                    Talk it through
+                </Link>
+            </div>
+        </div>
+    </section>
+);
 
 export default Services;

@@ -1,355 +1,292 @@
-/* Project Modal Styles — PRDUCK Warm Theme */
+/* Project case-study modal. */
 
-/* Project Modal Overlay */
 .project-modal-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    z-index: 10000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: clamp(0.75rem, 3vw, 2rem);
+    background: rgba(16, 16, 20, 0.4);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
 }
 
-.project-modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Modal Container */
+/* The dialog frame. Header and footer are fixed; only .project-modal-content
+   between them scrolls. */
 .project-modal-container {
-    background: var(--bg-primary);
-    width: 90%;
-    max-width: 900px;
-    height: 85vh;
-    border-radius: 16px;
-    box-shadow: var(--shadow-xl);
+    width: min(58rem, 100%);
+    /* svh, not vh: on mobile Safari a vh-sized dialog is taller than the visible
+       viewport while the address bar is showing, which pushes the close button
+       off screen. */
+    max-height: min(90svh, 56rem);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    transform: translateY(20px);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: var(--surface);
     border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-float);
+    overflow: hidden;
 }
 
-.project-modal-overlay.active .project-modal-container {
-    transform: translateY(0);
+/* The scroll region. `min-height: 0` is load-bearing — without it a flex child
+   refuses to shrink below its content and the dialog grows past its max-height
+   instead of scrolling. */
+.project-modal-content {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
-/* Header */
+/* --- Header ---------------------------------------------------------------- */
 .project-modal-header {
-    padding: 1.5rem 2rem;
-    border-bottom: 1px solid var(--border);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background: var(--bg-primary);
-    z-index: 2;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    flex-shrink: 0;
 }
 
+/* Without this the global h2 rule renders the dialog title at display size */
 .project-modal-header h2 {
-    font-size: 1.5rem;
-    margin: 0;
-    color: var(--primary);
-    font-family: var(--font-heading);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    min-width: 0;
+}
+
+.modal-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+/* Solid rather than tinted: these sit over an arbitrary screenshot, so they
+   need to carry their own contrast instead of borrowing the page's. */
+.modal-badge {
+    padding: 0.28rem 0.65rem;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    font-size: var(--fs-micro);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-primary);
 }
 
 .close-modal-btn {
-    background: transparent;
-    border: none;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
     cursor: pointer;
-    color: var(--text-muted);
-    transition: all 0.2s;
+    transition: var(--transition);
 }
 
 .close-modal-btn:hover {
-    background: var(--bg-secondary);
-    color: var(--primary);
-    transform: rotate(90deg);
+    border-color: var(--border-ink);
+    color: var(--text-primary);
 }
 
-/* Scrollable Content */
-.project-modal-content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0;
-}
-
-/* Hero Section inside Modal */
+/* --- Hero image ---------------------------------------------------------------- */
 .modal-hero {
-    height: 300px;
-    width: 100%;
     position: relative;
+    /* 16/9 matches the artwork these project images are drawn at, so `cover`
+       has nothing to crop; at 16/7 it was slicing the top off every mockup. */
+    aspect-ratio: 16 / 9;
+    background: var(--surface-sunken);
+    border-bottom: 1px solid var(--border);
     overflow: hidden;
-    background: var(--bg-secondary);
-}
-
-.modal-hero-scanline {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, var(--primary), var(--primary-dark), transparent);
-    box-shadow: 0 0 8px var(--primary), 0 0 15px var(--primary-dark);
-    animation: laserScan 4s linear infinite;
-    z-index: 3;
-    pointer-events: none;
-    opacity: 0.8;
-}
-
-@keyframes laserScan {
-    0% {
-        top: 0%;
-    }
-    50% {
-        top: 100%;
-    }
-    100% {
-        top: 0%;
-    }
 }
 
 .modal-hero img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+}
+
+/* The old theme swept a scanline across this image and laid a dark gradient
+   over it. The sweep is gone; the overlay stays, because it carries the category
+   and date badges — but it is now just a positioning box, not a scrim. */
+.modal-hero-scanline {
+    display: none;
 }
 
 .modal-hero-overlay {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-    padding: 2rem;
-    color: white;
+    left: 0.85rem;
+    bottom: 0.85rem;
+    right: 0.85rem;
 }
 
-.modal-badges {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.modal-badge {
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* Modal Body */
+/* --- Body ------------------------------------------------------------------------ */
 .modal-body {
-    padding: 2.5rem;
-    max-width: 800px;
-    margin: 0 auto;
+    padding: clamp(1.25rem, 3vw, 2rem);
 }
 
-.case-study-section {
-    margin-bottom: 3rem;
+.modal-body h2,
+.modal-body h3 {
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+}
+
+.modal-body > h2 {
+    font-size: var(--fs-h3);
+    margin-bottom: 0.75rem;
+}
+
+.modal-body p {
+    font-size: var(--fs-sm);
+    line-height: 1.75;
+    color: var(--text-secondary);
+}
+
+.case-study-section + .case-study-section {
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border);
 }
 
 .case-study-section h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.case-study-section h3 i {
-    color: var(--primary-dark);
-    font-size: 1rem;
-}
-
-.case-study-section p {
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 1rem;
-}
-
-/* Tech Stack Grid */
-.tech-stack-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-}
-
-.tech-tag {
-    padding: 0.5rem 1rem;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-primary);
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.95rem;
+    margin-bottom: 0.7rem;
 }
 
-.tech-tag:hover {
-    border-color: var(--primary);
-    background: var(--primary-glow);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px var(--primary-glow);
-    color: var(--primary);
+.case-study-section h3 i {
+    font-size: 0.8rem;
+    color: var(--accent);
 }
 
-/* Architecture Placeholder */
-.architecture-block {
-    background: var(--bg-secondary);
-    border: 1px dashed var(--border);
-    border-radius: 12px;
-    padding: 2rem;
-    text-align: center;
-    color: var(--text-muted);
+.case-study-section ul {
+    display: grid;
+    gap: 0.6rem;
 }
 
-/* Footer Actions */
-.modal-footer {
-    padding: 1.5rem 2.5rem;
-    border-top: 1px solid var(--border);
-    background: var(--bg-secondary);
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
+.case-study-section li {
+    position: relative;
+    padding-left: 1.3rem;
+    font-size: var(--fs-sm);
+    line-height: 1.65;
+    color: var(--text-secondary);
 }
 
-@media (max-width: 768px) {
-    .project-modal-container {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-    }
-
-    .modal-hero {
-        height: 200px;
-    }
-
-    .modal-body {
-        padding: 1.5rem;
-    }
+.case-study-section li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
 }
 
-/* Architecture Diagram Styles */
+/* --- Architecture flow ------------------------------------------------------------ */
+.architecture-block,
 .architecture-flow {
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem 0;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .arch-node {
     display: flex;
-    flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    position: relative;
-    z-index: 2;
+    padding: 0.5rem 0.8rem;
+    background: var(--surface-muted);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--text-primary);
 }
 
 .arch-icon {
-    width: 60px;
-    height: 60px;
-    background: var(--bg-primary);
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: var(--primary);
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-}
-
-.arch-node:hover .arch-icon {
-    border-color: var(--primary);
-    color: var(--primary-dark);
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
-.arch-label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    text-align: center;
-    max-width: 80px;
+    color: var(--accent);
+    font-size: 0.75rem;
 }
 
 .arch-arrow {
-    color: var(--text-muted);
-    font-size: 1.2rem;
-    animation: flowPulse 2s infinite;
+    color: var(--text-faint);
+    font-size: 0.7rem;
 }
 
-@keyframes flowPulse {
-    0% {
-        opacity: 0.4;
-        transform: translateX(0);
-    }
-
-    50% {
-        opacity: 1;
-        transform: translateX(3px);
-    }
-
-    100% {
-        opacity: 0.4;
-        transform: translateX(0);
-    }
+/* --- Tech stack -------------------------------------------------------------------- */
+.tech-stack-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
 }
 
-@media (max-width: 600px) {
-    .architecture-flow {
-        flex-direction: column;
-        gap: 0.5rem;
+.tech-tag {
+    padding: 0.3rem 0.7rem;
+    background: var(--surface-muted);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+/* --- Footer --------------------------------------------------------------------------- */
+.modal-footer {
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 1rem clamp(1.25rem, 3vw, 2rem);
+    border-top: 1px solid var(--border);
+    background: var(--surface-muted);
+}
+
+.btn-secondary {
+    background: var(--surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    border-color: var(--border-ink);
+}
+
+@media (max-width: 560px) {
+    .project-modal-overlay {
+        padding: 0;
+        place-items: end stretch;
     }
 
-    .arch-arrow {
-        transform: rotate(90deg);
-        margin: 0.5rem 0;
+    /* Full-bleed sheet on a phone: a centred dialog with 12px of margin on a
+       360px screen wastes the only space the content has. */
+    .project-modal-container {
+        width: 100%;
+        max-height: 92svh;
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        border-bottom: none;
     }
 
-    @keyframes flowPulse {
-        0% {
-            opacity: 0.4;
-            transform: translateY(0) rotate(90deg);
-        }
+    .project-modal-header h2 {
+        font-size: 1.05rem;
+    }
 
-        50% {
-            opacity: 1;
-            transform: translateY(3px) rotate(90deg);
-        }
-
-        100% {
-            opacity: 0.4;
-            transform: translateY(0) rotate(90deg);
-        }
+    .modal-footer .btn {
+        flex: 1 1 auto;
+        justify-content: center;
     }
 }

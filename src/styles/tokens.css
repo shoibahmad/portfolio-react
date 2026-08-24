@@ -1,0 +1,135 @@
+/* ===========================================================================
+   Design tokens — light, minimal, professional
+   ---------------------------------------------------------------------------
+   One accent colour. Neutral surfaces. Depth comes from shadow and hairline,
+   never from colour or translucency.
+
+   Token names carried over from the previous theme are kept and re-pointed, so
+   component stylesheets that still reference them keep resolving.
+   ======================================================================== */
+
+:root {
+  /* ---- Canvas -----------------------------------------------------------
+     A four-step neutral ramp, very slightly warm so the page reads as paper
+     rather than as a screenshot of a spreadsheet. */
+  --bg-primary:   #FAFAF9;
+  --bg-secondary: #F5F5F4;
+  --bg-tertiary:  #EFEFED;
+  --bg-elevated:  #FFFFFF;
+  --surface:      #FFFFFF;
+  --surface-muted:#F7F7F6;
+  --surface-sunken: #F2F2F0;
+
+  /* Legacy aliases */
+  --bg-veil: rgba(250, 250, 249, 0.85);
+  --bg-veil-strong: rgba(250, 250, 249, 0.96);
+  --glass-bg: #FFFFFF;
+  --glass-border: #E7E5E4;
+
+  /* ---- Ink ---------------------------------------------------------------
+     Never pure black. #101014 at 100% is as dark as anything gets, which keeps
+     large headings from vibrating against the off-white canvas. */
+  --text-primary:   #101014;
+  --text-secondary: #52525B;
+  --text-muted:     #8A8A94;
+  --text-faint:     #B4B4BC;
+  --text-inverse:   #FAFAFA;
+
+  /* ---- Accent -------------------------------------------------------------
+     Exactly one. Used for links, the primary action, and small emphasis marks —
+     nowhere else. Restraint here is what separates minimal from merely plain. */
+  --accent:        #EA580C;
+  --accent-hover:  #C2410C;
+  --accent-press:  #9A3412;
+  --accent-soft:   #FFF2E9;
+  --accent-border: #FBD5B8;
+  --accent-ring:   rgba(234, 88, 12, 0.22);
+
+  /* Legacy accent aliases */
+  --primary:       var(--accent);
+  --primary-dark:  var(--accent-hover);
+  --primary-light: #F97316;
+  --primary-soft:  var(--accent-soft);
+  --primary-glow:  var(--accent-ring);
+  --accent-dark:   var(--accent-press);
+  --accent-glow:   var(--accent-ring);
+
+  /* Semantic — kept muted so they never out-shout the accent */
+  --positive: #15803D;
+  --positive-soft: #ECFDF3;
+  --info: #1D4ED8;
+  --info-soft: #EFF4FF;
+
+  /* ---- Lines --------------------------------------------------------------
+     Hairlines, not boxes. A minimal layout is mostly held together by these. */
+  /* Nudged darker than a typical hairline palette: these sit on a #FAFAF9
+     canvas, and at #F0EFEE the light rule simply did not render. */
+  --border:        #E3E0DE;
+  --border-light:  #EBE8E6;
+  --border-strong: #CFCBC8;
+  --border-ink:    #101014;
+
+  /* ---- Depth --------------------------------------------------------------
+     Layered neutral shadows in the shape real light casts: one tight contact
+     shadow plus one wide ambient. Low alpha and no colour tint, so cards lift
+     off the page without looking like they are glowing.
+     ------------------------------------------------------------------------ */
+  --shadow-xs:  0 1px 2px rgba(16, 16, 20, 0.04);
+  --shadow-sm:  0 1px 3px rgba(16, 16, 20, 0.05), 0 1px 2px -1px rgba(16, 16, 20, 0.04);
+  --shadow:     0 4px 10px -3px rgba(16, 16, 20, 0.07), 0 2px 4px -2px rgba(16, 16, 20, 0.04);
+  --shadow-md:  var(--shadow);
+  --shadow-lg:  0 12px 26px -10px rgba(16, 16, 20, 0.11), 0 4px 9px -4px rgba(16, 16, 20, 0.05);
+  --shadow-xl:  0 26px 50px -14px rgba(16, 16, 20, 0.14), 0 8px 18px -8px rgba(16, 16, 20, 0.06);
+  --shadow-float: 0 42px 80px -26px rgba(16, 16, 20, 0.18), 0 14px 26px -12px rgba(16, 16, 20, 0.08);
+  --shadow-colored: 0 16px 34px -14px rgba(234, 88, 12, 0.32);
+  --glass-shadow: var(--shadow-lg);
+
+  /* Focus ring, drawn as a shadow so it follows border-radius */
+  --ring-focus: 0 0 0 3px var(--accent-ring);
+
+  /* ---- Type ---------------------------------------------------------------
+     Inter for everything the visitor reads; Plus Jakarta Sans for display sizes
+     only, where its wider apertures give the headline some character. */
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --font-mono:    'Space Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-accent:  'Playfair Display', Georgia, serif;
+
+  /* Fluid scale — every step clamps, so no size needs a mobile override */
+  --fs-display: clamp(2.4rem, 6.4vw, 4.6rem);
+  --fs-h1:      clamp(2rem, 4.6vw, 3.1rem);
+  --fs-h2:      clamp(1.65rem, 3.4vw, 2.4rem);
+  --fs-h3:      clamp(1.12rem, 1.9vw, 1.4rem);
+  --fs-lead:    clamp(1rem, 1.3vw, 1.14rem);
+  --fs-body:    1rem;
+  --fs-sm:      0.875rem;
+  --fs-xs:      0.78rem;
+  --fs-micro:   0.7rem;
+
+  --tracking-tight: -0.025em;
+  --tracking-label: 0.1em;
+
+  /* ---- Geometry ------------------------------------------------------------ */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  --section-spacing: clamp(4rem, 8.5vw, 7.5rem);
+  --gutter: clamp(1.15rem, 4vw, 2.25rem);
+  --shell: 1180px;
+  --shell-narrow: 760px;
+
+  /* ---- Motion ---------------------------------------------------------------
+     Short and eased-out. Minimal interfaces feel cheap when things bounce. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-smooth: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Shared vanishing point for the hover tilt */
+  --perspective: 1200px;
+}

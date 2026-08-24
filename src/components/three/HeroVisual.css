@@ -1,0 +1,132 @@
+/* The hero's 3D stage and its no-WebGL stand-in.
+
+   Both are sized identically and share the same aspect ratio, so swapping one
+   for the other after the capability check never shifts the layout. */
+
+.hero-object,
+.hero-object-fallback {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    /* Sized by .hero__object-layer now, not by a fixed cap of its own */
+    margin-inline: auto;
+    /* Contain the canvas so it cannot participate in the page's paint
+       invalidation while the rest of the document scrolls. */
+    contain: layout paint;
+}
+
+.hero-object canvas {
+    width: 100% !important;
+    height: 100% !important;
+    /* The object is decorative; the pointer should still reach anything the
+       canvas happens to overlap. Its own tilt uses React pointer events on the
+       wrapper, which still fire. */
+    touch-action: pan-y;
+}
+
+/* Fade the rendered scene in, so it never pops over the static form */
+.hero-object canvas {
+    animation: heroObjectIn 900ms var(--ease-out) both;
+}
+
+/* Contact shadow, in CSS rather than in the scene.
+   drei's <ContactShadows> projects onto a finite quad, and over a near-white
+   page the un-occluded part of that quad reads as a rectangle behind the
+   object. An ellipse has no edge to give away, costs no render target, and
+   matches the shape the fallback already draws. */
+.hero-object::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 7%;
+    width: 46%;
+    height: 6%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(16, 16, 20, 0.20) 0%, rgba(16, 16, 20, 0) 70%);
+    animation: heroShadowPulse 6.5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Tracks the object's float so the shadow tightens as the form rises */
+@keyframes heroShadowPulse {
+    0%, 100% { transform: translateX(-50%) scale(0.94); opacity: 0.9; }
+    50%      { transform: translateX(-50%) scale(1.06); opacity: 1; }
+}
+
+@keyframes heroObjectIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* --- Static fallback -------------------------------------------------------
+   Built from the same lighting logic as the render: key light from the upper
+   left, cool fill lower right, warm accent bounce, and a soft contact shadow
+   that grounds the form. */
+
+.hero-object-fallback {
+    display: grid;
+    place-items: center;
+}
+
+.hero-object-fallback__sphere {
+    grid-area: 1 / 1;
+    width: 58%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 32% 26%, #FFFFFF 0%, #F4F3F1 42%, #E2E0DC 72%, #CFCCC6 100%);
+    box-shadow:
+        inset -14px -18px 34px rgba(16, 16, 20, 0.10),
+        inset 10px 12px 26px rgba(255, 255, 255, 0.85),
+        /* warm bounce from below right, matching the rim light in the scene */
+        inset -6px -4px 20px rgba(234, 88, 12, 0.10),
+        var(--shadow-lg);
+    animation: fallbackFloat 7s ease-in-out infinite;
+}
+
+.hero-object-fallback__ring {
+    grid-area: 1 / 1;
+    width: 88%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    opacity: 0.4;
+    transform: rotateX(72deg);
+    animation: fallbackSpin 24s linear infinite;
+}
+
+.hero-object-fallback__shadow {
+    grid-area: 1 / 1;
+    align-self: end;
+    width: 52%;
+    height: 7%;
+    margin-bottom: 8%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(16, 16, 20, 0.22) 0%, rgba(16, 16, 20, 0) 70%);
+    animation: fallbackShadow 7s ease-in-out infinite;
+}
+
+@keyframes fallbackFloat {
+    0%, 100% { transform: translateY(-6px); }
+    50%      { transform: translateY(6px); }
+}
+
+@keyframes fallbackShadow {
+    0%, 100% { transform: scale(0.94); opacity: 0.85; }
+    50%      { transform: scale(1.06); opacity: 1; }
+}
+
+@keyframes fallbackSpin {
+    from { transform: rotateX(72deg) rotate(0deg); }
+    to   { transform: rotateX(72deg) rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-object::after,
+    .hero-object-fallback__sphere,
+    .hero-object-fallback__shadow,
+    .hero-object-fallback__ring {
+        animation: none;
+    }
+}

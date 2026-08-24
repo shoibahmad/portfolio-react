@@ -1,247 +1,220 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import {
+    BASICS,
+    SUMMARY,
+    SKILL_GROUPS,
+    EXPERIENCE,
+    EDUCATION,
+    CERTIFICATIONS,
+    PUBLICATIONS
+} from '../data/profile';
+import { PROJECTS } from '../data/projects';
 import './ResumeModal.css';
 
-const ResumeModal = () => {
+/**
+ * Printable CV sheet.
+ *
+ * Every line is rendered from the profile module rather than typed out here, so
+ * this sheet cannot drift from the rest of the site the way it previously had —
+ * it was still showing an old grade, an old phone number and a role list that no
+ * other page agreed with.
+ *
+ * Projects are the CV's featured set, matched by title against the full
+ * catalogue so the descriptions stay in one place.
+ */
+
+/** The CV leads with these; the rest of the catalogue stays on the site. */
+const FEATURED_PROJECT_TITLES = [
+    'Web Sonar — Advanced Web Intelligence Platform',
+    'Truth Guard AI (Misinformation)',
+    'Med-AI Vigi — ADR Risk Predictor',
+    'AgentForge — gitagent Studio',
+    'Mike AI — Smart Recruitment Platform'
+];
+
+/**
+ * Resolve the featured titles against the catalogue.
+ *
+ * This used to end in `.filter(Boolean)`, which meant renaming a project silently
+ * dropped it from the printed CV — exactly what happened when "ADR Risk
+ * Predictor" became "Med-AI Vigi — ADR Risk Predictor". A miss is a wiring bug,
+ * so it now says so in the console instead of quietly shortening the list.
+ */
+const featuredProjects = FEATURED_PROJECT_TITLES.map((title) => {
+    const match = PROJECTS.find((p) => p.title === title);
+    if (!match && import.meta.env.DEV) {
+        console.warn(`[ResumeModal] featured project not found in catalogue: "${title}"`);
+    }
+    return match;
+}).filter(Boolean);
+
+const ResumeModal = ({ isOpen = false, onClose = () => {} }) => {
     useEffect(() => {
-        const modal = document.getElementById('resume-modal');
-        const closeBtn = document.getElementById('close-resume');
-        const overlay = document.querySelector('.resume-overlay');
+        if (!isOpen) return undefined;
 
-        const closeModal = () => {
-            modal?.classList.remove('active');
-            document.body.style.overflow = '';
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+
+        const onKeyDown = (e) => {
+            if (e.key === 'Escape') onClose();
         };
-
-        closeBtn?.addEventListener('click', closeModal);
-        overlay?.addEventListener('click', closeModal);
+        window.addEventListener('keydown', onKeyDown);
 
         return () => {
-            closeBtn?.removeEventListener('click', closeModal);
-            overlay?.removeEventListener('click', closeModal);
+            document.body.style.overflow = previousOverflow;
+            window.removeEventListener('keydown', onKeyDown);
         };
-    }, []);
+    }, [isOpen, onClose]);
 
-    const projects = [
-        {
-            title: "Lumina - Smart Inventory Management",
-            type: "Mobile App",
-            description: "Offline-first Flutter inventory app with barcode scanning, dynamic sales charting, and real-time Firebase sync.",
-            tech: "Flutter, Firebase, Provider"
-        },
-        {
-            title: "RuralHealth AI",
-            type: "AI/ML Project",
-            description: "Digital health screening tool for rural areas using Gemini AI for analysis and OpenAI Whisper for voice vitals.",
-            tech: "React, Django, Gemini AI"
-        },
-        {
-            title: "Secure Eval",
-            type: "AI/ML Project",
-            description: "AI-powered proctoring platform with real-time cheating detection and automated behavioral analysis.",
-            tech: "React, FastAPI, Computer Vision"
-        },
-        {
-            title: "Code Scraper",
-            type: "Tool",
-            description: "Node.js automation tool using Puppeteer to scrape and structure code from documentation sites.",
-            tech: "Node.js, Puppeteer"
-        },
-        {
-            title: "Truth Guard AI",
-            type: "AI/ML Project",
-            description: "Multi-modal misinformation detector verifying news text and images using hybrid ML models.",
-            tech: "FastAPI, Python, NLP"
-        },
-        {
-            title: "ADR Risk Predictor",
-            type: "AI/ML Project",
-            description: "Machine learning model predicting adverse drug reactions based on patient history and vitals.",
-            tech: "Python, Scikit-learn, Flask"
-        },
-        {
-            title: "Food POS",
-            type: "Mobile App",
-            description: "High-contrast tablet POS system for food businesses with real-time kitchen syncing.",
-            tech: "Flutter, Firebase"
-        },
-        {
-            title: "IU CA (Cross Platform App)",
-            type: "Mobile App",
-            description: "Centralized university management app for notices, resources, and attendance tracking.",
-            tech: "Flutter, Firebase"
-        },
-        {
-            title: "Code Analyzer Tool",
-            type: "Web Tool",
-            description: "Client-side static analysis tool using AST parsing to detect code quality issues in real-time.",
-            tech: "React, Vite, AST"
-        },
-        {
-            title: "Employee Salary Predict",
-            type: "ML Project",
-            description: "Salary prediction web app using regression algorithms to estimate fair market value.",
-            tech: "Python, Flask, Pandas"
-        },
-        {
-            title: "Campus Grievance System",
-            type: "Mobile App",
-            description: "Ticket-based mobile app for streamlining student grievance redressal and tracking.",
-            tech: "Flutter, Firebase"
-        },
-        {
-            title: "Finance Management System",
-            type: "Web App",
-            description: "Personal finance dashboard for expense tracking, categorization, and visual analytics.",
-            tech: "React, Node.js, MongoDB"
-        }
-    ];
+    if (!isOpen) return null;
 
     return (
-        <div id="resume-modal" className="resume-modal">
-            <div className="resume-overlay"></div>
+        <div className="resume-modal active" role="dialog" aria-modal="true" aria-label="Resume">
+            <div className="resume-overlay" onClick={onClose}></div>
             <div className="resume-container">
                 <div className="resume-header">
-                    <h2>Resume</h2>
-                    <button id="close-resume" className="close-btn">&times;</button>
+                    <a
+                        className="btn btn-outline btn-sm"
+                        href="/resume/Shoib_Ahmad_Resume.pdf"
+                        download
+                    >
+                        Download PDF
+                    </a>
+                    <button
+                        type="button"
+                        className="btn btn-outline btn-sm"
+                        onClick={() => window.print()}
+                    >
+                        Print
+                    </button>
+                    <button
+                        type="button"
+                        className="close-btn"
+                        onClick={onClose}
+                        aria-label="Close resume"
+                    >
+                        &times;
+                    </button>
                 </div>
+
                 <div className="resume-content" id="resume-content">
                     <div className="resume-paper">
                         <div className="resume-top">
-                            <h1 className="resume-name">Shoib Ahmad</h1>
+                            <h1 className="resume-name">{BASICS.name}</h1>
+                            <p className="resume-role">
+                                {BASICS.title} — {BASICS.specialties.join(' · ')}
+                            </p>
                             <div className="resume-contact-info">
-                                <span><i className="fas fa-envelope"></i> shoibsahmad@gmail.com</span>
-                                <span><i className="fas fa-map-marker-alt"></i> Lucknow</span>
-                                <span><i className="fab fa-linkedin"></i> linkedin.com/in/shoib-ahmad-788096219/</span>
+                                <span>
+                                    <i className="fas fa-phone" aria-hidden="true" /> {BASICS.phone}
+                                </span>
+                                <a href={`mailto:${BASICS.email}`}>
+                                    <i className="fas fa-envelope" aria-hidden="true" /> {BASICS.email}
+                                </a>
+                                <a href={BASICS.linkedin} target="_blank" rel="noopener noreferrer">
+                                    <i className="fab fa-linkedin" aria-hidden="true" /> {BASICS.linkedinLabel}
+                                </a>
+                                <a href={BASICS.github} target="_blank" rel="noopener noreferrer">
+                                    <i className="fab fa-github" aria-hidden="true" /> {BASICS.githubLabel}
+                                </a>
+                                <a href={BASICS.siteUrl} target="_blank" rel="noopener noreferrer">
+                                    <i className="fas fa-globe" aria-hidden="true" /> {BASICS.site}
+                                </a>
                             </div>
                         </div>
 
                         <div className="resume-section">
-                            <h2 className="resume-section-title">Profile</h2>
-                            <p>"I'm a highly motivated and disciplined graduate with a strong academic background, eager to apply my skills to a software engineering career"</p>
+                            <h2 className="resume-section-title">Professional summary</h2>
+                            <p>{SUMMARY}</p>
                         </div>
 
                         <div className="resume-section">
-                            <h2 className="resume-section-title">Work Experience</h2>
-
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Lead Full Stack Developer, RuralHealth AI</strong>
-                                    <span>Jan 2026 – Present</span>
-                                </div>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Frontend Developer, Price Radar</strong>
-                                    <span>Aug 2025 – Dec 2025</span>
-                                </div>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Security & AI Engineer, Secure Eval</strong>
-                                    <span>Mar 2025 – Jul 2025</span>
-                                </div>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Machine Learning Engineer, ADR Risk Predictor</strong>
-                                    <span>Sep 2024 – Feb 2025</span>
-                                </div>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Software Engineer, Resume Analyzer</strong>
-                                    <span>Apr 2024 – Aug 2024</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="resume-section">
-                            <h2 className="resume-section-title">Education</h2>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Master's of Computer Application (MCA)</strong>
-                                    <span>08/2024 – Present | Delhi</span>
-                                </div>
-                                <div className="resume-item-details">
-                                    <p>Jamia Hamdard University</p>
-                                    <p>CGPA: 8.77/10</p>
-                                </div>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Bachelor of Computer Applications (BCA)</strong>
-                                    <span>2021 – 2024 | Lucknow</span>
-                                </div>
-                                <div className="resume-item-details">
-                                    <p>Integral University Lucknow</p>
-                                    <p>CGPA: 9.50/10</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="resume-section">
-                            <h2 className="resume-section-title">Skills</h2>
-                            <div className="resume-skills-grid">
-                                <div>
-                                    <strong>Programming Languages:</strong>
-                                    <p>C Programming, C++ Programming, Java, Dart, Python, Kotlin</p>
-                                </div>
-                                <div>
-                                    <strong>Frameworks & Technologies:</strong>
-                                    <p>React, Next.js, Vite, Flutter, Flask, FastAPI, XML</p>
-                                </div>
-                                <div>
-                                    <strong>Database & Tools:</strong>
-                                    <p>DBMS, Firebase, GitHub, Linux</p>
-                                </div>
-                                <div>
-                                    <strong>Other Skills:</strong>
-                                    <p>Research and Analytics, English Proficiency</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="resume-section">
-                            <h2 className="resume-section-title">Projects</h2>
-                            {projects.map((project, index) => (
-                                <div className="resume-item" key={index}>
-                                    <div className="resume-item-header">
-                                        <strong>{project.title}</strong>
-                                        <span>{project.type}</span>
+                            <h2 className="resume-section-title">Technical skills</h2>
+                            <dl className="resume-skills-grid">
+                                {SKILL_GROUPS.map((group) => (
+                                    <div className="resume-skill-row" key={group.id}>
+                                        <dt>{group.title}</dt>
+                                        <dd>{group.skills.join(', ')}</dd>
                                     </div>
-                                    <p>{project.description}</p>
-                                    <p style={{ fontSize: '0.85rem', marginTop: '0.3rem', color: 'var(--text-muted)' }}>
-                                        <i className="fas fa-code" style={{ marginRight: '5px' }}></i>
-                                        {project.tech}
-                                    </p>
+                                ))}
+                            </dl>
+                        </div>
+
+                        <div className="resume-section">
+                            <h2 className="resume-section-title">Professional experience</h2>
+                            {EXPERIENCE.map((role) => (
+                                <div className="resume-item" key={`${role.company}-${role.title}`}>
+                                    <div className="resume-item-header">
+                                        <strong>
+                                            {role.title} — {role.company}
+                                            {role.location ? `, ${role.location}` : ''}
+                                        </strong>
+                                        <span>{role.date}</span>
+                                    </div>
+                                    <ul className="resume-item-details">
+                                        {role.highlights.map((point) => (
+                                            <li key={point}>{point}</li>
+                                        ))}
+                                    </ul>
                                 </div>
                             ))}
                         </div>
 
                         <div className="resume-section">
-                            <h2 className="resume-section-title">Trainings / Certifications</h2>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Generative AI Foundation</strong>
-                                    <span>05/2025 – 06/2025</span>
+                            <h2 className="resume-section-title">Projects</h2>
+                            {featuredProjects.map((project) => (
+                                <div className="resume-item" key={project.title}>
+                                    <div className="resume-item-header">
+                                        <strong>{project.title}</strong>
+                                        <span>{project.tech.slice(0, 4).join(', ')}</span>
+                                    </div>
+                                    <p className="resume-item-details">{project.description}</p>
                                 </div>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Internship & Job Preparation</strong>
-                                    <span>02/2023 – 05/2023</span>
+                            ))}
+                        </div>
+
+                        <div className="resume-section">
+                            <h2 className="resume-section-title">Education</h2>
+                            {EDUCATION.map((entry) => (
+                                <div className="resume-item" key={entry.degree}>
+                                    <div className="resume-item-header">
+                                        <strong>
+                                            {entry.degree} — {entry.institution}, {entry.location}
+                                        </strong>
+                                        <span>{entry.date}</span>
+                                    </div>
+                                    <p className="resume-item-details">CGPA: {entry.cgpa}</p>
                                 </div>
-                            </div>
-                            <div className="resume-item">
-                                <div className="resume-item-header">
-                                    <strong>Android App Development</strong>
-                                    <span>02/2023 – 07/2023</span>
+                            ))}
+                        </div>
+
+                        <div className="resume-section">
+                            <h2 className="resume-section-title">
+                                Certifications, publications &amp; achievements
+                            </h2>
+                            {CERTIFICATIONS.map((cert) => (
+                                <div className="resume-item" key={cert.title}>
+                                    <div className="resume-item-header">
+                                        <strong>{cert.title} — {cert.issuer}</strong>
+                                        <span>{cert.date}</span>
+                                    </div>
                                 </div>
-                            </div>
+                            ))}
+                            {PUBLICATIONS.map((pub) => (
+                                <div className="resume-item" key={pub.link}>
+                                    <div className="resume-item-header">
+                                        <strong>Publication: {pub.title}</strong>
+                                        <span>{pub.date}</span>
+                                    </div>
+                                    <p className="resume-item-details">{pub.journal}</p>
+                                </div>
+                            ))}
                         </div>
 
                         <div className="resume-footer-text">
-                            <p>shoibsahmad@gmail.com</p>
+                            <p>
+                                {BASICS.email} · {BASICS.phone} · {BASICS.site}
+                            </p>
                         </div>
                     </div>
                 </div>

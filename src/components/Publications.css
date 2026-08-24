@@ -1,193 +1,122 @@
-/* Publications Section — PRDUCK Warm Theme */
-.publications {
-    padding: var(--section-spacing) 0;
-    background: var(--bg-primary);
-    position: relative;
-}
+/* Publications — an academic citation card. */
 
-/* Background decoration */
-.publications::before {
-    content: '';
-    position: absolute;
-    top: 20%;
-    right: 0;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(255, 107, 0, 0.04) 0%, transparent 70%);
-    z-index: 0;
-    pointer-events: none;
-}
-
-.publications-grid {
+.publications__list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    position: relative;
-    z-index: 1;
-}
-
-.pub-card {
-    border-radius: var(--radius-lg);
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-    background: rgba(255, 255, 255, 0.85);
-    border: 1px solid var(--border);
-}
-
-.pub-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--primary);
-}
-
-.card-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 107, 0, 0.04), transparent 40%);
-    opacity: 0;
-    transition: opacity 0.5s;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.pub-card:hover .card-glow {
-    opacity: 1;
-}
-
-.pub-year-badge {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    font-size: 3rem;
-    font-weight: 900;
-    color: rgba(0, 0, 0, 0.03);
-    font-family: var(--font-heading);
-    line-height: 1;
-    pointer-events: none;
-}
-
-.pub-content {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.pub-meta-top {
-    margin-bottom: 1rem;
-}
-
-.pub-journal {
-    font-size: 0.85rem;
-    color: var(--primary);
-    background: rgba(255, 107, 0, 0.08);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.pub-title {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    line-height: 1.4;
-}
-
-.pub-title a {
-    color: var(--text-primary);
-    background-image: linear-gradient(var(--primary), var(--primary));
-    background-size: 0% 1px;
-    background-repeat: no-repeat;
-    background-position: left bottom;
-    transition: background-size 0.3s;
-}
-
-.pub-title a:hover {
-    color: var(--primary);
-    background-size: 100% 1px;
-}
-
-.pub-abstract {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    margin-bottom: 2rem;
-    flex-grow: 1;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    line-height: 1.6;
-}
-
-.pub-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    margin-top: auto;
-}
-
-.pub-authors {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.pub-actions {
-    display: flex;
-    align-items: center;
     gap: 1rem;
 }
 
-.btn-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
+.publication {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    padding: clamp(1.5rem, 3vw, 2rem);
+}
+
+/* Year rail, separated by a hairline like a citation index */
+.publication__rail {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-    transition: var(--transition);
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-right: clamp(1rem, 3vw, 2rem);
+    border-right: 1px solid var(--border);
 }
 
-.btn-icon:hover {
-    background: var(--primary);
-    color: white;
-    transform: rotate(45deg);
-}
-
-.status-badge {
-    font-size: 0.75rem;
+.publication__year {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
     font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.publication__status {
+    align-self: flex-start;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-pill);
+    background: var(--positive-soft);
+    border: 1px solid rgba(21, 128, 61, 0.18);
+    font-size: var(--fs-micro);
+    font-weight: 600;
+    color: var(--positive);
+}
+
+.publication__journal {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
     text-transform: uppercase;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
 }
 
-.status-badge.published {
-    background: rgba(16, 185, 129, 0.1);
-    color: #059669;
-    border: 1px solid rgba(16, 185, 129, 0.2);
+.publication__title {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: 0.75rem;
 }
 
-@media (max-width: 768px) {
-    .publications {
-        padding: 4rem 0;
+.publication__title a {
+    color: var(--text-primary);
+    /* Keeps the trailing icon on the same line as the last word rather than
+       stranding it alone on a new line */
+    display: inline;
+}
+
+.publication__title a:hover {
+    color: var(--accent);
+}
+
+.publication__title i {
+    margin-left: 0.45rem;
+    font-size: 0.65em;
+    vertical-align: middle;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.publication__title a:hover i {
+    color: var(--accent);
+}
+
+.publication__abstract {
+    font-size: var(--fs-sm);
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 62ch;
+    margin-bottom: 0.85rem;
+}
+
+.publication__authors {
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--border-light);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+@media (max-width: 640px) {
+    /* The rail becomes a header row so the year and status sit side by side
+       instead of taking a 6.5rem column out of a 320px screen */
+    .publication {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
-    .publications-grid {
-        grid-template-columns: 1fr;
+    .publication__rail {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.75rem;
+        padding-right: 0;
+        padding-bottom: 0.85rem;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .publication__year {
+        font-size: 1.25rem;
     }
 }

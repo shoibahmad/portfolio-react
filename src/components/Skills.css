@@ -1,265 +1,150 @@
-/* =========================================================
-   Skills Section — Bento Grid Redesign (Highly Animated)
-   ========================================================= */
+/* Skills — grouped chips.
 
-.skills-section {
-    padding: 8rem 0 6rem;
-    background: var(--bg-primary);
-    position: relative;
-    overflow: hidden;
-}
+   Deliberately no per-skill brand colours and no proficiency meters. Twenty
+   logo colours in one grid is the fastest way to make a page look like a
+   sticker album, and a self-assigned percentage bar is a number with no unit
+   behind it. */
 
-.skills-header {
-    margin-bottom: 3.5rem;
-}
-
-.skills-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: #FF6B00;
-    background: rgba(255, 107, 0, 0.08);
-    border: 1px solid rgba(255, 107, 0, 0.2);
-    padding: 0.35rem 0.9rem;
-    border-radius: 9999px;
-    margin-bottom: 1.25rem;
-}
-
-.skills-badge .badge-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #FF6B00;
-    box-shadow: 0 0 8px #FF6B00;
-    animation: badgePing 2s infinite ease-in-out;
-}
-
-/* Tab Navigation */
-.skills-tabs {
+.skills__tabs {
     display: flex;
-    justify-content: center;
-    gap: 0.6rem;
     flex-wrap: wrap;
-    margin-bottom: 3rem;
+    gap: 0.4rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
 }
 
-.skills-tab-btn {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    color: #555555;
-    background: #FFFFFF;
+.skills__tab {
+    padding: 0.5rem 0.95rem;
+    background: transparent;
     border: 1px solid var(--border);
-    padding: 0.55rem 1.15rem;
-    border-radius: 9999px;
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--text-secondary);
     cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    white-space: nowrap;
+    transition: var(--transition);
 }
 
-.skills-tab-btn:hover {
-    color: #111111;
-    border-color: #FF6B00;
+.skills__tab:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
 }
 
-.skills-tab-btn.active {
-    background: #111111;
-    color: #FFFFFF;
-    border-color: #111111;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+.skills__tab.is-active {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--text-inverse);
 }
 
-/* Bento Grid */
-.skills-bento-grid {
+/* --- Groups ---------------------------------------------------------------- */
+.skills__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.75rem;
-    margin-bottom: 4rem;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    align-items: start;
 }
 
-.bento-skill-card {
-    background: #FFFFFF;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 2.25rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+.skills__group {
+    padding: clamp(1.25rem, 3vw, 1.75rem);
 }
 
-.bento-skill-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 107, 0, 0.4);
-    box-shadow: 0 16px 36px rgba(255, 107, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.04);
+/* The learning group reads as provisional: no fill, dashed edge. It should not
+   carry the same visual weight as the stack that ships. */
+.skills__group.is-learning {
+    background: transparent;
+    border-style: dashed;
+    box-shadow: none;
 }
 
-/* Bento Card Header */
-.bento-card-header {
+.skills__group-head {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.75rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.1rem;
+    border-bottom: 1px solid var(--border-light);
 }
 
-.bento-icon-wrapper {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    background: #FFF5EE;
-    border: 1px solid #FFE0CC;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-    color: #FF6B00;
+.skills__group-icon {
     flex-shrink: 0;
-    transition: all 0.3s ease;
-}
-
-.bento-skill-card:hover .bento-icon-wrapper {
-    background: #FF6B00;
-    color: #FFFFFF;
-    transform: scale(1.08) rotate(-4deg);
-    box-shadow: 0 6px 16px rgba(255, 107, 0, 0.3);
-}
-
-.bento-header-text {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-}
-
-.bento-tag {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #FF6B00;
-}
-
-.bento-header-text h3 {
-    font-family: var(--font-heading);
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: #111111;
-    margin: 0;
-    letter-spacing: -0.02em;
-}
-
-.bento-desc {
-    font-size: 0.92rem;
-    color: #666666;
-    line-height: 1.6;
-    margin-bottom: 1.75rem;
-}
-
-/* Skills List with Pills & Proficiency Meters */
-.bento-skills-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-    gap: 0.85rem;
-    margin-top: auto;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: var(--radius-sm);
+    background: var(--surface-muted);
+    border: 1px solid var(--border-light);
+    color: var(--accent);
+    font-size: 0.85rem;
 }
 
-.bento-skill-pill {
-    background: #FAF7F4;
-    border: 1px solid #EFEAE5;
-    border-radius: 14px;
-    padding: 0.75rem 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    transition: all 0.25s ease;
-    cursor: default;
+.skills__group.is-learning .skills__group-icon {
+    color: var(--text-muted);
 }
 
-.bento-skill-pill:hover {
-    background: #FFFFFF;
-    border-color: #FF6B00;
-    box-shadow: 0 6px 18px rgba(255, 107, 0, 0.12);
-}
-
-.bento-skill-pill i {
-    font-size: 1.3rem;
-    flex-shrink: 0;
-    transition: transform 0.25s ease;
-}
-
-.bento-skill-pill:hover i {
-    transform: scale(1.18);
-}
-
-.pill-info {
-    display: flex;
-    flex-direction: column;
+.skills__group-title {
     flex: 1;
     min-width: 0;
-    gap: 0.3rem;
-}
-
-.pill-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.pill-name {
-    font-size: 0.84rem;
+    font-size: 1.02rem;
     font-weight: 700;
-    color: #111111;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
 }
 
-.pill-meta {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.65rem;
-    color: #888888;
-    font-weight: 600;
+.skills__group-note {
+    flex-shrink: 0;
+    padding: 0.15rem 0.55rem;
+    border-radius: var(--radius-pill);
+    background: var(--surface-muted);
+    border: 1px solid var(--border-light);
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
 }
 
-/* Skill Progress Meter */
-.skill-meter-bg {
-    width: 100%;
-    height: 4px;
-    background: rgba(0, 0, 0, 0.06);
-    border-radius: 999px;
-    overflow: hidden;
-    position: relative;
+/* --- Pills -------------------------------------------------------------------- */
+.skills__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
 }
 
-.skill-meter-fill {
-    height: 100%;
-    border-radius: 999px;
-    box-shadow: 0 0 6px rgba(255, 107, 0, 0.4);
+.skills__pill {
+    padding: 0.34rem 0.7rem;
+    background: var(--surface-muted);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-/* Responsive */
-@media (max-width: 960px) {
-    .skills-bento-grid {
-        grid-template-columns: 1fr;
+.skills__pill:hover {
+    border-color: var(--border-strong);
+    color: var(--accent);
+}
+
+.skills__group.is-learning .skills__pill {
+    background: transparent;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 700px) {
+    /* Eight tabs scroll rather than wrapping into four rows */
+    .skills__tabs {
+        flex-wrap: nowrap;
+        min-width: 0;
+        width: 100%;
+        overflow-x: auto;
+        scrollbar-width: none;
     }
-}
 
-@media (max-width: 640px) {
-    .skills-section {
-        padding: 5rem 0 4rem;
-    }
+    .skills__tabs::-webkit-scrollbar { display: none; }
 
-    .bento-skill-card {
-        padding: 1.5rem;
-    }
-
-    .bento-skills-list {
-        grid-template-columns: 1fr;
-    }
+    .skills__tab { flex: 0 0 auto; }
 }

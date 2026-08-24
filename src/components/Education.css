@@ -1,111 +1,65 @@
-/* Education Section Styles — PRDUCK Warm Theme */
-.education {
-    padding: 6rem 0;
-    background: var(--bg-primary);
+/* Education — two ruled entries with a metadata rail. */
+
+.education__list {
+    border-top: 1px solid var(--border);
 }
 
-.education-list {
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+.education__item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: clamp(1rem, 4vw, 3rem);
+    padding: clamp(1.5rem, 3vw, 2rem) 0;
+    border-bottom: 1px solid var(--border);
 }
 
-.education-item {
-    background: rgba(255, 255, 255, 0.85);
-    padding: 2.5rem 3rem;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition);
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
-
-.education-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 4px;
-    background: var(--border);
-    transition: var(--transition);
-}
-
-.education-item:hover::before {
-    background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
-    box-shadow: 0 0 8px var(--primary);
-}
-
-.education-item:hover {
-    transform: translateX(5px);
-    box-shadow: var(--shadow-lg);
-    background: rgba(255, 255, 255, 0.95);
-    border-color: rgba(255, 107, 0, 0.3);
-}
-
-.edu-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-}
-
-.edu-header h3 {
-    font-size: 1.35rem;
-    margin-bottom: 0.5rem;
-    color: var(--text-primary);
-}
-
-.institution {
-    display: block;
-    color: var(--primary);
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-}
-
-.cgpa {
-    display: block;
-    color: var(--primary-dark);
+.education__degree {
+    font-size: var(--fs-h3);
     font-weight: 700;
-    margin-top: 0.5rem;
-    font-size: 1rem;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
 }
 
-.edu-meta {
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.edu-date {
-    font-size: 0.85rem;
+.education__institution {
+    font-size: var(--fs-body);
     color: var(--text-secondary);
-    font-weight: 600;
-    background: var(--bg-tertiary);
-    padding: 0.35rem 1rem;
-    border-radius: 20px;
-    display: inline-block;
 }
 
-.edu-location {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    font-weight: 600;
+.education__meta {
+    display: flex;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
 }
 
-@media (max-width: 768px) {
-    .edu-header {
-        flex-direction: column;
-        gap: 1rem;
+.education__meta dt {
+    margin-bottom: 0.2rem;
+}
+
+.education__cgpa {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    /* Tabular figures keep the two CGPAs aligned under one another */
+    font-variant-numeric: tabular-nums;
+}
+
+.education__value {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+    .education__item {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
     }
 
-    .edu-meta {
-        text-align: left;
+    .education__meta {
+        justify-content: space-between;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-light);
     }
 }

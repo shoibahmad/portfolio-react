@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ScrollToTop.css';
 
@@ -36,31 +36,24 @@ const ScrollToTop = () => {
                     className="scroll-to-top-btn"
                     onClick={scrollToTop}
                     aria-label="Scroll to top"
-                    initial={{ opacity: 0, scale: 0.5, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.5, y: 20 }}
-                    whileHover={{ scale: 1.1, y: -4 }}
-                    whileTap={{ scale: 0.9 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 12 }}
+                    whileHover={{ y: -3 }}
+                    whileTap={{ y: 0 }}
+                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                 >
-                    <svg className="scroll-progress-ring" width="54" height="54">
+                    <svg className="scroll-progress-ring" viewBox="0 0 54 54" aria-hidden="true">
                         <circle
                             className="ring-bg"
-                            stroke="rgba(255, 107, 0, 0.15)"
-                            strokeWidth="3.5"
-                            fill="transparent"
                             r={radius}
                             cx="27"
                             cy="27"
                         />
                         <circle
                             className="ring-fill"
-                            stroke="#FF6B00"
-                            strokeWidth="3.5"
                             strokeDasharray={circumference}
                             style={{ strokeDashoffset }}
-                            strokeLinecap="round"
-                            fill="transparent"
                             r={radius}
                             cx="27"
                             cy="27"

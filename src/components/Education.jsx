@@ -1,48 +1,45 @@
-import React from 'react';
+import { EDUCATION } from '../data/profile';
 import './Education.css';
 
-const Education = () => {
-    const education = [
-        {
-            degree: "Master's of Computer Application (MCA)",
-            institution: "Jamia Hamdard University",
-            cgpa: "CGPA: 8.77/10",
-            date: "08/2024 – Present",
-            location: "Delhi"
-        },
-        {
-            degree: "Bachelor of Computer Applications (BCA)",
-            institution: "Integral University Lucknow",
-            cgpa: "CGPA: 9.10/10",
-            date: "2021 – 2024",
-            location: "Lucknow"
-        }
-    ];
-
-    return (
-        <section id="education" className="education">
-            <div className="container">
-                <h2 className="section-title">Education</h2>
-                <div className="education-list">
-                    {education.map((edu, index) => (
-                        <div key={index} className="education-item animate-on-scroll" style={{ transitionDelay: `${index * 150}ms` }}>
-                            <div className="edu-header">
-                                <div>
-                                    <h3>{edu.degree}</h3>
-                                    <p className="institution">{edu.institution}</p>
-                                    <p className="cgpa">{edu.cgpa}</p>
-                                </div>
-                                <div className="edu-meta">
-                                    <span className="edu-date">{edu.date}</span>
-                                    <span className="edu-location">{edu.location}</span>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+const Education = () => (
+    <section className="education section" id="education" aria-labelledby="education-title">
+        <div className="shell">
+            <div className="section-head">
+                <span className="section-kicker">Education</span>
+                <h2 className="section-title" id="education-title">Formal grounding.</h2>
             </div>
-        </section>
-    );
-};
+
+            <ul className="education__list">
+                {EDUCATION.map((entry, index) => (
+                    <li
+                        className="education__item animate-on-scroll"
+                        key={entry.degree}
+                        style={{ transitionDelay: `${index * 120}ms` }}
+                    >
+                        <div className="education__body">
+                            <h3 className="education__degree">{entry.degree}</h3>
+                            <p className="education__institution">{entry.institution}</p>
+                        </div>
+
+                        <dl className="education__meta">
+                            <div>
+                                <dt className="label">CGPA</dt>
+                                <dd className="education__cgpa">{entry.cgpa}</dd>
+                            </div>
+                            <div>
+                                <dt className="label">Years</dt>
+                                <dd className="education__value">{entry.date}</dd>
+                            </div>
+                            <div>
+                                <dt className="label">Location</dt>
+                                <dd className="education__value">{entry.location}</dd>
+                            </div>
+                        </dl>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    </section>
+);
 
 export default Education;

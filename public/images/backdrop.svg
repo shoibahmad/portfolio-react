@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Page backdrop.
+
+  A very quiet gradient wash, not a picture with a subject. It exists to stop the
+  off-white canvas reading as dead flat, and it is tuned so that black body copy
+  laid over any part of it still clears AA contrast — every tint here sits above
+  #F2F1EF in luminance.
+
+  Authored as SVG rather than a raster: ~2KB, stays crisp on a 3x phone screen
+  and a 5K display alike, and its stops are the same values as the CSS tokens so
+  the backdrop and the DOM cannot drift apart.
+
+  preserveAspectRatio="xMidYMid slice" makes it behave like background-size: cover.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000"
+     preserveAspectRatio="xMidYMid slice" width="1600" height="1000">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%"   stop-color="#FBFBFA"/>
+      <stop offset="55%"  stop-color="#F7F6F4"/>
+      <stop offset="100%" stop-color="#F3F2F0"/>
+    </linearGradient>
+
+    <!-- Warm tint, keyed to the accent but at ~4% so it never becomes a colour -->
+    <radialGradient id="warm" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#EA580C" stop-opacity="0.055"/>
+      <stop offset="60%"  stop-color="#EA580C" stop-opacity="0.018"/>
+      <stop offset="100%" stop-color="#EA580C" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Cool counterweight, stops the whole page skewing orange -->
+    <radialGradient id="cool" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#64748B" stop-opacity="0.05"/>
+      <stop offset="60%"  stop-color="#64748B" stop-opacity="0.016"/>
+      <stop offset="100%" stop-color="#64748B" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="melt" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="110"/>
+    </filter>
+
+    <!-- Grain. Large smooth gradients band visibly on 8-bit panels; this noise
+         dithers those transitions away. Kept under 4% so it never reads as
+         texture, only as an absence of banding. -->
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="11" result="n"/>
+      <feColorMatrix in="n" type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#paper)"/>
+
+  <g filter="url(#melt)">
+    <ellipse cx="1330" cy="120"  rx="560" ry="420" fill="url(#warm)"/>
+    <ellipse cx="180"  cy="760"  rx="520" ry="400" fill="url(#warm)"/>
+    <ellipse cx="420"  cy="80"   rx="600" ry="380" fill="url(#cool)"/>
+    <ellipse cx="1180" cy="940"  rx="560" ry="360" fill="url(#cool)"/>
+  </g>
+
+  <rect width="1600" height="1000" filter="url(#grain)" opacity="0.035" style="mix-blend-mode:multiply"/>
+</svg>

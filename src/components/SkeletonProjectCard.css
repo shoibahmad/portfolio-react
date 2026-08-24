@@ -1,101 +1,85 @@
+/* Loading placeholder.
+
+   Shaped to match the real card exactly — same aspect ratio, same padding, same
+   block order — so nothing shifts when the content arrives. */
+
 .skeleton-card {
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: var(--radius-lg);
+    background: var(--surface);
     border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xs);
     overflow: hidden;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--shadow);
-}
-
-.skeleton-pulse {
-    background: linear-gradient(90deg,
-            var(--bg-tertiary) 0%,
-            var(--border) 50%,
-            var(--bg-tertiary) 100%);
-    background-size: 200% 100%;
-    animation: pulse 1.5s infinite linear;
-}
-
-@keyframes pulse {
-    0% {
-        background-position: 0% 0%;
-    }
-
-    100% {
-        background-position: -200% 0%;
-    }
 }
 
 .skeleton-image {
-    height: 260px;
-    width: 100%;
-    background-color: var(--bg-secondary);
+    aspect-ratio: 16 / 9;
+    border-bottom: 1px solid var(--border);
 }
 
+.skeleton-body,
 .skeleton-content {
-    padding: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    flex: 1;
+    gap: 0.7rem;
+    padding: 1.25rem;
 }
 
 .skeleton-header {
-    margin-bottom: 1.25rem;
-}
-
-.skeleton-title {
-    height: 28px;
-    width: 70%;
-    border-radius: 4px;
-    margin-bottom: 0.5rem;
-}
-
-.skeleton-date {
-    height: 24px;
-    width: 30%;
-    border-radius: 20px;
-    margin-top: 0.5rem;
-}
-
-.skeleton-body {
-    flex: 1;
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
-.skeleton-text {
-    height: 16px;
-    width: 100%;
-    border-radius: 4px;
-}
-
-.skeleton-text-short {
-    height: 16px;
-    width: 80%;
-    border-radius: 4px;
-}
+.skeleton-title { height: 1.1rem; width: 65%; }
+.skeleton-date  { height: 0.7rem; width: 20%; }
+.skeleton-text  { height: 0.7rem; width: 100%; }
+.skeleton-text-short { height: 0.7rem; width: 70%; }
 
 .skeleton-tags {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
     flex-wrap: wrap;
+    gap: 0.4rem;
 }
 
-.skeleton-tag {
-    height: 28px;
-    width: 60px;
-    border-radius: 4px;
+.skeleton-tag { height: 1.4rem; width: 4.5rem; border-radius: var(--radius-pill); }
+.skeleton-button { height: 2.2rem; width: 8rem; border-radius: var(--radius-pill); }
+
+/* One shimmer definition, applied to every block above */
+.skeleton-image,
+.skeleton-title,
+.skeleton-date,
+.skeleton-text,
+.skeleton-text-short,
+.skeleton-tag,
+.skeleton-button,
+.skeleton-pulse {
+    border-radius: var(--radius-xs);
+    background: linear-gradient(
+        90deg,
+        var(--surface-sunken) 25%,
+        var(--bg-tertiary) 37%,
+        var(--surface-sunken) 63%
+    );
+    background-size: 400% 100%;
+    animation: skeletonShimmer 1.4s ease-in-out infinite;
 }
 
-.skeleton-button {
-    height: 48px;
-    width: 100%;
-    border-radius: 0.5rem;
-    margin-top: auto;
+@keyframes skeletonShimmer {
+    0%   { background-position: 100% 50%; }
+    100% { background-position: 0 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton-image,
+    .skeleton-title,
+    .skeleton-date,
+    .skeleton-text,
+    .skeleton-text-short,
+    .skeleton-tag,
+    .skeleton-button,
+    .skeleton-pulse {
+        animation: none;
+        background: var(--surface-sunken);
+    }
 }

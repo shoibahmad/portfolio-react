@@ -1,137 +1,111 @@
-/* Services Section Styles — Highly Animated */
-.services {
-    padding: 8rem 0 6rem;
-    background: var(--bg-primary);
-    position: relative;
-    overflow: hidden;
-}
+/* Services — three numbered cards.
 
-.services-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: #FF6B00;
-    background: rgba(255, 107, 0, 0.08);
-    border: 1px solid rgba(255, 107, 0, 0.2);
-    padding: 0.35rem 0.9rem;
-    border-radius: 9999px;
-    margin-bottom: 1.25rem;
-}
+   The card is the one place in the layout where the quiet 3D lives: TiltCard
+   rotates the whole surface a few degrees under the pointer while `.pop-1`
+   holds the icon forward on its own plane, so the two separate visibly. */
 
-.services-badge .badge-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #FF6B00;
-    box-shadow: 0 0 8px #FF6B00;
-    animation: badgePing 2s infinite ease-in-out;
-}
-
-.services-grid {
+.services__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
-    position: relative;
-    z-index: 1;
-    padding: 1rem 0;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
 }
 
-.research-card {
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    padding: 3rem 2.25rem;
-    border-radius: 24px;
-    text-align: center;
-    border: 1px solid var(--border);
+.services__card {
     position: relative;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    height: 100%;
+    padding: clamp(1.5rem, 3vw, 2rem);
     overflow: hidden;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.35s var(--ease-out), transform 0.35s var(--ease-out),
+                border-color 0.3s ease;
 }
 
-.research-card:hover {
-    border-color: rgba(255, 107, 0, 0.5);
-    box-shadow: 0 20px 40px rgba(255, 107, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+.services__card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-strong);
 }
 
-.service-tag {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: #FF6B00;
-    background: rgba(255, 107, 0, 0.1);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    margin-bottom: 1.5rem;
-}
-
-.service-icon {
-    width: 76px;
-    height: 76px;
-    background: rgba(255, 107, 0, 0.08);
-    color: var(--primary);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    margin-bottom: 1.75rem;
-    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-    border: 1px solid rgba(255, 107, 0, 0.2);
-}
-
-.research-card:hover .service-icon {
-    background: linear-gradient(135deg, #FF6B00 0%, #E05E00 100%);
-    color: #FFFFFF;
-    transform: scale(1.12) rotate(6deg);
-    box-shadow: 0 10px 24px rgba(255, 107, 0, 0.35);
-    border-color: transparent;
-}
-
-.research-card h3 {
+/* Oversized index digit, ghosted into the top-right corner */
+.services__num {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
     font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: 4.5rem;
     font-weight: 800;
-    margin-bottom: 1rem;
+    line-height: 1;
     color: var(--text-primary);
-    letter-spacing: -0.02em;
+    opacity: 0.045;
+    pointer-events: none;
+    user-select: none;
 }
 
-.research-card p {
-    color: var(--text-secondary);
+.services__icon {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-bottom: 1.25rem;
+    border-radius: var(--radius-sm);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    color: var(--accent);
+    font-size: 1.05rem;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.services__card:hover .services__icon {
+    background: var(--accent);
+    color: #FFFFFF;
+    border-color: var(--accent);
+}
+
+.services__tag {
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.services__title {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+    margin-bottom: 0.65rem;
+}
+
+.services__desc {
+    font-size: var(--fs-sm);
     line-height: 1.7;
-    font-size: 0.96rem;
-    margin-bottom: 2rem;
-    flex-grow: 1;
+    color: var(--text-secondary);
 }
 
-.card-footer-line {
-    width: 44px;
-    height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s ease;
+/* --- Footer ---------------------------------------------------------------- */
+.services__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding-top: clamp(1.75rem, 3vw, 2.5rem);
+    border-top: 1px solid var(--border);
 }
 
-.research-card:hover .card-footer-line {
-    width: 100%;
-    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+.services__footer-text {
+    max-width: 42ch;
+    font-size: var(--fs-lead);
+    color: var(--text-secondary);
+    margin: 0;
 }
 
-@media (max-width: 768px) {
-    .services-grid {
-        grid-template-columns: 1fr;
+@media (max-width: 560px) {
+    .services__footer {
+        flex-direction: column;
+        align-items: flex-start;
     }
-    .research-card {
-        padding: 2.25rem 1.75rem;
+
+    .services__footer .btn {
+        width: 100%;
     }
 }

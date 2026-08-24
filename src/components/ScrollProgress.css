@@ -1,10 +1,20 @@
+/* Reading progress — a hairline across the very top of the viewport.
+
+   Sits above the header (z-index 101) so it stays visible once the header
+   resolves to its opaque state. */
+
 .scroll-progress {
     position: fixed;
     top: 0;
     left: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-    z-index: 9999;
-    transition: width 0.1s ease-out;
-    box-shadow: 0 2px 8px rgba(255, 107, 0, 0.4);
+    right: 0;
+    height: 2px;
+    z-index: 101;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    /* The component writes scaleX from scroll position; nothing here should
+       transition it, or the bar would lag behind the scroll. */
+    will-change: transform;
+    pointer-events: none;
 }

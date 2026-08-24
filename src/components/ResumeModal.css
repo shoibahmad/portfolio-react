@@ -1,264 +1,332 @@
-/* Resume Modal Styles — PRDUCK Warm Theme */
+/* Printable CV sheet.
+
+   Styled as a document, not as an app screen: white paper, serif-adjacent
+   hierarchy, ruled section headings. It is also the one surface with real print
+   styles, since this is the thing people actually print. */
+
 .resume-modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2000;
+    inset: 0;
+    z-index: 1000;
     display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
+    place-items: center;
+    padding: clamp(0.5rem, 3vw, 2rem);
 }
 
-.resume-modal.active {
-    display: flex;
+/* Toggled by the component adding this class on the element */
+.resume-modal.active,
+.resume-modal[style*="display: flex"],
+.resume-modal[style*="display:flex"] {
+    display: grid;
 }
 
 .resume-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
+    inset: 0;
+    background: rgba(16, 16, 20, 0.45);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
 }
 
 .resume-container {
     position: relative;
-    background: var(--bg-primary);
-    width: 100%;
-    max-width: 900px;
-    max-height: 90vh;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
+    width: min(52rem, 100%);
+    max-height: min(92svh, 60rem);
     display: flex;
     flex-direction: column;
-    z-index: 2;
-    animation: slideUp 0.4s ease-out;
+    background: var(--surface);
     border: 1px solid var(--border);
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-float);
+    overflow: hidden;
 }
 
 .resume-header {
-    padding: 2rem;
-    border-bottom: 1px solid var(--border);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background: var(--bg-secondary);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-muted);
+    flex-shrink: 0;
 }
 
-.resume-header h2 {
-    font-size: 2rem;
-    color: var(--text-primary);
-}
-
-.resume-modal .close-btn {
-    width: 45px;
-    height: 45px;
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
+.resume-header .close-btn {
+    display: grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
     border: 1px solid var(--border);
-    border-radius: 50%;
-    font-size: 1.5rem;
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    line-height: 1;
     cursor: pointer;
     transition: var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.resume-modal .close-btn:hover {
-    background: var(--primary);
-    color: white;
-    transform: rotate(90deg);
+.resume-header .close-btn:hover {
+    border-color: var(--border-ink);
+    color: var(--text-primary);
 }
 
 .resume-content {
-    padding: 2.5rem;
+    flex: 1;
+    min-height: 0;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    color: var(--text-secondary);
+    overscroll-behavior: contain;
+    background: var(--bg-secondary);
+    padding: clamp(0.75rem, 2.5vw, 1.75rem);
 }
 
-/* Scrollbar styles for the modal body */
-.resume-content::-webkit-scrollbar {
-    width: 8px;
+.resume-paper {
+    background: #FFFFFF;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    padding: clamp(1.5rem, 4vw, 3rem);
 }
 
-.resume-content::-webkit-scrollbar-track {
-    background: var(--bg-primary);
-}
-
-.resume-content::-webkit-scrollbar-thumb {
-    background: var(--bg-tertiary);
-    border-radius: 4px;
-}
-
-.resume-content::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
-}
-
+/* --- Masthead ---------------------------------------------------------------- */
 .resume-top {
-    text-align: center;
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.75rem;
+    border-bottom: 2px solid var(--text-primary);
 }
 
 .resume-name {
-    font-size: 2.75rem;
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
     color: var(--text-primary);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.resume-role {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
 }
 
 .resume-contact-info {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
     flex-wrap: wrap;
-    font-size: 0.95rem;
-    color: var(--text-muted);
+    gap: 0.5rem 1.25rem;
+    font-size: var(--fs-xs);
+    color: var(--text-secondary);
 }
 
-.resume-contact-info span {
-    display: flex;
+.resume-contact-info span,
+.resume-contact-info a {
+    display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.35rem;
 }
 
 .resume-contact-info i {
-    color: var(--primary);
+    color: var(--accent);
+    font-size: 0.75rem;
 }
 
+.resume-contact-info a:hover {
+    color: var(--accent);
+}
+
+/* --- Sections ------------------------------------------------------------------- */
 .resume-section {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.75rem;
 }
 
-.resume-modal .resume-section-title {
-    font-size: 1.75rem;
+.resume-section:last-child {
+    margin-bottom: 0;
+}
+
+.resume-section-title {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
     color: var(--text-primary);
-    border-bottom: 2px solid var(--primary);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-    display: inline-block;
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.9rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.resume-section p {
+    font-size: var(--fs-sm);
+    line-height: 1.7;
+    color: var(--text-secondary);
 }
 
 .resume-item {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.1rem;
+}
+
+.resume-item:last-child {
+    margin-bottom: 0;
 }
 
 .resume-item-header {
     display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.5rem;
-    gap: 1rem;
+    gap: 0.35rem 1rem;
+    margin-bottom: 0.2rem;
 }
 
-.resume-item-header strong {
+.resume-item-header h3,
+.resume-item-header h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
     color: var(--text-primary);
-    font-size: 1.1rem;
 }
 
 .resume-item-header span {
-    color: var(--primary);
-    font-size: 0.9rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--text-muted);
     white-space: nowrap;
-    background: rgba(255, 107, 0, 0.08);
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
 }
 
-.resume-item-details p {
-    margin: 0.25rem 0;
-    font-size: 1rem;
-}
-
-.resume-item p {
-    color: var(--text-secondary);
+.resume-item-details {
+    font-size: var(--fs-sm);
     line-height: 1.7;
-    margin: 0.5rem 0 0 0;
+    color: var(--text-secondary);
 }
 
+/* Bulleted highlights under a role */
+ul.resume-item-details {
+    display: grid;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+}
+
+ul.resume-item-details li {
+    position: relative;
+    padding-left: 1rem;
+}
+
+ul.resume-item-details li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.68em;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--text-faint);
+}
+
+/* Skills read as a definition list — label column, values column — which is how
+   a CV presents them and how a recruiter scans them. */
 .resume-skills-grid {
     display: grid;
-    gap: 1.25rem;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.45rem;
 }
 
-.resume-skills-grid div {
-    padding: 1.25rem;
-    background: var(--bg-secondary);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border);
-    transition: var(--transition);
+.resume-skill-row {
+    display: grid;
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: 0.75rem;
+    font-size: var(--fs-sm);
 }
 
-.resume-skills-grid div:hover {
-    border-color: var(--primary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
+.resume-skill-row dt {
+    font-weight: 700;
+    color: var(--text-primary);
 }
 
-.resume-skills-grid strong {
-    color: var(--primary);
-    display: block;
-    margin-bottom: 0.75rem;
-    font-size: 1.05rem;
-}
-
-.resume-skills-grid p {
+.resume-skill-row dd {
     color: var(--text-secondary);
-    margin: 0;
-    line-height: 1.6;
-    font-size: 0.95rem;
+}
+
+@media (max-width: 560px) {
+    .resume-skill-row {
+        grid-template-columns: 1fr;
+        gap: 0.1rem;
+    }
 }
 
 .resume-footer-text {
-    text-align: center;
-    margin-top: 3rem;
-    padding-top: 1.5rem;
+    margin-top: 1.75rem;
+    padding-top: 1rem;
     border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: var(--fs-micro);
     color: var(--text-muted);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 560px) {
+    .resume-modal {
+        padding: 0;
+    }
+
+    .resume-container {
+        width: 100%;
+        max-height: 100svh;
+        border-radius: 0;
+        border: none;
+    }
+
     .resume-content {
-        padding: 1.5rem;
+        padding: 0;
     }
 
-    .resume-name {
-        font-size: 2.25rem;
+    .resume-paper {
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}
+
+/* --- Print ---------------------------------------------------------------------
+   Strips the dialog chrome so the sheet prints as a document rather than as a
+   screenshot of a modal. */
+@media print {
+    body > *:not(.App),
+    .site-header,
+    .footer,
+    .scroll-to-top-btn,
+    .scroll-progress,
+    .resume-header,
+    .resume-overlay {
+        display: none !important;
     }
 
-    .resume-contact-info {
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: center;
+    .resume-modal {
+        position: static;
+        display: block;
+        padding: 0;
     }
 
-    .resume-item-header {
-        flex-direction: column;
-        gap: 0.5rem;
+    .resume-container {
+        max-height: none;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
     }
 
-    .resume-skills-grid {
-        grid-template-columns: 1fr;
+    .resume-content {
+        overflow: visible;
+        background: #FFFFFF;
+        padding: 0;
+    }
+
+    .resume-paper {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .resume-item {
+        /* Never split a role across a page boundary */
+        break-inside: avoid;
     }
 }

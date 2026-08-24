@@ -1,98 +1,14 @@
-/* Global Styles & Variables — PRDUCK-Inspired Warm Theme */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@1,500;1,600;1,700;1,800&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&family=Inter:wght@400;600;700;800;900&display=swap');
+/* ===========================================================================
+   Global base
+   ======================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap');
 
-:root {
-  /* ===== Warm Amber Palette =====
-     Hues stay on a single warm axis (~28deg) and vary by lightness/chroma, so
-     surfaces stack without the muddy mid-tones a multi-hue peach ramp produces. */
-  --bg-primary: #FFF7F0;
-  /* Warm paper base */
-  --bg-secondary: #FFF1E4;
-  /* Recessed warm cream */
-  --bg-tertiary: #FFE7D3;
-  /* Raised peach card surface */
-  --bg-elevated: #FFFCF9;
-  /* Cards that float above the page */
+@import './styles/tokens.css';
+@import './styles/depth.css';
 
-  /* Luminous mesh — replaces the flat muddy peach ramp.
-     Every stop carries alpha so the WebGL corridor behind the page shows
-     through. An opaque gradient here would hide the 3D layer completely. */
-  --bg-gradient:
-    radial-gradient(1200px 620px at 12% 6%, rgba(255, 138, 61, 0.26), transparent 62%),
-    radial-gradient(940px 540px at 88% 16%, rgba(255, 181, 115, 0.30), transparent 60%),
-    radial-gradient(1000px 720px at 50% 104%, rgba(255, 107, 0, 0.10), transparent 62%),
-    linear-gradient(180deg,
-      rgba(255, 235, 217, 0.86) 0%,
-      rgba(255, 221, 196, 0.78) 32%,
-      rgba(255, 234, 218, 0.72) 64%,
-      rgba(255, 247, 240, 0.80) 100%);
-
-  /* Frosted veil for sections that sit over the 3D layer and still need
-     body-copy contrast. Pair with backdrop-filter, never with full opacity. */
-  --bg-veil: rgba(255, 247, 240, 0.72);
-  --bg-veil-strong: rgba(255, 247, 240, 0.88);
-
-  --text-primary: #1A1310;
-  /* Warm near-black — reads as ink, not soot */
-  --text-secondary: #574B44;
-  /* Warm dark grey */
-  --text-muted: #8A7A70;
-  /* Warm mid grey */
-
-  --primary: #FF6B00;
-  /* Bold Orange */
-  --primary-dark: #D95400;
-  /* Deepened for AA contrast on light surfaces */
-  --primary-light: #FF8C33;
-  /* Lighter Orange */
-  --primary-soft: #FFE2CC;
-  /* Tinted fill for chips/badges */
-  --primary-glow: rgba(255, 107, 0, 0.12);
-
-  --accent: #1A1310;
-  /* Dark Accent */
-  --accent-dark: #0B0705;
-  --accent-glow: rgba(26, 19, 16, 0.08);
-
-  /* Depth cue for 3D sections */
-  --depth-near: rgba(255, 107, 0, 0.16);
-  --depth-far: rgba(140, 92, 58, 0.10);
-
-  --border: #EFDCCA;
-  /* Warm border, lifted so it stops reading as a hard line */
-  --border-light: #F6E9DC;
-  --border-strong: #DCC3AC;
-  --glass-bg: rgba(255, 247, 240, 0.82);
-  --glass-border: rgba(255, 255, 255, 0.65);
-  --glass-shadow: 0 8px 32px 0 rgba(150, 105, 70, 0.12);
-
-  /* Typography matching PRDUCK */
-  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Syne', 'Plus Jakarta Sans', sans-serif;
-  --font-accent: 'Playfair Display', Georgia, serif;
-  --font-mono: 'Space Mono', 'Fira Code', monospace;
-  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-
-  /* Spacing */
-  --section-spacing: 8rem;
-
-  /* Effects — shadows carry the warm hue so depth reads as light, not dirt */
-  --shadow-sm: 0 1px 3px 0 rgba(122, 78, 45, 0.07), 0 1px 2px -1px rgba(122, 78, 45, 0.05);
-  --shadow: 0 4px 6px -1px rgba(122, 78, 45, 0.09), 0 2px 4px -2px rgba(122, 78, 45, 0.06);
-  --shadow-lg: 0 10px 25px -5px rgba(122, 78, 45, 0.12), 0 8px 10px -6px rgba(122, 78, 45, 0.07);
-  --shadow-xl: 0 20px 40px -10px rgba(122, 78, 45, 0.15), 0 10px 20px -8px rgba(122, 78, 45, 0.09);
-  --shadow-colored: 0 10px 40px -10px rgba(255, 107, 0, 0.28);
-  /* Long, soft cast used by elements lifted on the z-axis during scroll */
-  --shadow-float: 0 32px 64px -24px rgba(122, 78, 45, 0.28), 0 12px 24px -12px rgba(255, 107, 0, 0.14);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 24px;
-}
-
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -101,541 +17,299 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light;
+  /* Anchors and scrollIntoView land below the floating header, not underneath it */
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
+  min-height: 100vh;
   font-family: var(--font-body);
-  color: var(--text-primary);
-  background: var(--bg-primary);
-  line-height: 1.85;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--text-secondary);
+  background-color: var(--bg-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* `clip`, not `hidden`. Per spec, `overflow-x: hidden` forces overflow-y to
-     compute to `auto`, which turns <body> into a scroll container — and every
-     `position: sticky` descendant then sticks to that container instead of the
-     viewport, which silently breaks scroll-pinned sections. `clip` prevents the
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  /* `clip`, not `hidden`. Per spec `overflow-x: hidden` forces overflow-y to
+     compute to `auto`, which turns <body> into a scroll container — every
+     `position: sticky` descendant then sticks to that container rather than the
+     viewport, silently breaking the scroll-pinned sections. `clip` stops the
      same horizontal overflow without creating a scroll container. */
   overflow-x: clip;
-  background-image:
-    radial-gradient(circle at 15% 50%, rgba(255, 107, 0, 0.07) 0%, transparent 32%),
-    radial-gradient(circle at 85% 30%, rgba(255, 181, 115, 0.09) 0%, transparent 32%),
-    radial-gradient(circle at 50% 100%, rgba(255, 138, 61, 0.06) 0%, transparent 42%);
-  background-attachment: fixed;
 }
 
-/* Clean warm background — no dot-grid overlay */
+/* ---------------------------------------------------------------------------
+   Backdrop
+   ---------------------------------------------------------------------------
+   Two fixed layers behind all content: the gradient wash, then a faint grid that
+   gives the page an implied ground plane. Both live on pseudo-elements rather
+   than using `background-attachment: fixed`, which iOS Safari ignores outright
+   and which repaints the full background every scroll frame where it does work.
+   ------------------------------------------------------------------------ */
 body::before {
-  display: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  line-height: 1.2;
-  color: var(--text-primary);
-  letter-spacing: -0.04em;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-  transition: var(--transition);
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.section-title {
-  font-size: 2.75rem;
-  text-align: center;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  letter-spacing: -0.04em;
-}
-
-/* Centered label divider style */
-.section-divider {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  justify-content: center;
-  margin-bottom: 3rem;
-}
-
-.section-divider::before,
-.section-divider::after {
   content: '';
-  flex: 1;
-  max-width: 120px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border));
-}
-
-.section-divider::after {
-  background: linear-gradient(90deg, var(--border), transparent);
-}
-
-.section-divider span {
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text-muted);
-  white-space: nowrap;
-}
-
-.section-subtitle {
-  text-align: center;
-  color: var(--text-secondary);
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin: 0 auto 4rem;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--primary), var(--primary-dark));
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--primary-light), var(--primary));
-}
-
-/* Utility Classes */
-.text-gradient {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.btn {
-  display: inline-block;
-  padding: 0.8rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  font-family: var(--font-body);
-}
-
-.btn-primary {
-  background: var(--primary);
-  color: #ffffff;
-  border: none;
-  box-shadow: none;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s;
-}
-
-.btn-primary:hover::before {
-  left: 100%;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  background: var(--primary-light);
-  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-}
-
-.btn-outline:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-}
-
-.wave-divider {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  transform: rotate(180deg);
-}
-
-.wave-divider svg {
-  position: relative;
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 80px;
-}
-
-.wave-divider .shape-fill {
-  fill: var(--bg-secondary);
-}
-
-.wave-divider .shape-fill-secondary {
-  fill: var(--bg-primary);
-}
-
-/* Animations */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Sections are always visible — only child elements animate */
-section {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-/* ===== Stats Counter Section ===== */
-.stats-section {
-  padding: 4rem 0;
-  /* Frosted rather than opaque, so the 3D corridor stays visible behind it */
-  background: var(--bg-veil);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-}
-
-.stats-section::before {
-  content: '';
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, 
-    rgba(255, 107, 0, 0.04) 0%, 
-    transparent 50%, 
-    rgba(245, 198, 160, 0.04) 100%
-  );
+  z-index: -2;
+  background-color: var(--bg-primary);
+  background-image: url('/images/backdrop.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   pointer-events: none;
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  position: relative;
-  z-index: 1;
-}
-
-.stat-card {
-  text-align: center;
-  padding: 2rem 1rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.stat-card::before {
+body::after {
   content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-  transform: scaleX(0);
-  transition: transform 0.4s ease;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(to right, rgba(16, 16, 20, 0.022) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 16, 20, 0.022) 1px, transparent 1px);
+  background-size: 72px 72px;
+  /* Fade the grid out toward the edges so it never competes with content */
+  -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 35%, #000 15%, transparent 75%);
+  mask-image: radial-gradient(ellipse 75% 60% at 50% 35%, #000 15%, transparent 75%);
+  pointer-events: none;
 }
 
-.stat-card:hover::before {
-  transform: scaleX(1);
-}
-
-.stat-card:hover {
-  border-color: var(--primary);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(255, 107, 0, 0.1);
-}
-
-.stat-number {
+/* ---------------------------------------------------------------------------
+   Typography
+   ------------------------------------------------------------------------ */
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-size: 3rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+  text-wrap: balance;
 }
 
-.stat-label {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: 1.05rem; }
+
+p { text-wrap: pretty; }
+
+strong, b { color: var(--text-primary); font-weight: 600; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.22s ease;
 }
 
-.stat-icon {
-  font-size: 1.5rem;
-  color: var(--primary);
-  margin-bottom: 1rem;
-  opacity: 0.7;
+img, svg, video, canvas {
+  display: block;
+  max-width: 100%;
 }
 
-@media (max-width: 768px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+ul, ol { list-style: none; }
+
+input, textarea, select, button {
+  font: inherit;
+  color: inherit;
 }
 
-@media (max-width: 480px) {
-  .stats-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .stat-number {
-    font-size: 2.25rem;
-  }
+code, pre, kbd {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
 }
 
-/* ===== Page Transition Wrapper ===== */
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent-press);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+  border-radius: var(--radius-xs);
+}
+
+/* Layout container. `.shell` (depth.css) is the modern name; `.container` stays
+   because a dozen component stylesheets still reference it. */
+.container {
+  width: 100%;
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
 main {
   position: relative;
   z-index: 1;
 }
 
-/* ===== Cursor spotlight effect on cards ===== */
-.spotlight-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 107, 0, 0.08),
-    transparent 40%
-  );
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-  z-index: 0;
-  border-radius: inherit;
-}
-
-.spotlight-card:hover::after {
-  opacity: 1;
-}
-
-/* ===== Advanced Animation Utilities ===== */
-@keyframes floatSlow {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(1deg);
-  }
-}
-
-@keyframes floatReverse {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(8px) rotate(-1deg);
-  }
-}
-
-@keyframes glowPulse {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(255, 107, 0, 0.2), inset 0 0 15px rgba(255, 107, 0, 0.05);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(255, 107, 0, 0.45), inset 0 0 25px rgba(255, 107, 0, 0.15);
-  }
-}
-
-@keyframes shineSweep {
-  0% {
-    transform: translateX(-100%) rotate(25deg);
-  }
-  100% {
-    transform: translateX(200%) rotate(25deg);
-  }
-}
-
-@keyframes borderRotate {
-  0% {
-    --border-angle: 0deg;
-  }
-  100% {
-    --border-angle: 360deg;
-  }
-}
-
-@keyframes flowPacket {
-  0% {
-    left: 0%;
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    left: 100%;
-    opacity: 0;
-  }
-}
-
-@keyframes badgePing {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(0.95);
-    opacity: 0.8;
-  }
-}
-
-.animate-float {
-  animation: floatSlow 6s ease-in-out infinite;
-}
-
-.animate-float-reverse {
-  animation: floatReverse 7s ease-in-out infinite;
-}
-
-.shine-effect {
+.App {
   position: relative;
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+/* Skip link — the first tab stop on every page */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -150%);
+  z-index: 2000;
+  padding: 0.7rem 1.2rem;
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: transform 0.2s var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: translate(-50%, 0);
+}
+
+/* ---------------------------------------------------------------------------
+   Scrollbar
+   ------------------------------------------------------------------------ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 3px solid var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+html {
+  scrollbar-color: var(--border-strong) var(--bg-secondary);
+  scrollbar-width: thin;
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll reveal
+   ---------------------------------------------------------------------------
+   The IntersectionObserver in App.jsx adds `.is-visible`. Sections themselves are
+   never hidden — only their children animate — so a failed observer can never
+   leave a whole page blank.
+   ------------------------------------------------------------------------ */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+section {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Stat band — shared by several pages
+   ------------------------------------------------------------------------ */
+.stats-section {
+  position: relative;
+  padding: clamp(2.5rem, 5vw, 3.5rem) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+  gap: 1px;
+  background: var(--border-light);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
   overflow: hidden;
 }
 
-.shine-effect::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    60deg,
-    transparent 35%,
-    rgba(255, 255, 255, 0.4) 50%,
-    transparent 65%
-  );
-  transform: translateX(-100%) rotate(25deg);
-  pointer-events: none;
-  transition: none;
+/* Cells share hairlines via the 1px grid gap, so the band reads as one ruled
+   table rather than four detached cards. */
+.stat-card {
+  position: relative;
+  padding: clamp(1.25rem, 3vw, 1.9rem) 1rem;
+  text-align: center;
+  background: var(--surface);
+  transition: background 0.3s ease;
 }
 
-.shine-effect:hover::before {
-  animation: shineSweep 1.2s ease forwards;
+.stat-card:hover { background: var(--surface-muted); }
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
 }
 
-/* Glass Card Interactive Base */
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--text-muted);
+}
+
+.stat-icon {
+  font-size: 1.05rem;
+  color: var(--accent);
+  margin-bottom: 0.7rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Compatibility shims
+   ---------------------------------------------------------------------------
+   Classes the previous theme defined that component markup still carries.
+   Re-pointed at the current system so nothing renders unstyled, and deliberately
+   quiet — the glass/glow versions of these are gone.
+   ------------------------------------------------------------------------ */
 .glass-interactive {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: var(--surface);
   border: 1px solid var(--border);
-  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
-              box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1),
-              border-color 0.35s ease;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out),
+              border-color 0.3s ease;
 }
 
 .glass-interactive:hover {
-  transform: translateY(-5px);
-  border-color: rgba(255, 107, 0, 0.4);
-  box-shadow: 0 16px 36px -8px rgba(255, 107, 0, 0.12),
-              0 6px 12px -4px rgba(0, 0, 0, 0.04);
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-lg);
 }
 
-/* ===== 3D Scroll Depth Utilities ===== */
+.section-subtitle {
+  max-width: 58ch;
+  margin: 0 auto clamp(2.25rem, 4.5vw, 3.5rem);
+  text-align: center;
+  font-size: var(--fs-lead);
+  color: var(--text-secondary);
+}
 
-/* Establishes a shared perspective so children share one vanishing point.
-   Apply to a section, then use .depth-layer on the children. */
 .depth-scene {
-  perspective: 1400px;
+  perspective: var(--perspective);
   perspective-origin: 50% 45%;
   transform-style: preserve-3d;
 }
@@ -645,61 +319,64 @@ main {
   backface-visibility: hidden;
 }
 
-/* Card that physically lifts toward the viewer on hover */
-.lift-3d {
-  transform-style: preserve-3d;
-  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1),
-              box-shadow 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+/* The old theme used these for sweeping highlights and coloured glows. Both are
+   off-brief now, so they resolve to no-ops rather than being left dangling. */
+.shine-effect::before,
+.spotlight-card::after {
+  content: none;
 }
 
-.lift-3d:hover {
-  transform: translateZ(40px) translateY(-6px) rotateX(3deg);
-  box-shadow: var(--shadow-float);
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
-/* Section seam: fades one band into the next so stacked sections read as
-   continuous depth instead of abutting rectangles. */
-.section-seam {
-  position: relative;
+@keyframes shimmerSweep {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
 }
 
-.section-seam::before {
-  content: '';
+/* ---------------------------------------------------------------------------
+   Phones
+   ---------------------------------------------------------------------------
+   Sizing is already fluid through clamp(), so this handles only what fluid type
+   cannot.
+   ------------------------------------------------------------------------ */
+@media (max-width: 768px) {
+  body::after { background-size: 44px 44px; }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-spacing: 3.5rem;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+  }
+}
+
+/* Visually hidden but available to screen readers and to the accessibility tree.
+   Used for labels whose visual role is already carried by an adjacent icon. */
+.sr-only {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 140px;
-  background: linear-gradient(180deg, var(--bg-primary), transparent);
-  pointer-events: none;
-  z-index: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
-@keyframes depthDriftIn {
-  from {
-    opacity: 0;
-    transform: perspective(1300px) translate3d(0, 60px, -180px) rotateX(22deg);
-  }
-  to {
-    opacity: 1;
-    transform: perspective(1300px) translate3d(0, 0, 0) rotateX(0deg);
-  }
+/* ---------------------------------------------------------------------------
+   Interior page spacing
+   ---------------------------------------------------------------------------
+   Interior routes render a breadcrumb that already clears the fixed header, so
+   the first section's full top padding on top of it left most of a screen empty
+   before any content. The home page is unaffected: its first child is the hero,
+   which owns its own offset.
+   ------------------------------------------------------------------------ */
+.page > .section:first-child,
+.page > div:first-child > .section:first-child {
+  padding-top: clamp(1.25rem, 3vw, 2.25rem);
 }
-
-.depth-drift-in {
-  animation: depthDriftIn 0.9s cubic-bezier(0.25, 1, 0.5, 1) both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .lift-3d:hover {
-    transform: none;
-  }
-}
-

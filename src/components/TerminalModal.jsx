@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { BASICS } from '../data/profile';
 import './TerminalModal.css';
 
 const TerminalModal = ({ isOpen, onClose }) => {
@@ -38,26 +39,31 @@ const TerminalModal = ({ isOpen, onClose }) => {
                 newHistory.push({ type: 'output', content: '  exit        - close terminal' });
                 break;
             case 'whoami':
-                newHistory.push({ type: 'output', content: 'Shoib Ahmad' });
-                newHistory.push({ type: 'output', content: 'Software Engineer & Full Stack Developer' });
-                newHistory.push({ type: 'output', content: 'Currently pursuing MCA at Jamia Hamdard University.' });
+                newHistory.push({ type: 'output', content: BASICS.name });
+                newHistory.push({ type: 'output', content: 'Full-Stack Engineer — React, Next.js, REST APIs, AI/LLM integration' });
+                newHistory.push({ type: 'output', content: 'Final-year MCA at Jamia Hamdard University (CGPA 8.10).' });
                 break;
             case 'ls projects':
                 newHistory.push({ type: 'output', content: 'projects/' });
-                newHistory.push({ type: 'output', content: '├── RuralHealth AI (Full Stack / AI)' });
-                newHistory.push({ type: 'output', content: '├── Price Radar (Frontend)' });
-                newHistory.push({ type: 'output', content: '├── Secure Eval (FastAPI / React)' });
-                newHistory.push({ type: 'output', content: '└── ADR Risk Predictor (ML / Python)' });
+                newHistory.push({ type: 'output', content: '├── SecureEval AI (React / FastAPI) — live, daily use' });
+                newHistory.push({ type: 'output', content: '├── RuralHealth AI (DRF / React) — offline-first' });
+                newHistory.push({ type: 'output', content: '├── Web Sonar (FastAPI / Scrapy / Playwright)' });
+                newHistory.push({ type: 'output', content: '├── TruthGuard AI (PyTorch / OpenCV)' });
+                newHistory.push({ type: 'output', content: '└── Med-AI Vigi (XGBoost / Scikit-learn)' });
                 break;
             case 'ls skills':
                 newHistory.push({ type: 'output', content: 'skills/' });
-                newHistory.push({ type: 'output', content: '├── Languages : Python, Java, C++, Dart, JS' });
-                newHistory.push({ type: 'output', content: '├── Frameworks: React, Next.js, Flutter, Flask, FastAPI' });
-                newHistory.push({ type: 'output', content: '└── Database  : Firebase, MongoDB, SQL' });
+                newHistory.push({ type: 'output', content: '├── Frontend : React.js, Next.js, Vite, Tailwind CSS' });
+                newHistory.push({ type: 'output', content: '├── Backend  : FastAPI, Django REST Framework, Flask' });
+                newHistory.push({ type: 'output', content: '├── AI/LLM   : Gemini, Claude API, PyTorch, Scikit-learn' });
+                newHistory.push({ type: 'output', content: '├── Data     : PostgreSQL, Firestore, IndexedDB' });
+                newHistory.push({ type: 'output', content: '└── Cloud    : GCP, Azure, Docker, Azure DevOps' });
                 break;
             case 'contact':
-                newHistory.push({ type: 'output', content: 'Email: shoibsahmad@gmail.com' });
-                newHistory.push({ type: 'output', content: 'LinkedIn: linkedin.com/in/shoib-ahmad-788096219' });
+                newHistory.push({ type: 'output', content: `Email: ${BASICS.email}` });
+                newHistory.push({ type: 'output', content: `LinkedIn: ${BASICS.linkedinLabel}` });
+                newHistory.push({ type: 'output', content: `GitHub: ${BASICS.githubLabel}` });
+                newHistory.push({ type: 'output', content: `Phone: ${BASICS.phone}` });
                 break;
             case 'clear':
                 setHistory([]);

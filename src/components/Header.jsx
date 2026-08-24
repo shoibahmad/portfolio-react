@@ -1,141 +1,155 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import './Header.css';
+
+const NAV_ITEMS = [
+    { path: '/projects', label: 'Projects' },
+    { path: '/skills', label: 'Skills' },
+    { path: '/experience', label: 'Experience' },
+    { path: '/services', label: 'Services' },
+    { path: '/resume', label: 'Resume' }
+];
 
 const Header = ({ onToggleTerminal }) => {
     const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const location = useLocation();
+    const toggleRef = useRef(null);
+
+    /* The drawer stores the route it was opened on rather than a bare boolean.
+       Navigating changes `location.pathname`, so the menu closes itself with no
+       effect and no listener — which also covers back/forward navigation that
+       no click handler would ever see. */
+    const [openAtPath, setOpenAtPath] = useState(null);
+    const isMenuOpen = openAtPath === location.pathname;
+    const setIsMenuOpen = (next) => setOpenAtPath(next ? location.pathname : null);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 30);
-        };
-
-        window.addEventListener('scroll', handleScroll);
+        const handleScroll = () => setIsScrolled(window.scrollY > 16);
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const toggleMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-        document.body.style.overflow = !isMobileMenuOpen ? 'hidden' : '';
-    };
+    /* Lock the page behind the open drawer. Restoring the previous value rather
+       than clearing it means this cannot stomp on a modal that already locked
+       scrolling for its own reasons. */
+    useEffect(() => {
+        if (!isMenuOpen) return;
 
-    const handleNavClick = () => {
-        setIsMobileMenuOpen(false);
-        document.body.style.overflow = '';
-    };
+        const previous = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
 
-    const navItems = [
-        { path: '/projects', label: 'PROJECTS' },
-        { path: '/skills', label: 'SKILLS' },
-        { path: '/experience', label: 'EXPERIENCE' },
-        { path: '/services', label: 'SERVICES' },
-        { path: '/resume', label: 'RESUME' }
-    ];
+        const onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                setOpenAtPath(null);
+                toggleRef.current?.focus();
+            }
+        };
+        window.addEventListener('keydown', onKeyDown);
+
+        return () => {
+            document.body.style.overflow = previous;
+            window.removeEventListener('keydown', onKeyDown);
+        };
+    }, [isMenuOpen]);
 
     return (
-        <header className={`header-wrapper ${isScrolled ? 'scrolled' : ''}`}>
-            <div className="header-pill">
-                {/* Left: Brand */}
-                <div className="header-left">
-                    <Link to="/" className="brand-logo" onClick={handleNavClick} aria-label="Shoib Ahmad - Home">
-                        <svg className="brand-logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="logo-bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stopColor="#242428" />
-                                    <stop offset="100%" stopColor="#121214" />
-                                </linearGradient>
-                                <linearGradient id="logo-border-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stopColor="rgba(255, 107, 0, 0.7)" />
-                                    <stop offset="50%" stopColor="rgba(255, 255, 255, 0.15)" />
-                                    <stop offset="100%" stopColor="rgba(255, 107, 0, 0.3)" />
-                                </linearGradient>
-                                <linearGradient id="logo-s-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stopColor="#FFA14A" />
-                                    <stop offset="100%" stopColor="#FF5E00" />
-                                </linearGradient>
-                                <linearGradient id="logo-accent-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stopColor="#FFFFFF" />
-                                    <stop offset="100%" stopColor="#FFB070" />
-                                </linearGradient>
-                            </defs>
-                            {/* Background Squircle */}
-                            <rect x="1.5" y="1.5" width="33" height="33" rx="9.5" fill="url(#logo-bg-grad)" stroke="url(#logo-border-grad)" strokeWidth="1.2" className="logo-base-rect" />
-                            {/* Stylized S Monogram */}
-                            <path
-                                d="M24 10.5C24 9.12 22.88 8 21.5 8H15C12.24 8 10 10.24 10 13C10 15.76 12.24 18 15 18H21C23.76 18 26 20.24 26 23C26 25.76 23.76 28 21 28H14.5C13.12 28 12 26.88 12 25.5"
-                                stroke="url(#logo-s-grad-1)"
-                                strokeWidth="3"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                            {/* Modern Glowing Nodes */}
-                            <circle cx="21.5" cy="8" r="1.5" fill="url(#logo-accent-grad)" />
-                            <circle cx="14.5" cy="28" r="1.5" fill="url(#logo-accent-grad)" />
-                            <circle cx="18" cy="18" r="1.2" fill="#FFFFFF" opacity="0.9" />
-                            {/* Terminal Angle Accents */}
-                            <path d="M6.5 16.5L8 18L6.5 19.5" stroke="rgba(255, 107, 0, 0.45)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M29.5 16.5L28 18L29.5 19.5" stroke="rgba(255, 107, 0, 0.45)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                        <span className="logo-text">SHOIB<span className="logo-accent-dot">.</span></span>
-                    </Link>
-                </div>
+        <header className={`site-header ${isScrolled ? 'is-scrolled' : ''}`}>
+            <div className="site-header__inner shell">
+                <Link to="/" className="brand" aria-label="Shoib Ahmad — home">
+                    <span className="brand__mark" aria-hidden="true">S</span>
+                    <span className="brand__name">
+                        Shoib Ahmad
+                        <span className="brand__role">Full stack &amp; AI</span>
+                    </span>
+                </Link>
 
-                {/* Center: Nav Menu */}
-                <nav className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
-                    <ul>
-                        {navItems.map((item) => (
-                            <li key={item.label}>
+                <nav className="site-nav" aria-label="Primary">
+                    <ul className="site-nav__list">
+                        {NAV_ITEMS.map((item) => (
+                            <li key={item.path}>
                                 <NavLink
                                     to={item.path}
-                                    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-                                    onClick={handleNavClick}
+                                    className={({ isActive }) =>
+                                        `site-nav__link ${isActive ? 'is-active' : ''}`
+                                    }
                                 >
                                     {item.label}
                                 </NavLink>
                             </li>
                         ))}
                     </ul>
-
-                    {/* Prominent CTA in Mobile Menu */}
-                    <Link to="/contact" className="mobile-drawer-cta" onClick={handleNavClick}>
-                        <span>Let's Talk & Collaborate</span>
-                        <i className="fas fa-arrow-right"></i>
-                    </Link>
                 </nav>
 
-                {/* Right: Actions */}
-                <div className="header-right">
-                    <Link to="/contact" className="header-contact-btn" onClick={handleNavClick} title="Contact Shoib" aria-label="Contact">
-                        <i className="fas fa-paper-plane"></i>
-                        <span>Contact</span>
-                    </Link>
-
-                    <Link to="/contact" className="user-profile-pill" onClick={handleNavClick} title="Shoib Profile">
-                        <span className="avatar-circle">S</span>
-                        <span className="avatar-username">SHOIB SA..</span>
-                    </Link>
-
+                <div className="site-header__actions">
                     <button
-                        className="terminal-pill-btn"
+                        type="button"
+                        className="icon-btn"
                         onClick={onToggleTerminal}
-                        title="Toggle CLI Terminal"
-                        aria-label="Terminal"
+                        title="Toggle terminal"
+                        aria-label="Toggle terminal"
                     >
-                        <i className="fas fa-terminal"></i>
+                        <i className="fas fa-terminal" aria-hidden="true" />
                     </button>
 
+                    <Link to="/contact" className="btn btn-primary btn-sm header-cta">
+                        Contact
+                    </Link>
+
                     <button
-                        className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`}
-                        onClick={toggleMenu}
-                        aria-label="Toggle navigation menu"
+                        ref={toggleRef}
+                        type="button"
+                        className={`menu-toggle ${isMenuOpen ? 'is-open' : ''}`}
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                        aria-expanded={isMenuOpen}
+                        aria-controls="mobile-nav"
                     >
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <span aria-hidden="true" />
+                        <span aria-hidden="true" />
                     </button>
                 </div>
             </div>
+
+            {/* Mobile drawer. Rendered always and hidden with a transform so the
+                links stay in the DOM for assistive tech and for the transition. */}
+            <div
+                className={`mobile-nav ${isMenuOpen ? 'is-open' : ''}`}
+                id="mobile-nav"
+                aria-hidden={!isMenuOpen}
+                /* React 19 takes `inert` as a real boolean; an empty string is
+                   coerced to false and warns. This keeps the closed drawer out
+                   of the tab order and out of the accessibility tree. */
+                inert={!isMenuOpen}
+            >
+                <nav aria-label="Mobile">
+                    <ul className="mobile-nav__list">
+                        {NAV_ITEMS.map((item) => (
+                            <li key={item.path}>
+                                <NavLink
+                                    to={item.path}
+                                    className={({ isActive }) =>
+                                        `mobile-nav__link ${isActive ? 'is-active' : ''}`
+                                    }
+                                >
+                                    {item.label}
+                                </NavLink>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+
+                <Link to="/contact" className="btn btn-primary mobile-nav__cta">
+                    Start a conversation
+                </Link>
+            </div>
+
+            {/* Scrim closes the drawer on tap without swallowing keyboard focus */}
+            <div
+                className={`mobile-nav__scrim ${isMenuOpen ? 'is-open' : ''}`}
+                onClick={() => setIsMenuOpen(false)}
+                aria-hidden="true"
+            />
         </header>
     );
 };

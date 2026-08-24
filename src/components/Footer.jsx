@@ -1,101 +1,125 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import { BASICS } from '../data/profile';
 import './Footer.css';
+
+const NAV_LINKS = [
+    { to: '/', label: 'Home' },
+    { to: '/services', label: 'Services' },
+    { to: '/projects', label: 'Projects' },
+    { to: '/skills', label: 'Skills' },
+    { to: '/experience', label: 'Experience' },
+    { to: '/resume', label: 'Resume' }
+];
+
+const SOCIALS = [
+    { href: BASICS.github, label: 'GitHub', icon: 'fab fa-github' },
+    { href: BASICS.linkedin, label: 'LinkedIn', icon: 'fab fa-linkedin-in' },
+    { href: BASICS.phoneHref, label: 'WhatsApp', icon: 'fab fa-whatsapp' },
+    { href: `mailto:${BASICS.email}`, label: 'Email', icon: 'fas fa-envelope' }
+];
 
 const Footer = ({ onOpenLegal }) => {
     const currentYear = new Date().getFullYear();
 
     return (
         <footer className="footer">
-            <div className="container">
-                {/* Modern CTA Banner */}
-                <div className="footer-cta animate-on-scroll">
-                    <div className="footer-cta-content">
-                        <h2>Let's build something exceptional together</h2>
-                        <p>Have an idea or a project in mind? Let's collaborate to make it reality.</p>
+            <div className="shell">
+                <div className="footer__cta animate-on-scroll">
+                    <div>
+                        <h2 className="footer__cta-title">
+                            Let&rsquo;s build something exceptional together.
+                        </h2>
+                        <p className="footer__cta-text">
+                            Have an idea or a project in mind? It starts with a conversation.
+                        </p>
                     </div>
-                    <div className="footer-cta-action">
-                        <Link to="/contact" className="btn-cta-footer">
-                            Get In Touch <i className="fas fa-arrow-right"></i>
-                        </Link>
-                    </div>
+                    <Link to="/contact" className="btn btn-primary btn-lg">
+                        Get in touch
+                    </Link>
                 </div>
 
-                <div className="footer-grid">
-                    {/* Brand Section */}
-                    <div className="footer-brand animate-on-scroll" style={{ transitionDelay: '50ms' }}>
-                        <Link to="/" className="footer-logo">
-                            <span className="logo-text">shoib<span className="logo-dot">.</span>dev</span>
+                <div className="footer__grid">
+                    <div className="footer__brand">
+                        <Link to="/" className="footer__logo">
+                            shoib<span>.</span>dev
                         </Link>
-                        <div className="footer-availability">
-                            <span className="avail-dot"></span>
-                            Open to opportunities
-                        </div>
-                        <p className="tagline">Building digital experiences that matter.</p>
-                        <p className="description">
-                            A passionate Full Stack Developer & AI Enthusiast focused on creating interactive, clean, and high-performance web applications.
+
+                        <p className="footer__availability">
+                            <span className="footer__availability-dot" aria-hidden="true" />
+                            {BASICS.availability}
+                        </p>
+
+                        <p className="footer__desc">
+                            Full-stack engineer shipping production systems end to end —
+                            React and Next.js interfaces on REST API backends, with LLMs
+                            integrated into real product workflows.
                         </p>
                     </div>
 
-                    {/* Quick Links */}
-                    <div className="footer-links animate-on-scroll" style={{ transitionDelay: '100ms' }}>
-                        <h4>Navigation</h4>
+                    <nav className="footer__col" aria-label="Footer navigation">
+                        <h3 className="label">Navigation</h3>
                         <ul>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/services">Services</Link></li>
-                            <li><Link to="/projects">Projects</Link></li>
-                            <li><Link to="/skills">Skills</Link></li>
-                            <li><Link to="/experience">Experience</Link></li>
+                            {NAV_LINKS.map((link) => (
+                                <li key={link.to}>
+                                    <Link to={link.to} className="footer__link">
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+
+                    <div className="footer__col">
+                        <h3 className="label">Get in touch</h3>
+                        <ul>
+                            <li>
+                                <a className="footer__link" href={`mailto:${BASICS.email}`}>
+                                    {BASICS.email}
+                                </a>
+                            </li>
+                            <li>
+                                <a className="footer__link" href={BASICS.phoneHref}>
+                                    {BASICS.phone}
+                                </a>
+                            </li>
+                            <li>
+                                <span className="footer__muted">{BASICS.location}</span>
+                            </li>
                         </ul>
                     </div>
 
-                    {/* Contact Info */}
-                    <div className="footer-contact animate-on-scroll" style={{ transitionDelay: '150ms' }}>
-                        <h4>Get In Touch</h4>
-                        <ul>
-                            <li>
-                                <i className="fas fa-envelope"></i>
-                                <a href="mailto:shoibsahmad@gmail.com">shoibsahmad@gmail.com</a>
-                            </li>
-                            <li>
-                                <i className="fas fa-map-marker-alt"></i>
-                                <span>Lucknow, India</span>
-                            </li>
+                    <div className="footer__col">
+                        <h3 className="label">Connect</h3>
+                        <ul className="footer__socials">
+                            {SOCIALS.map((social) => (
+                                <li key={social.label}>
+                                    <a
+                                        href={social.href}
+                                        aria-label={social.label}
+                                        {...(social.href.startsWith('http')
+                                            ? { target: '_blank', rel: 'noopener noreferrer' }
+                                            : {})}
+                                    >
+                                        <i className={social.icon} aria-hidden="true" />
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
-                    </div>
-
-                    {/* Connect Section */}
-                    <div className="footer-social animate-on-scroll" style={{ transitionDelay: '200ms' }}>
-                        <h4>Connect</h4>
-                        <div className="social-links">
-                            <a href="https://github.com/shoibahmad" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
-                                <i className="fab fa-github"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/shoib-ahmad-788096219/" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">
-                                <i className="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://wa.me/918853741966" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-                                <i className="fab fa-whatsapp"></i>
-                            </a>
-                            <a href="mailto:shoibsahmad@gmail.com" aria-label="Email">
-                                <i className="fas fa-envelope"></i>
-                            </a>
-                        </div>
                     </div>
                 </div>
 
-                <div className="footer-bottom animate-on-scroll" style={{ transitionDelay: '250ms' }}>
-                    <div className="copyright">
-                        <p>&copy; {currentYear} Shoib Ahmad. All rights reserved.</p>
-                    </div>
-                    <div className="footer-legal">
-                        <button onClick={() => onOpenLegal('privacy')}>Privacy Policy</button>
-                        <button onClick={() => onOpenLegal('terms')}>Terms of Service</button>
+                <div className="footer__bottom">
+                    <p>&copy; {currentYear} {BASICS.name}. All rights reserved.</p>
+                    <div className="footer__legal">
+                        <button type="button" onClick={() => onOpenLegal('privacy')}>
+                            Privacy policy
+                        </button>
+                        <button type="button" onClick={() => onOpenLegal('terms')}>
+                            Terms of service
+                        </button>
                     </div>
                 </div>
             </div>
-            {/* Background watermark */}
-            <div className="footer-watermark" aria-hidden="true">shoib.dev</div>
         </footer>
     );
 };

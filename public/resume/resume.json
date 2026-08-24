@@ -2,63 +2,165 @@
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
     "name": "Shoib Ahmad",
-    "label": "Research Scholar | AI Specialist | Full Stack Engineer",
+    "label": "Full-Stack Engineer | React · Next.js · REST APIs · AI/LLM Integration · Tailwind",
     "image": "https://shoibahmad.in/images/profile.jpg",
-    "email": "contact@shoibahmad.in",
+    "email": "shoibsahmad@gmail.com",
+    "phone": "+91 8840324043",
     "url": "https://shoibahmad.in",
-    "summary": "Research Scholar specializing in AI, Machine Learning, and Full Stack Development. Bridging the gap between advanced research and scalable software.",
+    "summary": "Final-year MCA student (CGPA 8.10) who ships production fullstack systems end-to-end — from React/Next.js interfaces to REST API backends — including a live examination-integrity platform in daily institutional use and an offline-first rural healthcare platform, both owned solo from requirements through deployment. Comfortable across the stack (React.js, Next.js, Tailwind CSS, FastAPI/Django REST Framework), with a track record of turning ambiguous product requirements into working, well-tested systems with minimal supervision. Integrates LLMs (Gemini, Claude) into real product workflows — prompt design, model evaluation, pipeline integration — and is currently deepening TypeScript and Node.js/NestJS.",
     "location": {
-      "city": "New Delhi",
+      "city": "Lucknow",
       "countryCode": "IN",
-      "region": "Delhi"
+      "region": "Uttar Pradesh"
     },
     "profiles": [
       {
         "network": "GitHub",
         "username": "shoibahmad",
         "url": "https://github.com/shoibahmad"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "shoib-ahmad-788096219",
+        "url": "https://www.linkedin.com/in/shoib-ahmad-788096219/"
       }
     ]
   },
+  "work": [
+    {
+      "name": "Mike Agent AI",
+      "position": "Agentic AI Developer",
+      "location": "Remote",
+      "startDate": "2026-03-01",
+      "summary": "Building agentic AI workflows: multi-step tool use, orchestration, and evaluation of model behaviour in production paths."
+    },
+    {
+      "name": "SecureEval AI",
+      "position": "Software Developer (Freelance)",
+      "location": "Lucknow",
+      "startDate": "2026-01-01",
+      "endDate": "2026-03-01",
+      "highlights": [
+        "Architected and delivered a dual-interface fullstack examination-integrity platform (React.js frontend, FastAPI backend), now live and in active daily use — owned end-to-end from design through deployment.",
+        "Designed high-throughput asynchronous REST API endpoints with clear service contracts to reliably handle concurrent student sessions at scale.",
+        "Integrated MediaPipe Face Mesh and Gemini 1.5 for real-time multi-face detection and behavioral analysis, achieving 90%+ suspicious-activity detection precision.",
+        "Partnered directly with university stakeholders to translate ambiguous requirements into a reliable, observable system with a real-time admin monitoring dashboard."
+      ]
+    },
+    {
+      "name": "RuralHealthAI",
+      "position": "Freelance Software Engineer",
+      "location": "Remote",
+      "startDate": "2025-01-01",
+      "endDate": "2026-01-01",
+      "highlights": [
+        "Independently designed and built RuralHealthAI, an offline-capable disease-screening platform (Django REST Framework backend, React 18/Vite frontend) for frontline rural health workers, delivered as a client engagement.",
+        "Architected a local-first offline sync layer using IndexedDB and a custom SyncQueue handling retry logic, conflict resolution, and automatic reconciliation on reconnect.",
+        "Integrated Google Gemini Pro for AI-driven clinical risk analysis and built REST endpoints for authentication, role-based dashboards, and screening data (Firebase Auth/Firestore + PostgreSQL audit logging).",
+        "Implemented role-based access across health worker, officer, and patient interfaces, including a regional dashboard for high-risk surveillance and analytics."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Web Sonar — Web Intelligence Engine",
+      "startDate": "2025-11-01",
+      "endDate": "2026-03-01",
+      "highlights": [
+        "Built a scalable Python data pipeline (FastAPI, Scrapy, Playwright) across 50+ dynamic sources, achieving a 98% retrieval success rate at 10,000+ daily requests.",
+        "Engineered 24 analyzer modules across 30+ analysis panels, integrating the Gemini API to extract structured insights from web data at scale."
+      ]
+    },
+    {
+      "name": "TruthGuard AI — Deepfake Detection System",
+      "startDate": "2025-08-01",
+      "endDate": "2025-10-01",
+      "highlights": [
+        "Engineered a CNN-based deep learning model (PyTorch, OpenCV) achieving 92% accuracy on the FaceForensics++ benchmark, served through a tested FastAPI REST service with a live analytics dashboard."
+      ]
+    },
+    {
+      "name": "Med-AI Vigi — Adverse Drug Reaction Risk Predictor",
+      "startDate": "2025-05-01",
+      "endDate": "2025-10-01",
+      "highlights": [
+        "Trained an XGBoost/Random Forest ensemble achieving an 87% F1-score, reducing false-negative rates by 18% over baseline."
+      ]
+    }
+  ],
   "education": [
     {
       "institution": "Jamia Hamdard University",
+      "location": "Delhi",
       "area": "Computer Applications",
-      "studyType": "MCA",
-      "startDate": "2023",
-      "endDate": "Present"
+      "studyType": "Master of Computer Applications (MCA)",
+      "startDate": "2024-08-01",
+      "endDate": "2026-06-01",
+      "score": "8.10/10"
+    },
+    {
+      "institution": "Integral University",
+      "location": "Lucknow",
+      "area": "Computer Applications",
+      "studyType": "Bachelor of Computer Applications (BCA)",
+      "startDate": "2021-10-01",
+      "endDate": "2024-06-01",
+      "score": "9.10/10"
     }
   ],
-  "work": [
+  "certificates": [
     {
-      "company": "RuralHealth AI",
-      "position": "Lead Full Stack Developer",
-      "startDate": "2026-01-01",
-      "endDate": "Present"
+      "name": "Generative AI Foundation",
+      "issuer": "UpGrad",
+      "date": "2025-06-01"
     },
     {
-      "company": "Price Radar",
-      "position": "Frontend Developer",
-      "startDate": "2025-08-01",
-      "endDate": "2025-12-01"
+      "name": "Python Bootcamp",
+      "issuer": "Code for Cause",
+      "date": "2024-08-01"
     },
     {
-      "company": "Secure Eval",
-      "position": "Security & AI Engineer",
-      "startDate": "2025-03-01",
-      "endDate": "2025-07-01"
+      "name": "Campus Ambassador — Google Build with AI Solution Challenge 2026",
+      "issuer": "Hack2skill",
+      "date": "2026-01-01"
+    }
+  ],
+  "publications": [
+    {
+      "name": "IU CA Cross Platform Application",
+      "publisher": "International Journal of Science and Advanced Technology (IJSAT)",
+      "releaseDate": "2025-11-01",
+      "url": "https://www.ijsat.org/research-paper.php?id=9262"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Frontend",
+      "keywords": ["React.js", "Next.js", "Vite", "JavaScript (ES6+)", "Tailwind CSS", "HTML/CSS"]
     },
     {
-      "company": "ADR Risk Predictor",
-      "position": "Machine Learning Engineer",
-      "startDate": "2024-09-01",
-      "endDate": "2025-02-01"
+      "name": "Backend & APIs",
+      "keywords": ["FastAPI", "Django REST Framework", "Flask", "RESTful API Design", "Asynchronous Services", "Auth Flows", "Service Contracts"]
     },
     {
-      "company": "Resume Analyzer",
-      "position": "Software Engineer",
-      "startDate": "2024-04-01",
-      "endDate": "2024-08-01"
+      "name": "AI / LLM",
+      "keywords": ["LLM Integration (Gemini, Claude API)", "Prompt Engineering", "Model Evaluation", "PyTorch", "Scikit-learn"]
+    },
+    {
+      "name": "Databases",
+      "keywords": ["PostgreSQL", "SQL", "Relational Data Modeling", "Firebase Firestore", "IndexedDB"]
+    },
+    {
+      "name": "Cloud & DevOps",
+      "keywords": ["Google Cloud Platform", "Microsoft Azure", "Azure DevOps (CI/CD)", "Docker", "Git/GitHub", "Postman"]
+    },
+    {
+      "name": "Core Fundamentals",
+      "keywords": ["Data Structures & Algorithms", "OOP", "System Design", "Offline-First Architecture", "Testing", "Documentation"]
+    },
+    {
+      "name": "Actively Deepening",
+      "keywords": ["TypeScript", "Node.js", "NestJS", "RAG Pipelines", "Vector Databases", "AWS"]
     }
   ]
 }

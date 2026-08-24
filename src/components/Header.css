@@ -1,373 +1,282 @@
-/* =========================================================
-   PRDUCK-Exact Header Styling
-   ========================================================= */
+/* Site header — a full-width bar, not a floating pill.
 
-.header-wrapper {
+   It starts transparent over the hero and resolves to an opaque bar with a
+   hairline once the page scrolls. Opaque rather than blurred: a blur here means
+   the compositor re-samples the strip behind the header on every scroll frame,
+   for a result that on a near-white page is indistinguishable from a flat fill. */
+
+.site-header {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 0.85rem 1.5rem;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: none; /* allows clicking through wrapper outside pill */
+    right: 0;
+    z-index: 100;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.header-wrapper.scrolled {
-    padding: 0.5rem 1.5rem;
+.site-header.is-scrolled {
+    background: rgba(250, 250, 249, 0.92);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom-color: var(--border);
 }
 
-.header-pill {
-    max-width: 1320px;
-    margin: 0 auto;
-    background: #111111;
-    border: 1px solid #282828;
-    border-radius: 16px;
-    height: 58px;
+.site-header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1.25rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.4);
-    pointer-events: auto;
-    transition: all 0.3s ease;
+    gap: 1.5rem;
+    height: 4.5rem;
 }
 
-.header-wrapper.scrolled .header-pill {
-    background: #0A0A0A;
-    border-color: #333333;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
-}
-
-/* ---------------- Left: Brand ---------------- */
-.header-left {
-    display: flex;
-    align-items: center;
-}
-
-.brand-logo {
-    display: flex;
+/* --- Brand ---------------------------------------------------------------- */
+.brand {
+    display: inline-flex;
     align-items: center;
     gap: 0.65rem;
-    text-decoration: none;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.brand-logo:hover {
-    transform: translateY(-1px);
-}
-
-.brand-logo-icon {
-    width: 32px;
-    height: 32px;
     flex-shrink: 0;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    filter: drop-shadow(0 2px 8px rgba(255, 107, 0, 0.3));
 }
 
-.brand-logo:hover .brand-logo-icon {
-    filter: drop-shadow(0 4px 14px rgba(255, 107, 0, 0.55));
-    transform: scale(1.06) rotate(-2deg);
-}
-
-.brand-logo .logo-text {
+.brand__mark {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-xs);
+    background: var(--text-primary);
+    color: var(--text-inverse);
     font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 1.18rem;
-    color: #FFFFFF;
-    letter-spacing: 0.05em;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1;
+    transition: background 0.25s ease;
+}
+
+.brand:hover .brand__mark {
+    background: var(--accent);
+}
+
+.brand__name {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    color: var(--text-primary);
+}
+
+.brand__role {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* --- Desktop nav ------------------------------------------------------------ */
+.site-nav__list {
     display: flex;
     align-items: center;
+    gap: 0.25rem;
 }
 
-.brand-logo .logo-accent-dot {
-    color: #FF6B00;
-    display: inline-block;
-    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.brand-logo:hover .logo-accent-dot {
-    transform: scale(1.4) translateY(-1px);
-}
-
-/* ---------------- Center: Navigation ---------------- */
-.nav-menu ul {
-    display: flex;
-    align-items: center;
-    gap: 1.75rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-link {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.76rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    color: #8E8E8E;
-    text-decoration: none;
-    transition: color 0.2s ease;
-    padding: 0.25rem 0;
+.site-nav__link {
     position: relative;
+    display: block;
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color 0.2s ease, background 0.2s ease;
 }
 
-.nav-link:hover {
-    color: #FFFFFF;
+.site-nav__link:hover {
+    color: var(--text-primary);
+    background: rgba(16, 16, 20, 0.04);
 }
 
-.nav-link.active {
-    color: #FFFFFF;
+.site-nav__link.is-active {
+    color: var(--text-primary);
+    font-weight: 600;
 }
 
-.nav-link.active::after {
+/* Active marker: a 3px dot under the label. Quieter than a full underline and
+   it does not shift the text baseline the way a border would. */
+.site-nav__link.is-active::after {
     content: '';
     position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #FF6B00;
-    border-radius: 2px;
+    bottom: 0.1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--accent);
 }
 
-/* ---------------- Right: Contact Button, Avatar & Terminal ---------------- */
-.header-right {
+/* --- Actions ----------------------------------------------------------------- */
+.site-header__actions {
     display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.header-contact-btn {
-    font-family: var(--font-body);
-    font-size: 0.78rem;
-    font-weight: 800;
-    color: #FFFFFF !important;
-    background: #FF6B00;
-    border-radius: 8px;
-    padding: 0.42rem 0.95rem;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    box-shadow: 0 2px 12px rgba(255, 107, 0, 0.35);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    white-space: nowrap;
-}
-
-.header-contact-btn i {
-    font-size: 0.75rem;
-}
-
-.header-contact-btn:hover {
-    background: #E05E00;
-    box-shadow: 0 4px 18px rgba(255, 107, 0, 0.5);
-    transform: translateY(-1px);
-}
-
-/* Mobile Drawer CTA */
-.mobile-drawer-cta {
-    display: none;
-    margin-top: 2rem;
-    padding: 0.9rem 2.2rem;
-    background: #FF6B00;
-    color: #FFFFFF;
-    border-radius: 9999px;
-    font-family: var(--font-body);
-    font-weight: 800;
-    font-size: 0.95rem;
-    text-decoration: none;
     align-items: center;
     gap: 0.6rem;
-    box-shadow: 0 6px 20px rgba(255, 107, 0, 0.35);
-    transition: all 0.2s ease;
+    flex-shrink: 0;
 }
 
-.mobile-drawer-cta:hover {
-    background: #E05E00;
-    transform: translateY(-2px);
-}
-
-/* User Profile Pill */
-.user-profile-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: #181818;
-    border: 1px solid #333333;
-    border-radius: 9999px;
-    padding: 0.25rem 0.75rem 0.25rem 0.3rem;
-    text-decoration: none;
-    transition: all 0.2s ease;
-}
-
-.user-profile-pill:hover {
-    border-color: #FF6B00;
-    background: #202020;
-}
-
-.avatar-circle {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: #FF6B00;
-    color: #111111;
-    font-weight: 900;
+.icon-btn {
+    display: grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text-secondary);
     font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-heading);
-}
-
-.avatar-username {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    color: #E0E0E0;
-}
-
-/* Terminal Pill Button */
-.terminal-pill-btn {
-    background: #181818;
-    border: 1px solid #333333;
-    color: #888888;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 0.75rem;
+    transition: var(--transition);
 }
 
-.terminal-pill-btn:hover {
-    color: #FF6B00;
-    border-color: #FF6B00;
-    background: rgba(255, 107, 0, 0.08);
+.icon-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
 }
 
-/* Mobile Hamburger */
-.hamburger {
+/* --- Menu toggle ---------------------------------------------------------------
+   Two bars that rotate into an X. Two rather than the usual three: with a 2-bar
+   mark the open and closed states are the same two elements, so the animation is
+   a pure rotation with nothing to fade out. */
+.menu-toggle {
     display: none;
-    flex-direction: column;
-    gap: 4px;
+    position: relative;
+    width: 2.1rem;
+    height: 2.1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
     cursor: pointer;
-    padding: 0.4rem;
-    border: none;
-    background: transparent;
 }
 
-.hamburger span {
-    width: 20px;
-    height: 2px;
-    background: #FFFFFF;
-    transition: var(--transition-smooth);
+.menu-toggle span {
+    position: absolute;
+    left: 50%;
+    width: 1rem;
+    height: 1.5px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: transform 0.3s var(--ease-out);
 }
 
-/* ---------------- Responsive ---------------- */
-@media (max-width: 1080px) {
-    .nav-menu ul {
-        gap: 1.15rem;
-    }
+.menu-toggle span:nth-child(1) { transform: translate(-50%, -4px); }
+.menu-toggle span:nth-child(2) { transform: translate(-50%, 4px); }
+
+.menu-toggle.is-open span:nth-child(1) { transform: translate(-50%, 0) rotate(45deg); }
+.menu-toggle.is-open span:nth-child(2) { transform: translate(-50%, 0) rotate(-45deg); }
+
+/* --- Mobile drawer ---------------------------------------------------------------- */
+.mobile-nav {
+    position: fixed;
+    top: 4.5rem;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1rem var(--gutter) 1.75rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    /* Slides up out of view rather than unmounting, so the drawer animates in
+       both directions and its links stay in the DOM. */
+    transform: translateY(-110%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.35s var(--ease-out), opacity 0.25s ease, visibility 0.35s;
 }
 
-@media (max-width: 860px) {
-    .header-wrapper {
-        padding: 0.5rem 0.75rem;
-    }
+.mobile-nav.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
 
-    .header-pill {
-        height: 50px;
-        padding: 0 0.75rem;
-    }
+.mobile-nav__link {
+    display: block;
+    padding: 0.85rem 0.25rem;
+    border-bottom: 1px solid var(--border-light);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
 
-    .header-right {
-        gap: 0.65rem;
-    }
+.mobile-nav__link.is-active {
+    color: var(--accent);
+}
 
-    .header-contact-btn {
-        padding: 0.32rem 0.7rem;
-        font-size: 0.72rem;
-        border-radius: 6px;
-    }
+.mobile-nav__cta {
+    margin-top: 1.1rem;
+    width: 100%;
+}
 
-    .mobile-drawer-cta {
-        display: inline-flex;
-    }
+.mobile-nav__scrim {
+    position: fixed;
+    inset: 4.5rem 0 0;
+    z-index: 98;
+    background: rgba(16, 16, 20, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
 
-    .user-profile-pill .avatar-username {
+.mobile-nav__scrim.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- Breakpoints -------------------------------------------------------------------
+   1024px is where five nav labels plus the brand and the CTA stop fitting
+   without the labels crowding each other. */
+@media (max-width: 1024px) {
+    .site-nav {
         display: none;
     }
 
-    .user-profile-pill {
-        padding: 0.2rem;
+    .menu-toggle {
+        display: block;
+    }
+}
+
+@media (max-width: 560px) {
+    .site-header__inner {
+        height: 4rem;
     }
 
-    .terminal-pill-btn {
-        width: 28px;
-        height: 28px;
-        font-size: 0.7rem;
+    .mobile-nav,
+    .mobile-nav__scrim {
+        top: 4rem;
     }
 
-    .hamburger {
-        display: flex;
+    .mobile-nav__scrim {
+        inset-block-start: 4rem;
     }
 
-    .nav-menu {
-        position: fixed;
-        top: -100vh;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: rgba(17, 17, 17, 0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        z-index: 1001;
-        opacity: 0;
-        pointer-events: none;
+    /* The brand's secondary line and the terminal shortcut are the two things
+       worth losing first when width runs out */
+    .brand__role,
+    .icon-btn {
+        display: none;
     }
+}
 
-    .nav-menu.active {
-        top: 0;
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    .nav-menu ul {
-        flex-direction: column;
-        gap: 2rem;
-        text-align: center;
-    }
-
-    .nav-link {
-        font-size: 1.1rem;
-        color: #CCCCCC;
-    }
-
-    .nav-link.active {
-        color: #FF6B00;
-    }
-
-    .hamburger.active span:nth-child(1) {
-        transform: translateY(6px) rotate(45deg);
-        background: #FF6B00;
-    }
-
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-        transform: translateY(-6px) rotate(-45deg);
-        background: #FF6B00;
+@media (max-width: 380px) {
+    .header-cta {
+        display: none;
     }
 }

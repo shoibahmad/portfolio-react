@@ -1,621 +1,339 @@
-/* Hero Section Styles — Highly Animated Warm Theme */
+/* Hero — asymmetric two-column, copy left, rendered object right.
+
+   The column split is 1.15fr / 1fr rather than 1fr / 1fr: the headline needs the
+   extra measure, and an off-centre split reads as composed where an even one
+   reads as a template. */
+
 .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding-top: 110px;
-    padding-bottom: 4.5rem;
     position: relative;
-    background: var(--bg-gradient);
-    overflow: hidden;
+    padding-top: clamp(6.5rem, 14vh, 9rem);
+    padding-bottom: clamp(3.5rem, 8vh, 6rem);
 }
 
-/* Soft horizon glow that hands the hero off to the next section */
-.hero::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 220px;
-    background: linear-gradient(180deg, transparent, var(--bg-primary) 88%);
-    pointer-events: none;
-    z-index: 0;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px);
-    background-size: 36px 36px;
-    mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 40%, transparent 100%);
-    pointer-events: none;
-    z-index: 0;
-}
-
-.hero .container {
-    position: relative;
-    z-index: 1;
-}
-
-.hero-content {
+.hero__shell {
     display: grid;
-    grid-template-columns: 1.45fr 1fr;
-    gap: 3.5rem;
+    grid-template-columns: 1.15fr 1fr;
     align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
 }
 
-/* ---------------------------------------------------------------------------
-   No backdrop-filter inside .hero-content.
-
-   The container animates its opacity on scroll. Any opacity below 1 turns the
-   subtree into a single composited group, and a descendant's backdrop-filter
-   then samples that already-faded group rather than the page behind it — which
-   renders as a milky, washed-out panel instead of frosted glass.
-
-   These surfaces sit at 0.9+ alpha anyway, so an opaque background is visually
-   equivalent, immune to the grouping problem, and materially cheaper to paint.
-   --------------------------------------------------------------------------- */
-.hero-content .floating-badge,
-.hero-content .details-card,
-.hero-content .hero-role-carousel,
-.hero-content .local-time,
-.hero-content .availability-pulse,
-.hero-content .hero-cta-btn-alt,
-.hero-content .stat-item {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+.hero__text {
+    max-width: 40rem;
 }
 
-/* Text Area */
-.hero-text {
-    max-width: 740px;
-}
-
-.hero-breadcrumbs {
+/* --- Meta row ------------------------------------------------------------- */
+.hero__meta {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.75rem;
-    font-size: 0.88rem;
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
+    gap: 0.75rem 1.25rem;
+    margin-bottom: 1.75rem;
 }
 
-.hero-breadcrumbs a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.25s ease;
+.hero__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.34rem 0.8rem 0.34rem 0.6rem;
+    border-radius: var(--radius-pill);
+    background: var(--positive-soft);
+    border: 1px solid rgba(21, 128, 61, 0.18);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    color: var(--positive);
+}
+
+.hero__status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--positive);
+    animation: pulseRing 2.4s ease-out infinite;
+}
+
+.hero__time {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    /* Digits stop the row twitching each time the minute rolls over */
+    font-variant-numeric: tabular-nums;
+}
+
+/* --- Headline -------------------------------------------------------------- */
+.hero__title {
+    font-size: var(--fs-display);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    color: var(--text-primary);
+    margin-bottom: 1.1rem;
+    text-wrap: balance;
+}
+
+.hero__title-accent {
+    color: var(--accent);
+}
+
+/* --- Role rotator ----------------------------------------------------------- */
+.hero__role {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+    font-size: var(--fs-lead);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.hero__role-label {
+    color: var(--text-muted);
     font-weight: 500;
 }
 
-.hero-breadcrumbs a:hover {
-    color: var(--primary);
-}
-
-.hero-breadcrumbs i {
-    font-size: 0.65rem;
-    color: var(--text-muted);
-}
-
-.hero-breadcrumbs .current {
-    color: var(--text-primary);
-    font-weight: 600;
-}
-
-.status-badge-container {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    margin-bottom: 1.25rem;
-    flex-wrap: wrap;
-}
-
-.availability-pulse {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.35rem 0.9rem;
-    border: 1px solid rgba(39, 201, 63, 0.35);
-    border-radius: 50px;
-    background: rgba(39, 201, 63, 0.1);
-    backdrop-filter: blur(8px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.availability-pulse:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 15px rgba(39, 201, 63, 0.25);
-}
-
-.pulse-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #27C93F;
-    border-radius: 50%;
-    box-shadow: 0 0 0 0 rgba(39, 201, 63, 0.7);
-    animation: pulse-animation 2s infinite;
-}
-
-@keyframes pulse-animation {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(39, 201, 63, 0.7); }
-    70% { transform: scale(1.05); box-shadow: 0 0 0 7px rgba(39, 201, 63, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(39, 201, 63, 0); }
-}
-
-.pulse-text {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: #1a1a1a;
-}
-
-.local-time {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    font-family: var(--font-mono, monospace);
-    background: rgba(255, 255, 255, 0.9);
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    border: 1px solid rgba(224, 208, 192, 0.5);
-}
-
-.local-time i {
-    color: var(--primary);
-}
-
-/* Dynamic Animated Role Carousel */
-.hero-role-carousel {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 107, 0, 0.25);
-    padding: 0.4rem 1.1rem;
-    border-radius: 50px;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.08);
-}
-
-.role-label {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-}
-
-.role-slider-box {
-    min-width: 190px;
-    height: 24px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-}
-
-.role-title-dynamic {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: var(--primary);
-    white-space: nowrap;
-}
-
-.role-icon {
-    font-size: 0.85rem;
-}
-
-.hero-title {
-    font-size: 3.5rem;
-    line-height: 1.15;
-    margin-bottom: 1.5rem;
-    font-weight: 900;
-    color: var(--text-primary);
-    letter-spacing: -0.03em;
-}
-
-.hero-title-accent {
-    font-family: var(--font-accent);
-    color: #FF6B00;
-    font-style: italic;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+/* Clipping slot for the crossfade. Height is fixed so the exiting and entering
+   words cannot push the paragraph below; width comes from the hidden sizer. */
+.hero__role-slot {
     position: relative;
     display: inline-block;
+    height: 1.6em;
+    overflow: hidden;
+    vertical-align: bottom;
 }
 
-.hero-title-accent::after {
-    content: '';
+.hero__role-sizer {
+    display: block;
+    white-space: nowrap;
+    visibility: hidden;
+}
+
+.hero__role-value {
     position: absolute;
-    bottom: 2px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, #FF6B00, transparent);
-    border-radius: 2px;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    color: var(--text-primary);
 }
 
-.hero-description {
-    font-size: 1.08rem;
-    color: var(--text-secondary);
-    line-height: 1.75;
+/* --- Lede ------------------------------------------------------------------- */
+.hero__lede {
+    max-width: 46ch;
     margin-bottom: 2rem;
-    max-width: 95%;
-}
-
-.hero-stats {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    margin-bottom: 2.5rem;
+    font-size: var(--fs-lead);
+    line-height: 1.7;
     color: var(--text-secondary);
-    font-size: 0.9rem;
-    flex-wrap: wrap;
 }
 
-.stat-item {
+/* --- Actions ---------------------------------------------------------------- */
+.hero__actions {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 0.4rem 0.85rem;
-    border-radius: 30px;
-    border: 1px solid rgba(224, 208, 192, 0.6);
-    cursor: default;
-}
-
-.stat-item i {
-    color: var(--primary);
-}
-
-.stat-item strong {
-    color: var(--text-primary);
-}
-
-/* Buttons */
-.hero-buttons {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
     flex-wrap: wrap;
-}
-
-.hero-cta-btn {
-    display: inline-flex;
-    align-items: center;
     gap: 0.75rem;
-    padding: 0.9rem 2.2rem;
-    font-size: 1rem;
-    font-weight: 700;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #FF6B00 0%, #E05E00 100%);
-    box-shadow: 0 8px 25px rgba(255, 107, 0, 0.35);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    margin-bottom: 2.75rem;
 }
 
-.hero-cta-btn:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 14px 30px rgba(255, 107, 0, 0.45);
-}
-
-.hero-cta-btn-alt {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.65rem;
-    padding: 0.85rem 1.8rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(224, 208, 192, 0.8);
-    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.hero-cta-btn-alt:hover {
-    transform: translateY(-3px);
-    border-color: var(--primary);
-    background: rgba(255, 255, 255, 0.95);
-    color: var(--primary);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-}
-
-/* 3D Visuals Stage */
-.hero-visuals-wrapper {
-    width: 100%;
+/* --- Facts ------------------------------------------------------------------
+   A ruled row rather than four cards. Dividers between, none on the ends. */
+.hero__facts {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2rem;
-    perspective: 1200px;
+    flex-wrap: wrap;
+    gap: 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
 }
 
-.hero-portrait-stage {
-    position: relative;
-    width: 340px;
-    height: 380px;
-    perspective: 1000px;
+.hero__fact {
+    padding-right: clamp(1rem, 3vw, 2rem);
+    margin-right: clamp(1rem, 3vw, 2rem);
+    border-right: 1px solid var(--border);
 }
 
-/* Floating Orbiting Pills */
-.floating-badge {
-    position: absolute;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.55rem 1.1rem;
-    background: #FFFFFF;
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 107, 0, 0.35);
-    border-radius: 50px;
-    box-shadow: 0 12px 30px rgba(255, 107, 0, 0.2);
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    pointer-events: none;
+.hero__fact:last-child {
+    padding-right: 0;
+    margin-right: 0;
+    border-right: none;
 }
 
-.badge-top-left {
-    top: -15px;
-    left: -25px;
-}
-
-.badge-bottom-right {
-    bottom: -15px;
-    right: -25px;
-}
-
-.hero-portrait {
-    width: 100%;
-    height: 100%;
-    border-radius: 24px;
-    overflow: hidden;
-    position: relative;
-    padding: 3.5px;
-    background: linear-gradient(135deg, #FF6B00, #FFB366, #FF6B00, #FFA14A);
-    background-size: 300% 300%;
-    animation: gradientBorder 6s ease infinite;
-    box-shadow: 0 20px 45px rgba(255, 107, 0, 0.22);
-    cursor: pointer;
-    transform-origin: center center;
-}
-
-@keyframes gradientBorder {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.hero-portrait img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 20%;
-    filter: brightness(0.96) contrast(1.05);
-    border-radius: 21px;
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.hero-portrait:hover img {
-    transform: scale(1.05);
-}
-
-/* 3D Details Card */
-.details-card {
-    width: 340px;
-    background: rgba(255, 255, 255, 0.97);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 1.8rem;
-    box-shadow: 0 16px 36px -8px rgba(180, 140, 100, 0.15);
-    transform-origin: center center;
-}
-
-.details-card h3 {
-    font-size: 1.18rem;
-    color: var(--text-primary);
-    margin-bottom: 1.25rem;
+.hero__fact-value {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
     font-weight: 700;
     letter-spacing: -0.02em;
-}
-
-.details-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.details-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.92rem;
-    padding: 0.2rem 0;
-}
-
-.detail-label {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--text-secondary);
-}
-
-.detail-label i {
-    color: var(--primary);
-    width: 16px;
-    text-align: center;
-}
-
-.detail-value {
     color: var(--text-primary);
-    font-weight: 600;
+    line-height: 1.2;
 }
 
-.detail-value.highlight-avail {
-    color: #1b8a2e;
-    background: rgba(39, 201, 63, 0.12);
-    padding: 0.15rem 0.55rem;
-    border-radius: 6px;
-    font-size: 0.82rem;
+.hero__fact-label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    color: var(--text-muted);
+    margin-top: 0.15rem;
 }
 
-/* Hero Scroll Down Indicator */
-.hero-scroll-indicator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.45rem;
-    margin-top: 3.5rem;
-    cursor: pointer;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0.5rem 1rem;
-    border-radius: 30px;
-    transition: all 0.3s ease;
-    user-select: none;
-}
-
-.scroll-mouse-icon {
-    width: 22px;
-    height: 36px;
-    border: 2px solid rgba(255, 107, 0, 0.6);
-    border-radius: 14px;
+/* --- Visual ------------------------------------------------------------------
+   A two-layer composition: the rendered form behind, the portrait in front and
+   overlapping it. The overlap is the whole point — it puts the two on different
+   planes instead of side by side. */
+.hero__visual {
     position: relative;
     display: flex;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(6px);
+    /* Explicit, because the stacked breakpoint sets `justify-items: center` on
+       the grid. That makes this item shrink-to-fit, and since everything inside
+       the composition is absolutely positioned there is no intrinsic width to
+       fit — the whole visual collapses to zero. */
+    width: 100%;
 }
 
-.scroll-wheel-dot {
-    width: 4px;
-    height: 7px;
-    background: var(--primary);
-    border-radius: 2px;
+.hero__composition {
+    position: relative;
+    width: 100%;
+    max-width: 26rem;
+    margin-inline: auto;
+    /* Square keeps the two layers' offsets proportional at every width, so the
+       composition never needs re-tuning per breakpoint. */
+    aspect-ratio: 1 / 1;
+}
+
+/* The form sits up and to the right, so the portrait covers its lower-left
+   quadrant and the sphere reads as passing behind. */
+.hero__object-layer {
     position: absolute;
-    top: 6px;
-    animation: scrollWheelDot 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    top: -6%;
+    right: -10%;
+    width: 82%;
+    z-index: 0;
+    pointer-events: none;
 }
 
-@keyframes scrollWheelDot {
-    0% {
-        opacity: 0;
-        transform: translateY(0);
-    }
-    20% {
-        opacity: 1;
-    }
-    70% {
-        opacity: 1;
-        transform: translateY(12px);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(16px);
-    }
+.hero__portrait {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 74%;
+    z-index: 1;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+    /* A white lip around the photo, the way a mounted print sits in a frame.
+       Drawn as a ring rather than a border so the radius stays true. */
+    box-shadow: 0 0 0 6px var(--surface), var(--shadow-xl);
+    transition: box-shadow 0.4s var(--ease-out);
+    will-change: transform;
 }
 
-.scroll-label {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    transition: color 0.2s ease;
+.hero__portrait:hover {
+    box-shadow: 0 0 0 6px var(--surface), var(--shadow-float);
 }
 
-.scroll-arrow-down {
-    font-size: 0.75rem;
-    color: var(--primary);
-    animation: bounceChevron 1.8s ease-in-out infinite;
+.hero__portrait img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
-@keyframes bounceChevron {
-    0%, 100% {
-        transform: translateY(0);
-        opacity: 0.6;
-    }
-    50% {
-        transform: translateY(4px);
-        opacity: 1;
-    }
-}
-
-.hero-scroll-indicator:hover .scroll-label {
-    color: var(--primary);
-}
-
-.hero-scroll-indicator:hover .scroll-mouse-icon {
-    border-color: var(--primary);
-    box-shadow: 0 0 15px rgba(255, 107, 0, 0.3);
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-    .hero-content {
-        grid-template-columns: 1fr;
-        gap: 3.5rem;
-    }
-
-    .hero-visuals-wrapper {
-        align-items: center;
-        padding-bottom: 1.5rem;
-    }
-}
-
-@media (max-width: 768px) {
+/* --- Tablet -------------------------------------------------------------------
+   Below 960px the two columns stop fitting side by side without squeezing the
+   headline to three words a line. Stacking, with the object first, keeps the
+   composition intact. */
+@media (max-width: 960px) {
     .hero {
-        padding-top: 95px;
-        padding-bottom: 3rem;
+        padding-top: clamp(5.5rem, 12vh, 7rem);
     }
 
-    .hero-title {
-        font-size: 2.45rem;
+    .hero__shell {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        justify-items: center;
+        text-align: center;
     }
 
-    .hero-breadcrumbs {
-        font-size: 0.8rem;
+    .hero__text {
+        max-width: 34rem;
+        order: 2;
     }
-    
-    .hero-portrait-stage {
+
+    .hero__visual {
+        order: 1;
+    }
+
+    .hero__meta,
+    .hero__role,
+    .hero__actions,
+    .hero__facts {
+        justify-content: center;
+    }
+
+    .hero__lede {
+        margin-inline: auto;
+    }
+
+    .hero__composition {
+        max-width: 20rem;
+    }
+}
+
+/* --- Phone --------------------------------------------------------------------- */
+@media (max-width: 560px) {
+    .hero__title {
+        line-height: 1.08;
+    }
+
+    /* The composition sits above the headline here, so every pixel it takes is a
+       pixel of copy pushed below the fold. */
+    .hero__composition {
+        max-width: 15.5rem;
+    }
+
+    .hero__portrait {
+        box-shadow: 0 0 0 4px var(--surface), var(--shadow-lg);
+    }
+
+    /* The label and the rotating role stack, so a 22-character role never has to
+       share a 390px line with "Shoib Ahmad —". */
+    .hero__role {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.1rem;
+    }
+
+    .hero__actions {
         width: 100%;
-        max-width: 320px;
-        height: 360px;
+        margin-bottom: 2rem;
     }
 
-    .badge-top-left {
-        left: -10px;
-        top: -12px;
+    /* Full-width stacked buttons — side-by-side pills below ~360px leave two
+       cramped targets instead of two comfortable ones. */
+    .hero__actions .btn {
+        flex: 1 1 14rem;
     }
 
-    .badge-bottom-right {
-        right: -10px;
-        bottom: -12px;
-    }
-    
-    .details-card {
+    /* The ruled row becomes a 2x2 grid; four columns on a phone gives each fact
+       about 20px of width. */
+    .hero__facts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.1rem 0;
         width: 100%;
-        max-width: 320px;
-        padding: 1.4rem;
     }
 
-    .hero-scroll-indicator {
-        margin-top: 2rem;
+    .hero__fact {
+        padding-right: 1rem;
+        margin-right: 0;
+        text-align: left;
+    }
+
+    .hero__fact:nth-child(even) {
+        border-right: none;
+        padding-left: 1rem;
+    }
+
+    .hero__fact:last-child {
+        padding-left: 1rem;
     }
 }

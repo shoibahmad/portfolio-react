@@ -1,295 +1,237 @@
-/* Interactive Resume Section Styles — Highly Animated */
-.interactive-resume {
-    padding: 8rem 0 6rem;
-    background: var(--bg-primary);
-    position: relative;
-    overflow: hidden;
-}
+/* Interactive resume. */
 
-.resume-header {
-    margin-bottom: 3.5rem;
-}
-
-.resume-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: #FF6B00;
-    background: rgba(255, 107, 0, 0.08);
-    border: 1px solid rgba(255, 107, 0, 0.2);
-    padding: 0.35rem 0.9rem;
-    border-radius: 9999px;
-    margin-bottom: 1.25rem;
-}
-
-.resume-badge .badge-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #FF6B00;
-    box-shadow: 0 0 8px #FF6B00;
-    animation: badgePing 2s infinite ease-in-out;
-}
-
-.resume-filters {
+.resume__filters {
     display: flex;
-    justify-content: center;
-    gap: 0.85rem;
-    margin-bottom: 3rem;
     flex-wrap: wrap;
-}
-
-.resume-filter-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.65rem 1.4rem;
-    background: #FFFFFF;
-    border: 1px solid var(--border);
-    border-radius: 50px;
-    color: var(--text-secondary);
-    font-weight: 700;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    font-family: var(--font-body);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-}
-
-.resume-filter-btn:hover {
-    border-color: #FF6B00;
-    color: #111111;
-}
-
-.resume-filter-btn.active {
-    background: #111111;
-    color: #FFFFFF;
-    border-color: #111111;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-}
-
-.active-filters {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 2.5rem;
-    padding: 1rem 1.25rem;
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(12px);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    flex-wrap: wrap;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-}
-
-.filter-label {
-    font-weight: 700;
-    color: var(--text-secondary);
-    font-size: 0.88rem;
-    font-family: 'Courier New', 'Fira Code', monospace;
-}
-
-.active-filter-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.35rem 0.85rem;
-    background: linear-gradient(135deg, #FF6B00 0%, #E05E00 100%);
-    color: white;
-    border-radius: 20px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.25);
-}
-
-.active-filter-tag button {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    font-size: 0.75rem;
-}
-
-.resume-content {
-    display: flex;
-    flex-direction: column;
-    gap: 3.5rem;
-    perspective: 1200px;
-}
-
-.resume-section {
-    position: relative;
-}
-
-.resume-section-title {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 1.65rem;
-    font-weight: 800;
-    margin-bottom: 2rem;
-    color: var(--text-primary);
-    letter-spacing: -0.02em;
-}
-
-.resume-section-title i {
-    color: var(--primary);
-    font-size: 1.4rem;
-}
-
-/* 3D Tilt Resume Card */
-.resume-card {
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    padding: 2.25rem;
-    border-radius: 22px;
-    border: 1px solid var(--border);
-    margin-bottom: 1.75rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    transform-origin: center center;
-    cursor: default;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.resume-card:hover {
-    border-color: rgba(255, 107, 0, 0.5);
-    box-shadow: 0 16px 36px rgba(255, 107, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
-}
-
-.resume-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-    gap: 1rem;
-}
-
-.resume-card-header h4 {
-    font-family: var(--font-heading);
-    font-size: 1.35rem;
-    font-weight: 800;
-    color: var(--text-primary);
-    margin-bottom: 0.3rem;
-    letter-spacing: -0.02em;
-}
-
-.interactive-resume .company {
-    color: var(--primary);
-    font-weight: 700;
-    font-size: 1.02rem;
-}
-
-.period {
-    background: rgba(255, 107, 0, 0.1);
-    border: 1px solid rgba(255, 107, 0, 0.2);
-    color: var(--primary);
-    padding: 0.4rem 1.1rem;
-    border-radius: 20px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    white-space: nowrap;
-    font-family: 'Courier New', 'Fira Code', monospace;
-}
-
-.location {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--text-muted);
-    font-size: 0.88rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
-}
-
-.interactive-resume .description {
-    color: var(--text-secondary);
-    line-height: 1.75;
-    font-size: 0.96rem;
+    gap: 0.4rem;
     margin-bottom: 1.5rem;
 }
 
-.resume-skills {
+.resume__filter {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.resume__filter:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+}
+
+.resume__filter.is-active {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--text-inverse);
+}
+
+/* --- Active highlight bar -------------------------------------------------- */
+.resume__active {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
+    align-items: center;
+    gap: 0.5rem;
+    /* The element is height-animated on enter/exit; without this it would
+       collapse its own padding into the measured height and jitter. */
+    overflow: hidden;
+    margin-bottom: 1.5rem;
 }
 
-.skill-tag {
-    padding: 0.45rem 0.95rem;
-    background: #FAF7F4;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    color: #444444;
-    font-size: 0.82rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    display: inline-block;
+.resume__active-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.28rem 0.4rem 0.28rem 0.7rem;
+    border-radius: var(--radius-pill);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    color: var(--accent-hover);
 }
 
-.skill-tag:hover {
-    background: rgba(255, 107, 0, 0.12);
-    border-color: #FF6B00;
-    color: #FF6B00;
-}
-
-.skill-tag.highlighted {
-    background: #FF6B00;
-    color: #FFFFFF;
-    border-color: #FF6B00;
-    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
-}
-
-/* Skills Category Grid */
-.skills-category-grid {
+.resume__active-tag button {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    place-items: center;
+    width: 1.05rem;
+    height: 1.05rem;
+    border: none;
+    border-radius: 50%;
+    background: rgba(234, 88, 12, 0.14);
+    color: var(--accent-hover);
+    font-size: 0.55rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
 }
 
-.skills-category {
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(14px);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 1.8rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-    transition: all 0.3s ease;
+.resume__active-tag button:hover {
+    background: rgba(234, 88, 12, 0.28);
 }
 
-.skills-category:hover {
-    border-color: rgba(255, 107, 0, 0.4);
-    box-shadow: 0 12px 28px rgba(255, 107, 0, 0.08);
+.resume__active-clear {
+    background: none;
+    border: none;
+    padding: 0.28rem 0.3rem;
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
 }
 
-.skills-category-title {
-    font-family: var(--font-heading);
-    font-size: 1.15rem;
+.resume__active-clear:hover {
     color: var(--text-primary);
-    margin-bottom: 1.25rem;
-    font-weight: 800;
-    letter-spacing: -0.01em;
 }
 
-@media (max-width: 768px) {
-    .resume-card-header {
+/* --- Blocks ------------------------------------------------------------------ */
+.resume__body {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+}
+
+.resume__block-title {
+    padding-bottom: 0.7rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+}
+
+.resume__entries {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.resume__entry {
+    padding: clamp(1.1rem, 2.5vw, 1.5rem);
+    transition: box-shadow 0.35s var(--ease-out), transform 0.35s var(--ease-out),
+                border-color 0.3s ease;
+}
+
+.resume__entry:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-strong);
+}
+
+.resume__entry-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.35rem;
+}
+
+.resume__entry-title {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+}
+
+.resume__entry-org {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--accent);
+}
+
+.resume__entry-period {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.resume__entry-location {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    margin-bottom: 0.7rem;
+}
+
+.resume__entry-desc {
+    font-size: var(--fs-sm);
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 0.9rem;
+}
+
+/* --- Tags ---------------------------------------------------------------------- */
+.resume__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.resume__tag {
+    padding: 0.28rem 0.65rem;
+    background: var(--surface-muted);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.resume__tag:hover {
+    border-color: var(--border-strong);
+    color: var(--text-primary);
+}
+
+.resume__tag.is-on {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #FFFFFF;
+}
+
+/* --- Skills matrix --------------------------------------------------------------- */
+.resume__matrix {
+    display: grid;
+    gap: 0.85rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
+.resume__matrix-cell {
+    padding: 1.15rem;
+}
+
+.resume__matrix-cell h4 {
+    margin-bottom: 0.75rem;
+}
+
+@media (max-width: 560px) {
+    .resume__entry-head {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.35rem;
     }
+}
 
-    .period {
-        align-self: flex-start;
-    }
+/* Toolbar: section filters on the left, the printable-sheet action on the
+   right. They share a row so the CV action reads as a peer of the filters
+   rather than as a floating button. */
+.resume__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
 
-    .resume-card {
-        padding: 1.6rem;
+.resume__toolbar .resume__filters {
+    margin-bottom: 0;
+}
+
+@media (max-width: 560px) {
+    .resume__toolbar > .btn {
+        width: 100%;
     }
 }

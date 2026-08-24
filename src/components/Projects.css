@@ -1,814 +1,571 @@
-/* =========================================================
-   Projects Section — Interactive Split-Screen Studio & Dossier
-   ========================================================= */
+/* Work index — master/detail on wide screens, cards on narrow.
 
-.projects-studio-section {
-    padding: 8rem 0 6rem;
-    background: var(--bg-secondary);
-    position: relative;
-}
+   The two layouts share the header, the controls and the chip/tech vocabulary;
+   only the body differs, which is why they live in one stylesheet rather than
+   two. */
 
-.projects-header {
-    margin-bottom: 3rem;
-}
-
-.projects-badge {
-    display: inline-flex;
+.work__controls {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem;
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: #FF6B00;
-    background: rgba(255, 107, 0, 0.08);
-    border: 1px solid rgba(255, 107, 0, 0.2);
-    padding: 0.35rem 0.9rem;
-    border-radius: 9999px;
-    margin-bottom: 1.25rem;
-}
-
-.projects-badge .badge-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #FF6B00;
-    box-shadow: 0 0 8px #FF6B00;
-}
-
-/* ---------------- Search Bar ---------------- */
-.projects-search {
+    justify-content: space-between;
+    gap: 1rem;
     margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
 }
 
-.search-wrapper {
+/* --- Search ---------------------------------------------------------------- */
+.work__search {
     position: relative;
-    max-width: 680px;
-    margin: 0 auto;
+    flex: 1 1 20rem;
+    max-width: 26rem;
 }
 
-.search-icon {
+.work__search > i {
     position: absolute;
-    left: 1.25rem;
+    left: 0.9rem;
     top: 50%;
     transform: translateY(-50%);
-    color: #888888;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
     pointer-events: none;
 }
 
-.search-input {
+.work__search input {
     width: 100%;
-    padding: 0.95rem 3rem 0.95rem 3.25rem;
+    padding: 0.65rem 2.2rem 0.65rem 2.3rem;
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 9999px;
-    font-size: 0.95rem;
-    font-family: var(--font-body);
-    background: #FFFFFF;
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sm);
     color: var(--text-primary);
-    transition: all 0.25s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.search-input:focus {
+.work__search input::placeholder {
+    color: var(--text-faint);
+}
+
+.work__search input:focus {
     outline: none;
-    border-color: #FF6B00;
-    box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.12), 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-color: var(--accent);
+    box-shadow: var(--ring-focus);
 }
 
-.search-input::placeholder {
-    color: #999999;
+/* Chrome and Safari draw their own clear button on type="search"; ours is the
+   only one that matches the design, so theirs is removed. */
+.work__search input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
 }
 
-.search-clear {
+.work__search-clear {
     position: absolute;
-    right: 1rem;
+    right: 0.5rem;
     top: 50%;
     transform: translateY(-50%);
-    background: #F0EAE4;
-    border: none;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: #666666;
-    transition: all 0.2s ease;
-    font-size: 0.75rem;
-}
-
-.search-clear:hover {
-    background: #FF6B00;
-    color: #FFFFFF;
-}
-
-/* Category Filter Pills */
-.projects-filter {
-    display: flex;
-    justify-content: center;
-    gap: 0.6rem;
-    margin-bottom: 3.5rem;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    padding: 0.55rem 1.25rem;
-    border: 1px solid var(--border);
-    background: #FFFFFF;
-    border-radius: 9999px;
-    color: #555555;
-    cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-}
-
-.filter-count {
-    opacity: 0.7;
-    font-size: 0.7rem;
-}
-
-.filter-btn:hover {
-    color: #111111;
-    border-color: #FF6B00;
-    transform: translateY(-1px);
-}
-
-.filter-btn.active {
-    background: #111111;
-    color: #FFFFFF;
-    border-color: #111111;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.filter-btn.active .filter-count {
-    color: #FF6B00;
-    opacity: 1;
-    font-weight: 800;
-}
-
-/* =========================================================
-   Split-Screen Studio Layout
-   ========================================================= */
-
-.studio-workspace {
     display: grid;
-    grid-template-columns: 420px 1fr;
-    gap: 2.25rem;
-    align-items: flex-start;
-}
-
-/* ---------------- Left: Directory Pane ---------------- */
-.studio-directory-pane {
-    background: #FFFFFF;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-    position: sticky;
-    top: 90px;
-    max-height: calc(100vh - 120px);
-    display: flex;
-    flex-direction: column;
-}
-
-.directory-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.15rem 1.4rem;
-    background: #FAF7F4;
-    border-bottom: 1px solid var(--border);
-}
-
-.directory-title {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: #111111;
-    letter-spacing: 0.08em;
-}
-
-.directory-title i {
-    color: #FF6B00;
-}
-
-.directory-count {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: #888888;
-}
-
-.directory-list {
-    overflow-y: auto;
-    padding: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.directory-list::-webkit-scrollbar {
-    width: 6px;
-}
-
-.directory-list::-webkit-scrollbar-thumb {
-    background: #E5DCD3;
-    border-radius: 4px;
-}
-
-.directory-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.95rem 1.15rem;
-    background: #FAF7F4;
-    border: 1px solid transparent;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    position: relative;
-}
-
-.directory-item:hover {
-    background: #FFF5EE;
-    border-color: #FFE0CC;
-    transform: translateX(3px);
-}
-
-.directory-item.active {
-    background: #111111;
-    border-color: #111111;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    transform: translateX(4px);
-}
-
-.dir-item-left {
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-    min-width: 0;
-}
-
-.dir-num {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: #FF6B00;
-    flex-shrink: 0;
-}
-
-.dir-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    min-width: 0;
-}
-
-.dir-title {
-    font-family: var(--font-heading);
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #111111;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: color 0.2s ease;
-}
-
-.directory-item.active .dir-title {
-    color: #FFFFFF;
-}
-
-.dir-meta-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.dir-cat {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: #888888;
-    text-transform: uppercase;
-}
-
-.directory-item.active .dir-cat {
-    color: #FF8C33;
-}
-
-.dir-date {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.65rem;
-    color: #AAAAAA;
-}
-
-.dir-item-right .dir-arrow {
-    font-size: 0.75rem;
-    color: #CCCCCC;
-    transition: all 0.2s ease;
-}
-
-.directory-item.active .dir-arrow {
-    color: #FF6B00;
-    transform: translateX(3px);
-}
-
-.directory-empty {
-    padding: 3rem 1.5rem;
-    text-align: center;
-    color: #888888;
-}
-
-.directory-empty i {
-    font-size: 2rem;
-    color: #FF6B00;
-    margin-bottom: 0.75rem;
-    opacity: 0.5;
-}
-
-/* ---------------- Right: Mission Control Dossier Inspector ---------------- */
-.studio-inspector-pane {
-    background: #FFFFFF;
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
-    animation: fadeIn 0.3s ease;
-}
-
-/* Top Bar */
-.inspector-topbar {
-    height: 40px;
-    background: #111111;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-    border-bottom: 1px solid #222222;
-}
-
-.mac-dots {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.sc-dot {
-    width: 9px;
-    height: 9px;
+    place-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border: none;
     border-radius: 50%;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: var(--transition);
 }
 
-.dot-red { background: #FF5F56; }
-.dot-yellow { background: #FFBD2E; }
-.dot-green { background: #27C93F; }
+.work__search-clear:hover {
+    background: var(--surface-muted);
+    color: var(--text-primary);
+}
 
-.inspector-url-bar {
-    background: #1C1C1C;
-    border: 1px solid #333333;
-    border-radius: 6px;
-    padding: 0.2rem 0.75rem;
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.7rem;
-    color: #AAAAAA;
+/* --- Filters ---------------------------------------------------------------- */
+.work__filters {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     gap: 0.4rem;
 }
 
-.inspector-url-bar i {
-    color: #27C93F;
-    font-size: 0.65rem;
-}
-
-.inspector-badges {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.badge-cat {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: #FF6B00;
-    background: rgba(255, 107, 0, 0.15);
-    padding: 0.15rem 0.55rem;
-    border-radius: 4px;
-}
-
-.badge-live {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: #27C93F;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-}
-
-.beacon-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #27C93F;
-    box-shadow: 0 0 6px #27C93F;
-    animation: pulse-animation 2s infinite;
-}
-
-/* Visual Canvas */
-.inspector-visual-canvas {
-    height: 260px;
-    background: #0E0E0E;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.inspector-visual-canvas img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 20%;
-    transition: transform 0.5s ease;
-}
-
-.canvas-laser-scan {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #FF6B00, #FFAA66, transparent);
-    box-shadow: 0 0 8px #FF6B00;
-    animation: laserScan 4s linear infinite;
-    z-index: 2;
-}
-
-.canvas-badge-overlay {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 0.25rem 0.75rem;
-    border-radius: 6px;
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.7rem;
-    color: #FFFFFF;
-    z-index: 3;
-}
-
-/* Dossier Body */
-.inspector-body {
-    padding: 2.25rem;
-}
-
-.inspector-title-row h3 {
-    font-family: var(--font-heading);
-    font-size: 1.7rem;
-    font-weight: 900;
-    color: #111111;
-    letter-spacing: -0.03em;
-    margin: 0 0 0.85rem 0;
-    line-height: 1.25;
-}
-
-.inspector-desc {
-    font-size: 0.95rem;
-    color: #555555;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-}
-
-/* Dossier Tabs Navigation */
-.dossier-tabs-nav {
-    display: flex;
-    gap: 0.5rem;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.75rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.dossier-tab-btn {
-    background: #FAF7F4;
-    border: 1px solid #EAE3DC;
-    padding: 0.55rem 1rem;
-    border-radius: 8px;
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #666666;
-    cursor: pointer;
-    transition: all 0.2s ease;
+.work__filter {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
+    padding: 0.5rem 0.9rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
 }
 
-.dossier-tab-btn i {
-    font-size: 0.75rem;
-    color: #888888;
+.work__filter:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
 }
 
-.dossier-tab-btn:hover {
-    color: #111111;
-    border-color: #FF6B00;
+.work__filter.is-active {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--text-inverse);
 }
 
-.dossier-tab-btn.active {
-    background: #FF6B00;
-    color: #FFFFFF;
-    border-color: #FF6B00;
+.work__filter-count {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--text-muted);
 }
 
-.dossier-tab-btn.active i {
-    color: #FFFFFF;
+.work__filter.is-active .work__filter-count {
+    color: rgba(255, 255, 255, 0.6);
 }
 
-/* Dossier Panel Contents */
-.dossier-panel {
-    background: #FAF7F4;
-    border: 1px solid #EAE3DC;
-    border-radius: 14px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    animation: fadeIn 0.25s ease;
-}
-
-/* Architecture Pipeline */
-.architecture-pipeline {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 0.75rem;
-    overflow-x: auto;
-    padding: 0.5rem 0;
-}
-
-.pipeline-node {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-    min-width: 90px;
+.work__empty {
+    padding: 4rem 0;
     text-align: center;
+    color: var(--text-muted);
 }
 
-.pipeline-node .node-icon {
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
-    background: #FFFFFF;
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.15rem;
-    color: #FF6B00;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-    position: relative;
-}
-
-.pipeline-node:hover .node-icon {
-    transform: translateY(-3px) scale(1.08);
-    border-color: #FF6B00;
-    box-shadow: 0 8px 20px rgba(255, 107, 0, 0.25);
-    color: #FF6B00;
-}
-
-.pipeline-node .node-label {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.68rem;
-    font-weight: 700;
-    color: #444444;
-}
-
-.pipeline-separator {
-    color: #FF6B00;
-    font-size: 0.85rem;
-    opacity: 0.8;
-    position: relative;
-    display: inline-block;
-    animation: flowPulse 2s ease-in-out infinite;
-}
-
-@keyframes flowPulse {
-    0%, 100% {
-        transform: translateX(0);
-        opacity: 0.5;
-        color: #FF6B00;
-    }
-    50% {
-        transform: translateX(4px);
-        opacity: 1;
-        color: #FF8C33;
-        text-shadow: 0 0 8px rgba(255, 107, 0, 0.6);
-    }
-}
-
-/* Breakdown Cards */
-.breakdown-panel {
+/* --- Wide layout: master / detail --------------------------------------------
+   The index scrolls inside its own pane while the detail sticks. Capping the
+   index height is what makes that work — an uncapped column of nineteen items
+   would be taller than the detail, and the sticky pane would have nothing left
+   to stick against. */
+.work__workspace {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
+    grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
 }
 
-.breakdown-card {
-    background: #FFFFFF;
+.work__index-pane {
+    position: sticky;
+    top: 6rem;
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1.15rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
 }
 
-.breakdown-card h5 {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    margin: 0 0 0.5rem 0;
+.work__index-head {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    justify-content: space-between;
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-muted);
 }
 
-.challenge-card h5 { color: #E05E00; }
-.solution-card h5 { color: #059669; }
-
-.breakdown-card p {
-    font-size: 0.85rem;
-    color: #555555;
-    line-height: 1.6;
-    margin: 0;
+.work__index {
+    max-height: min(60vh, 34rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
-/* Learnings List */
-.learnings-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.work__index-item {
     display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    padding: 0.8rem 1.1rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-light);
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s ease;
 }
 
-.learnings-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-    font-size: 0.88rem;
-    color: #444444;
-    line-height: 1.5;
+.work__index-item:hover {
+    background: var(--surface-muted);
 }
 
-.learnings-list li i {
-    color: #FF6B00;
-    font-size: 0.75rem;
-    margin-top: 0.25rem;
+/* Selected row gets an accent rule on its leading edge. Using an inset shadow
+   rather than a border keeps the row from shifting 3px when it activates. */
+.work__index-item.is-active {
+    background: var(--accent-soft);
+    box-shadow: inset 3px 0 0 var(--accent);
 }
 
-/* Tech Section */
-.inspector-tech-section {
-    margin-bottom: 2.25rem;
+.work__index-num {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
 }
 
-.tech-heading {
+.work__index-item.is-active .work__index-num {
+    color: var(--accent);
+}
+
+.work__index-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.work__index-title {
     display: block;
-    font-family: 'Courier New', 'Fira Code', monospace;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    /* Titles run long; one line with an ellipsis keeps every row the same height
+       so the list reads as an index rather than a ragged stack. */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.work__index-cat {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+}
+
+.work__index-arrow {
     font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    color: #888888;
+    color: var(--text-faint);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.work__index-item:hover .work__index-arrow,
+.work__index-item.is-active .work__index-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--accent);
+}
+
+/* --- Detail ------------------------------------------------------------------- */
+.work__detail {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.work__detail-media {
+    aspect-ratio: 16 / 9;
+    background: var(--surface-sunken);
+    border-bottom: 1px solid var(--border);
+}
+
+.work__detail-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.work__detail-body {
+    padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.work__detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.85rem;
+}
+
+.work__detail-date {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+}
+
+.work__detail-title {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
     margin-bottom: 0.65rem;
 }
 
-.inspector-tech-tags {
+.work__detail-desc {
+    font-size: var(--fs-body);
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* --- Tabs ---------------------------------------------------------------------- */
+.work__tabs {
+    display: flex;
+    gap: 0.25rem;
+    border-bottom: 1px solid var(--border);
+    /* Three labels do not fit on a narrow tablet; scrolling beats wrapping into
+       a second row that shifts the panel below it. */
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.work__tabs::-webkit-scrollbar { display: none; }
+
+.work__tab {
+    position: relative;
+    padding: 0.6rem 0.85rem;
+    background: transparent;
+    border: none;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.work__tab:hover { color: var(--text-primary); }
+
+.work__tab.is-active {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.work__tab.is-active::after {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: -1px;
+    height: 2px;
+    background: var(--accent);
+}
+
+.work__panel {
+    padding: 1.5rem 0;
+    min-height: 8rem;
+}
+
+.work__panel:focus-visible {
+    box-shadow: none;
+}
+
+/* --- Architecture pipeline ------------------------------------------------------
+   Chevron-linked steps. The arrow is drawn as a ::after on each node except the
+   last, so the chain has no separator elements to keep in sync with the data. */
+.work__pipeline {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.5rem 0;
+    align-items: stretch;
 }
 
-.inspector-tech-pill {
-    font-family: 'Courier New', 'Fira Code', monospace;
-    font-size: 0.74rem;
-    font-weight: 700;
-    color: #333333;
-    background: #FAF7F4;
-    border: 1px solid #EAE3DC;
-    padding: 0.35rem 0.75rem;
-    border-radius: 6px;
-    transition: all 0.2s ease;
-}
-
-.inspector-tech-pill:hover {
-    background: #FFF5EE;
-    border-color: #FF6B00;
-    color: #FF6B00;
-}
-
-/* Action Buttons */
-.inspector-actions {
+.work__pipeline-node {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding-top: 1.5rem;
+    gap: 0.5rem;
+    padding: 0.55rem 0.85rem;
+    background: var(--surface-muted);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.work__pipeline-node i {
+    font-size: 0.75rem;
+    color: var(--accent);
+}
+
+.work__pipeline-node:not(:last-child)::after {
+    content: '';
+    width: 1.25rem;
+    height: 1px;
+    margin-left: 0.6rem;
+    margin-right: -0.85rem;
+    background: var(--border-strong);
+}
+
+/* --- Breakdown -------------------------------------------------------------------- */
+.work__breakdown {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.work__breakdown h4 {
+    margin-bottom: 0.5rem;
+}
+
+.work__breakdown p {
+    font-size: var(--fs-sm);
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+/* --- Learnings ---------------------------------------------------------------------- */
+.work__learnings {
+    display: grid;
+    gap: 0.7rem;
+}
+
+.work__learnings li {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: var(--fs-sm);
+    line-height: 1.65;
+    color: var(--text-secondary);
+}
+
+.work__learnings li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+/* --- Tech + actions --------------------------------------------------------------- */
+.work__tech {
+    padding-top: 1.25rem;
     border-top: 1px solid var(--border);
 }
 
-.btn-inspect-modal {
-    flex: 1;
-    padding: 0.9rem 1.5rem;
-    background: #111111;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 12px;
-    font-family: var(--font-body);
-    font-weight: 800;
-    font-size: 0.9rem;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+.work__tech h4 { margin-bottom: 0.65rem; }
+
+.work__tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.work__actions {
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.6rem;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 1.5rem;
 }
 
-.btn-inspect-modal:hover {
-    background: #FF6B00;
-    box-shadow: 0 8px 24px rgba(255, 107, 0, 0.35);
-    transform: translateY(-2px);
+/* --- Narrow layout: cards ------------------------------------------------------- */
+.work__cards {
+    display: grid;
+    gap: clamp(1rem, 3vw, 1.5rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
 }
 
-.btn-github-link {
-    padding: 0.9rem 1.4rem;
-    background: #FAF7F4;
-    border: 1px solid var(--border);
-    color: #111111;
-    border-radius: 12px;
-    font-family: var(--font-body);
+.work__card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* TiltCard writes an inline transform on pointer move; the transition here is
+       what smooths the release back to rest. */
+    transition: box-shadow 0.35s var(--ease-out), transform 0.35s var(--ease-out),
+                border-color 0.3s ease;
+}
+
+.work__card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-strong);
+}
+
+.work__card-media {
+    aspect-ratio: 16 / 9;
+    background: var(--surface-sunken);
+    border-bottom: 1px solid var(--border);
+}
+
+.work__card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.work__card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 1.25rem;
+    flex: 1;
+}
+
+.work__card-title {
+    font-size: 1.05rem;
     font-weight: 700;
-    font-size: 0.9rem;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.2s ease;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
 }
 
-.btn-github-link:hover {
-    background: #111111;
-    color: #FFFFFF;
-    border-color: #111111;
-    transform: translateY(-2px);
+.work__card-desc {
+    font-size: var(--fs-sm);
+    line-height: 1.65;
+    color: var(--text-secondary);
+    /* Descriptions vary from two lines to twelve; clamping keeps the grid even */
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-/* ---------------- Responsive ---------------- */
-@media (max-width: 1024px) {
-    .studio-workspace {
-        grid-template-columns: 340px 1fr;
+.work__card .work__actions {
+    margin-top: auto;
+    padding-top: 0.4rem;
+}
+
+/* --- Breakpoints ------------------------------------------------------------------- */
+@media (max-width: 1180px) {
+    .work__workspace {
+        grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
         gap: 1.5rem;
     }
 }
 
-@media (max-width: 860px) {
-    .studio-workspace {
-        grid-template-columns: 1fr;
-    }
-
-    .studio-directory-pane {
-        position: static;
-        max-height: 400px;
-    }
-
-    .breakdown-panel {
-        grid-template-columns: 1fr;
-    }
-
-    .inspector-actions {
+@media (max-width: 700px) {
+    .work__controls {
         flex-direction: column;
+        align-items: stretch;
     }
 
-    .btn-inspect-modal, .btn-github-link {
+    /* Two things go wrong once the controls stack into a column:
+       `flex: 1 1 20rem` sizes the main axis, which is now the *height* — a
+       20rem-tall search box — and a flex item's default `min-width: auto` lets
+       it grow to its content, which here is a long placeholder string. Pinning
+       the width to the container fixes both. */
+    .work__search {
+        flex: 0 0 auto;
         width: 100%;
-        justify-content: center;
+        min-width: 0;
+        max-width: none;
+    }
+
+    /* Filters scroll horizontally rather than wrapping to three rows and pushing
+       the grid a screen further down. `min-width: 0` is required for that: as a
+       flex item this defaults to `min-width: auto`, which sizes it to the full
+       un-wrapped row and pushes the page wide instead of scrolling inside it. */
+    .work__filters {
+        flex-wrap: nowrap;
+        min-width: 0;
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 0.35rem;
+        scrollbar-width: none;
+    }
+
+    .work__filters::-webkit-scrollbar { display: none; }
+
+    .work__filter { flex: 0 0 auto; }
+
+    .work__actions .btn {
+        flex: 1 1 auto;
     }
 }

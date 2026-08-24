@@ -1,15 +1,45 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
+import { BASICS } from '../data/profile';
 import './Contact.css';
 
+const CHANNELS = [
+    {
+        icon: 'fas fa-envelope',
+        label: 'Email',
+        value: BASICS.email,
+        href: `mailto:${BASICS.email}`
+    },
+    {
+        icon: 'fab fa-linkedin-in',
+        label: 'LinkedIn',
+        value: BASICS.linkedinLabel,
+        href: BASICS.linkedin
+    },
+    {
+        icon: 'fab fa-github',
+        label: 'GitHub',
+        value: BASICS.githubLabel,
+        href: BASICS.github
+    },
+    {
+        icon: 'fab fa-whatsapp',
+        label: 'WhatsApp',
+        value: BASICS.phone,
+        href: BASICS.phoneHref
+    },
+    {
+        icon: 'fas fa-location-dot',
+        label: 'Location',
+        value: `${BASICS.location} — open to remote or relocation`
+    }
+];
+
+const ALERT_ACCENT = '#EA580C';
+
 const Contact = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        message: ''
-    });
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e) => {
@@ -32,40 +62,38 @@ const Contact = () => {
             to_email: formData.email,
             from_name: formData.name,
             message: formData.message,
-            reply_to: 'shoibsahmad@gmail.com'
+            reply_to: BASICS.email
         };
 
         try {
             await emailjs.init('W-1fxkwC0rOyOEvqa');
-
-            // Send main email
             await emailjs.send('service_jo38u8b', 'template_jkspt2b', templateParams);
 
-            // Send auto-reply
+            // The auto-reply is a courtesy; failing to send it must not make the
+            // visitor think their message did not arrive.
             try {
                 await emailjs.send('service_jo38u8b', 'template_kmut55i', autoReplyParams);
             } catch (err) {
-                console.error("Auto-reply failed", err);
+                console.error('Auto-reply failed', err);
             }
 
             Swal.fire({
-                title: 'Message Sent! ✉️',
-                text: "Thank you for reaching out! I'll get back to you within 24-48 hours.",
+                title: 'Message sent',
+                text: "Thanks for reaching out — I'll reply within 24 to 48 hours.",
                 icon: 'success',
-                confirmButtonColor: '#FF6B00',
-                confirmButtonText: 'Great!',
+                confirmButtonColor: ALERT_ACCENT,
+                confirmButtonText: 'Close',
                 timer: 3500
             });
 
             setFormData({ name: '', email: '', message: '' });
-
         } catch (error) {
             console.error('Error:', error);
             Swal.fire({
-                title: 'Message Received!',
-                text: 'Thank you! Please contact me directly at shoibsahmad@gmail.com',
+                title: "That didn't send",
+                text: `Please email me directly at ${BASICS.email} and I will pick it up there.`,
                 icon: 'info',
-                confirmButtonColor: '#FF6B00'
+                confirmButtonColor: ALERT_ACCENT
             });
         } finally {
             setIsSubmitting(false);
@@ -73,158 +101,114 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="contact">
-            <div className="container">
-                <div className="contact-header text-center">
-                    <div className="contact-badge">
-                        <span className="badge-dot"></span>
-                        GET IN TOUCH
-                    </div>
-                    <h2 className="section-title">
-                        Let's Build Something <span className="hero-title-accent">Exceptional.</span>
+        <section className="contact section" id="contact" aria-labelledby="contact-title">
+            <div className="shell">
+                <div className="section-head">
+                    <span className="section-kicker">Contact</span>
+                    <h2 className="section-title" id="contact-title">
+                        Let&rsquo;s build something exceptional.
                     </h2>
-                    <p className="section-subtitle">
-                        I'm always open to discussing new opportunities, high-impact projects, or AI engineering collaborations.
+                    <p className="section-lede">
+                        Open to new opportunities, high-impact projects, and AI engineering
+                        collaborations.
                     </p>
                 </div>
 
-                <div className="contact-content">
-                    <motion.div
-                        className="contact-info spotlight-card"
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <h3>Connect Directly</h3>
-                        <p>Have an ambitious project in mind, an open role, or need architectural consultation? Reach out across any channel.</p>
-                        
-                        <div className="contact-details">
-                            <motion.a
-                                href="mailto:shoibsahmad@gmail.com"
-                                className="contact-detail-item"
-                                whileHover={{ x: 6 }}
-                                transition={{ type: "spring", stiffness: 350 }}
-                            >
-                                <div className="contact-icon-box">
-                                    <i className="fas fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <h4>Email</h4>
-                                    <p>shoibsahmad@gmail.com</p>
-                                </div>
-                            </motion.a>
+                <div className="contact__grid">
+                    <div className="contact__channels">
+                        <h3 className="contact__subtitle">Direct channels</h3>
+                        <p className="contact__intro">
+                            An ambitious project, an open role, or an architecture question —
+                            any of these are worth an email.
+                        </p>
 
-                            <motion.div
-                                className="contact-detail-item"
-                                whileHover={{ x: 6 }}
-                                transition={{ type: "spring", stiffness: 350 }}
-                            >
-                                <div className="contact-icon-box">
-                                    <i className="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div>
-                                    <h4>Location</h4>
-                                    <p>Lucknow, India (Open to Remote / Relocation)</p>
-                                </div>
-                            </motion.div>
+                        <ul className="contact__list">
+                            {CHANNELS.map((channel) => {
+                                const Inner = (
+                                    <>
+                                        <span className="contact__icon" aria-hidden="true">
+                                            <i className={channel.icon} />
+                                        </span>
+                                        <span className="contact__text">
+                                            <span className="label">{channel.label}</span>
+                                            <span className="contact__value">{channel.value}</span>
+                                        </span>
+                                    </>
+                                );
 
-                            <motion.a
-                                href="https://www.linkedin.com/in/shoib-ahmad-788096219/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="contact-detail-item"
-                                whileHover={{ x: 6 }}
-                                transition={{ type: "spring", stiffness: 350 }}
-                            >
-                                <div className="contact-icon-box">
-                                    <i className="fab fa-linkedin"></i>
-                                </div>
-                                <div>
-                                    <h4>LinkedIn</h4>
-                                    <p>linkedin.com/in/shoib-ahmad</p>
-                                </div>
-                            </motion.a>
+                                return (
+                                    <li key={channel.label}>
+                                        {channel.href ? (
+                                            <a
+                                                className="contact__item contact__item--link"
+                                                href={channel.href}
+                                                {...(channel.href.startsWith('http')
+                                                    ? { target: '_blank', rel: 'noopener noreferrer' }
+                                                    : {})}
+                                            >
+                                                {Inner}
+                                            </a>
+                                        ) : (
+                                            <div className="contact__item">{Inner}</div>
+                                        )}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
 
-                            <motion.a
-                                href="https://wa.me/918853741966"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="contact-detail-item"
-                                whileHover={{ x: 6 }}
-                                transition={{ type: "spring", stiffness: 350 }}
-                            >
-                                <div className="contact-icon-box">
-                                    <i className="fab fa-whatsapp"></i>
-                                </div>
-                                <div>
-                                    <h4>WhatsApp</h4>
-                                    <p>+91 8853741966</p>
-                                </div>
-                            </motion.a>
-                        </div>
-                    </motion.div>
+                    <form className="contact__form card" onSubmit={handleSubmit} noValidate={false}>
+                        <h3 className="contact__subtitle">Send a message</h3>
 
-                    <motion.form
-                        id="contact-form"
-                        className="contact-form spotlight-card"
-                        onSubmit={handleSubmit}
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.15 }}
-                    >
-                        <h3>Send a Direct Message</h3>
-                        <div className="form-group">
-                            <label htmlFor="name">Your Name</label>
+                        <div className="field">
+                            <label htmlFor="name">Your name</label>
                             <input
                                 type="text"
                                 id="name"
                                 name="name"
-                                placeholder="e.g. Alex Morgan"
+                                autoComplete="name"
+                                placeholder="Alex Morgan"
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
                             />
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="email">Email Address</label>
+
+                        <div className="field">
+                            <label htmlFor="email">Email address</label>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
+                                autoComplete="email"
                                 placeholder="alex@company.com"
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
                             />
                         </div>
-                        <div className="form-group">
+
+                        <div className="field">
                             <label htmlFor="message">Message</label>
                             <textarea
                                 id="message"
                                 name="message"
                                 rows="5"
-                                placeholder="Tell me about your project, timeline, or idea..."
+                                placeholder="The project, the timeline, or just the idea."
                                 value={formData.message}
                                 onChange={handleChange}
                                 required
-                            ></textarea>
+                            />
                         </div>
-                        <motion.button
+
+                        <button
                             type="submit"
-                            className="btn btn-primary contact-submit-btn"
+                            className="btn btn-primary contact__submit"
                             disabled={isSubmitting}
-                            whileHover={{ scale: 1.02, y: -2 }}
-                            whileTap={{ scale: 0.98 }}
                         >
-                            {isSubmitting ? (
-                                <><i className="fas fa-spinner fa-spin"></i> Sending Message...</>
-                            ) : (
-                                <><i className="fas fa-paper-plane"></i> Send Message</>
-                            )}
-                        </motion.button>
-                    </motion.form>
+                            {isSubmitting ? 'Sending…' : 'Send message'}
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>

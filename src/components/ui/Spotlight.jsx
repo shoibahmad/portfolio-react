@@ -1,26 +1,20 @@
-import React, { useRef } from 'react';
-import './Spotlight.css';
+import React from 'react';
 
-const Spotlight = ({ children, className = '' }) => {
-    const containerRef = useRef(null);
-
-    const handleMouseMove = (e) => {
-        if (!containerRef.current) return;
-        const cards = containerRef.current.getElementsByClassName('spotlight-card');
-        for (const card of cards) {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-        }
-    };
-
-    return (
-        <div ref={containerRef} onMouseMove={handleMouseMove} className={`spotlight-container ${className}`}>
-            {children}
-        </div>
-    );
-};
+/**
+ * Layout wrapper.
+ *
+ * This used to attach a mousemove listener per section to drive a radial
+ * "flashlight" highlight. That effect is gone with the glass theme, so the
+ * listener is gone too — several sections each sampling pointer position every
+ * frame is real main-thread cost for no remaining visual result.
+ *
+ * Kept as a component because four sections still compose with it, and a plain
+ * wrapper is a cheaper change than rewriting each of their layouts.
+ */
+const Spotlight = ({ children, className = '', ...rest }) => (
+    <div className={className} {...rest}>
+        {children}
+    </div>
+);
 
 export default Spotlight;

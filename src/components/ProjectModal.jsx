@@ -10,12 +10,21 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
     // The effect now only does what effects are for: syncing an external system
     // (document.body) with React state.
     useEffect(() => {
-        if (!isOpen) return;
+        if (!isOpen) return undefined;
+
+        const previousOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
-        return () => {
-            document.body.style.overflow = '';
+
+        const onKeyDown = (e) => {
+            if (e.key === 'Escape') onClose();
         };
-    }, [isOpen]);
+        window.addEventListener('keydown', onKeyDown);
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            window.removeEventListener('keydown', onKeyDown);
+        };
+    }, [isOpen, onClose]);
 
     if (!project) return null;
 

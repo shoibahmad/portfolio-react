@@ -1,0 +1,163 @@
+/* Narrative section — a ruled list, not a card grid.
+
+   Chapters are separated by hairlines rather than boxed individually. Five
+   stacked cards would read as five unrelated things; one ruled column reads as
+   a single continuous story, which is what the copy actually is. */
+
+/* One perspective for the whole list, so all five chapters rotate toward the
+   same vanishing point as they arrive. Set here rather than per chapter: a
+   perspective on each item gives every one its own camera, and the group stops
+   reading as a single space. */
+.about-chapters {
+    border-top: 1px solid var(--border);
+    perspective: 1100px;
+    perspective-origin: 50% 40%;
+}
+
+.about-chapter {
+    /* The panel hinges from its top edge, the way a page swings up into view */
+    transform-origin: 50% 0%;
+    transform-style: preserve-3d;
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr) 14rem;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    align-items: start;
+    padding: clamp(1.75rem, 3.5vw, 2.75rem) 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.about-chapter__index {
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    line-height: 1.9;
+    color: var(--text-faint);
+    letter-spacing: 0.04em;
+    /* Sits on the same baseline as the chapter title without needing a
+       hand-tuned margin */
+    font-variant-numeric: tabular-nums;
+}
+
+.about-chapter__title {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+}
+
+.about-chapter__headline {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.85rem;
+}
+
+.about-chapter__text {
+    font-size: var(--fs-body);
+    line-height: 1.75;
+    color: var(--text-secondary);
+    max-width: 58ch;
+}
+
+/* Facts sit in their own column on desktop and fold under the copy on phones */
+.about-chapter__facts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.about-fact__label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.15rem;
+}
+
+.about-fact__value {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* --- Closing call to action ------------------------------------------------ */
+.about-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.about-cta__text {
+    font-family: var(--font-heading);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.about-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+/* --- Tablet ---------------------------------------------------------------- */
+@media (max-width: 900px) {
+    .about-chapter {
+        grid-template-columns: 3rem minmax(0, 1fr);
+    }
+
+    /* Facts move under the copy, aligned with it rather than with the numeral */
+    .about-chapter__facts {
+        grid-column: 2;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 1.25rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border-light);
+    }
+}
+
+/* --- Phone ------------------------------------------------------------------ */
+@media (max-width: 560px) {
+    .about-chapter {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .about-chapter__index {
+        line-height: 1.4;
+    }
+
+    .about-chapter__facts {
+        grid-column: 1;
+    }
+
+    .about-cta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .about-cta__actions {
+        width: 100%;
+    }
+
+    .about-cta__actions .btn {
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+}
