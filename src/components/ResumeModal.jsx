@@ -105,9 +105,9 @@ const ResumeModal = ({ isOpen = false, onClose = () => {} }) => {
                                 {BASICS.title} — {BASICS.specialties.join(' · ')}
                             </p>
                             <div className="resume-contact-info">
-                                <span>
-                                    <i className="fas fa-phone" aria-hidden="true" /> {BASICS.phone}
-                                </span>
+                                <a href={BASICS.whatsapp} target="_blank" rel="noopener noreferrer">
+                                    <i className="fab fa-whatsapp" aria-hidden="true" /> WhatsApp
+                                </a>
                                 <a href={`mailto:${BASICS.email}`}>
                                     <i className="fas fa-envelope" aria-hidden="true" /> {BASICS.email}
                                 </a>
@@ -213,7 +213,7 @@ const ResumeModal = ({ isOpen = false, onClose = () => {} }) => {
 
                         <div className="resume-footer-text">
                             <p>
-                                {BASICS.email} · {BASICS.phone} · {BASICS.site}
+                                {BASICS.email} · {BASICS.site}
                             </p>
                         </div>
                     </div>

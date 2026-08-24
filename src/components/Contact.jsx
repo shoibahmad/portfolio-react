@@ -24,12 +24,6 @@ const CHANNELS = [
         href: BASICS.github
     },
     {
-        icon: 'fab fa-whatsapp',
-        label: 'WhatsApp',
-        value: BASICS.phone,
-        href: BASICS.phoneHref
-    },
-    {
         icon: 'fas fa-location-dot',
         label: 'Location',
         value: `${BASICS.location} — open to remote or relocation`
@@ -155,6 +149,23 @@ const Contact = () => {
                                 );
                             })}
                         </ul>
+
+                        {/* Direct action rather than a displayed number: tapping
+                            opens a WhatsApp conversation with a message already
+                            drafted, so there is nothing to copy down. */}
+                        <a
+                            className="contact__whatsapp"
+                            href={BASICS.whatsapp}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <i className="fab fa-whatsapp" aria-hidden="true" />
+                            <span>
+                                <strong>{BASICS.whatsappLabel}</strong>
+                                <small>Opens a chat — usually a reply within a day</small>
+                            </span>
+                            <i className="fas fa-arrow-right contact__whatsapp-go" aria-hidden="true" />
+                        </a>
                     </div>
 
                     <form className="contact__form card" onSubmit={handleSubmit} noValidate={false}>

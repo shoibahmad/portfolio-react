@@ -63,7 +63,7 @@ const TerminalModal = ({ isOpen, onClose }) => {
                 newHistory.push({ type: 'output', content: `Email: ${BASICS.email}` });
                 newHistory.push({ type: 'output', content: `LinkedIn: ${BASICS.linkedinLabel}` });
                 newHistory.push({ type: 'output', content: `GitHub: ${BASICS.githubLabel}` });
-                newHistory.push({ type: 'output', content: `Phone: ${BASICS.phone}` });
+                newHistory.push({ type: 'output', content: `WhatsApp: ${BASICS.whatsapp.split('?')[0]}` });
                 break;
             case 'clear':
                 setHistory([]);

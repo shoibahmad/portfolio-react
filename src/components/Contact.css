@@ -85,6 +85,75 @@
     overflow-wrap: anywhere;
 }
 
+/* --- WhatsApp action -----------------------------------------------------------
+   A destination, not a piece of data. The number is never shown; tapping opens
+   the conversation with a message already drafted.
+
+   Deliberately not WhatsApp green as a fill: the page runs on a single accent,
+   and a large brand-green panel would become the loudest thing on it. The green
+   appears only on the glyph, which is enough to make the affordance obvious. */
+.contact__whatsapp {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-top: 1.5rem;
+    padding: 0.95rem 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+    transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out),
+                border-color 0.25s ease;
+}
+
+.contact__whatsapp:hover {
+    transform: translateY(-2px);
+    border-color: #25D366;
+    box-shadow: var(--shadow);
+}
+
+.contact__whatsapp > .fa-whatsapp {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: rgba(37, 211, 102, 0.12);
+    color: #128C7E;
+    font-size: 1.15rem;
+}
+
+.contact__whatsapp span {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact__whatsapp strong {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.contact__whatsapp small {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+}
+
+.contact__whatsapp-go {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    transition: transform 0.25s var(--ease-out), color 0.25s ease;
+}
+
+.contact__whatsapp:hover .contact__whatsapp-go {
+    transform: translateX(3px);
+    color: #128C7E;
+}
+
 /* --- Form --------------------------------------------------------------------- */
 .contact__form {
     padding: clamp(1.5rem, 3.5vw, 2.25rem);

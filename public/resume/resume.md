@@ -2,7 +2,7 @@
 
 **Full-Stack Engineer** | React · Next.js · REST APIs · AI/LLM Integration · Tailwind
 
-+91 8840324043 · [shoibsahmad@gmail.com](mailto:shoibsahmad@gmail.com) · [linkedin.com/in/shoib-ahmad-788096219](https://www.linkedin.com/in/shoib-ahmad-788096219/) · [github.com/shoibahmad](https://github.com/shoibahmad) · [shoibahmad.in](https://shoibahmad.in)
+[shoibsahmad@gmail.com](mailto:shoibsahmad@gmail.com) · [linkedin.com/in/shoib-ahmad-788096219](https://www.linkedin.com/in/shoib-ahmad-788096219/) · [github.com/shoibahmad](https://github.com/shoibahmad) · [shoibahmad.in](https://shoibahmad.in)
 
 📍 Lucknow, India — open to remote or relocation
 

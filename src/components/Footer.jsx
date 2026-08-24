@@ -14,7 +14,7 @@ const NAV_LINKS = [
 const SOCIALS = [
     { href: BASICS.github, label: 'GitHub', icon: 'fab fa-github' },
     { href: BASICS.linkedin, label: 'LinkedIn', icon: 'fab fa-linkedin-in' },
-    { href: BASICS.phoneHref, label: 'WhatsApp', icon: 'fab fa-whatsapp' },
+    { href: BASICS.whatsapp, label: 'WhatsApp', icon: 'fab fa-whatsapp' },
     { href: `mailto:${BASICS.email}`, label: 'Email', icon: 'fas fa-envelope' }
 ];
 
@@ -78,8 +78,13 @@ const Footer = ({ onOpenLegal }) => {
                                 </a>
                             </li>
                             <li>
-                                <a className="footer__link" href={BASICS.phoneHref}>
-                                    {BASICS.phone}
+                                <a
+                                    className="footer__link"
+                                    href={BASICS.whatsapp}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {BASICS.whatsappLabel}
                                 </a>
                             </li>
                             <li>

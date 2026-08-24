@@ -16,8 +16,25 @@ export const BASICS = {
     title: 'Full-Stack Engineer',
     specialties: ['React', 'Next.js', 'REST APIs', 'AI/LLM Integration', 'Tailwind'],
     email: 'shoibsahmad@gmail.com',
-    phone: '+91 8840324043',
-    phoneHref: 'https://wa.me/918840324043',
+
+    /* No `phone` field on purpose.
+     *
+     * The number is never rendered as text anywhere on the site — the only way
+     * to reach it is the WhatsApp action below, which opens a conversation
+     * directly.
+     *
+     * Note the number is still present inside this URL, because wa.me requires
+     * it to address the chat. That means it is visible on hover, in the status
+     * bar and in page source. To remove it completely, create a WhatsApp
+     * Business short link (https://wa.me/message/XXXXXXXX) and paste it here in
+     * place of this URL — nothing else needs to change. */
+    whatsapp:
+        'https://wa.me/918840324043?text=' +
+        encodeURIComponent(
+            'Hi Shoib — I came across your portfolio and would like to talk about a project.'
+        ),
+    whatsappLabel: 'Chat on WhatsApp',
+
     location: 'Lucknow, India',
     availability: 'Open to opportunities',
     site: 'shoibahmad.in',
