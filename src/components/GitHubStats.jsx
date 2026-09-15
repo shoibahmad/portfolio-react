@@ -3,12 +3,88 @@ import './GitHubStats.css';
 
 const GITHUB_USERNAME = 'shoibahmad';
 
+/**
+ * Cached GitHub data.
+ *
+ * The unauthenticated GitHub API allows 60 requests per hour *per IP*, and this
+ * component made two on every single visit to /skills. Roughly thirty page views
+ * an hour from one address — or one office or campus behind a shared NAT —
+ * exhausted the quota, and every visitor after that got "Could not load GitHub
+ * stats" instead of the panel.
+ *
+ * Caching the derived result makes repeat visits cost nothing, and the stale
+ * fallback below means a spent quota degrades to slightly old numbers rather
+ * than to an error box.
+ */
+const CACHE_KEY = `github-stats:${GITHUB_USERNAME}:v1`;
+const CACHE_TTL = 6 * 60 * 60 * 1000; // six hours
+
+function readCache() {
+    // localStorage throws in Safari private mode and when storage is disabled;
+    // a missing cache is never a reason to break the page.
+    try {
+        const raw = window.localStorage.getItem(CACHE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed?.data || typeof parsed.at !== 'number') return null;
+        return { data: parsed.data, age: Date.now() - parsed.at };
+    } catch {
+        return null;
+    }
+}
+
+function writeCache(data) {
+    try {
+        window.localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), data }));
+    } catch {
+        /* Quota exceeded or storage disabled — the app works without it. */
+    }
+}
+
+/** Reduce the two API payloads to only what this panel renders. */
+function shape(profileData, reposData) {
+    const langMap = {};
+    reposData.forEach((repo) => {
+        if (repo.language) langMap[repo.language] = (langMap[repo.language] || 0) + 1;
+    });
+
+    const sorted = Object.entries(langMap)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 6);
+    const total = sorted.reduce((acc, [, v]) => acc + v, 0) || 1;
+
+    return {
+        profile: {
+            name: profileData.name,
+            login: profileData.login,
+            avatar_url: profileData.avatar_url,
+            html_url: profileData.html_url,
+            public_repos: profileData.public_repos,
+            followers: profileData.followers,
+            following: profileData.following
+        },
+        repos: reposData.slice(0, 6).map((r) => ({
+            id: r.id,
+            name: r.name,
+            description: r.description,
+            html_url: r.html_url,
+            language: r.language,
+            stargazers_count: r.stargazers_count,
+            forks_count: r.forks_count,
+            fork: r.fork
+        })),
+        totalStars: reposData.reduce((acc, r) => acc + (r.stargazers_count || 0), 0),
+        languages: Object.fromEntries(
+            sorted.map(([lang, count]) => [lang, Math.round((count / total) * 100)])
+        )
+    };
+}
+
 const GitHubStats = () => {
-    const [profile, setProfile] = useState(null);
-    const [repos, setRepos] = useState([]);
-    const [languages, setLanguages] = useState({});
+    const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [rateLimited, setRateLimited] = useState(false);
 
     /* The contribution graph is rendered by a third-party service that is
        currently returning 402. Hiding the <img> alone left its heading and card
@@ -17,50 +93,89 @@ const GitHubStats = () => {
     const [heatmapFailed, setHeatmapFailed] = useState(false);
 
     useEffect(() => {
+        const controller = new AbortController();
+        let active = true;
+
+        const cached = readCache();
+
+        // Paint cached data immediately, fresh or not. A stale number beats a
+        // spinner, and beats an error if the refresh then fails.
+        if (cached) {
+            setData(cached.data);
+            setLoading(false);
+        }
+
+        // Fresh cache: nothing to do, and — the whole point — no API call.
+        if (cached && cached.age < CACHE_TTL) return () => controller.abort();
+
         const fetchGitHub = async () => {
             try {
-                // Fetch profile + repos in parallel
                 const [profileRes, reposRes] = await Promise.all([
-                    fetch(`https://api.github.com/users/${GITHUB_USERNAME}`),
-                    fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`)
+                    fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
+                        signal: controller.signal
+                    }),
+                    fetch(
+                        `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`,
+                        { signal: controller.signal }
+                    )
                 ]);
 
-                if (!profileRes.ok || !reposRes.ok) throw new Error('GitHub API error');
+                if (!profileRes.ok || !reposRes.ok) {
+                    /* Distinguish an exhausted quota: it is temporary and says
+                       nothing about the profile, so it deserves a different
+                       message.
 
-                const profileData = await profileRes.json();
-                const reposData = await reposRes.json();
+                       Not keyed on the x-ratelimit-remaining header alone.
+                       Reading a custom header cross-origin requires the server
+                       to list it in Access-Control-Expose-Headers, so it is
+                       null whenever that is absent — and the branch would
+                       silently never fire. On the public API a 403 or 429 for a
+                       valid username is a quota in practice, so that is the
+                       signal, with the header used only to confirm. */
+                    const throttled = [profileRes, reposRes].find(
+                        (r) => r.status === 403 || r.status === 429
+                    );
+                    const err = new Error('GitHub API error');
+                    err.rateLimited =
+                        Boolean(throttled) &&
+                        throttled.headers.get('x-ratelimit-remaining') !== '1';
+                    throw err;
+                }
 
-                setProfile(profileData);
-                setRepos(reposData.slice(0, 6)); // top 6 most recently updated
+                const [profileData, reposData] = await Promise.all([
+                    profileRes.json(),
+                    reposRes.json()
+                ]);
 
-                // Aggregate languages across all repos
-                const langMap = {};
-                reposData.forEach(repo => {
-                    if (repo.language) {
-                        langMap[repo.language] = (langMap[repo.language] || 0) + 1;
-                    }
-                });
-
-                // Sort and take top 6
-                const sorted = Object.entries(langMap)
-                    .sort((a, b) => b[1] - a[1])
-                    .slice(0, 6);
-
-                const total = sorted.reduce((acc, [, v]) => acc + v, 0);
-                const langWithPercent = Object.fromEntries(
-                    sorted.map(([lang, count]) => [lang, Math.round((count / total) * 100)])
-                );
-
-                setLanguages(langWithPercent);
-            } catch {
-                setError(true);
+                const shaped = shape(profileData, reposData);
+                writeCache(shaped);
+                if (!active) return;
+                setData(shaped);
+                setError(false);
+                setRateLimited(false);
+            } catch (err) {
+                if (err.name === 'AbortError' || !active) return;
+                // Only surface a failure when there is nothing cached to show.
+                if (!cached) {
+                    setError(true);
+                    setRateLimited(Boolean(err.rateLimited));
+                }
             } finally {
-                setLoading(false);
+                if (active) setLoading(false);
             }
         };
 
         fetchGitHub();
+
+        return () => {
+            active = false;
+            controller.abort();
+        };
     }, []);
+
+    const profile = data?.profile ?? null;
+    const repos = data?.repos ?? [];
+    const languages = data?.languages ?? {};
 
     // Language color map
     const langColors = {
@@ -87,10 +202,25 @@ const GitHubStats = () => {
         </div>
     );
 
-    if (error) return (
+    /* Reached only when there is no cached data to fall back on. The rate-limit
+       case is called out separately because it is temporary and says nothing
+       about the profile — "could not load" reads like the account is broken. */
+    if (error || !profile) return (
         <div className="github-error">
-            <i className="fab fa-github"></i>
-            <p>Could not load GitHub stats. <a href={`https://github.com/${GITHUB_USERNAME}`} target="_blank" rel="noopener noreferrer">View on GitHub →</a></p>
+            <i className="fab fa-github" aria-hidden="true"></i>
+            <p>
+                {rateLimited
+                    ? 'GitHub caps anonymous requests per hour and that limit is currently reached. The stats return on their own shortly.'
+                    : 'GitHub stats are unavailable right now.'}
+            </p>
+            <a
+                className="github-view-btn"
+                href={`https://github.com/${GITHUB_USERNAME}`}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View profile on GitHub <i className="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
         </div>
     );
 
@@ -142,9 +272,10 @@ const GitHubStats = () => {
                 </div>
                 <div className="github-counter-card">
                     <i className="fas fa-star"></i>
-                    <span className="counter-value">
-                        {repos.reduce((acc, r) => acc + r.stargazers_count, 0)}
-                    </span>
+                    {/* Summed across every repository, not just the six shown
+                        below — this previously reduced over the truncated list
+                        and under-reported the total. */}
+                    <span className="counter-value">{data.totalStars}</span>
                     <span className="counter-label">Total Stars</span>
                 </div>
             </div>
