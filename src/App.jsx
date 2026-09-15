@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Header from './components/Header';
@@ -20,7 +20,11 @@ import Breadcrumb from './components/Breadcrumb';
 import ScrollProgress from './components/ScrollProgress';
 import InteractiveResume from './components/InteractiveResume';
 import TerminalModal from './components/TerminalModal';
+import NotFound from './components/NotFound';
 import Reveal from './components/ui/Reveal';
+import useDocumentMeta from './hooks/useDocumentMeta';
+import { findRouteMeta, NOT_FOUND_META } from './data/routes';
+import { findProjectBySlug } from './data/projects';
 
 /* No `filter` in these variants on purpose. Framer leaves the settled value as
    `filter: blur(0px)`, and any non-`none` filter makes the element a containing
@@ -93,6 +97,29 @@ function App() {
 
   const closeLegalModal = () => setLegalModalOpen(false);
 
+  /* Resolve the document metadata for whatever the URL currently is. Project
+     detail routes are not in the route table — they are generated from the
+     catalogue — so they are matched separately here. */
+  const meta = useMemo(() => {
+    const routeMeta = findRouteMeta(location.pathname);
+    if (routeMeta) return routeMeta;
+
+    const projectMatch = location.pathname.match(/^\/projects\/(.+?)\/?$/);
+    if (projectMatch) {
+      const project = findProjectBySlug(projectMatch[1]);
+      if (project) {
+        return {
+          title: `${project.title} — Shoib Ahmad`,
+          description: project.description
+        };
+      }
+    }
+
+    return NOT_FOUND_META;
+  }, [location.pathname]);
+
+  useDocumentMeta({ ...meta, pathname: location.pathname });
+
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -134,10 +161,16 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<PageWrapper><Services /></PageWrapper>} />
             <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
+            {/* Same component: the slug selects and opens a case study, so a
+                shared link lands directly on that project. */}
+            <Route path="/projects/:slug" element={<PageWrapper><Projects /></PageWrapper>} />
             <Route path="/skills" element={<PageWrapper><Skills /></PageWrapper>} />
             <Route path="/experience" element={<ExperiencePage />} />
             <Route path="/resume" element={<PageWrapper><InteractiveResume /></PageWrapper>} />
             <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+            {/* Catch-all. Without it an unknown path rendered the chrome around
+                an empty middle, which reads as broken rather than as wrong. */}
+            <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
           </Routes>
         </AnimatePresence>
       </main>

@@ -32,9 +32,9 @@ const Services = () => (
         <div className="shell">
             <div className="section-head">
                 <span className="section-kicker">Services</span>
-                <h2 className="section-title" id="services-title">
+                <h1 className="section-title" id="services-title">
                     Solutions engineered with precision.
-                </h2>
+                </h1>
                 <p className="section-lede">
                     Three areas where the work is deep rather than broad — and where each
                     has already shipped into something people use daily.

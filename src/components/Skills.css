@@ -113,13 +113,19 @@
     gap: 0.4rem;
 }
 
+/* Rounded rectangle rather than a full pill.
+   Labels here run from "SQL" to "LLM Integration (Gemini, Claude API)", and at
+   narrow widths the long ones wrap to two lines. A pill radius on a two-line box
+   bulges into a lozenge and reads as a rendering fault; a small radius takes the
+   wrap without comment. */
 .skills__pill {
     padding: 0.34rem 0.7rem;
     background: var(--surface-muted);
     border: 1px solid var(--border-light);
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-sm);
     font-size: var(--fs-xs);
     font-weight: 500;
+    line-height: 1.5;
     color: var(--text-primary);
     transition: border-color 0.2s ease, color 0.2s ease;
 }
@@ -134,17 +140,46 @@
     color: var(--text-secondary);
 }
 
+/* --- Phone -----------------------------------------------------------------
+   The tab strip used to scroll horizontally here. With eight categories that
+   meant 977px of tabs inside a 353px viewport: three were visible, the third was
+   sliced through the middle of a word at the screen edge, and nothing indicated
+   the rest could be reached. A cut-off label reads as broken, not as scrollable.
+
+   Wrapping costs two extra rows and makes all eight reachable without the
+   visitor having to discover a gesture. */
 @media (max-width: 700px) {
-    /* Eight tabs scroll rather than wrapping into four rows */
     .skills__tabs {
-        flex-wrap: nowrap;
-        min-width: 0;
-        width: 100%;
-        overflow-x: auto;
-        scrollbar-width: none;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.25rem;
     }
 
-    .skills__tabs::-webkit-scrollbar { display: none; }
+    .skills__tab {
+        padding: 0.4rem 0.75rem;
+        font-size: var(--fs-xs);
+    }
 
-    .skills__tab { flex: 0 0 auto; }
+    /* Tighter cards: seven full-width groups stack into a long column on a
+       phone, so every bit of padding is multiplied seven times. */
+    .skills__group {
+        padding: 1.1rem 1rem;
+    }
+
+    .skills__group-head {
+        gap: 0.6rem;
+        padding-bottom: 0.8rem;
+        margin-bottom: 0.9rem;
+    }
+
+    .skills__group-icon {
+        width: 1.85rem;
+        height: 1.85rem;
+        font-size: 0.75rem;
+    }
+
+    .skills__group-title {
+        font-size: 0.95rem;
+    }
 }

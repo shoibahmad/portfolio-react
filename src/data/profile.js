@@ -50,7 +50,7 @@ export const LEDE =
     'Final-year MCA student who ships production full-stack systems end to end — from React and Next.js interfaces to REST API backends — including a live examination-integrity platform in daily institutional use and an offline-first rural healthcare platform, both owned solo from requirements through deployment.';
 
 export const SUMMARY =
-    'Final-year MCA student (CGPA 8.10) who ships production full-stack systems end-to-end — from React/Next.js interfaces to REST API backends — including a live examination-integrity platform in daily institutional use and an offline-first rural healthcare platform, both owned solo from requirements through deployment. Comfortable across the stack (React.js, Next.js, Tailwind CSS, FastAPI/Django REST Framework), with a track record of turning ambiguous product requirements into working, well-tested systems with minimal supervision. Integrates LLMs (Gemini, Claude) into real product workflows — prompt design, model evaluation, pipeline integration — and is currently deepening TypeScript and Node.js/NestJS.';
+    'Final-year MCA student (CGPA 8.26) who ships production full-stack systems end-to-end — from React/Next.js interfaces to REST API backends — including a live examination-integrity platform in daily institutional use and an offline-first rural healthcare platform, both owned solo from requirements through deployment. Comfortable across the stack (React.js, Next.js, Tailwind CSS, FastAPI/Django REST Framework), with a track record of turning ambiguous product requirements into working, well-tested systems with minimal supervision. Integrates LLMs (Gemini, Claude) into real product workflows — prompt design, model evaluation, pipeline integration — and is currently deepening TypeScript and Node.js/NestJS.';
 
 /** Rotating roles in the hero, taken from the CV's title line. */
 export const ROLES = [
@@ -67,7 +67,7 @@ export const ROLES = [
 export const FACTS = [
     { value: '19', label: 'Projects' },
     { value: '2', label: 'Live platforms' },
-    { value: '8.10', label: 'MCA CGPA' },
+    { value: '8.26', label: 'MCA CGPA' },
     { value: '1', label: 'Publication' }
 ];
 
@@ -219,7 +219,7 @@ export const EDUCATION = [
     {
         degree: 'Master of Computer Applications (MCA)',
         institution: 'Jamia Hamdard University',
-        cgpa: '8.10 / 10',
+        cgpa: '8.26 / 10',
         date: 'Aug 2024 – Jun 2026',
         location: 'Delhi',
         skills: ['Data Structures & Algorithms', 'System Design', 'OOP']
@@ -235,6 +235,18 @@ export const EDUCATION = [
 ];
 
 export const CERTIFICATIONS = [
+    {
+        title: 'Introduction to Agents',
+        issuer: 'Mercor',
+        date: 'Sep 2026',
+        icon: 'fas fa-robot',
+        note: 'Rigor, calibration and clarity in AI agent evaluation',
+        /* A verifiable credential — the certificate carries a number and a
+           check URL, so both are kept and surfaced rather than asking anyone to
+           take the line on trust. */
+        credentialId: 'MRC-2026-XC5JG862',
+        url: 'https://work.mercor.com/learn/verify/MRC-2026-XC5JG862'
+    },
     {
         title: 'Generative AI Foundation',
         issuer: 'UpGrad',

@@ -6,7 +6,7 @@ const Experience = () => (
         <div className="shell">
             <div className="section-head">
                 <span className="section-kicker">Experience</span>
-                <h2 className="section-title" id="experience-title">Where the work happened.</h2>
+                <h1 className="section-title" id="experience-title">Where the work happened.</h1>
                 <p className="section-lede">
                     Client engagements owned end to end — from ambiguous requirements
                     through to systems in daily institutional use.

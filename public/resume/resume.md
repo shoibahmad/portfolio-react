@@ -10,7 +10,7 @@
 
 ## Professional summary
 
-Final-year MCA student (CGPA 8.10) who ships production fullstack systems end-to-end — from React/Next.js interfaces to REST API backends — including a live examination-integrity platform in daily institutional use and an offline-first rural healthcare platform, both owned solo from requirements through deployment. Comfortable across the stack (React.js, Next.js, Tailwind CSS, FastAPI/Django REST Framework), with a track record of turning ambiguous product requirements into working, well-tested systems with minimal supervision. Integrates LLMs (Gemini, Claude) into real product workflows — prompt design, model evaluation, pipeline integration — and is currently deepening TypeScript and Node.js/NestJS.
+Final-year MCA student (CGPA 8.26) who ships production fullstack systems end-to-end — from React/Next.js interfaces to REST API backends — including a live examination-integrity platform in daily institutional use and an offline-first rural healthcare platform, both owned solo from requirements through deployment. Comfortable across the stack (React.js, Next.js, Tailwind CSS, FastAPI/Django REST Framework), with a track record of turning ambiguous product requirements into working, well-tested systems with minimal supervision. Integrates LLMs (Gemini, Claude) into real product workflows — prompt design, model evaluation, pipeline integration — and is currently deepening TypeScript and Node.js/NestJS.
 
 ---
 
@@ -78,7 +78,7 @@ Final-year MCA student (CGPA 8.10) who ships production fullstack systems end-to
 ## Education
 
 ### Master of Computer Applications (MCA)
-**Jamia Hamdard University**, Delhi | Aug 2024 – Jun 2026 | CGPA 8.10/10
+**Jamia Hamdard University**, Delhi | Aug 2024 – Jun 2026 | CGPA 8.26/10
 
 ### Bachelor of Computer Applications (BCA)
 **Integral University**, Lucknow | Oct 2021 – Jun 2024 | CGPA 9.10/10
@@ -87,6 +87,7 @@ Final-year MCA student (CGPA 8.10) who ships production fullstack systems end-to
 
 ## Certifications, publications & achievements
 
+- **Introduction to Agents** — Mercor, Sep 2026 — credential [MRC-2026-XC5JG862](https://work.mercor.com/learn/verify/MRC-2026-XC5JG862)
 - **Generative AI Foundation** — UpGrad, Jun 2025
 - **Python Bootcamp** — Code for Cause, Aug 2024
 - **Campus Ambassador** — Hack2skill, Google Build with AI Solution Challenge 2026

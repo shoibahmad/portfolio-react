@@ -94,9 +94,9 @@ const InteractiveResume = () => {
             <div className="shell">
                 <div className="section-head">
                     <span className="section-kicker">Curriculum vitae</span>
-                    <h2 className="section-title" id="resume-title">
+                    <h1 className="section-title" id="resume-title">
                         An interactive career timeline.
-                    </h2>
+                    </h1>
                     <p className="section-lede">
                         Filter by section, or select any technology to trace it across every
                         role and degree it appears in.

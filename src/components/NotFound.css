@@ -1,0 +1,82 @@
+/* Catch-all route. Centred and deliberately sparse — the job is to get the
+   visitor moving again, not to be interesting. */
+
+.notfound {
+    display: grid;
+    place-items: center;
+    /* Fills the viewport minus the header, so the footer does not ride up under
+       the short amount of content this page carries. */
+    min-height: calc(100svh - 12rem);
+    padding-top: clamp(5rem, 12vh, 8rem);
+}
+
+.notfound__inner {
+    text-align: center;
+}
+
+.notfound__code {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.notfound__title {
+    font-size: var(--fs-h1);
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+    margin-bottom: 0.9rem;
+}
+
+.notfound__lede {
+    max-width: 46ch;
+    margin: 0 auto 2.25rem;
+    font-size: var(--fs-lead);
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.notfound__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.notfound__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 0.95rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: var(--transition);
+}
+
+.notfound__link i {
+    font-size: 0.65rem;
+    color: var(--text-faint);
+    transition: transform 0.25s var(--ease-out), color 0.25s ease;
+}
+
+.notfound__link:hover {
+    border-color: var(--border-ink);
+    transform: translateY(-2px);
+}
+
+.notfound__link:hover i {
+    transform: translateX(2px);
+    color: var(--accent);
+}
+
+@media (hover: none) {
+    .notfound__link:hover { transform: none; }
+}

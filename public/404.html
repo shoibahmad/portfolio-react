@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FAFAF9" />
+  <!-- This page only ever exists for a few milliseconds before redirecting, but
+       a crawler that lands here should not index it as real content. -->
+  <meta name="robots" content="noindex" />
+  <title>Shoib Ahmad</title>
+
+  <script>
+    /*
+     * GitHub Pages SPA fallback.
+     *
+     * GitHub Pages serves static files. This app is a single-page app, so there
+     * is no /projects/index.html on disk — a request for any route other than
+     * "/" returned GitHub's own 404 page. That broke every shared link, every
+     * refresh after navigating, and left the sitemap advertising six URLs that
+     * all failed.
+     *
+     * GitHub serves this file for any unmatched path. It rewrites the requested
+     * path into a query string and bounces to "/", where the snippet in
+     * index.html unpacks it and hands the real path to the router. The visitor
+     * sees one redirect; the URL they end up on is the one they asked for.
+     *
+     * `replace` rather than `assign` so the redirect does not land in history —
+     * otherwise Back would return here and bounce forward again, trapping the
+     * visitor.
+     */
+    (function () {
+      var l = window.location;
+      var path = l.pathname.replace(/^\/+/, '');
+      l.replace(
+        l.protocol + '//' + l.host + '/?redirect=' +
+        encodeURIComponent(path + l.search + l.hash)
+      );
+    }());
+  </script>
+</head>
+
+<body>
+  <!-- Shown only if JavaScript is unavailable, where the redirect cannot run. -->
+  <noscript>
+    <p>This site needs JavaScript. <a href="/">Go to the homepage</a>.</p>
+  </noscript>
+</body>
+
+</html>

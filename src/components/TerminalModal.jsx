@@ -41,7 +41,7 @@ const TerminalModal = ({ isOpen, onClose }) => {
             case 'whoami':
                 newHistory.push({ type: 'output', content: BASICS.name });
                 newHistory.push({ type: 'output', content: 'Full-Stack Engineer — React, Next.js, REST APIs, AI/LLM integration' });
-                newHistory.push({ type: 'output', content: 'Final-year MCA at Jamia Hamdard University (CGPA 8.10).' });
+                newHistory.push({ type: 'output', content: 'Final-year MCA at Jamia Hamdard University (CGPA 8.26).' });
                 break;
             case 'ls projects':
                 newHistory.push({ type: 'output', content: 'projects/' });
@@ -63,7 +63,11 @@ const TerminalModal = ({ isOpen, onClose }) => {
                 newHistory.push({ type: 'output', content: `Email: ${BASICS.email}` });
                 newHistory.push({ type: 'output', content: `LinkedIn: ${BASICS.linkedinLabel}` });
                 newHistory.push({ type: 'output', content: `GitHub: ${BASICS.githubLabel}` });
-                newHistory.push({ type: 'output', content: `WhatsApp: ${BASICS.whatsapp.split('?')[0]}` });
+                /* Deliberately not the wa.me URL. Stripping the query off
+                   BASICS.whatsapp still leaves "wa.me/<number>", which printed
+                   the phone number as plain text — the one thing this site is
+                   meant not to display. Point at the contact page instead. */
+                newHistory.push({ type: 'output', content: `WhatsApp: ${BASICS.site}/contact` });
                 break;
             case 'clear':
                 setHistory([]);

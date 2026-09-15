@@ -29,9 +29,29 @@ const Certifications = () => (
                         <div className="certs__body">
                             <h3 className="certs__title">{cert.title}</h3>
                             <p className="certs__issuer">{cert.issuer}</p>
+                            {cert.note && <p className="certs__note">{cert.note}</p>}
                         </div>
 
-                        <time className="certs__date">{cert.date}</time>
+                        <div className="certs__meta">
+                            <time className="certs__date">{cert.date}</time>
+                            {/* Only credentials that publish a check URL get a link;
+                                the rest simply have no affordance rather than a dead
+                                one. */}
+                            {cert.url && (
+                                <a
+                                    className="certs__verify"
+                                    href={cert.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`Verify ${cert.title} credential${
+                                        cert.credentialId ? ` ${cert.credentialId}` : ''
+                                    }`}
+                                >
+                                    Verify
+                                    <i className="fas fa-arrow-up-right-from-square" aria-hidden="true" />
+                                </a>
+                            )}
+                        </div>
                     </li>
                 ))}
             </ul>

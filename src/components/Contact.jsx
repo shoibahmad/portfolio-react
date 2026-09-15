@@ -99,9 +99,9 @@ const Contact = () => {
             <div className="shell">
                 <div className="section-head">
                     <span className="section-kicker">Contact</span>
-                    <h2 className="section-title" id="contact-title">
+                    <h1 className="section-title" id="contact-title">
                         Let&rsquo;s build something exceptional.
-                    </h2>
+                    </h1>
                     <p className="section-lede">
                         Open to new opportunities, high-impact projects, and AI engineering
                         collaborations.

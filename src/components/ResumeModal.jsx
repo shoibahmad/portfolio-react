@@ -73,19 +73,21 @@ const ResumeModal = ({ isOpen = false, onClose = () => {} }) => {
             <div className="resume-overlay" onClick={onClose}></div>
             <div className="resume-container">
                 <div className="resume-header">
-                    <a
-                        className="btn btn-outline btn-sm"
-                        href="/resume/Shoib_Ahmad_Resume.pdf"
-                        download
-                    >
-                        Download PDF
-                    </a>
+                    {/* No "Download PDF" link here.
+                        It pointed at public/resume/Shoib_Ahmad_Resume.pdf, which is a
+                        701-byte stub containing the literal text "Placeholder PDF -
+                        Replace with actual resume" — anyone who clicked it got a blank
+                        document. The print dialog offers "Save as PDF" on every modern
+                        browser and prints this sheet through the stylesheet below, so it
+                        produces a real, current document from a single source. Restore a
+                        download link only once a genuine PDF is committed. */}
                     <button
                         type="button"
                         className="btn btn-outline btn-sm"
                         onClick={() => window.print()}
                     >
-                        Print
+                        <i className="fas fa-file-arrow-down" aria-hidden="true" />
+                        Save as PDF
                     </button>
                     <button
                         type="button"
@@ -198,6 +200,14 @@ const ResumeModal = ({ isOpen = false, onClose = () => {} }) => {
                                         <strong>{cert.title} — {cert.issuer}</strong>
                                         <span>{cert.date}</span>
                                     </div>
+                                    {/* Printed as text, not as a link: on paper a
+                                        credential number is the thing someone can
+                                        actually act on. */}
+                                    {cert.credentialId && (
+                                        <p className="resume-item-details">
+                                            Credential {cert.credentialId}
+                                        </p>
+                                    )}
                                 </div>
                             ))}
                             {PUBLICATIONS.map((pub) => (

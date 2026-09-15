@@ -42,6 +42,23 @@
     color: var(--text-muted);
 }
 
+.certs__note {
+    margin-top: 0.2rem;
+    font-size: var(--fs-xs);
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 58ch;
+}
+
+/* Date and verify link share a right-hand column so they stay on one axis
+   regardless of which rows carry a link. */
+.certs__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    flex-shrink: 0;
+}
+
 .certs__date {
     font-family: var(--font-mono);
     font-size: var(--fs-xs);
@@ -49,14 +66,43 @@
     white-space: nowrap;
 }
 
+.certs__verify {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    transition: var(--transition);
+}
+
+.certs__verify i {
+    font-size: 0.6rem;
+    color: var(--text-faint);
+    transition: color 0.2s ease;
+}
+
+.certs__verify:hover {
+    border-color: var(--accent-border);
+    background: var(--accent-soft);
+    color: var(--accent-hover);
+}
+
+.certs__verify:hover i { color: var(--accent); }
+
 @media (max-width: 560px) {
-    /* The date moves under the title, indented to clear the icon column */
+    /* The meta column moves under the title, indented to clear the icon */
     .certs__item {
         grid-template-columns: auto minmax(0, 1fr);
-        row-gap: 0.4rem;
+        row-gap: 0.5rem;
     }
 
-    .certs__date {
+    .certs__meta {
         grid-column: 2;
+        justify-content: flex-start;
     }
 }

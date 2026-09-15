@@ -78,6 +78,27 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet">
+  <script>
+    /*
+     * Companion to public/404.html.
+     *
+     * GitHub Pages has no SPA fallback, so 404.html catches unmatched paths and
+     * bounces here with the original path in ?redirect=. This unpacks it and
+     * restores the real URL before React mounts, so the router boots on the
+     * route the visitor actually asked for and never renders the homepage first.
+     *
+     * replaceState, not pushState: the redirect must not become a history entry,
+     * or Back would return to the bounce URL.
+     */
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var redirect = params.get('redirect');
+      if (redirect) {
+        history.replaceState(null, '', '/' + redirect.replace(/^\/+/, ''));
+      }
+    }());
+  </script>
+
   <title>Shoib Ahmad - Full-Stack Engineer | React, Next.js, REST APIs, AI/LLM</title>
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1771389944029472"

@@ -10,6 +10,12 @@ const GitHubStats = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
+    /* The contribution graph is rendered by a third-party service that is
+       currently returning 402. Hiding the <img> alone left its heading and card
+       behind — an empty titled box. Tracking the failure in state lets the whole
+       block drop out, and lets it reappear by itself if the service recovers. */
+    const [heatmapFailed, setHeatmapFailed] = useState(false);
+
     useEffect(() => {
         const fetchGitHub = async () => {
             try {
@@ -170,20 +176,25 @@ const GitHubStats = () => {
             </div>
 
             {/* Contribution Heatmap via GitHub readme stats */}
-            <div className="github-heatmap">
-                <h4 className="github-section-title">
-                    <i className="fas fa-fire"></i> Contribution Activity
-                </h4>
-                <div className="heatmap-img-wrapper">
-                    <img
-                        src={`https://github-readme-activity-graph.vercel.app/graph?username=${GITHUB_USERNAME}&theme=react-dark&bg_color=121F2A&color=10B981&line=2DD4BF&point=10B981&area=true&hide_border=true`}
-                        alt="GitHub Activity Graph"
-                        className="heatmap-img"
-                        loading="lazy"
-                        onError={(e) => { e.target.style.display = 'none'; }}
-                    />
+            {!heatmapFailed && (
+                <div className="github-heatmap">
+                    <h4 className="github-section-title">
+                        <i className="fas fa-fire"></i> Contribution Activity
+                    </h4>
+                    <div className="heatmap-img-wrapper">
+                        <img
+                            /* Themed to the page rather than to the service's dark
+                               default, which rendered a near-black panel in the
+                               middle of a light layout. */
+                            src={`https://github-readme-activity-graph.vercel.app/graph?username=${GITHUB_USERNAME}&bg_color=FFFFFF&color=101014&line=EA580C&point=EA580C&title_color=101014&area=true&hide_border=true`}
+                            alt={`${GITHUB_USERNAME} GitHub contribution activity over the last year`}
+                            className="heatmap-img"
+                            loading="lazy"
+                            onError={() => setHeatmapFailed(true)}
+                        />
+                    </div>
                 </div>
-            </div>
+            )}
 
             {/* Recent Repos */}
             <div className="github-repos">

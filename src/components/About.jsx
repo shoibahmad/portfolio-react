@@ -26,7 +26,7 @@ const CHAPTERS = [
         body: 'A final-year MCA student at Jamia Hamdard who found that the interesting problems were never the ones with textbook answers. Started pulling software apart to understand why it worked, and never really stopped.',
         facts: [
             { label: 'Based in', value: 'Lucknow, IN' },
-            { label: 'MCA CGPA', value: '8.10 / 10' }
+            { label: 'MCA CGPA', value: '8.26 / 10' }
         ]
     },
     {

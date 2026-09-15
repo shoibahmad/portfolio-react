@@ -31,9 +31,9 @@ const Skills = () => {
             <div className="shell">
                 <div className="section-head">
                     <span className="section-kicker">Capabilities</span>
-                    <h2 className="section-title" id="skills-title">
+                    <h1 className="section-title" id="skills-title">
                         The stack behind the work.
-                    </h2>
+                    </h1>
                     <p className="section-lede">
                         Interfaces, API backends, and the model integrations that sit
                         between them — plus the fundamentals underneath.

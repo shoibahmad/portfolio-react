@@ -6,6 +6,24 @@
  * the same source.
  */
 
+/**
+ * URL slug for a project title.
+ *
+ * Only the part before an em dash or a bracket is used, so
+ * "SecureEval AI — Examination Integrity Platform" becomes "secureeval-ai"
+ * rather than a seventy-character URL. Titles are stable, so the slugs are too —
+ * but see the collision check below, which is what stops a future rename from
+ * silently pointing two projects at one address.
+ */
+export function slugify(title) {
+    return title
+        .split(/[—(]/)[0]
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+}
+
 export const PROJECTS = [
         {
             title: "AgentForge — gitagent Studio",
@@ -365,3 +383,29 @@ export const PROJECTS = [
 ];
 
 export const CATEGORIES = ['All', 'Web Dev', 'Mobile Apps', 'AI/ML'];
+
+/* Slugs are attached once at module load rather than derived at every lookup,
+   so the project list and the router agree on one value. */
+for (const project of PROJECTS) {
+    project.slug = slugify(project.title);
+}
+
+/* A collision would make one project unreachable and silently shadow another.
+   Cheap to check once, and it fails loudly during development instead of
+   producing a URL that quietly opens the wrong case study. */
+if (import.meta.env?.DEV) {
+    const seen = new Map();
+    for (const project of PROJECTS) {
+        if (seen.has(project.slug)) {
+            console.error(
+                `[projects] duplicate slug "${project.slug}": ` +
+                `"${seen.get(project.slug)}" and "${project.title}"`
+            );
+        }
+        seen.set(project.slug, project.title);
+    }
+}
+
+export function findProjectBySlug(slug) {
+    return PROJECTS.find((project) => project.slug === slug) || null;
+}

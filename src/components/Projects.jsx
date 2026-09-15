@@ -1,8 +1,9 @@
-import { useState, useMemo, useId } from 'react';
+import { useState, useMemo, useId, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import ProjectModal from './ProjectModal';
 import TiltCard from './ui/TiltCard';
 import useMediaQuery from '../hooks/useMediaQuery';
-import { PROJECTS, CATEGORIES } from '../data/projects';
+import { PROJECTS, CATEGORIES, findProjectBySlug } from '../data/projects';
 import './Projects.css';
 
 /**
@@ -30,10 +31,27 @@ const Projects = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [activeIndex, setActiveIndex] = useState(0);
     const [tab, setTab] = useState('architecture');
-    const [selectedProject, setSelectedProject] = useState(null);
 
     const isWide = useMediaQuery('(min-width: 1024px)');
     const searchId = useId();
+
+    /* The open case study is addressed by the URL rather than held in state, so
+       a link can be shared, the page can be refreshed onto an open project, and
+       the browser Back button closes the modal for free. */
+    const { slug } = useParams();
+    const navigate = useNavigate();
+    const selectedProject = slug ? findProjectBySlug(slug) : null;
+
+    // A slug that matches nothing would otherwise render the page with no modal
+    // and a URL implying one — send those back to the index.
+    useEffect(() => {
+        if (slug && !selectedProject) {
+            navigate('/projects', { replace: true });
+        }
+    }, [slug, selectedProject, navigate]);
+
+    const openProject = (project) => navigate(`/projects/${project.slug}`);
+    const closeProject = () => navigate('/projects');
 
     const filtered = useMemo(() => {
         /* Search matched raw substrings, which meant the spelling had to be
@@ -246,7 +264,7 @@ const Projects = () => {
                         <button
                             type="button"
                             className="btn btn-primary"
-                            onClick={() => setSelectedProject(activeProject)}
+                            onClick={() => openProject(activeProject)}
                         >
                             Full case study
                         </button>
@@ -294,7 +312,7 @@ const Projects = () => {
                                 <button
                                     type="button"
                                     className="btn btn-primary btn-sm"
-                                    onClick={() => setSelectedProject(project)}
+                                    onClick={() => openProject(project)}
                                 >
                                     Case study
                                 </button>
@@ -322,9 +340,9 @@ const Projects = () => {
             <div className="shell">
                 <div className="section-head">
                     <span className="section-kicker">Selected work</span>
-                    <h2 className="section-title" id="work-title">
+                    <h1 className="section-title" id="work-title">
                         Engineered for impact and innovation.
-                    </h2>
+                    </h1>
                     <p className="section-lede">
                         Nineteen shipped systems across web, mobile and applied AI. Pick one to
                         read its architecture, the problem it solved, and what it taught.
@@ -354,7 +372,7 @@ const Projects = () => {
             <ProjectModal
                 project={selectedProject}
                 isOpen={Boolean(selectedProject)}
-                onClose={() => setSelectedProject(null)}
+                onClose={closeProject}
             />
         </section>
     );
