@@ -6,7 +6,7 @@
     "image": "https://shoibahmad.in/images/profile.jpg",
     "email": "shoibsahmad@gmail.com",
     "url": "https://shoibahmad.in",
-    "summary": "Final-year MCA student (CGPA 8.10) who ships production fullstack systems end-to-end — from React/Next.js interfaces to REST API backends — including a live examination-integrity platform in daily institutional use and an offline-first rural healthcare platform, both owned solo from requirements through deployment. Comfortable across the stack (React.js, Next.js, Tailwind CSS, FastAPI/Django REST Framework), with a track record of turning ambiguous product requirements into working, well-tested systems with minimal supervision. Integrates LLMs (Gemini, Claude) into real product workflows — prompt design, model evaluation, pipeline integration — and is currently deepening TypeScript and Node.js/NestJS.",
+    "summary": "Final-year MCA student (CGPA 8.26) who ships production fullstack systems end-to-end — from React/Next.js interfaces to REST API backends — including a live examination-integrity platform in daily institutional use and an offline-first rural healthcare platform, both owned solo from requirements through deployment. Comfortable across the stack (React.js, Next.js, Tailwind CSS, FastAPI/Django REST Framework), with a track record of turning ambiguous product requirements into working, well-tested systems with minimal supervision. Integrates LLMs (Gemini, Claude) into real product workflows — prompt design, model evaluation, pipeline integration — and is currently deepening TypeScript and Node.js/NestJS.",
     "location": {
       "city": "Lucknow",
       "countryCode": "IN",
@@ -95,7 +95,7 @@
       "studyType": "Master of Computer Applications (MCA)",
       "startDate": "2024-08-01",
       "endDate": "2026-06-01",
-      "score": "8.10/10"
+      "score": "8.26/10"
     },
     {
       "institution": "Integral University",
@@ -108,6 +108,13 @@
     }
   ],
   "certificates": [
+    {
+      "name": "Introduction to Agents",
+      "issuer": "Mercor",
+      "date": "2026-09-11",
+      "url": "https://work.mercor.com/learn/verify/MRC-2026-XC5JG862",
+      "summary": "Credential MRC-2026-XC5JG862 — rigor, calibration and clarity in AI agent evaluation."
+    },
     {
       "name": "Generative AI Foundation",
       "issuer": "UpGrad",
@@ -135,31 +142,79 @@
   "skills": [
     {
       "name": "Frontend",
-      "keywords": ["React.js", "Next.js", "Vite", "JavaScript (ES6+)", "Tailwind CSS", "HTML/CSS"]
+      "keywords": [
+        "React.js",
+        "Next.js",
+        "Vite",
+        "JavaScript (ES6+)",
+        "Tailwind CSS",
+        "HTML/CSS"
+      ]
     },
     {
       "name": "Backend & APIs",
-      "keywords": ["FastAPI", "Django REST Framework", "Flask", "RESTful API Design", "Asynchronous Services", "Auth Flows", "Service Contracts"]
+      "keywords": [
+        "FastAPI",
+        "Django REST Framework",
+        "Flask",
+        "RESTful API Design",
+        "Asynchronous Services",
+        "Auth Flows",
+        "Service Contracts"
+      ]
     },
     {
       "name": "AI / LLM",
-      "keywords": ["LLM Integration (Gemini, Claude API)", "Prompt Engineering", "Model Evaluation", "PyTorch", "Scikit-learn"]
+      "keywords": [
+        "LLM Integration (Gemini, Claude API)",
+        "Prompt Engineering",
+        "Model Evaluation",
+        "PyTorch",
+        "Scikit-learn"
+      ]
     },
     {
       "name": "Databases",
-      "keywords": ["PostgreSQL", "SQL", "Relational Data Modeling", "Firebase Firestore", "IndexedDB"]
+      "keywords": [
+        "PostgreSQL",
+        "SQL",
+        "Relational Data Modeling",
+        "Firebase Firestore",
+        "IndexedDB"
+      ]
     },
     {
       "name": "Cloud & DevOps",
-      "keywords": ["Google Cloud Platform", "Microsoft Azure", "Azure DevOps (CI/CD)", "Docker", "Git/GitHub", "Postman"]
+      "keywords": [
+        "Google Cloud Platform",
+        "Microsoft Azure",
+        "Azure DevOps (CI/CD)",
+        "Docker",
+        "Git/GitHub",
+        "Postman"
+      ]
     },
     {
       "name": "Core Fundamentals",
-      "keywords": ["Data Structures & Algorithms", "OOP", "System Design", "Offline-First Architecture", "Testing", "Documentation"]
+      "keywords": [
+        "Data Structures & Algorithms",
+        "OOP",
+        "System Design",
+        "Offline-First Architecture",
+        "Testing",
+        "Documentation"
+      ]
     },
     {
       "name": "Actively Deepening",
-      "keywords": ["TypeScript", "Node.js", "NestJS", "RAG Pipelines", "Vector Databases", "AWS"]
+      "keywords": [
+        "TypeScript",
+        "Node.js",
+        "NestJS",
+        "RAG Pipelines",
+        "Vector Databases",
+        "AWS"
+      ]
     }
   ]
 }
