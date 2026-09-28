@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import {
     BASICS,
     SUMMARY,
@@ -66,9 +67,34 @@ const ResumeModal = ({ isOpen = false, onClose = () => {} }) => {
         };
     }, [isOpen, onClose]);
 
+    /** Open the browser's print / save-as-PDF dialog.
+     *
+     *  Adds a `printing-resume` class on <body> so the @media print rules know
+     *  the modal is the thing being printed, then removes it once the dialog
+     *  closes (or after a timeout fallback for browsers that don't fire
+     *  afterprint). */
+    const handleSavePDF = useCallback(() => {
+        document.body.classList.add('printing-resume');
+
+        const cleanup = () => {
+            document.body.classList.remove('printing-resume');
+            window.removeEventListener('afterprint', cleanup);
+        };
+
+        window.addEventListener('afterprint', cleanup);
+
+        // Fallback: some browsers don't fire 'afterprint'
+        setTimeout(cleanup, 5000);
+
+        // Small delay so the class is painted before the print dialog opens
+        requestAnimationFrame(() => {
+            window.print();
+        });
+    }, []);
+
     if (!isOpen) return null;
 
-    return (
+    return createPortal(
         <div className="resume-modal active" role="dialog" aria-modal="true" aria-label="Resume">
             <div className="resume-overlay" onClick={onClose}></div>
             <div className="resume-container">
@@ -84,7 +110,7 @@ const ResumeModal = ({ isOpen = false, onClose = () => {} }) => {
                     <button
                         type="button"
                         className="btn btn-outline btn-sm"
-                        onClick={() => window.print()}
+                        onClick={handleSavePDF}
                     >
                         <i className="fas fa-file-arrow-down" aria-hidden="true" />
                         Save as PDF
@@ -229,7 +255,8 @@ const ResumeModal = ({ isOpen = false, onClose = () => {} }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 

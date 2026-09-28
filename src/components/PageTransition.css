@@ -1,0 +1,37 @@
+/* ===========================================================================
+   Page Transition — Smooth Overlay Wipe
+   ---------------------------------------------------------------------------
+   A gradient overlay panel sweeps across the viewport to create a cinematic
+   page transition. The overlay uses the site's accent palette for a cohesive,
+   premium feel.
+   ======================================================================== */
+
+.page-transition-wrapper {
+  width: 100%;
+  position: relative;
+}
+
+/* The wipe overlay — a fixed, full-viewport panel that sweeps across */
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(
+    135deg,
+    var(--text-primary, #101014) 0%,
+    #1a1a22 40%,
+    var(--accent, #EA580C) 100%
+  );
+  pointer-events: none;
+  will-change: clip-path;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition-wrapper {
+    will-change: auto;
+  }
+
+  .page-transition-overlay {
+    display: none !important;
+  }
+}

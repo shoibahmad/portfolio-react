@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -22,42 +21,21 @@ import InteractiveResume from './components/InteractiveResume';
 import TerminalModal from './components/TerminalModal';
 import NotFound from './components/NotFound';
 import Reveal from './components/ui/Reveal';
+import PageTransition from './components/PageTransition';
 import useDocumentMeta from './hooks/useDocumentMeta';
 import { findRouteMeta, NOT_FOUND_META } from './data/routes';
 import { findProjectBySlug } from './data/projects';
 
-/* No `filter` in these variants on purpose. Framer leaves the settled value as
-   `filter: blur(0px)`, and any non-`none` filter makes the element a containing
-   block, which breaks `position: sticky` in descendants. It also removes a
-   full-page filter pass on every route change. */
-const pageVariants = {
-  initial: { opacity: 0, y: 12 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
-  exit: { opacity: 0, y: -8, transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] } }
-};
-
-const PageWrapper = ({ children }) => (
-  <motion.div
-    variants={pageVariants}
-    initial="initial"
-    animate="animate"
-    exit="exit"
-    className="page"
-    style={{ width: '100%', position: 'relative' }}
-    onAnimationComplete={() => {
-      // The page transition can outlast the IntersectionObserver's first pass,
-      // which would leave above-the-fold children stuck at opacity 0.
-      document
-        .querySelectorAll('.animate-on-scroll')
-        .forEach((el) => el.classList.add('is-visible'));
-    }}
-  >
-    {children}
-  </motion.div>
-);
+/* ---------------------------------------------------------------------------
+   Page compositions
+   ---------------------------------------------------------------------------
+   Each route's content is wrapped in a `<div className="page">` so the
+   interior-page spacing rule in index.css still applies. The actual route
+   transition animation is handled by <PageTransition> in the JSX below.
+   ------------------------------------------------------------------------ */
 
 const HomePage = () => (
-  <PageWrapper>
+  <div className="page">
     {/* Hero drives its own scroll-linked parallax, so it is not wrapped */}
     <Hero />
     <About />
@@ -67,11 +45,11 @@ const HomePage = () => (
     <Reveal variant="soft">
       <TechMarquee />
     </Reveal>
-  </PageWrapper>
+  </div>
 );
 
 const ExperiencePage = () => (
-  <PageWrapper>
+  <div className="page">
     <Reveal>
       <Experience />
     </Reveal>
@@ -81,7 +59,13 @@ const ExperiencePage = () => (
     <Reveal>
       <Certifications />
     </Reveal>
-  </PageWrapper>
+  </div>
+);
+
+const Page = ({ children }) => (
+  <div className="page" style={{ width: '100%', position: 'relative' }}>
+    {children}
+  </div>
 );
 
 function App() {
@@ -139,7 +123,7 @@ function App() {
     // Delay so the route transition settles before elements are measured
     const timeout = setTimeout(() => {
       document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
-    }, 350);
+    }, 400);
 
     return () => {
       clearTimeout(timeout);
@@ -156,23 +140,23 @@ function App() {
       <Breadcrumb />
 
       <main id="main">
-        <AnimatePresence mode="wait">
+        <PageTransition>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<PageWrapper><Services /></PageWrapper>} />
-            <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
+            <Route path="/services" element={<Page><Services /></Page>} />
+            <Route path="/projects" element={<Page><Projects /></Page>} />
             {/* Same component: the slug selects and opens a case study, so a
                 shared link lands directly on that project. */}
-            <Route path="/projects/:slug" element={<PageWrapper><Projects /></PageWrapper>} />
-            <Route path="/skills" element={<PageWrapper><Skills /></PageWrapper>} />
+            <Route path="/projects/:slug" element={<Page><Projects /></Page>} />
+            <Route path="/skills" element={<Page><Skills /></Page>} />
             <Route path="/experience" element={<ExperiencePage />} />
-            <Route path="/resume" element={<PageWrapper><InteractiveResume /></PageWrapper>} />
-            <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+            <Route path="/resume" element={<Page><InteractiveResume /></Page>} />
+            <Route path="/contact" element={<Page><Contact /></Page>} />
             {/* Catch-all. Without it an unknown path rendered the chrome around
                 an empty middle, which reads as broken rather than as wrong. */}
-            <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
+            <Route path="*" element={<Page><NotFound /></Page>} />
           </Routes>
-        </AnimatePresence>
+        </PageTransition>
       </main>
 
       <Footer onOpenLegal={openLegalModal} />
@@ -185,3 +169,4 @@ function App() {
 }
 
 export default App;
+
