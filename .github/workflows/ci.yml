@@ -1,0 +1,105 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# A second push to the same branch makes the earlier run's verdict irrelevant,
+# so cancel it rather than paying for an answer nobody will read. The key
+# includes the ref, so a PR run can never cancel the main-branch run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Lint, test, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          # Keys the ~/.npm cache off package-lock.json, which is what turns the
+          # `npm ci` below into a restore instead of a full registry fetch.
+          cache: npm
+
+      # `npm ci` rather than `npm install`: it installs exactly what the lockfile
+      # says and fails loudly when package.json and the lock have drifted apart,
+      # which is the drift that makes "works on my machine" builds possible.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      # The `--` forwards `--run` to the test runner itself, so it executes once
+      # and exits instead of dropping into watch mode and hanging the runner
+      # until the job times out.
+      - name: Test
+        run: npm test -- --run
+
+      # `prebuild` regenerates public/sitemap.xml from the route table, so this
+      # step also catches a sitemap generator that has stopped working — the
+      # failure mode that let the hand-written sitemap go stale in the first place.
+      - name: Build
+        run: npm run build
+
+      # Handing dist/ to the lighthouse job as an artifact stops that job from
+      # reinstalling the whole toolchain and rebuilding identical bytes.
+      - name: Upload dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
+
+  lighthouse:
+    name: Lighthouse (advisory)
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # Checked out only for lighthouserc.json — the site itself arrives as the
+      # dist artifact built by the job above.
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      # Warn-only, and deliberately belt-and-braces about it. Every assertion in
+      # lighthouserc.json sits at `warn` level so lhci exits 0 on a regression,
+      # and continue-on-error means even a crashed Chrome or a bad npx fetch
+      # cannot turn a PR red. The repo has no Lighthouse baseline yet, so
+      # hard-failing from day one would block every PR on scores nobody has
+      # agreed to. Promote the assertions to `error` once a handful of runs have
+      # established what "normal" looks like for this site.
+      #
+      # Chrome ships preinstalled on ubuntu-latest, so there is no browser setup
+      # step. @lhci/cli is fetched by npx rather than added to package.json so
+      # that an advisory CI-only tool stays out of every local `npm ci`.
+      - name: Run Lighthouse CI
+        continue-on-error: true
+        run: npx --yes @lhci/cli autorun
+
+      # `if: always()` because the reports are most worth reading precisely when
+      # the step above failed or flagged something.
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci
+          retention-days: 7
+          if-no-files-found: ignore

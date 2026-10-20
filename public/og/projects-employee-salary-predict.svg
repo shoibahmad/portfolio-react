@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Employee Salary Predict">
+  <defs>
+    <radialGradient id="wash" cx="16%" cy="10%" r="82%">
+      <stop offset="0%" stop-color="#EA580C" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#EA580C" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#101014"/>
+  <rect width="1200" height="630" fill="url(#wash)"/>
+  <rect x="80" y="78" width="64" height="6" rx="3" fill="#EA580C"/>
+  <text x="80" y="154" font-family="'Plus Jakarta Sans','Segoe UI',Inter,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="22" font-weight="700" fill="#EA580C" letter-spacing="4">AI/ML</text>
+  <text x="80" y="264" font-family="'Plus Jakarta Sans','Segoe UI',Inter,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="80" font-weight="800" fill="#FAFAF9" letter-spacing="-1.5">Employee Salary</text>
+  <text x="80" y="358" font-family="'Plus Jakarta Sans','Segoe UI',Inter,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="80" font-weight="800" fill="#FAFAF9" letter-spacing="-1.5">Predict</text>
+  <text x="80" y="453" font-family="'Plus Jakarta Sans','Segoe UI',Inter,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="26" font-weight="400" fill="#A8A29E">An intelligent machine learning web application designed to predict employee</text>
+  <text x="80" y="491" font-family="'Plus Jakarta Sans','Segoe UI',Inter,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="26" font-weight="400" fill="#A8A29E">salaries with high accuracy utilizing advanced regression algorithms.</text>
+  <rect x="80" y="512" width="1040" height="1" fill="#FAFAF9" fill-opacity="0.12"/>
+  <text x="80" y="562" font-family="'Plus Jakarta Sans','Segoe UI',Inter,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="700" fill="#FAFAF9">shoibahmad.in</text>
+  <text x="1120" y="562" font-family="'Plus Jakarta Sans','Segoe UI',Inter,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="400" fill="#A8A29E" text-anchor="end">Shoib Ahmad · Full-Stack Engineer</text>
+</svg>

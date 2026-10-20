@@ -1,0 +1,64 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Pushing a commit to the gh-pages branch is a write to the repository.
+permissions:
+  contents: write
+
+# Never cancel a publish midway: gh-pages works by committing and pushing a
+# branch, and an interrupted push can leave gh-pages holding half a build.
+# Queue the next deploy behind this one instead.
+concurrency:
+  group: deploy-gh-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and publish to GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Only the build gates the deploy. Lint and tests run in ci.yml against
+      # this same commit, and making them a second gate here would mean a
+      # formatting nit could keep a working site from going out.
+      - name: Build
+        run: npm run build
+
+      # This is the CI form of the existing `npm run deploy`, on purpose.
+      #
+      # The modern alternative (actions/upload-pages-artifact + deploy-pages)
+      # only works once the repository's Pages source is switched from "deploy
+      # from a branch" to "GitHub Actions" — and that switch would silently turn
+      # the manual `npm run deploy` into a no-op, because nothing would serve the
+      # gh-pages branch any more. Publishing to the same branch with the same
+      # gh-pages package already in devDependencies keeps the manual command a
+      # working escape hatch and needs no repository settings change at all.
+      #
+      # --dotfiles: dist/.nojekyll comes from public/.nojekyll and exists to stop
+      # Pages running the build output through Jekyll. gh-pages skips dotfiles
+      # unless asked, so without this flag the file the repo deliberately ships
+      # never reaches the branch. dist/CNAME (shoibahmad.in) is an ordinary file
+      # and is published either way, which is what keeps the custom domain bound.
+      - name: Publish dist to gh-pages branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx gh-pages \
+            --dist dist \
+            --dotfiles \
+            --message "Deploy ${{ github.sha }}" \
+            --user "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>" \
+            --repo "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"

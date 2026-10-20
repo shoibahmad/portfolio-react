@@ -1,0 +1,418 @@
+/* ===========================================================================
+   Skill graph
+   ---------------------------------------------------------------------------
+   A dark panel inside a light page. The inversion is doing work rather than
+   decorating: faint connecting curves need a dark ground to read against at
+   all, and the surrounding page already uses dark surfaces for the project
+   visuals, so the diagram lands as part of the same family.
+
+   Every colour is a local token. The graph is the only thing on the site that
+   needs a dark palette, and leaking six dark values into tokens.css — where
+   every other component would then have to ignore them — is how a token file
+   stops being trustworthy.
+   ======================================================================== */
+
+.skill-graph {
+  --sg-surface: #0b1120;
+  --sg-surface-raised: #16203a;
+  --sg-border: #24304d;
+  --sg-ink: #e8edf7;
+  --sg-ink-muted: #8d9bb8;
+  --sg-ink-faint: #5d6b88;
+  --sg-signal: #ff8a4c;
+  --sg-signal-strong: #ffb086;
+
+  /* Edge gradient endpoints — cool at the source, warm at the destination, so
+     direction is legible without drawing a single arrowhead. */
+  --sg-edge-from: #5d72a8;
+  --sg-edge-to: #c08560;
+
+  position: relative;
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: var(--radius-xl, 28px);
+  background: radial-gradient(120% 90% at 18% 0%, #16203a 0%, #0b1120 58%);
+  border: 1px solid var(--sg-border);
+  box-shadow: var(--shadow-lg, 0 12px 26px -10px rgba(16, 16, 20, 0.11));
+  overflow: hidden;
+}
+
+/* A faint grid, to read as instrumentation rather than as illustration. */
+.skill-graph::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(100% 70% at 50% 0%, #000 20%, transparent 85%);
+}
+
+/* ---------------------------------------------------------------------------
+   Header
+   ------------------------------------------------------------------------ */
+
+.skill-graph__head {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: clamp(1rem, 2vw, 1.75rem);
+}
+
+.skill-graph__kicker {
+  display: block;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sg-signal);
+}
+
+.skill-graph__title {
+  margin-top: 0.625rem;
+  max-width: 20ch;
+  font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(1.375rem, 2.4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--sg-ink);
+}
+
+.skill-graph__hint {
+  max-width: 34ch;
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: var(--sg-ink-muted);
+}
+
+.skill-graph__clear {
+  display: block;
+  margin-top: 0.625rem;
+  padding: 0.3125rem 0.75rem;
+  border: 1px solid var(--sg-border);
+  border-radius: var(--radius-pill, 999px);
+  background: var(--sg-surface-raised);
+  color: var(--sg-ink);
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.skill-graph__clear:hover {
+  border-color: var(--sg-signal);
+  color: var(--sg-signal-strong);
+}
+
+/* ---------------------------------------------------------------------------
+   Canvas
+   ---------------------------------------------------------------------------
+   The viewBox scales as one unit down to the breakpoint, then the container
+   scrolls. Letting it keep shrinking would reach a width where the project
+   labels overlap each other, and an unreadable diagram is worse than one that
+   needs a swipe.
+   ------------------------------------------------------------------------ */
+
+.skill-graph__scroll {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.skill-graph__svg {
+  display: block;
+  width: 100%;
+  min-width: 860px;
+  height: auto;
+}
+
+/* Column headers. Naming the three layers is what makes the picture read as a
+   network rather than as three unrelated lists that happen to have lines
+   between them. */
+.skill-graph__column-label {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  fill: var(--sg-ink-faint);
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------------------
+   Edges
+   ------------------------------------------------------------------------ */
+
+.skill-graph__edge {
+  fill: none;
+  stroke: url(#sg-edge);
+  stroke-width: 1.1;
+  opacity: 0.55;
+  transition: opacity 0.35s ease, stroke-width 0.35s ease;
+}
+
+/* Draw-in. The dash length is set well above any real path length so one dash
+   covers the whole curve — measuring each path to set it exactly would mean
+   reading geometry back from the DOM for 87 elements at mount. */
+.skill-graph.is-revealed .skill-graph__edge {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: sg-draw 1.1s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes sg-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.skill-graph.is-focused .skill-graph__edge {
+  opacity: 0.08;
+}
+
+.skill-graph.is-focused .skill-graph__edge:not(.is-dim) {
+  opacity: 1;
+  stroke: var(--sg-signal);
+  stroke-width: 1.7;
+  filter: drop-shadow(0 0 4px rgba(255, 138, 76, 0.55));
+}
+
+/* ---------------------------------------------------------------------------
+   Signals
+   ------------------------------------------------------------------------ */
+
+.skill-graph__pulse {
+  fill: url(#sg-pulse);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.skill-graph__pulse-core {
+  fill: var(--sg-signal-strong);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* A diagram the visitor is interrogating should not also be firing at random —
+   the idle animation is there to attract attention, and competing with a
+   deliberate selection is the opposite of that. */
+.skill-graph.is-focused .skill-graph__pulses {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* ---------------------------------------------------------------------------
+   Nodes
+   ------------------------------------------------------------------------ */
+
+.skill-graph__node {
+  cursor: pointer;
+  transition: opacity 0.35s ease;
+}
+
+.skill-graph__node:focus {
+  outline: none;
+}
+
+.skill-graph__node:focus-visible .skill-graph__halo,
+.skill-graph__node:focus-visible rect {
+  stroke: var(--sg-signal-strong);
+  stroke-width: 2;
+  opacity: 1;
+}
+
+.skill-graph.is-revealed .skill-graph__node {
+  animation: sg-arrive 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes sg-arrive {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+}
+
+.skill-graph.is-focused .skill-graph__node.is-dim {
+  opacity: 0.22;
+}
+
+.skill-graph__node text {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  fill: var(--sg-ink-muted);
+  pointer-events: none;
+  transition: fill 0.3s ease;
+}
+
+.skill-graph__node:not(.is-dim) text {
+  fill: var(--sg-ink);
+}
+
+/* Domains ---------------------------------------------------------------- */
+
+.skill-graph__node.is-domain rect {
+  fill: var(--sg-surface-raised);
+  stroke: var(--sg-border);
+  stroke-width: 1;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.skill-graph__node.is-domain text {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.skill-graph__node.is-domain:hover rect,
+.skill-graph.is-focused .skill-graph__node.is-domain:not(.is-dim) rect {
+  fill: #23304f;
+  stroke: var(--sg-signal);
+}
+
+/* Technologies ------------------------------------------------------------ */
+
+.skill-graph__halo {
+  fill: transparent;
+  stroke: var(--sg-border);
+  stroke-width: 1;
+  opacity: 0.55;
+  transition: stroke 0.3s ease, opacity 0.3s ease;
+}
+
+.skill-graph__dot {
+  fill: #7e8db0;
+  transition: fill 0.3s ease, r 0.3s ease;
+}
+
+.skill-graph__node.is-skill text {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 11.5px;
+  letter-spacing: 0.01em;
+}
+
+.skill-graph__node.is-skill:hover .skill-graph__dot,
+.skill-graph.is-focused .skill-graph__node.is-skill:not(.is-dim) .skill-graph__dot {
+  fill: var(--sg-signal);
+}
+
+.skill-graph__node.is-skill:hover .skill-graph__halo,
+.skill-graph.is-focused .skill-graph__node.is-skill:not(.is-dim) .skill-graph__halo {
+  stroke: var(--sg-signal);
+  opacity: 1;
+}
+
+/* Projects ---------------------------------------------------------------- */
+
+.skill-graph__node.is-project text {
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.skill-graph__node.is-project .skill-graph__dot {
+  fill: #6c7b9e;
+}
+
+.skill-graph__node.is-project:hover .skill-graph__dot,
+.skill-graph.is-focused .skill-graph__node.is-project:not(.is-dim) .skill-graph__dot {
+  fill: var(--sg-signal-strong);
+}
+
+.skill-graph__node.is-project:hover .skill-graph__halo,
+.skill-graph.is-focused .skill-graph__node.is-project:not(.is-dim) .skill-graph__halo {
+  stroke: var(--sg-signal-strong);
+  opacity: 1;
+}
+
+.skill-graph__node.is-project:hover text {
+  fill: var(--sg-signal-strong);
+}
+
+/* ---------------------------------------------------------------------------
+   Legend
+   ------------------------------------------------------------------------ */
+
+.skill-graph__legend {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1.125rem;
+  border-top: 1px solid var(--sg-border);
+  font-size: 0.75rem;
+  color: var(--sg-ink-muted);
+}
+
+.skill-graph__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skill-graph__legend-item::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #7e8db0;
+}
+
+.skill-graph__legend-item.is-domain::before {
+  border-radius: 2px;
+  background: var(--sg-surface-raised);
+  box-shadow: inset 0 0 0 1px var(--sg-signal);
+}
+
+.skill-graph__legend-item.is-skill::before {
+  background: var(--sg-signal);
+}
+
+.skill-graph__legend-item.is-project::before {
+  background: var(--sg-signal-strong);
+}
+
+.skill-graph__legend-note {
+  margin-left: auto;
+  color: var(--sg-ink-faint);
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 0.6875rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion
+   ---------------------------------------------------------------------------
+   The highlight transitions survive — they are feedback for a deliberate
+   action, not ambient movement, and removing them would make the diagram feel
+   broken rather than calm. What goes is everything that moves on its own.
+   ------------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-graph.is-revealed .skill-graph__edge,
+  .skill-graph.is-revealed .skill-graph__node {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .skill-graph__pulses {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .skill-graph {
+    padding: 1.25rem 1rem;
+    border-radius: var(--radius-lg, 20px);
+  }
+
+  .skill-graph__legend-note {
+    margin-left: 0;
+    width: 100%;
+  }
+}

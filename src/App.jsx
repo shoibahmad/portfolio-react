@@ -1,15 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useMemo, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
-import Services from './components/Services';
-import Projects from './components/Projects';
-import Skills from './components/Skills';
-import Experience from './components/Experience';
-import Education from './components/Education';
-import Certifications from './components/Certifications';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
 import LegalModal from './components/LegalModal';
 import ScrollToTop from './components/ScrollToTop';
@@ -17,14 +10,36 @@ import Publications from './components/Publications';
 import TechMarquee from './components/TechMarquee';
 import Breadcrumb from './components/Breadcrumb';
 import ScrollProgress from './components/ScrollProgress';
-import InteractiveResume from './components/InteractiveResume';
 import TerminalModal from './components/TerminalModal';
-import NotFound from './components/NotFound';
+import ErrorBoundary from './components/ErrorBoundary';
+import RouteFallback from './components/RouteFallback';
 import Reveal from './components/ui/Reveal';
 import PageTransition from './components/PageTransition';
 import useDocumentMeta from './hooks/useDocumentMeta';
 import { findRouteMeta, NOT_FOUND_META } from './data/routes';
 import { findProjectBySlug } from './data/projects';
+
+/* ---------------------------------------------------------------------------
+   Route-level code splitting
+   ---------------------------------------------------------------------------
+   The whole app used to ship as one chunk, and Vite had started warning about
+   it: every visitor downloaded the resume timeline, the project case studies
+   and the 404 page before the homepage could paint, whether or not they ever
+   navigated.
+
+   The homepage is deliberately NOT split. It is the landing route for almost
+   every visit, so lazy-loading it would only add a request to the critical
+   path — splitting pays off exactly where a chunk might never be fetched.
+   ------------------------------------------------------------------------ */
+const Services = lazy(() => import('./components/Services'));
+const Projects = lazy(() => import('./components/Projects'));
+const Skills = lazy(() => import('./components/Skills'));
+const Experience = lazy(() => import('./components/Experience'));
+const Education = lazy(() => import('./components/Education'));
+const Certifications = lazy(() => import('./components/Certifications'));
+const Contact = lazy(() => import('./components/Contact'));
+const InteractiveResume = lazy(() => import('./components/InteractiveResume'));
+const NotFound = lazy(() => import('./components/NotFound'));
 
 /* ---------------------------------------------------------------------------
    Page compositions
@@ -141,6 +156,13 @@ function App() {
 
       <main id="main">
         <PageTransition>
+          {/* The boundary sits inside the transition so a crash replaces the
+              page content rather than the whole shell — the header and footer
+              stay usable, which is the difference between "this page broke"
+              and "the site is down". `resetKey` clears a caught error on
+              navigation, so the fallback cannot outlive the route that threw. */}
+          <ErrorBoundary resetKey={location.pathname}>
+          <Suspense fallback={<RouteFallback />}>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<Page><Services /></Page>} />
@@ -156,6 +178,8 @@ function App() {
                 an empty middle, which reads as broken rather than as wrong. */}
             <Route path="*" element={<Page><NotFound /></Page>} />
           </Routes>
+          </Suspense>
+          </ErrorBoundary>
         </PageTransition>
       </main>
 

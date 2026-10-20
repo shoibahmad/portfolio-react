@@ -1,0 +1,100 @@
+/* ===========================================================================
+   Error fallback
+   ---------------------------------------------------------------------------
+   Sized to hold the page open rather than collapse the shell around it — a
+   crash that shrinks the document to two lines reads as a broken site, where
+   a full-height panel reads as one page that failed.
+   ======================================================================== */
+
+.error-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: clamp(3rem, 10vw, 7rem) 1.5rem;
+}
+
+.error-fallback__inner {
+  max-width: 34rem;
+  text-align: center;
+}
+
+.error-fallback__eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius-pill);
+  padding: 0.375rem 0.875rem;
+}
+
+.error-fallback__title {
+  margin-top: 1.5rem;
+  font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+.error-fallback__body {
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.error-fallback__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.error-fallback__button,
+.error-fallback__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1.5rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.error-fallback__button {
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  border: 1px solid var(--text-primary);
+  cursor: pointer;
+}
+
+.error-fallback__button:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.error-fallback__link {
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.error-fallback__link:hover {
+  border-color: var(--border-strong);
+}
+
+.error-fallback__button:focus-visible,
+.error-fallback__link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import GitHubStats from './GitHubStats';
+import SkillGraph from './SkillGraph';
 import { SKILL_GROUPS } from '../data/profile';
 import './Skills.css';
 
@@ -80,6 +81,8 @@ const Skills = () => {
                         </article>
                     ))}
                 </div>
+
+                <SkillGraph />
 
                 <GitHubStats />
             </div>
